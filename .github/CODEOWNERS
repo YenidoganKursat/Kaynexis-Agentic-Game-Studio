@@ -1,11 +1,14 @@
 # Update these owners if your GitHub handle or team differs from the current default.
-* @kursatyenidogan
+* @YenidoganKursat
 
-/.github/ @kursatyenidogan
-/.codex/ @kursatyenidogan
-/.agents/ @kursatyenidogan
-/scripts/ @kursatyenidogan
-/docs/reference/ @kursatyenidogan
-/studio/docs/templates/ @kursatyenidogan
-/Dockerfile @kursatyenidogan
-/docker-compose.yml @kursatyenidogan
+/.github/ @YenidoganKursat
+/.codex/ @YenidoganKursat
+/.agents/ @YenidoganKursat
+/scripts/ @YenidoganKursat
+/docs/reference/ @YenidoganKursat
+/docs/research/ @YenidoganKursat
+/studio/checklists/ @YenidoganKursat
+/studio/starter-kits/ @YenidoganKursat
+/studio/docs/templates/ @YenidoganKursat
+/Dockerfile @YenidoganKursat
+/docker-compose.yml @YenidoganKursat

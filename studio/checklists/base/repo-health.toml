@@ -1,0 +1,27 @@
+id = "repo-health"
+title = "Repository Health"
+layer = "base"
+
+[[item]]
+id = "repo-health-doctor"
+title = "Doctor passes before merge"
+severity = "required"
+applies_when = "Any repo-wide or automation change"
+validation = "Run python3 scripts/doctor.py"
+owner = "maintainer"
+
+[[item]]
+id = "repo-health-layout"
+title = "Required layout paths stay present"
+severity = "required"
+applies_when = "Whenever files are moved or onboarding changes"
+validation = "Run python3 scripts/validate_repo_layout.py"
+owner = "maintainer"
+
+[[item]]
+id = "repo-health-evals"
+title = "Local eval surface stays green"
+severity = "required"
+applies_when = "When routing, agents, docs, or validation contracts change"
+validation = "Run python3 scripts/run_local_evals.py"
+owner = "maintainer"

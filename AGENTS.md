@@ -48,7 +48,7 @@ For any non-trivial task, structure work around:
 
 ## Routing heuristic
 
-When the task is ambiguous, start with `$intake-router` or `python3 scripts/route_task.py "<task>"`.
+When the task is ambiguous, start with `$intake-router` or `python3 scripts/codex_studio.py next "<task>"`.
 
 Use these broad lanes:
 

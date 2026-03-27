@@ -1,0 +1,11 @@
+id = "ui-ux"
+title = "UI And UX"
+layer = "discipline"
+
+[[item]]
+id = "ui-state-clarity"
+title = "UI states and player prompts stay unambiguous"
+severity = "required"
+applies_when = "HUD, menu, tutorial, or settings work"
+validation = "List the key state changes and the player action each state expects"
+owner = "ux"

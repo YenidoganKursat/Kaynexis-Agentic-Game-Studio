@@ -6,7 +6,7 @@ Use this checklist when you are the person standing up the repo for a team or ne
 
 - Confirm Python `3.11+` is available.
 - Confirm the intended engine, platform, and genre presets.
-- Run `python3 scripts/setup_repo.py --project-name "Your Game" --engine ... --platform ... --genre ...`
+- Run `python3 scripts/codex_studio.py init --project-name "Your Game" --engine ... --platform ... --genre ... --yes`
 - Review `studio/docs/active/game-brief.md`
 - Review `studio/docs/active/genre-starter.md`
 - Review `studio/docs/active/engine-profile.md`

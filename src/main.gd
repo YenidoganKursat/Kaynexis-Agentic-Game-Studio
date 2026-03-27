@@ -19,10 +19,11 @@ var hit_flash_timer := 0.0
 
 
 func _ready() -> void:
+    player.set_arena_bounds(ARENA_RECT)
     pulse_warden.room_cleared.connect(_on_room_cleared)
     _refresh_hud()
     queue_redraw()
-    print("Kaynexis Agentic Game Studio ready")
+    print("First combat room ready")
 
 
 func _process(delta: float) -> void:
@@ -34,13 +35,18 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
     if pulse_warden.is_pulsing():
-        var distance_to_warden := player.global_position.distance_to(pulse_warden.global_position)
-        if distance_to_warden <= pulse_warden.pulse_radius and not pulse_contact_resolved:
-            pulse_contact_resolved = true
-            if player.is_dashing():
-                pulse_warden.defeat()
-            else:
-                _player_hit()
+        if not pulse_contact_resolved:
+            var resolution := pulse_warden.resolve_player_contact(
+                player.global_position,
+                player.get_collision_radius(),
+                player.is_dashing(),
+            )
+            if resolution != "none":
+                pulse_contact_resolved = true
+                if resolution == "defeat":
+                    pulse_warden.defeat()
+                else:
+                    _player_hit()
     else:
         pulse_contact_resolved = false
 
@@ -89,8 +95,8 @@ func _build_objective_text() -> String:
     if not upgrade_taken.is_empty():
         return "Upgrade locked in. The slice now proves combat, failure, and reward in one room."
     if player_health < 3:
-        return "Taking a pulse resets your position and costs health, so wait for the telegraph."
-    return "Move into range, wait for the yellow telegraph, then dash through the red pulse."
+        return "Taking the red pulse ring resets your position and costs health, so enter the band only during a dash."
+    return "Stay inside the arena, read the yellow telegraph, then dash through the red pulse ring."
 
 
 func _refresh_hud() -> void:

@@ -8,8 +8,11 @@ import sys
 from pathlib import Path
 
 from _studio_common import REPO_ROOT, build_genre_replacements
+from studio_core import resolve_checklists, research_notes, validate_research_note
 
 EVALS_DIR = REPO_ROOT / "evals"
+UNITY_STUB = REPO_ROOT / "tools" / "engine-stubs" / "unity" / "Unity"
+UNREAL_STUB = REPO_ROOT / "tools" / "engine-stubs" / "unreal" / "RunUAT.sh"
 
 
 def load_cases(path: Path) -> list[dict[str, object]]:
@@ -95,6 +98,163 @@ def run_doctor_surface_eval() -> list[str]:
     return failures
 
 
+def run_engine_kits_eval() -> list[str]:
+    failures: list[str] = []
+    script = REPO_ROOT / "scripts" / "validate_engine_kits.py"
+    result = subprocess.run(
+        [sys.executable, str(script), "--json"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        payload = json.loads(result.stdout or "{}")
+        for engine, items in payload.items():
+            for item in items:
+                failures.append(item)
+    return failures
+
+
+def run_workflow_surface_eval() -> list[str]:
+    failures: list[str] = []
+    expected = load_cases(EVALS_DIR / "workflow_surface" / "expected_workflows.json")
+    script = REPO_ROOT / "scripts" / "validate_workflows.py"
+    result = subprocess.run(
+        [sys.executable, str(script), "--json"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        payload = json.loads(result.stdout or "{}")
+        failures.extend(payload.get("failures", []))
+        return failures
+
+    payload = json.loads(result.stdout)
+    summaries = payload.get("workflows", {})
+    for workflow_name, expected_jobs in expected.items():
+        if workflow_name not in summaries:
+            failures.append(f"workflow surface missing '{workflow_name}'")
+            continue
+        actual_jobs = set(summaries[workflow_name].get("jobs", []))
+        missing_jobs = sorted(set(expected_jobs) - actual_jobs)
+        if missing_jobs:
+            failures.append(f"{workflow_name} missing expected jobs: {', '.join(missing_jobs)}")
+    return failures
+
+
+def run_checklist_eval() -> list[str]:
+    failures: list[str] = []
+    items = resolve_checklists(engine_slug="godot-4", disciplines=["gameplay"], milestone="prototype", agent_name="gameplay_programmer")
+    item_ids = {item["id"] for item in items}
+    for required in ("repo-health-doctor", "gameplay-readability", "prototype-proves-core-loop"):
+        if required not in item_ids:
+            failures.append(f"resolved checklist bundle is missing '{required}'")
+    return failures
+
+
+def run_engine_adapter_eval() -> list[str]:
+    failures: list[str] = []
+    cases = [
+        (
+            [
+                sys.executable,
+                str(REPO_ROOT / "scripts" / "unity_adapter.py"),
+                "test",
+                "--project-path",
+                str(REPO_ROOT / "studio" / "starter-kits" / "unity-6" / "scaffold"),
+                "--unity-path",
+                str(UNITY_STUB),
+                "--dry-run",
+                "--json",
+            ],
+            "-runTests",
+        ),
+        (
+            [
+                sys.executable,
+                str(REPO_ROOT / "scripts" / "unreal_adapter.py"),
+                "package",
+                "--project-path",
+                str(REPO_ROOT / "studio" / "starter-kits" / "unreal-5" / "scaffold"),
+                "--uat-path",
+                str(UNREAL_STUB),
+                "--dry-run",
+                "--json",
+            ],
+            "BuildCookRun",
+        ),
+    ]
+    for command, expected_token in cases:
+        result = subprocess.run(command, cwd=REPO_ROOT, check=False, capture_output=True, text=True)
+        if result.returncode != 0:
+            failures.append(f"engine adapter dry-run failed: {' '.join(command[1:3])}")
+            continue
+        payload = json.loads(result.stdout)
+        joined = " ".join(payload.get("command", []))
+        if expected_token not in joined:
+            failures.append(f"engine adapter command missing expected token '{expected_token}'")
+        if payload.get("validation_failures"):
+            failures.append(f"engine adapter reported unexpected validation failures: {payload['validation_failures']}")
+    return failures
+
+
+def run_route_task_engine_eval() -> list[str]:
+    failures: list[str] = []
+    cases = [
+        ("Plan the next Unity starter kit task", "engine / tooling / packaging", "unity-6"),
+        ("Plan the next UE5 packaging task", "engine / tooling / packaging", "unreal-5"),
+        ("Implement Unity combat room", "combat / gameplay", "unity-6"),
+    ]
+    script = REPO_ROOT / "scripts" / "route_task.py"
+    for task, expected_route, expected_engine in cases:
+        result = subprocess.run([sys.executable, str(script), task, "--json"], cwd=REPO_ROOT, check=False, capture_output=True, text=True)
+        if result.returncode != 0:
+            failures.append(f"route_task failed for '{task}'")
+            continue
+        payload = json.loads(result.stdout)
+        if payload.get("route") != expected_route:
+            failures.append(f"route_task route mismatch for '{task}': expected {expected_route}, got {payload.get('route')}")
+        if payload.get("engine_kit", {}).get("id") != expected_engine:
+            failures.append(f"route_task engine mismatch for '{task}': expected {expected_engine}, got {payload.get('engine_kit', {}).get('id')}")
+    return failures
+
+
+def run_research_surface_eval() -> list[str]:
+    failures: list[str] = []
+    notes = research_notes()
+    if not notes:
+        failures.append("research knowledge base has no notes")
+        return failures
+    for note in notes:
+        failures.extend(validate_research_note(note))
+    return failures
+
+
+def run_ci_report_eval() -> list[str]:
+    failures: list[str] = []
+    script = REPO_ROOT / "scripts" / "ci_artifact_report.py"
+    output_dir = REPO_ROOT / "build" / "ci" / "eval"
+    result = subprocess.run(
+        [sys.executable, str(script), "--output-dir", str(output_dir), "--json"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        failures.append(f"ci_artifact_report failed during eval: {result.stderr.strip() or result.stdout.strip()}")
+        return failures
+    payload = json.loads(result.stdout)
+    for key in ("json", "markdown"):
+        path = Path(payload[key])
+        if not path.exists():
+            failures.append(f"ci artifact report missing generated file: {path}")
+    return failures
+
+
 def run_godot_surface_eval() -> list[str]:
     failures: list[str] = []
     expectations = load_cases(EVALS_DIR / "godot_surface" / "expectations.json")
@@ -138,6 +298,13 @@ def main() -> int:
         "route_task": run_route_task_eval(),
         "genre_guidance": run_genre_guidance_eval(),
         "doctor_surface": run_doctor_surface_eval(),
+        "engine_kits": run_engine_kits_eval(),
+        "workflow_surface": run_workflow_surface_eval(),
+        "engine_adapters": run_engine_adapter_eval(),
+        "route_task_engines": run_route_task_engine_eval(),
+        "checklists": run_checklist_eval(),
+        "research_surface": run_research_surface_eval(),
+        "ci_report": run_ci_report_eval(),
         "godot_surface": run_godot_surface_eval(),
     }
     total_failures = sum(len(items) for items in failures.values())

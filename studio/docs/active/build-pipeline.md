@@ -1,26 +1,31 @@
-# Build Pipeline — kaynexisGame
+# Build Pipeline — Codex Game Studio Pro Max
 
 ## Build graph
-- Source -> repo validation -> local evals -> Godot static smoke -> pytest -> optional runtime smoke -> export -> artifact -> distribution
+- Source -> route/checklist/research alignment -> repo validation -> starter-kit validation -> local evals -> engine-native smoke -> package -> artifact -> distribution
 
 ## Environments
 - Local: `make ci-local`
-- Local engine smoke: `make godot-smoke`
-- Local automated tests: `make test`
-- Local exports: `make export-linux` and `make export-windows`
+- Front door: `python3 scripts/codex_studio.py`
 - CI: `.github/workflows/repo-validate.yml`
+- Starter-kit matrix: `.github/workflows/starter-kit-contracts.yml`
+- Release gate bundle: `.github/workflows/release-readiness.yml`
+- Nightly audit: `.github/workflows/nightly-audit.yml`
 - Container check: `.github/workflows/docker-smoke.yml` and `make docker-verify`
-- Release: use `scripts/godot_export.py` once a Godot 4.x binary is available on the machine or runner
+- Adapter contract smoke: repo-local Unity/Unreal tool stubs keep dry-run checks honest in CI
+- Release: real editor/export jobs only count as complete once engine binaries are present on the runner
+
+## Engine contracts
+- Godot 4: `python3 scripts/godot_smoke.py --static-only`, optional runtime smoke, then `python3 scripts/godot_export.py --preset "..."`
+- Unity 6: use `tools/engine-stubs/unity/Unity` for command-contract smoke; switch to a real `UNITY_CLI` path for editor-backed tests/builds
+- Unreal 5: use `tools/engine-stubs/unreal/RunUAT.sh` for command-contract smoke; switch to a real `UNREAL_UAT` or `UNREAL_EDITOR` path for packaging work
 
 ## Artifacts & versioning
 - Keep artifact names deterministic
-- Linux export path: `build/linux/kaynexisGame.x86_64`
-- Windows export path: `build/windows/kaynexisGame.exe`
 - Store release notes, validation commands, and build provenance alongside artifacts
+- Emit `build/ci/*` report bundles so CI failures have portable evidence instead of only console logs
 - Add symbols or crash artifacts once the engine-specific build pipeline exists
 
 ## Failure / rollback
 - If validation or evals regress, stop before merge
-- If Godot export fails, rerun `python3 scripts/godot_smoke.py --json --static-only` before changing scene logic
 - If Docker or workflow changes break, revert the smallest change first
 - Record release or infra regressions in `studio/docs/active/risk-register.md` and an eval plan when shared behavior changed

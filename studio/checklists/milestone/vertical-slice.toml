@@ -1,0 +1,12 @@
+id = "vertical-slice"
+title = "Vertical Slice"
+layer = "milestone"
+
+[[item]]
+id = "slice-quality-bar"
+title = "Vertical slice has a visible quality bar, not only feature coverage"
+severity = "required"
+applies_when = "Vertical slice milestone"
+validation = "Document the player-facing quality target and proof artifact"
+milestone = "vertical-slice"
+owner = "creative-director"

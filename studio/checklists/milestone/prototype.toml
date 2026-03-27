@@ -1,0 +1,21 @@
+id = "prototype"
+title = "Prototype"
+layer = "milestone"
+
+[[item]]
+id = "prototype-proves-core-loop"
+title = "Prototype proves one repeatable loop before expansion"
+severity = "required"
+applies_when = "Prototype milestone"
+validation = "Tie the change to one slice in current-sprint.md"
+milestone = "prototype"
+owner = "producer"
+
+[[item]]
+id = "prototype-scope-cut"
+title = "Scope is cut aggressively when validation lags"
+severity = "recommended"
+applies_when = "Prototype milestone"
+validation = "Record dropped scope or deferred systems in current-sprint.md or risk-register.md"
+milestone = "prototype"
+owner = "producer"

@@ -1,21 +1,52 @@
+
+# OS / editor
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
-.pytest_cache/
+
+# Python
 __pycache__/
 *.pyc
+.venv/
+venv/
+
+# Node / web
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+.codex-log/
+
+# Generic exports
+out/
+release/
+releases/
+
+# Game engine build/cache noise
 .godot/
 .import/
 .export/
-build/
+Library/
+Temp/
+Obj/
 Build/
 Builds/
 Logs/
-Temp/
-Library/
-DerivedDataCache/
-UserSettings/
 MemoryCaptures/
+UserSettings/
+Saved/
+DerivedDataCache/
+Binaries/
+Intermediate/
+
+# Crash / debug
 *.dmp
 *.stacktrace
+
+# Local secrets
+.env
+.env.*
+!.env.example

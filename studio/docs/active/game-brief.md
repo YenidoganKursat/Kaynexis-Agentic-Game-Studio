@@ -1,7 +1,7 @@
-# Game Brief — kaynexisGame
+# Game Brief — Codex Game Studio Pro Max
 
 ## High concept
-- Action Roguelite baseline project focused on a small but high-quality first playable slice
+- Codex-first Action Roguelite project focused on a small but high-quality first playable slice
 - Target audience: players who value readable action, replayable runs, and build experimentation
 - Reference titles / contrast set: Hades, Dead Cells, Risk of Rain 2
 
@@ -28,7 +28,13 @@
 - Prototype -> vertical slice
 - Exit criteria: one stable, replayable combat slice with clear validation and genre fit
 
+## Operating loop
+- Route work with `python3 scripts/codex_studio.py next "..."`
+- Resolve the checklist bundle with `python3 scripts/codex_studio.py checklist --task "..."`
+- Link or create research in `docs/research/game-development/`
+- Update `studio/docs/active/current-sprint.md` and `studio/docs/active/decision-log.md` as the slice changes
+
 ## Known risks
 - Readability can collapse before depth is proven
 - Scope can grow faster than validation
-- Runtime and export confidence still depend on a real Godot 4.x binary being available on at least one machine or CI runner
+- Engine and build assumptions still need to be confirmed with real project files

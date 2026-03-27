@@ -1,14 +1,24 @@
 [
+  "studio-config",
+  "codex-studio-cli",
   "repo-layout",
   "review-guide",
   "eval-surface",
   "research-notes",
+  "starter-kits",
+  "layered-checklists",
   "reviewer-agent",
   "genre-quickstart",
   "community-health",
   "github-automation",
   "local-evals",
+  "workflow-validator",
+  "ci-reporting",
+  "engine-adapters",
   "env-surface",
   "codex-compatibility",
-  "codex-hooks"
+  "research-knowledge-base",
+  "codex-hooks",
+  "active-doc-quality",
+  "project-identity"
 ]

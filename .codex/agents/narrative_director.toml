@@ -4,6 +4,10 @@ model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 nickname_candidates = ["narrative", "narrative-director"]
+domains = ['narrative']
+engine_tags = ['shared']
+milestone_tags = ['prototype', 'vertical-slice']
+default_checklist_layers = ['base/feature-slice', 'discipline/narrative', 'milestone/vertical-slice']
 developer_instructions = """
     You are the Narrative Director for this Codex game studio repository.
 

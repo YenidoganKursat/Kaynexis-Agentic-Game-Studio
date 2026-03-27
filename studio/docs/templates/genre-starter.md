@@ -17,12 +17,21 @@
 
 {GENRE_FIRST_SLICE}
 
+## Reference games
+
+{GENRE_REFERENCE_GAMES}
+
+## Design focus
+
+{GENRE_DESIGN_FOCUS}
+
 ## Recommended first skills
 
 {GENRE_SKILLS}
 
 ## Next commands
 
-- `python3 scripts/route_task.py "{GENRE_ROUTE_EXAMPLE}"`
+- `python3 scripts/codex_studio.py next "{GENRE_ROUTE_EXAMPLE}"`
+- `python3 scripts/codex_studio.py checklist --task "{GENRE_ROUTE_EXAMPLE}"`
 - `python3 scripts/scaffold_feature.py "{GENRE_FIRST_FEATURE}" --with-adr --with-test-plan`
 - `python3 scripts/generate_qa_matrix.py "{GENRE_FIRST_FEATURE}"`

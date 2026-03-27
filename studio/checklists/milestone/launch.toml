@@ -1,0 +1,12 @@
+id = "launch"
+title = "Launch"
+layer = "milestone"
+
+[[item]]
+id = "launch-governance"
+title = "Rulesets, release gates, and artifact provenance are in place"
+severity = "required"
+applies_when = "Launch or external ship target"
+validation = "Verify GitHub protection, release checklist, and artifact notes"
+milestone = "launch"
+owner = "maintainer"

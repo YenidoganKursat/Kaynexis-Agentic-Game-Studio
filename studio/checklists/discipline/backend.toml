@@ -1,0 +1,19 @@
+id = "backend"
+title = "Backend"
+layer = "discipline"
+
+[[item]]
+id = "backend-contract"
+title = "Authority and data contract are explicit"
+severity = "required"
+applies_when = "Backend, multiplayer, or service-shaped work"
+validation = "State the authority model and key messages or data flow"
+owner = "backend"
+
+[[item]]
+id = "backend-failure-mode"
+title = "At least one failure mode is planned"
+severity = "required"
+applies_when = "Backend, matchmaking, or sync work"
+validation = "Document timeout, retry, or disconnect behavior"
+owner = "network"

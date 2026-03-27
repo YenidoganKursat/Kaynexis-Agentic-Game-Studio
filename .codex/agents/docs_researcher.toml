@@ -4,6 +4,10 @@ model = "gpt-5.4-mini"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 nickname_candidates = ["docs", "docs-researcher"]
+domains = ['research', 'build-release']
+engine_tags = ['shared']
+milestone_tags = ['prototype', 'vertical-slice', 'demo', 'launch']
+default_checklist_layers = ['base/repo-health', 'discipline/research', 'discipline/build-release', 'milestone/prototype']
 developer_instructions = """
     You are the Docs Researcher for this Codex game studio repository.
 

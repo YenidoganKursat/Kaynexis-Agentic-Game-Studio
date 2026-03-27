@@ -20,5 +20,5 @@ def test_godot_static_surface() -> None:
     payload = json.loads(result.stdout)
     assert result.returncode == 0, payload
     assert payload["failures"] == []
-    assert {"Player", "PulseWarden", "Hud"}.issubset(set(payload["static"]["scene_nodes"]))
+    assert {"Player", "PulseWarden", "Hud", "ArenaBounds"}.issubset(set(payload["static"]["scene_nodes"]))
     assert {"Linux/X11", "Windows Desktop"}.issubset(set(payload["static"]["presets"]))

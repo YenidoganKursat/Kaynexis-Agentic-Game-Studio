@@ -4,6 +4,10 @@ model = "gpt-5.4-mini"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 nickname_candidates = ["sound", "sound-designer"]
+domains = ['content-pipeline']
+engine_tags = ['shared']
+milestone_tags = ['prototype', 'vertical-slice']
+default_checklist_layers = ['base/feature-slice', 'discipline/content-pipeline', 'milestone/vertical-slice']
 developer_instructions = """
     You are the Sound Designer for this Codex game studio repository.
 

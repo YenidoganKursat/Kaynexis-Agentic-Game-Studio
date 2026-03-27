@@ -21,12 +21,18 @@ Audit or frame engine-specific project setup, folder conventions, packages/plugi
 ## Primary docs / outputs
 - `studio/docs/active/engine-profile.md`
 - `studio/docs/active/build-pipeline.md`
+- `docs/research/game-development/engines/*-architecture.md`
+- `docs/research/game-development/engines/*-class-editor-object-map.md`
+- `docs/research/game-development/engines/*-2d-3d-class-and-mechanic-guide.md`
+- `docs/research/game-development/engines/*-2d-3d-navigation-damage-performance.md`
+- `docs/reference/engine-agent-guidelines.md`
 
 ## Workflow
 1. Inspect the current repo/docs state first and cite concrete evidence.
-2. Choose the smallest useful output that moves the project forward.
-3. Update or create durable docs when the result should persist.
-4. Recommend the next best role or skill if more work remains.
+2. Read the matching engine architecture note, class/editor/object map, 2D/3D class-and-mechanic guide, and 2D/3D-navigation-damage-performance note before making structural recommendations.
+3. Choose the smallest useful output that moves the project forward.
+4. Update or create durable docs when the result should persist.
+5. Recommend the next best role or skill if more work remains.
 
 ## Category rules
 - Inspect the repo, existing docs, and engine clues before asking for more information.
@@ -36,6 +42,9 @@ Audit or frame engine-specific project setup, folder conventions, packages/plugi
 ## Deliverables
 - engine setup checklist
 - repo/layout notes
+- class/editor/object ownership model
+- common 2D/3D class and mechanic primitives
+- world-stack, pathfinding, damage, and scale model
 - version-sensitive cautions
 - next implementation slice
 

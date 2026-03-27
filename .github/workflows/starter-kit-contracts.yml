@@ -1,0 +1,60 @@
+name: Starter Kit Contracts
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "studio/starter-kits/**"
+      - "scripts/unity_adapter.py"
+      - "scripts/unreal_adapter.py"
+      - "scripts/starter_kit_contract_smoke.py"
+      - "scripts/validate_engine_kits.py"
+      - ".github/workflows/starter-kit-contracts.yml"
+  push:
+    branches:
+      - main
+      - master
+      - "codex/**"
+    paths:
+      - "studio/starter-kits/**"
+      - "scripts/unity_adapter.py"
+      - "scripts/unreal_adapter.py"
+      - "scripts/starter_kit_contract_smoke.py"
+      - "scripts/validate_engine_kits.py"
+      - ".github/workflows/starter-kit-contracts.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  starter-kit-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: ["godot-4", "unity-6", "unreal-5"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Mark engine tool stubs executable
+        run: chmod +x tools/engine-stubs/unity/Unity tools/engine-stubs/unreal/RunUAT.sh
+
+      - name: Run starter-kit contract smoke
+        run: python3 scripts/starter_kit_contract_smoke.py --engine ${{ matrix.engine }} --output-dir build/ci/starter-kit/${{ matrix.engine }}
+
+      - name: Upload starter-kit contract artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: starter-kit-${{ matrix.engine }}
+          path: build/ci/starter-kit/${{ matrix.engine }}
+          if-no-files-found: error

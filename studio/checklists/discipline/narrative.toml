@@ -1,0 +1,19 @@
+id = "narrative"
+title = "Narrative"
+layer = "discipline"
+
+[[item]]
+id = "narrative-state"
+title = "Narrative state change is visible and intentional"
+severity = "required"
+applies_when = "Dialogue, quest, or story work"
+validation = "List the before/after state for the scene or branch"
+owner = "narrative"
+
+[[item]]
+id = "narrative-recovery"
+title = "Player recovery path is clear when they miss content"
+severity = "recommended"
+applies_when = "Branching narrative or quest flow"
+validation = "Document one fallback or recovery path"
+owner = "quest"

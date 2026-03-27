@@ -23,7 +23,7 @@ def main() -> int:
 
     lines = [f"# QA Matrix — {args.title}", "", "## Test cases", "", "| Case | Type | Expected | Notes |", "|---|---|---|---|"]
     for i, criterion in enumerate(criteria, start=1):
-        lines.append(f"| {i}. {criterion} | Smoke / Regression | Pass | TBD |")
+        lines.append(f"| {i}. {criterion} | Smoke / Regression | Pass | Record observed result, build, and evidence |")
     lines += ["", "## Environment notes", "- Build / platform / locale / save state", "", "## Exit criteria", "- All critical cases pass or accepted risks are documented"]
     target = ACTIVE_DIR / f"qa-matrix-{slug}.md"
     write_text(target, "\n".join(lines))

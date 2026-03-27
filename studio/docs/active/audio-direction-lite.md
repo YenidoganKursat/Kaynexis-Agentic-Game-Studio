@@ -1,17 +1,21 @@
-# Audio Direction Lite — Untitled Project
+# Audio Direction Lite — Codex Game Studio Pro Max
 
 ## Audio pillars
-- Pillar 1
-- Pillar 2
-- Pillar 3
+- Critical gameplay timing cues always cut through the mix
+- Audio feedback reinforces state changes before it chases spectacle
+- The room should feel tense and reactive without drowning out player input feedback
 
 ## Mix hierarchy
-- Critical gameplay cues
-- Ambient/music balance
-- UI language
+- Highest priority: damage windows, dodge success, incoming threat pulses
+- Secondary: enemy loop, room state changes, upgrade selection feedback
+- Tertiary: ambience and musical support that can duck under combat-critical cues
 
 ## Event priorities
-- Which interactions need feedback first
+- Dodge success and failure need different envelopes and tonal identity
+- Enemy pulse wind-up should be readable even with effects-heavy visuals
+- Upgrade reward should feel distinct from combat resolution
 
 ## Implementation notes
-- Middleware/plugins, memory budgets, platform constraints
+- Start with engine-native playback unless a middleware need is proven
+- Keep one-shot variation lightweight and deterministic
+- Review repeated combat cues for fatigue before adding content scale

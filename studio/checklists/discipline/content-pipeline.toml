@@ -1,0 +1,19 @@
+id = "content-pipeline"
+title = "Content Pipeline"
+layer = "discipline"
+
+[[item]]
+id = "content-authoring-path"
+title = "Authoring-to-runtime path is explicit"
+severity = "required"
+applies_when = "Art, audio, content import, or tooling work"
+validation = "Describe where source content lives and how it reaches runtime"
+owner = "technical-artist"
+
+[[item]]
+id = "content-naming"
+title = "Naming and import assumptions are deterministic"
+severity = "recommended"
+applies_when = "Any new content pipeline surface"
+validation = "State naming or import rules in content-pipeline.md"
+owner = "technical-artist"

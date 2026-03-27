@@ -5,10 +5,15 @@ Use this page when you want to choose a genre quickly without reading every pres
 The easiest path is:
 
 ```bash
-python3 scripts/start_game_studio.py
+python3 scripts/codex_studio.py init
 ```
 
 That guided setup shows the same options in a simple menu and then creates `studio/docs/active/genre-starter.md` for the chosen genre.
+
+For deeper design references, also read:
+
+- `docs/research/game-development/genre/genre-design-pattern-catalog.md`
+- `docs/research/game-development/genre/genre-example-matrix.md`
 
 ## Quick chooser
 

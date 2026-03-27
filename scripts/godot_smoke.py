@@ -3,40 +3,19 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
-import shutil
 import subprocess
+import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+from _studio_common import REPO_ROOT, find_godot_binary
+
 PROJECT_FILE = REPO_ROOT / "project.godot"
 EXPORT_PRESETS_FILE = REPO_ROOT / "export_presets.cfg"
 SCENE_FILE = REPO_ROOT / "src" / "main.tscn"
 MAIN_SCRIPT = REPO_ROOT / "src" / "main.gd"
 PLAYER_SCRIPT = REPO_ROOT / "src" / "player.gd"
 WARDEN_SCRIPT = REPO_ROOT / "src" / "pulse_warden.gd"
-
-
-def find_godot_binary() -> str | None:
-    env_candidate = os.environ.get("GODOT_BIN")
-    candidates = [env_candidate] if env_candidate else []
-    candidates += ["godot4", "godot", "godot4.4", "godot4.3", "godot4.2"]
-
-    for candidate in candidates:
-        if not candidate:
-            continue
-        path_candidate = Path(candidate).expanduser()
-        if path_candidate.exists():
-            return str(path_candidate.resolve())
-        resolved = shutil.which(candidate)
-        if resolved:
-            return resolved
-
-    mac_app = Path("/Applications/Godot.app/Contents/MacOS/Godot")
-    if mac_app.exists():
-        return str(mac_app)
-    return None
 
 
 def parse_scene_nodes(text: str) -> list[str]:
@@ -60,17 +39,18 @@ def run_static_checks() -> tuple[list[str], dict[str, object]]:
     ]
     for path in required_files:
         if not path.exists():
-            failures.append(f"Missing required file: {path.relative_to(REPO_ROOT)}")
+            failures.append(f"Missing required Godot file: {path.relative_to(REPO_ROOT)}")
 
-    main_scene = ""
     scene_nodes: list[str] = []
     presets: list[str] = []
+    main_scene = ""
+    main_script_text = ""
 
     if PROJECT_FILE.exists():
         project_text = PROJECT_FILE.read_text(encoding="utf-8")
         match = re.search(r'^run/main_scene="([^"]+)"$', project_text, flags=re.MULTILINE)
         if not match:
-            failures.append("project.godot does not define run/main_scene.")
+            failures.append("project.godot does not declare run/main_scene.")
         else:
             main_scene = match.group(1)
             if main_scene != "res://src/main.tscn":
@@ -79,7 +59,7 @@ def run_static_checks() -> tuple[list[str], dict[str, object]]:
     if SCENE_FILE.exists():
         scene_text = SCENE_FILE.read_text(encoding="utf-8")
         scene_nodes = parse_scene_nodes(scene_text)
-        for node_name in ("Player", "PulseWarden", "Hud"):
+        for node_name in ("Player", "PulseWarden", "Hud", "ArenaBounds"):
             if node_name not in scene_nodes:
                 failures.append(f"main.tscn is missing node '{node_name}'.")
 
@@ -89,6 +69,11 @@ def run_static_checks() -> tuple[list[str], dict[str, object]]:
         for preset_name in ("Linux/X11", "Windows Desktop"):
             if preset_name not in presets:
                 failures.append(f"export_presets.cfg is missing preset '{preset_name}'.")
+
+    if MAIN_SCRIPT.exists():
+        main_script_text = MAIN_SCRIPT.read_text(encoding="utf-8")
+        if "First combat room ready" not in main_script_text:
+            failures.append("src/main.gd should print a stable smoke marker on startup.")
 
     payload = {
         "main_scene": main_scene,
@@ -113,8 +98,10 @@ def run_runtime_smoke(godot_bin: str) -> tuple[list[str], dict[str, object]]:
         check=False,
     )
     output = (result.stdout + "\n" + result.stderr).strip()
+
     if result.returncode != 0:
-        failures.append(f"Runtime smoke failed with exit code {result.returncode}.")
+        failures.append(f"Godot headless startup failed with exit code {result.returncode}.")
+
     return failures, {
         "command": [godot_bin, "--headless", "--path", str(REPO_ROOT), "--quit"],
         "returncode": result.returncode,
@@ -123,9 +110,9 @@ def run_runtime_smoke(godot_bin: str) -> tuple[list[str], dict[str, object]]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run static and optional runtime smoke checks for the project.")
+    parser = argparse.ArgumentParser(description="Run static and optional runtime smoke checks for the Godot slice.")
     parser.add_argument("--json", action="store_true", help="Emit machine-readable output.")
-    parser.add_argument("--static-only", action="store_true", help="Skip the runtime invocation.")
+    parser.add_argument("--static-only", action="store_true", help="Skip the runtime Godot invocation.")
     parser.add_argument("--require-engine", action="store_true", help="Fail if a Godot binary is not available.")
     args = parser.parse_args()
 
@@ -134,18 +121,19 @@ def main() -> int:
     runtime_payload: dict[str, object] = {"attempted": False}
 
     godot_bin = find_godot_binary()
-    if not args.static_only:
-        if godot_bin:
-            runtime_failures, runtime_payload = run_runtime_smoke(godot_bin)
-            runtime_payload["attempted"] = True
-            runtime_payload["godot_bin"] = godot_bin
-            failures.extend(runtime_failures)
+    if args.static_only:
+        pass
+    elif godot_bin:
+        runtime_failures, runtime_payload = run_runtime_smoke(godot_bin)
+        runtime_payload["attempted"] = True
+        runtime_payload["godot_bin"] = godot_bin
+        failures.extend(runtime_failures)
+    else:
+        message = "No Godot binary found. Set GODOT_BIN or install Godot 4.x to run the runtime smoke."
+        if args.require_engine:
+            failures.append(message)
         else:
-            message = "No Godot binary found. Set GODOT_BIN or install Godot 4.x to run the runtime smoke."
-            if args.require_engine:
-                failures.append(message)
-            else:
-                warnings.append(message)
+            warnings.append(message)
 
     payload = {
         "failures": failures,
@@ -163,7 +151,7 @@ def main() -> int:
             for item in failures:
                 print(f"[FAIL] {item}")
         else:
-            print("[PASS] Static project surface is complete.")
+            print("[PASS] Static Godot surface is complete.")
         for item in warnings:
             print(f"[WARN] {item}")
         if runtime_payload.get("attempted"):

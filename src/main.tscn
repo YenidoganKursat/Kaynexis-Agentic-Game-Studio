@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://src/player.gd" id="2_player"]
@@ -9,6 +9,18 @@ radius = 18.0
 
 [sub_resource type="CircleShape2D" id="2_warden_shape"]
 radius = 28.0
+
+[sub_resource type="RectangleShape2D" id="3_left_wall_shape"]
+size = Vector2(16, 560)
+
+[sub_resource type="RectangleShape2D" id="4_right_wall_shape"]
+size = Vector2(16, 560)
+
+[sub_resource type="RectangleShape2D" id="5_top_wall_shape"]
+size = Vector2(1120, 16)
+
+[sub_resource type="RectangleShape2D" id="6_bottom_wall_shape"]
+size = Vector2(1120, 16)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
@@ -30,6 +42,32 @@ script = ExtResource("3_warden")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PulseWarden"]
 shape = SubResource("2_warden_shape")
+
+[node name="ArenaBounds" type="Node2D" parent="."]
+
+[node name="LeftWall" type="StaticBody2D" parent="ArenaBounds"]
+position = Vector2(88, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaBounds/LeftWall"]
+shape = SubResource("3_left_wall_shape")
+
+[node name="RightWall" type="StaticBody2D" parent="ArenaBounds"]
+position = Vector2(1184, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaBounds/RightWall"]
+shape = SubResource("4_right_wall_shape")
+
+[node name="TopWall" type="StaticBody2D" parent="ArenaBounds"]
+position = Vector2(640, 88)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaBounds/TopWall"]
+shape = SubResource("5_top_wall_shape")
+
+[node name="BottomWall" type="StaticBody2D" parent="ArenaBounds"]
+position = Vector2(640, 624)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaBounds/BottomWall"]
+shape = SubResource("6_bottom_wall_shape")
 
 [node name="Hud" type="CanvasLayer" parent="."]
 

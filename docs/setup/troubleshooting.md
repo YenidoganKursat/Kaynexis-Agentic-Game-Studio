@@ -1,6 +1,6 @@
 # Troubleshooting
 
-## `python3 scripts/setup_repo.py` fails immediately
+## `python3 scripts/codex_studio.py init` fails immediately
 
 Check:
 
@@ -49,7 +49,7 @@ Fix:
 Run setup again with the right metadata or edit the docs directly:
 
 ```bash
-python3 scripts/setup_repo.py \
+python3 scripts/codex_studio.py init \
   --project-name "Your Game" \
   --engine godot-4 \
   --platform pc-premium \
@@ -94,6 +94,49 @@ python3 scripts/godot_smoke.py
 python3 scripts/godot_export.py --preset "Linux/X11"
 ```
 
+## `python3 scripts/unity_adapter.py ...` says no Unity binary was found
+
+Contract smoke still works with the repo-local stub:
+
+```bash
+python3 scripts/unity_adapter.py test \
+  --project-path studio/starter-kits/unity-6/scaffold \
+  --unity-path tools/engine-stubs/unity/Unity \
+  --dry-run --json
+```
+
+If you want editor-backed Unity validation or builds, point the repo to a real Unity executable:
+
+```bash
+export UNITY_CLI="/absolute/path/to/Unity"
+python3 scripts/unity_adapter.py test \
+  --project-path studio/starter-kits/unity-6/scaffold \
+  --unity-path "$UNITY_CLI" \
+  --dry-run --json
+```
+
+## `python3 scripts/unreal_adapter.py ...` says no Unreal tool path was found
+
+Contract smoke still works with the repo-local stub:
+
+```bash
+python3 scripts/unreal_adapter.py package \
+  --project-path studio/starter-kits/unreal-5/scaffold \
+  --uat-path tools/engine-stubs/unreal/RunUAT.sh \
+  --dry-run --json
+```
+
+If you want engine-backed packaging, point the repo to a real Unreal path:
+
+```bash
+export UNREAL_UAT="/absolute/path/to/RunUAT.sh"
+python3 scripts/unreal_adapter.py package \
+  --project-path studio/starter-kits/unreal-5/scaffold \
+  --uat-path "$UNREAL_UAT" \
+  --platform Win64 \
+  --dry-run --json
+```
+
 ## I only want the docs and scripts, not the Docker helper
 
 That is fine. Docker is optional.
@@ -101,9 +144,11 @@ That is fine. Docker is optional.
 Use the native commands instead:
 
 ```bash
-python3 scripts/setup_repo.py --project-name "Your Game" --engine godot-4 --platform pc-premium --genre action-roguelite
+python3 scripts/codex_studio.py init --project-name "Your Game" --engine godot-4 --platform pc-premium --genre action-roguelite --yes
 make validate
 ```
+
+You can swap `--engine godot-4` for `unity-6` or `unreal-5`.
 
 ## `make` is not available
 

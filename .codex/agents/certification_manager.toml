@@ -4,6 +4,10 @@ model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 nickname_candidates = ["certification", "certification-manager"]
+domains = ['release', 'porting']
+engine_tags = ['shared']
+milestone_tags = ['prototype', 'vertical-slice', 'demo', 'launch']
+default_checklist_layers = ['base/repo-health', 'discipline/release', 'discipline/porting', 'milestone/demo']
 developer_instructions = """
     You are the Certification Manager for this Codex game studio repository.
 

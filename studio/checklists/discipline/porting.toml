@@ -1,0 +1,19 @@
+id = "porting"
+title = "Porting"
+layer = "discipline"
+
+[[item]]
+id = "porting-delta"
+title = "Platform delta is documented before implementation"
+severity = "required"
+applies_when = "Console or non-primary platform work"
+validation = "List input, performance, and compliance deltas"
+owner = "porting"
+
+[[item]]
+id = "porting-cert-risk"
+title = "At least one cert or compliance risk is surfaced"
+severity = "recommended"
+applies_when = "Submission or console prep"
+validation = "Record a cert-risk assumption in the active docs"
+owner = "certification"

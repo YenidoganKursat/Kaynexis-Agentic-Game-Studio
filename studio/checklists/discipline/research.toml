@@ -1,0 +1,19 @@
+id = "research"
+title = "Research"
+layer = "discipline"
+
+[[item]]
+id = "research-primary-sources"
+title = "Research uses primary sources first"
+severity = "required"
+applies_when = "Any architecture or engine decision"
+validation = "Include official or primary source links in the research note"
+owner = "docs-researcher"
+
+[[item]]
+id = "research-repo-impact"
+title = "Research ends with a repo-impact statement"
+severity = "required"
+applies_when = "Any research note added to the knowledge base"
+validation = "Document what changes in starter kits, checklists, docs, or workflows"
+owner = "technical-director"

@@ -8,7 +8,7 @@ Use eval plans whenever a change may alter how Codex routes, reviews, researches
 - `.codex/config.toml`
 - `.codex/agents/*.toml`
 - `.agents/skills/**`
-- shared scripts such as `route_task.py`, `setup_repo.py`, `doctor.py`, or other repo-wide workflow tools
+- shared scripts such as `codex_studio.py`, `route_task.py`, `setup_repo.py`, `doctor.py`, or other repo-wide workflow tools
 - changes that tighten or relax review, safety, or delegation behavior
 
 ## Minimal eval loop

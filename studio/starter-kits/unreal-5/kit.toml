@@ -1,0 +1,39 @@
+id = "unreal-5"
+engine = "unreal"
+version_family = "5.x"
+required_markers = [
+  "StarterKit.uproject",
+  "Config",
+  "Config/DefaultEngine.ini",
+  "Config/DefaultInput.ini",
+  "Content",
+  "Content/Blueprints/README.md",
+  "Content/Maps/README.md",
+  "Source",
+  "Source/StarterKit/StarterKitCharacter.h",
+  "Source/StarterKit/StarterKitCharacter.cpp",
+  "Source/StarterKit/StarterKitEnemyActor.h",
+  "Source/StarterKit/StarterKitEnemyActor.cpp",
+  "Source/StarterKit/StarterKitGameModeBase.h",
+  "Source/StarterKit/StarterKitGameModeBase.cpp",
+  "Source/StarterKit/StarterKitEnemyArchetype.h",
+  "Source/StarterKit/StarterKitHealthComponent.h",
+  "Source/StarterKit/StarterKitHealthComponent.cpp",
+]
+bootstrap_command = "python3 scripts/codex_studio.py init --engine unreal-5"
+smoke_commands = [
+  "python3 scripts/validate_engine_kits.py --engine unreal-5",
+  "python3 scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --uat-path tools/engine-stubs/unreal/RunUAT.sh --dry-run --json",
+]
+export_commands = [
+  "python3 scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --uat-path tools/engine-stubs/unreal/RunUAT.sh --platform Win64 --dry-run --json",
+  "Replace the stub path with a real UNREAL_UAT or UNREAL_EDITOR value before treating packaging coverage as engine-backed",
+]
+supported_platforms = ["pc-premium", "console-premium"]
+seed_docs = ["studio/docs/active/engine-profile.md", "studio/docs/active/build-pipeline.md", "studio/docs/active/platform-targets.md"]
+validation_steps = [
+  "Maintain clear Source vs Content boundaries.",
+  "Keep sample gameplay framework classes explicit so the starter kit proves Actor, Component, Character, and DataAsset ownership.",
+  "Treat plugin/module sprawl as a first-class architecture risk.",
+  "Document cook/package assumptions before content scale grows.",
+]

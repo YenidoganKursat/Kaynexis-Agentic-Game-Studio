@@ -3,6 +3,11 @@
 ## Current save model
 - Files / slots / schema / ownership
 
+## Data boundaries
+- Authored immutable data
+- Run/session mutable state
+- Durable save/profile state
+
 ## Migration strategy
 - Versioning, upgrade path, fallback behavior
 

@@ -1,0 +1,27 @@
+id = "performance"
+title = "Performance"
+layer = "discipline"
+
+[[item]]
+id = "perf-baseline"
+title = "Performance baseline is captured before tuning"
+severity = "required"
+applies_when = "FPS, load time, memory, or thermal work"
+validation = "Record one baseline number or reproducible observation"
+owner = "performance"
+
+[[item]]
+id = "perf-target"
+title = "Target budget or expected improvement is explicit"
+severity = "required"
+applies_when = "Any performance pass"
+validation = "Document the expected target in the perf note or active doc"
+owner = "technical-director"
+
+[[item]]
+id = "perf-representation-choice"
+title = "Representation choice is reviewed before micro-optimization"
+severity = "recommended"
+applies_when = "Large crowds, many projectiles, repeated props, or physics-heavy systems"
+validation = "Document whether the feature should stay on full gameplay objects or move to pooling, instancing, servers, DOTS, or Mass"
+owner = "technical-director"

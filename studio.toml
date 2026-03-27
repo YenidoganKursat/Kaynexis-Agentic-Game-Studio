@@ -1,0 +1,30 @@
+[project]
+name = "Codex Game Studio Pro Max"
+repo_role = "studio-os"
+public_face = "codex-first"
+language = "en"
+primary_engine = "godot-4"
+supported_engines = ["godot-4", "unity-6", "unreal-5"]
+platform = "pc-premium"
+genre = "action-roguelite"
+engine_version = "4.x"
+
+[ux]
+mode = "wizard-first"
+
+[checklists]
+merge_order = ["base", "engine", "discipline", "milestone", "custom"]
+custom_dirs = ["studio/checklists/custom"]
+default_milestone = "prototype"
+
+[research]
+knowledge_base_dir = "docs/research/game-development"
+policy = "official-first"
+required_sections = ["Summary", "Primary sources", "Why this matters to this repo", "Decision impact"]
+
+[tools]
+python = "python3"
+godot_bin = ""
+unity_cli = ""
+unreal_editor = ""
+unreal_uat = ""

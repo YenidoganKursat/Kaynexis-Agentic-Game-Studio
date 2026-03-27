@@ -7,6 +7,7 @@ import json
 import os
 import re
 import shutil
+import tomllib
 from pathlib import Path
 from typing import Iterable
 
@@ -15,6 +16,22 @@ TEMPLATE_DIR = REPO_ROOT / "studio" / "docs" / "templates"
 ACTIVE_DIR = REPO_ROOT / "studio" / "docs" / "active"
 PRESET_DIR = REPO_ROOT / "studio" / "presets"
 PLACEHOLDER_FILENAMES = {".gitkeep", "AGENTS.md"}
+PROJECT_SCOPED_ACTIVE_DOCS = {
+    "art-direction-lite.md",
+    "audio-direction-lite.md",
+    "build-pipeline.md",
+    "content-pipeline.md",
+    "current-sprint.md",
+    "decision-log.md",
+    "engine-profile.md",
+    "game-brief.md",
+    "localization-glossary.md",
+    "milestones.md",
+    "monetization-guardrails.md",
+    "platform-targets.md",
+    "risk-register.md",
+    "telemetry-schema.md",
+}
 
 PLACEHOLDER_DEFAULTS = {
     "PROJECT_NAME": "Untitled Project",
@@ -30,6 +47,8 @@ PLACEHOLDER_DEFAULTS = {
     "GENRE_FIRST_SLICE": "- Define one small playable slice that proves the core loop.",
     "GENRE_FIRST_FEATURE": "First Genre Slice",
     "GENRE_ROUTE_EXAMPLE": "Describe the first genre-specific task",
+    "GENRE_REFERENCE_GAMES": "- Add one or two contrast-set references.",
+    "GENRE_DESIGN_FOCUS": "- Document the dominant loop and first failure risk.",
     "TODAY": _dt.date.today().isoformat(),
     "FEATURE_NAME": "Example Feature",
     "DECISION_NAME": "Example Decision",
@@ -49,6 +68,18 @@ ENGINE_HINTS = {
     "godot": ["project.godot", ".tscn", ".tres", ".gd"],
     "unity": ["Assets", "ProjectSettings", "Packages/manifest.json"],
     "unreal": [".uproject", "Config", "Content", "Source"],
+}
+
+ENGINE_SLUG_TO_FAMILY = {
+    "godot-4": "godot",
+    "unity-6": "unity",
+    "unreal-5": "unreal",
+}
+
+ENGINE_VERSION_DEFAULTS = {
+    "godot-4": "4.x",
+    "unity-6": "6000.x",
+    "unreal-5": "5.x",
 }
 
 GENRE_STARTER_GUIDANCE = {
@@ -91,6 +122,41 @@ GENRE_STARTER_GUIDANCE = {
         "GENRE_FIRST_SLICE": "- One small skirmish with readable forecasted outcomes\n- One meaningful build or loadout choice\n- One terrain or positioning lesson",
         "GENRE_FIRST_FEATURE": "First Tactical Skirmish",
         "GENRE_ROUTE_EXAMPLE": "Implement the first tactical skirmish with readable damage forecasting",
+    },
+}
+
+GENRE_REFERENCE_GUIDANCE = {
+    "action-roguelite": {
+        "GENRE_REFERENCE_GAMES": "- `Dead Cells` -> study repeat-run mastery, failure cadence, and readable combat pressure\n- `Risk of Rain 2` -> study scaling chaos, item-build variance, and escalation pacing",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: survive encounter -> choose build growth -> repeat\n- Architecture watch: separate run state from meta progression early\n- First risk: variety collapse or permanent power trivializing mastery",
+    },
+    "co-op-survival": {
+        "GENRE_REFERENCE_GAMES": "- `Don't Starve Together` -> study shared scarcity, role expression, and co-op recovery",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: gather -> coordinate -> survive -> rebuild\n- Architecture watch: authority for inventory, resource state, and session failure\n- First risk: desync pain or ambiguous shared state",
+    },
+    "cozy-sim": {
+        "GENRE_REFERENCE_GAMES": "- `Stardew Valley` -> study routine breadth, long-term attachment, and low-friction progression\n- `Animal Crossing: New Horizons` -> study persistent place-making and customization-driven reward texture",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: daily routine -> visible improvement -> stronger attachment\n- Architecture watch: persistent world state, schedules, and friction-light UI\n- First risk: chores becoming grind or interface sprawl",
+    },
+    "extraction-lite": {
+        "GENRE_REFERENCE_GAMES": "- `Hunt: Showdown` -> study extraction pressure, information play, and fair high-stakes loss",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: gear up -> risk more -> extract or lose gains\n- Architecture watch: economy trust, loot authority, and extraction-state clarity\n- First risk: unfair loss or exploit-driven economy collapse",
+    },
+    "narrative-adventure": {
+        "GENRE_REFERENCE_GAMES": "- `Life is Strange` -> study visible consequence framing and relationship state\n- `Pentiment` -> study authored scene flow and narrative content density",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: advance scene -> choose -> pay off later\n- Architecture watch: state tracking, branch containment, and content throughput\n- First risk: branching explosion or hidden state bugs",
+    },
+    "platformer": {
+        "GENRE_REFERENCE_GAMES": "- `Dead Cells` -> study movement-combat readability overlap and restart cadence",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: read space -> execute movement -> fail fast -> retry cleaner\n- Architecture watch: movement feel, camera support, and checkpoint cadence\n- First risk: input latency, camera frustration, or unreadable landing zones",
+    },
+    "puzzle": {
+        "GENRE_REFERENCE_GAMES": "- `Portal 2` -> study teach/test/twist sequencing and authored escalation",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: observe rule -> test hypothesis -> learn hidden constraint\n- Architecture watch: rule clarity, misunderstanding recovery, and hint discipline\n- First risk: rule ambiguity or accidental solves",
+    },
+    "tactical-rpg": {
+        "GENRE_REFERENCE_GAMES": "- `Fire Emblem Engage` -> study forecast clarity, turn consequence readability, and mobility-vs-tactics balance",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: forecast -> commit turn -> absorb result -> grow options\n- Architecture watch: forecast UI, rule clarity, and complexity pacing\n- First risk: decision paralysis or opaque combat rules",
     },
 }
 
@@ -210,11 +276,14 @@ def build_genre_replacements(genre: str | None) -> dict[str, str]:
             "GENRE_FIRST_SLICE": "- Define one playable slice that proves the core loop.",
             "GENRE_FIRST_FEATURE": f"First {genre_name} Slice",
             "GENRE_ROUTE_EXAMPLE": f"Plan the first {genre_name.lower()} slice",
+            "GENRE_REFERENCE_GAMES": "- Add one or two contrast-set references.",
+            "GENRE_DESIGN_FOCUS": "- Document the dominant loop and first failure risk.",
         }
 
     metadata = parse_preset_metadata(path)
     sections = metadata.get("sections", {})
     guidance = GENRE_STARTER_GUIDANCE.get(genre, {})
+    reference_guidance = GENRE_REFERENCE_GUIDANCE.get(genre, {})
     genre_name = str(metadata.get("display_name") or humanize_slug(genre))
 
     return {
@@ -227,6 +296,8 @@ def build_genre_replacements(genre: str | None) -> dict[str, str]:
         "GENRE_FIRST_SLICE": guidance.get("GENRE_FIRST_SLICE", "- Define one playable slice that proves the core loop."),
         "GENRE_FIRST_FEATURE": guidance.get("GENRE_FIRST_FEATURE", f"First {genre_name} Slice"),
         "GENRE_ROUTE_EXAMPLE": guidance.get("GENRE_ROUTE_EXAMPLE", f"Plan the first {genre_name.lower()} slice"),
+        "GENRE_REFERENCE_GAMES": reference_guidance.get("GENRE_REFERENCE_GAMES", "- Add one or two contrast-set references."),
+        "GENRE_DESIGN_FOCUS": reference_guidance.get("GENRE_DESIGN_FOCUS", "- Document the dominant loop and first failure risk."),
     }
 
 
@@ -239,6 +310,29 @@ def build_bootstrap_replacements(project_name: str, engine: str, engine_version:
     }
     replacements.update(build_genre_replacements(genre))
     return replacements
+
+
+def sync_active_doc_titles(project_name: str) -> list[Path]:
+    updated: list[Path] = []
+    for path in sorted(ACTIVE_DIR.glob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        original = text
+
+        if "Untitled Project" in text:
+            text = text.replace("Untitled Project", project_name)
+
+        if path.name in PROJECT_SCOPED_ACTIVE_DOCS:
+            lines = text.splitlines()
+            if lines and lines[0].startswith("# "):
+                match = re.match(r"^(# [^—]+?)(?:\s+—\s+.+)?$", lines[0].strip())
+                if match:
+                    lines[0] = f"{match.group(1)} — {project_name}"
+                    text = "\n".join(lines)
+
+        if text != original:
+            write_text(path, text)
+            updated.append(path)
+    return updated
 
 
 def has_substantive_files(directory: Path, ignored_names: set[str] | None = None) -> bool:
@@ -255,18 +349,77 @@ def unresolved_placeholders(text: str) -> list[str]:
     return sorted(set(re.findall(r"\{[A-Z0-9_]+\}", text)))
 
 
-def detect_engine(root: Path | None = None) -> str:
+def load_root_studio_config(root: Path | None = None) -> dict[str, object]:
     root = root or REPO_ROOT
-    # Godot
+    path = root / "studio.toml"
+    if not path.exists():
+        return {}
+    try:
+        return tomllib.loads(path.read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError:
+        return {}
+
+
+def configured_engine_slug(root: Path | None = None) -> str | None:
+    config = load_root_studio_config(root)
+    project = config.get("project", {})
+    if isinstance(project, dict):
+        engine = str(project.get("primary_engine", "")).strip()
+        if engine:
+            return engine
+    return None
+
+
+def engine_family_from_slug(engine_slug: str | None) -> str:
+    if not engine_slug:
+        return "unknown"
+    return ENGINE_SLUG_TO_FAMILY.get(engine_slug, "unknown")
+
+
+def default_engine_version(engine_slug: str | None) -> str:
+    if not engine_slug:
+        return "TBD"
+    return ENGINE_VERSION_DEFAULTS.get(engine_slug, "TBD")
+
+
+def detect_engine_from_clues(root: Path | None = None) -> str:
+    root = root or REPO_ROOT
     if (root / "project.godot").exists():
         return "godot"
-    # Unity
     if (root / "Assets").exists() and (root / "ProjectSettings").exists():
         return "unity"
-    # Unreal
     if any(root.glob("*.uproject")) or ((root / "Config").exists() and (root / "Content").exists()):
         return "unreal"
     return "unknown"
+
+
+def engine_detection_report(root: Path | None = None) -> dict[str, object]:
+    root = root or REPO_ROOT
+    configured_slug = configured_engine_slug(root)
+    configured_family = engine_family_from_slug(configured_slug)
+    clue_engine = detect_engine_from_clues(root)
+
+    if configured_family != "unknown":
+        resolved_engine = configured_family
+        source = "studio.toml"
+    else:
+        resolved_engine = clue_engine
+        source = "repo-clues"
+
+    mismatch = configured_family != "unknown" and clue_engine != "unknown" and configured_family != clue_engine
+    return {
+        "configured_slug": configured_slug,
+        "configured_family": configured_family,
+        "clue_engine": clue_engine,
+        "resolved_engine": resolved_engine,
+        "source": source,
+        "mismatch": mismatch,
+    }
+
+
+def detect_engine(root: Path | None = None) -> str:
+    report = engine_detection_report(root)
+    return str(report["resolved_engine"])
 
 
 def find_godot_binary() -> str | None:
@@ -335,8 +488,12 @@ def append_preset_pack(engine: str | None = None, platform: str | None = None, g
 
 
 def repo_summary() -> dict[str, object]:
+    engine_report = engine_detection_report()
     return {
-        "engine": detect_engine(),
+        "engine": engine_report["resolved_engine"],
+        "engine_source": engine_report["source"],
+        "configured_engine": engine_report["configured_slug"] or "",
+        "engine_clue": engine_report["clue_engine"],
         "has_src": (REPO_ROOT / "src").exists(),
         "has_tests": (REPO_ROOT / "tests").exists(),
         "has_assets": (REPO_ROOT / "assets").exists(),

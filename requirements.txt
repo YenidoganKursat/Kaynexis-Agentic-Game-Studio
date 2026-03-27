@@ -1,6 +1,7 @@
 ipython
 numpy
 pandas
+PyYAML
 pytest
 python-dotenv
 requests

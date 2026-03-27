@@ -13,6 +13,9 @@
 - Save/load case
 - Input case
 - Platform case
+- State ownership case
+- Damage/contact case
+- AI/navigation case
 
 ## Exit criteria
 - What passes before this is considered done

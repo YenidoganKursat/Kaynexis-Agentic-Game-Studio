@@ -4,7 +4,7 @@ Use this repository like a studio operating system, not a loose prompt dump.
 
 ## Quick start
 
-1. Run `python3 scripts/start_game_studio.py`
+1. Run `python3 scripts/codex_studio.py init`
 2. Read `docs/setup/getting-started.md`
 3. Review `docs/reference/code-review.md`
 4. Run `make ci-local`

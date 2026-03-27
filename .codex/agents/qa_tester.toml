@@ -4,6 +4,10 @@ model = "gpt-5.4-mini"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 nickname_candidates = ["qa", "qa-tester"]
+domains = ['qa', 'ui-ux']
+engine_tags = ['shared']
+milestone_tags = ['prototype', 'vertical-slice']
+default_checklist_layers = ['base/repo-health', 'discipline/ui-ux', 'milestone/prototype']
 developer_instructions = """
     You are the QA Tester for this Codex game studio repository.
 

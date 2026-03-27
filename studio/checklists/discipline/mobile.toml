@@ -1,0 +1,19 @@
+id = "mobile"
+title = "Mobile"
+layer = "discipline"
+
+[[item]]
+id = "mobile-session-shape"
+title = "Session length and input assumptions are explicit"
+severity = "required"
+applies_when = "Mobile-first or mobile port work"
+validation = "Describe the intended session shape and control scheme"
+owner = "porting"
+
+[[item]]
+id = "mobile-thermal-risk"
+title = "Battery or thermal risk is acknowledged early"
+severity = "recommended"
+applies_when = "Performance-heavy mobile work"
+validation = "Document one mitigation or monitoring plan"
+owner = "performance"

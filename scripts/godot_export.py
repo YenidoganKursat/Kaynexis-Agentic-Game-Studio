@@ -2,35 +2,13 @@
 from __future__ import annotations
 
 import argparse
-import os
 import re
-import shutil
 import subprocess
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+from _studio_common import REPO_ROOT, find_godot_binary
+
 EXPORT_PRESETS_PATH = REPO_ROOT / "export_presets.cfg"
-
-
-def find_godot_binary() -> str | None:
-    env_candidate = os.environ.get("GODOT_BIN")
-    candidates = [env_candidate] if env_candidate else []
-    candidates += ["godot4", "godot", "godot4.4", "godot4.3", "godot4.2"]
-
-    for candidate in candidates:
-        if not candidate:
-            continue
-        path_candidate = Path(candidate).expanduser()
-        if path_candidate.exists():
-            return str(path_candidate.resolve())
-        resolved = shutil.which(candidate)
-        if resolved:
-            return resolved
-
-    mac_app = Path("/Applications/Godot.app/Contents/MacOS/Godot")
-    if mac_app.exists():
-        return str(mac_app)
-    return None
 
 
 def read_export_path(preset_name: str) -> str | None:
@@ -46,7 +24,7 @@ def read_export_path(preset_name: str) -> str | None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Export the project using export_presets.cfg.")
+    parser = argparse.ArgumentParser(description="Export the Godot project using export_presets.cfg.")
     parser.add_argument("--preset", default="Linux/X11", help="Preset name from export_presets.cfg.")
     parser.add_argument("--output", help="Optional override for the output path.")
     parser.add_argument("--dry-run", action="store_true", help="Print the resolved command without running it.")

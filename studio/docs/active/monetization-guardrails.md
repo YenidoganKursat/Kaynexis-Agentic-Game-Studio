@@ -1,13 +1,20 @@
-# Monetization Guardrails — Untitled Project
+# Monetization Guardrails — Codex Game Studio Pro Max
 
 ## Allowed patterns
-- Patterns aligned with player trust
+- Premium purchase with transparent scope and no hidden monetization layers
+- Optional soundtrack or cosmetic extras only if they do not distort game balance
 
 ## Disallowed patterns
-- Pay-to-win, dark patterns, manipulative timers, etc.
+- Pay-to-win progression shortcuts
+- Manipulative timers, energy systems, or opaque scarcity pressure
+- Reward structures that push players into external storefront decisions mid-run
 
 ## Review questions
-- Fairness, pressure, disclosure, platform policy
+- Does the monetization choice preserve player trust?
+- Can the design still stand on its own without the monetization layer?
+- Would a first-time player understand the offering without reading legal fine print?
 
 ## Comms notes
-- How monetization is explained transparently
+- State the premium-first stance clearly in public-facing material
+- If paid extras ever exist, separate them from gameplay power
+- Update this doc before any pricing or DLC discussions leave prototype territory

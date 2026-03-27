@@ -1,9 +1,9 @@
 # Assets
 
-This folder is reserved for project art, audio, and supporting content.
+This folder is ready for real project assets.
 
-Suggested baseline:
+Current baseline expectations:
 
-- keep names consistent and easy to scan
-- add only the assets needed for the next playable milestone
-- prefer small, readable content sets over early content sprawl
+- keep names deterministic and lower_snake_case where the engine permits it
+- document memory or compression-sensitive assets in `studio/docs/active/content-pipeline.md`
+- land only the smallest asset set needed for the first validated slice

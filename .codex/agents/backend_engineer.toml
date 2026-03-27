@@ -4,6 +4,10 @@ model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
 nickname_candidates = ["backend", "backend-engineer"]
+domains = ['backend']
+engine_tags = ['shared']
+milestone_tags = ['prototype', 'vertical-slice']
+default_checklist_layers = ['base/repo-health', 'discipline/backend', 'milestone/prototype']
 developer_instructions = """
     You are the Backend Engineer for this Codex game studio repository.
 

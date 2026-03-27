@@ -6,6 +6,7 @@ signal room_cleared
 @export var telegraph_duration := 0.85
 @export var pulse_duration := 0.25
 @export var pulse_radius := 90.0
+@export var pulse_band_width := 22.0
 
 enum State { IDLE, TELEGRAPH, PULSE, DEFEATED }
 
@@ -62,6 +63,19 @@ func get_status_label() -> String:
     return "unknown"
 
 
+func resolve_player_contact(player_position: Vector2, player_radius: float, player_is_dashing: bool) -> String:
+    if not is_pulsing():
+        return "none"
+
+    var distance_to_player := global_position.distance_to(player_position)
+    var half_band := pulse_band_width * 0.5
+    var inner_bound := pulse_radius - half_band - player_radius
+    var outer_bound := pulse_radius + half_band + player_radius
+    if distance_to_player < inner_bound or distance_to_player > outer_bound:
+        return "none"
+    return "defeat" if player_is_dashing else "hit"
+
+
 func defeat() -> void:
     if state == State.DEFEATED:
         return
@@ -90,10 +104,10 @@ func _draw() -> void:
     var ring_width := 4.0
     if state == State.TELEGRAPH:
         ring_color = Color("ffe082")
-        ring_width = 8.0
+        ring_width = max(pulse_band_width - 4.0, 8.0)
     elif state == State.PULSE:
         ring_color = Color("ff5c7a")
-        ring_width = 12.0
+        ring_width = pulse_band_width
     elif state == State.DEFEATED:
         ring_color = Color("7ae582")
         ring_width = 6.0
