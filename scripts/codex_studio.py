@@ -6,9 +6,10 @@ import json
 import subprocess
 import sys
 
-from _studio_common import REPO_ROOT, available_presets, build_genre_replacements, parse_preset_metadata, preset_path
+from _studio_common import REPO_ROOT, available_presets, build_genre_replacements, default_engine_version, parse_preset_metadata, preset_path
 from studio_core import (
     available_starter_kits,
+    configured_project_name,
     infer_engine_from_text,
     primary_engine_slug,
     related_research_refs,
@@ -111,7 +112,7 @@ def handle_init(args: argparse.Namespace) -> int:
     if interactive:
         print("Codex Studio")
         print("============")
-        args.project_name = prompt_text("Project name", args.project_name, REPO_ROOT.name)
+        args.project_name = prompt_text("Project name", args.project_name, configured_project_name(REPO_ROOT.name))
         args.engine = choose_option("engine", engines, args.engine)
         args.platform = choose_option("platform", platforms, args.platform)
         args.genre = choose_option("genre", genres, args.genre)
@@ -120,6 +121,7 @@ def handle_init(args: argparse.Namespace) -> int:
         if missing:
             raise SystemExit(f"Non-interactive init requires: {', '.join('--' + item.replace('_', '-') for item in missing)}")
 
+    args.engine_version = args.engine_version or default_engine_version(args.engine)
     guidance = build_genre_replacements(args.genre)
     if not (args.dry_run and args.json):
         print()
@@ -127,6 +129,7 @@ def handle_init(args: argparse.Namespace) -> int:
         print("--------------")
         print(f"Project: {args.project_name}")
         print(f"Engine: {args.engine}")
+        print(f"Engine version: {args.engine_version}")
         print(f"Platform: {args.platform}")
         print(f"Genre: {guidance['GENRE_NAME']}")
         print(f"Summary: {guidance['GENRE_SUMMARY']}")
@@ -289,7 +292,7 @@ def build_parser() -> argparse.ArgumentParser:
     init_parser = subparsers.add_parser("init", help="Guided repo setup and baseline seeding.")
     init_parser.add_argument("--project-name")
     init_parser.add_argument("--engine")
-    init_parser.add_argument("--engine-version", default="TBD")
+    init_parser.add_argument("--engine-version")
     init_parser.add_argument("--platform")
     init_parser.add_argument("--genre")
     init_parser.add_argument("--overwrite", action="store_true")

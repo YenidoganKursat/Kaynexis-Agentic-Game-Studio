@@ -1,4 +1,4 @@
-# Milestones — kaynexisGame
+# Milestones — Codex Game Studio Pro Max
 
 ## Milestones
 | Milestone | Goal | Exit criteria | Target window | Risks |

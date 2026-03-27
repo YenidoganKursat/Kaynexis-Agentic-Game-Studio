@@ -1,0 +1,9 @@
+{
+  "name": "StarterKit.Editor",
+  "references": [
+    "StarterKit.Runtime"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ]
+}

@@ -1,9 +1,9 @@
 .DEFAULT_GOAL := help
 
 PYTHON ?= python3
-PROJECT_NAME ?= Untitled Project
+PROJECT_NAME ?= Codex Game Studio Pro Max
 ENGINE ?= godot-4
-ENGINE_VERSION ?= TBD
+ENGINE_VERSION ?= 4.x
 PLATFORM ?= pc-premium
 GENRE ?= action-roguelite
 TASK ?= Investigate controller aim drift
@@ -11,6 +11,8 @@ FEATURE ?= Example Feature
 BUG ?= Example Bug
 QA_TITLE ?= Example Feature
 EVAL_TITLE ?= Example Eval
+UNITY_STUB ?= tools/engine-stubs/unity/Unity
+UNREAL_STUB ?= tools/engine-stubs/unreal/RunUAT.sh
 
 help: ## Show common repo commands
 	@grep -E '^[a-zA-Z0-9_.-]+:.*## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {printf "%-16s %s\n", $$1, $$2}'
@@ -32,6 +34,7 @@ doctor: ## Run local tooling and repo health checks
 
 ci-local: ## Run the local CI-equivalent checks
 	$(PYTHON) -m compileall -q scripts docs studio evals tests
+	$(PYTHON) scripts/validate_workflows.py
 	$(PYTHON) scripts/doctor.py
 	$(PYTHON) scripts/validate_engine_kits.py
 	$(PYTHON) scripts/run_local_evals.py
@@ -40,8 +43,10 @@ ci-local: ## Run the local CI-equivalent checks
 	$(PYTHON) scripts/validate_repo_layout.py
 	$(PYTHON) scripts/validate_docs.py
 	$(PYTHON) scripts/validate_assets.py
+	$(PYTHON) scripts/ci_artifact_report.py --output-dir build/ci/local
 
 validate: ## Run layout, docs, and asset validation
+	$(PYTHON) scripts/validate_workflows.py
 	$(PYTHON) scripts/validate_engine_kits.py
 	$(PYTHON) scripts/godot_smoke.py --static-only
 	$(PYTHON) scripts/validate_repo_layout.py
@@ -87,14 +92,25 @@ research: ## Scaffold a research note inside the knowledge base
 engine-kits: ## Validate all starter-kit manifests and scaffold markers
 	$(PYTHON) scripts/validate_engine_kits.py
 
+ci-workflows: ## Validate GitHub workflow coverage and action pinning
+	$(PYTHON) scripts/validate_workflows.py
+
+ci-report: ## Generate CI health artifacts into build/ci/latest
+	$(PYTHON) scripts/ci_artifact_report.py --output-dir build/ci/latest
+
+starter-kit-smoke: ## Run starter-kit contract smoke for all supported engines
+	$(PYTHON) scripts/starter_kit_contract_smoke.py --engine godot-4 --output-dir build/ci/starter-kit
+	$(PYTHON) scripts/starter_kit_contract_smoke.py --engine unity-6 --output-dir build/ci/starter-kit
+	$(PYTHON) scripts/starter_kit_contract_smoke.py --engine unreal-5 --output-dir build/ci/starter-kit
+
 unity-test-command: ## Print the Unity test command for the starter-kit scaffold
-	$(PYTHON) scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --unity-path /Applications/Unity/Hub/Editor/6000.0.0f1/Unity --dry-run --json
+	$(PYTHON) scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --unity-path $(UNITY_STUB) --dry-run --json
 
 unity-build-command: ## Print the Unity build command for the starter-kit scaffold
-	$(PYTHON) scripts/unity_adapter.py build --project-path studio/starter-kits/unity-6/scaffold --unity-path /Applications/Unity/Hub/Editor/6000.0.0f1/Unity --dry-run --json
+	$(PYTHON) scripts/unity_adapter.py build --project-path studio/starter-kits/unity-6/scaffold --unity-path $(UNITY_STUB) --dry-run --json
 
 unreal-package-command: ## Print the Unreal package command for the starter-kit scaffold
-	$(PYTHON) scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --uat-path /Applications/Epic/UE_5.5/Engine/Build/BatchFiles/RunUAT.sh --dry-run --json
+	$(PYTHON) scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --uat-path $(UNREAL_STUB) --dry-run --json
 
 feature: ## Scaffold a feature brief, ADR, and test plan
 	$(PYTHON) scripts/scaffold_feature.py "$(FEATURE)" --with-adr --with-test-plan

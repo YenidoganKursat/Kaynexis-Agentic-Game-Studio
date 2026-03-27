@@ -1,9 +1,10 @@
-# Engine Profile — kaynexisGame
+# Engine Profile — Codex Game Studio Pro Max
 
 ## Engine
 - Engine: Godot 4
 - Version: 4.x
 - Rendering path / pipeline: confirm once real engine-native project files land
+- Repo support contract: multi-engine starter-kit parity for Godot 4, Unity 6, and Unreal 5
 
 ## Repository layout
 - Shared studio config: `studio.toml`
@@ -21,8 +22,11 @@
 ## Starter-kit parity
 - Supported engine families: Godot 4, Unity 6, Unreal 5
 - Primary engine for this project: Godot 4
+- Current runtime reference slice: Godot 4 in `src/`
+- Unity starter-kit support includes runtime, editor, prefab, ScriptableObject, and edit-mode test surfaces
+- Unreal starter-kit support includes gameplay framework, health/component, data asset, config, and packaging surfaces
+- Unity and Unreal support live through starter kits, adapters, checklists, research notes, and CI contract smoke
 - Engine-specific caveats and research should be linked from `docs/research/game-development/engines/`
-- Engine class/editor/object guidance should be linked from `docs/reference/engine-agent-guidelines.md`
 
 ## Core technical constraints
 - Performance target: stable 60 FPS on target PC baseline

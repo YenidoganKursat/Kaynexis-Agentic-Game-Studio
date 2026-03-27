@@ -1,0 +1,56 @@
+name: Release Readiness
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_label:
+        description: "Label for the readiness report"
+        required: false
+        default: "manual-check"
+
+permissions:
+  contents: read
+
+jobs:
+  release-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Mark engine tool stubs executable
+        run: chmod +x tools/engine-stubs/unity/Unity tools/engine-stubs/unreal/RunUAT.sh
+
+      - name: Validate workflows
+        run: python3 scripts/validate_workflows.py
+
+      - name: Validate repo surface
+        run: make validate
+
+      - name: Run local evals
+        run: python3 scripts/run_local_evals.py
+
+      - name: Run starter-kit contract smoke
+        run: |
+          python3 scripts/starter_kit_contract_smoke.py --engine godot-4 --output-dir build/ci/release/starter-kit
+          python3 scripts/starter_kit_contract_smoke.py --engine unity-6 --output-dir build/ci/release/starter-kit
+          python3 scripts/starter_kit_contract_smoke.py --engine unreal-5 --output-dir build/ci/release/starter-kit
+
+      - name: Generate release readiness report
+        run: python3 scripts/ci_artifact_report.py --label "${{ inputs.release_label }}" --output-dir build/ci/release
+
+      - name: Upload release readiness bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: release-readiness-${{ inputs.release_label }}
+          path: build/ci/release
+          if-no-files-found: error

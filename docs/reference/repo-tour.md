@@ -29,6 +29,16 @@ These directories define durable behavior. They are not where live project state
 
 Use these when you want to explain how to operate the template itself.
 
+## Multi-Engine Layer
+
+- `studio/starter-kits/godot-4/` — Godot 4 starter kit, smoke flow, and reference runtime surface
+- `studio/starter-kits/unity-6/` — Unity 6 starter kit, adapter, asmdef/package layout, and runtime sample surface
+- `studio/starter-kits/unreal-5/` — Unreal 5 starter kit, adapter, module layout, and packaging sample surface
+- `studio/checklists/engine/` — engine-specific checklist rules for Godot, Unity, and Unreal
+- `docs/research/game-development/engines/` — engine-specific architecture, class/editor/object, 2D/3D class-mechanic, and performance notes
+
+This repo is not Godot-only. The current `src/` runtime sample is Godot-based, but the operating system, adapters, starter kits, checklists, research, and CI contracts are shared across all supported engine families.
+
 ## GitHub Surfaces
 
 - `.github/CODEOWNERS` — review ownership
@@ -62,7 +72,7 @@ If a decision, risk, milestone, or feature is important to the current game, it 
 - `prototypes/` — throwaway or focused experiments
 - `tools/` — internal helper tools
 
-These folders begin intentionally light. The template expects the real engine/project layout to shape them over time.
+These folders begin intentionally light. The template expects the real engine/project layout to shape them over time. In the current repo, `src/` is the Godot reference implementation; Unity and Unreal runtime examples live under their starter-kit scaffolds until a concrete project chooses them as the primary engine.
 
 ## Helper Scripts
 

@@ -1,4 +1,4 @@
-# Game Brief — kaynexisGame
+# Game Brief — Codex Game Studio Pro Max
 
 ## High concept
 - Codex-first Action Roguelite project focused on a small but high-quality first playable slice
@@ -38,4 +38,3 @@
 - Readability can collapse before depth is proven
 - Scope can grow faster than validation
 - Engine and build assumptions still need to be confirmed with real project files
-- Starter-kit parity can drift if engine-specific rules are not promoted into manifests and checklists

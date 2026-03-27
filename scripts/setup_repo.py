@@ -8,11 +8,11 @@ import sys
 from pathlib import Path
 
 from bootstrap_studio import CORE_DOCS
-from _studio_common import ACTIVE_DIR, PRESET_DIR, append_preset_pack, build_bootstrap_replacements, copy_template_to_active
-from studio_core import sync_studio_config
+from _studio_common import ACTIVE_DIR, PRESET_DIR, append_preset_pack, build_bootstrap_replacements, copy_template_to_active, default_engine_version, sync_active_doc_titles
+from studio_core import configured_project_name, sync_studio_config
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PROJECT_NAME = REPO_ROOT.name
+DEFAULT_PROJECT_NAME = configured_project_name(REPO_ROOT.name)
 
 
 def run_step(label: str, command: list[str]) -> int:
@@ -80,7 +80,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="One-command bootstrap for Codex Game Studio repositories.")
     parser.add_argument("--project-name", default=DEFAULT_PROJECT_NAME)
     parser.add_argument("--engine", default="godot-4", help="Preset slug under studio/presets/engine")
-    parser.add_argument("--engine-version", default="TBD")
+    parser.add_argument("--engine-version")
     parser.add_argument("--platform", default="pc-premium", help="Preset slug under studio/presets/platform")
     parser.add_argument("--genre", default="action-roguelite", help="Preset slug under studio/presets/genre")
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing active docs.")
@@ -92,12 +92,13 @@ def main() -> int:
     parser.add_argument("--skip-validate", action="store_true", help="Skip validation scripts.")
     parser.add_argument("--skip-doctor", action="store_true", help="Skip the doctor health check.")
     args = parser.parse_args()
+    args.engine_version = args.engine_version or default_engine_version(args.engine)
 
     print("Codex Game Studio Setup", flush=True)
     print("=======================", flush=True)
     print(f"Repo: {REPO_ROOT}", flush=True)
     print(f"Project: {args.project_name}", flush=True)
-    print(f"Engine / platform / genre: {args.engine} / {args.platform} / {args.genre}", flush=True)
+    print(f"Engine / version / platform / genre: {args.engine} / {args.engine_version} / {args.platform} / {args.genre}", flush=True)
     print(flush=True)
 
     sync_studio_config(args.project_name, args.engine, args.engine_version, args.platform, args.genre)
@@ -122,6 +123,8 @@ def main() -> int:
     if not args.skip_baseline:
         if run_baseline_seed(args) != 0:
             return 1
+
+    sync_active_doc_titles(args.project_name)
 
     if not args.skip_hooks:
         if (REPO_ROOT / ".git").exists():

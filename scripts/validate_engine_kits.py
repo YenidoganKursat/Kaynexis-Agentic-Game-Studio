@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shlex
 import sys
 from pathlib import Path
 
@@ -30,19 +31,92 @@ KIT_DEEP_MARKERS: dict[str, tuple[str, ...]] = {
     ),
     "unity-6": (
         "Assets/Scenes/CombatRoom.unity",
+        "Assets/Prefabs/README.md",
+        "Assets/ScriptableObjects/README.md",
         "Assets/Scripts/Runtime/StarterKit.Runtime.asmdef",
         "Assets/Scripts/Runtime/CombatRoomDirector.cs",
         "Assets/Scripts/Runtime/EnemyArchetype.cs",
+        "Assets/Scripts/Runtime/Health.cs",
+        "Assets/Scripts/Runtime/PlayerAvatar.cs",
+        "Assets/Scripts/Runtime/PulseEnemy.cs",
+        "Assets/Scripts/Editor/BuildPipelineEntry.cs",
+        "Assets/Scripts/Editor/StarterKit.Editor.asmdef",
         "Assets/Tests/EditMode/StarterKit.EditMode.asmdef",
         "Assets/Tests/EditMode/CombatRoomDirectorTests.cs",
+        "Assets/Tests/EditMode/HealthTests.cs",
     ),
     "unreal-5": (
+        "Config/DefaultEngine.ini",
+        "Config/DefaultInput.ini",
+        "Content/Blueprints/README.md",
         "Source/StarterKit/StarterKitGameModeBase.h",
         "Source/StarterKit/StarterKitGameModeBase.cpp",
         "Source/StarterKit/StarterKitEnemyArchetype.h",
+        "Source/StarterKit/StarterKitCharacter.h",
+        "Source/StarterKit/StarterKitCharacter.cpp",
+        "Source/StarterKit/StarterKitEnemyActor.h",
+        "Source/StarterKit/StarterKitEnemyActor.cpp",
+        "Source/StarterKit/StarterKitHealthComponent.h",
+        "Source/StarterKit/StarterKitHealthComponent.cpp",
         "Content/Maps/README.md",
     ),
 }
+
+FILE_CONTENT_MARKERS: dict[str, dict[str, tuple[str, ...]]] = {
+    "unity-6": {
+        "Assets/Scripts/Runtime/CombatRoomDirector.cs": ("PlayerAvatar", "PulseEnemy", "DescribeNextExpansion"),
+        "Assets/Scripts/Runtime/EnemyArchetype.cs": ("attackWindupSeconds", "pulseRadius"),
+        "Assets/Scripts/Runtime/Health.cs": ("ApplyDamage", "ResetHealth"),
+        "Assets/Scripts/Runtime/PlayerAvatar.cs": ("DashDistance", "DescribeControlSurface"),
+        "Assets/Scripts/Runtime/PulseEnemy.cs": ("Configure", "DescribePressureProfile"),
+        "Assets/Scripts/Editor/BuildPipelineEntry.cs": ("Build()", "Debug.Log"),
+        "Assets/Tests/EditMode/HealthTests.cs": ("ApplyDamage_ClampsToZero",),
+    },
+    "unreal-5": {
+        "Source/StarterKit/StarterKitGameModeBase.h": ("DefaultPlayerClass", "DefaultEnemyClass"),
+        "Source/StarterKit/StarterKitGameModeBase.cpp": ("AStarterKitCharacter::StaticClass()", "AStarterKitEnemyActor::StaticClass()"),
+        "Source/StarterKit/StarterKitEnemyArchetype.h": ("PulseWindupSeconds", "PulseRadius"),
+        "Source/StarterKit/StarterKitCharacter.h": ("ACharacter", "DashDistance"),
+        "Source/StarterKit/StarterKitEnemyActor.h": ("UStarterKitHealthComponent", "PulseRadius"),
+        "Source/StarterKit/StarterKitHealthComponent.h": ("ApplyDamage", "IsAlive"),
+        "Config/DefaultInput.ini": ("ActionName=\"Dash\"", "AxisName=\"MoveForward\""),
+        "Config/DefaultEngine.ini": ("GameDefaultMap=/Game/Maps/CombatRoom",),
+    },
+}
+
+
+def validate_command_references(engine_slug: str, manifest: dict[str, object]) -> list[str]:
+    failures: list[str] = []
+    commands: list[str] = []
+    bootstrap_command = manifest.get("bootstrap_command")
+    if isinstance(bootstrap_command, str) and bootstrap_command.strip():
+        commands.append(bootstrap_command)
+    for key in ("smoke_commands", "export_commands"):
+        values = manifest.get(key, [])
+        if isinstance(values, list):
+            commands.extend(str(value) for value in values if str(value).strip())
+
+    if not commands:
+        failures.append(f"{engine_slug}: manifest has no executable command references")
+        return failures
+
+    for command in commands:
+        try:
+            parts = shlex.split(command)
+        except ValueError as exc:
+            failures.append(f"{engine_slug}: command is not shell-parseable '{command}': {exc}")
+            continue
+        if len(parts) >= 2 and parts[0].startswith("python") and parts[1].startswith("scripts/"):
+            script_path = REPO_ROOT / parts[1]
+            if not script_path.exists():
+                failures.append(f"{engine_slug}: command references missing script '{parts[1]}'")
+
+    for path_str in manifest.get("seed_docs", []):
+        seed_path = REPO_ROOT / str(path_str)
+        if not seed_path.exists():
+            failures.append(f"{engine_slug}: seed doc path is missing '{path_str}'")
+
+    return failures
 
 
 def validate_kit(engine_slug: str) -> list[str]:
@@ -66,6 +140,17 @@ def validate_kit(engine_slug: str) -> list[str]:
         marker_path = scaffold_dir / marker
         if not marker_path.exists():
             failures.append(f"{engine_slug}: deep validation missing '{marker}'")
+
+    for relative_path, markers in FILE_CONTENT_MARKERS.get(engine_slug, {}).items():
+        file_path = scaffold_dir / relative_path
+        if not file_path.exists():
+            continue
+        text = file_path.read_text(encoding="utf-8")
+        for marker in markers:
+            if marker not in text:
+                failures.append(f"{engine_slug}: '{relative_path}' is missing expected content marker '{marker}'")
+
+    failures.extend(validate_command_references(engine_slug, manifest))
 
     return failures
 

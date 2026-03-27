@@ -1,4 +1,4 @@
-# Decision Log — kaynexisGame
+# Decision Log — Codex Game Studio Pro Max
 
 ## Recent decisions
 | Date | Decision | Status | Owner | Follow-up |

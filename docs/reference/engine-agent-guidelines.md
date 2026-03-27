@@ -9,27 +9,31 @@ When a task is engine-specific, the agent should read in this order:
 1. `studio/docs/active/engine-profile.md`
 2. The engine architecture baseline in `docs/research/game-development/engines/`
 3. The matching engine class/editor/object map in `docs/research/game-development/engines/`
-4. The matching 2D/3D, navigation, damage, and performance note in `docs/research/game-development/engines/`
-5. The matching engine checklist in `studio/checklists/engine/`
-6. The relevant active docs such as `build-pipeline.md`, `current-sprint.md`, or `content-pipeline.md`
+4. The matching 2D/3D class and mechanic guide in `docs/research/game-development/engines/`
+5. The matching 2D/3D, navigation, damage, and performance note in `docs/research/game-development/engines/`
+6. The matching engine checklist in `studio/checklists/engine/`
+7. The relevant active docs such as `build-pipeline.md`, `current-sprint.md`, or `content-pipeline.md`
 
 ## Engine-specific knowledge index
 
 ### Godot 4
 - Architecture: `docs/research/game-development/engines/godot-4-architecture.md`
 - Class/editor/object map: `docs/research/game-development/engines/godot-4-class-editor-object-map.md`
+- Common classes/mechanics: `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
 - Systems/performance: `docs/research/game-development/engines/godot-4-2d-3d-navigation-damage-performance.md`
 - Checklist: `studio/checklists/engine/godot-4.toml`
 
 ### Unity 6
 - Architecture: `docs/research/game-development/engines/unity-6-architecture.md`
 - Class/editor/object map: `docs/research/game-development/engines/unity-6-class-editor-object-map.md`
+- Common classes/mechanics: `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
 - Systems/performance: `docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md`
 - Checklist: `studio/checklists/engine/unity-6.toml`
 
 ### Unreal 5
 - Architecture: `docs/research/game-development/engines/unreal-5-architecture.md`
 - Class/editor/object map: `docs/research/game-development/engines/unreal-5-class-editor-object-map.md`
+- Common classes/mechanics: `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
 - Systems/performance: `docs/research/game-development/engines/unreal-5-2d-3d-navigation-damage-performance.md`
 - Checklist: `studio/checklists/engine/unreal-5.toml`
 
@@ -43,6 +47,7 @@ When a task is engine-specific, the agent should read in this order:
   - what is the validation loop
 - For system-heavy gameplay work, also state:
   - what world stack is in charge: `2D`, `3D`, or limited hybrid
+  - which engine-native classes or object families own movement, contact, camera, animation, and authored data
   - what navigation model is in charge: native navmesh/server stack versus explicit graph/grid
   - what damage/contact model is in charge: overlaps, collision callbacks, direct queries, or ability/effect framework
   - what scale lever is in charge: ordinary authored objects versus instancing, pooling, servers, DOTS, or Mass

@@ -1,0 +1,47 @@
+name: Nightly Audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  nightly-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Mark engine tool stubs executable
+        run: chmod +x tools/engine-stubs/unity/Unity tools/engine-stubs/unreal/RunUAT.sh
+
+      - name: Run full local CI equivalent
+        run: make ci-local
+
+      - name: Run starter-kit smoke matrix
+        run: |
+          python3 scripts/starter_kit_contract_smoke.py --engine godot-4 --output-dir build/ci/nightly/starter-kit
+          python3 scripts/starter_kit_contract_smoke.py --engine unity-6 --output-dir build/ci/nightly/starter-kit
+          python3 scripts/starter_kit_contract_smoke.py --engine unreal-5 --output-dir build/ci/nightly/starter-kit
+
+      - name: Generate nightly audit report
+        run: python3 scripts/ci_artifact_report.py --label nightly-audit --output-dir build/ci/nightly
+
+      - name: Upload nightly audit bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nightly-audit
+          path: build/ci/nightly
+          if-no-files-found: error

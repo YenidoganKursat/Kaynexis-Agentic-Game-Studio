@@ -15,10 +15,27 @@ DEFAULT_BUILD_TARGET = "StandaloneWindows64"
 DEFAULT_EXECUTE_METHOD = "BuildPipelineEntry.Build"
 
 
+def normalize_tool_path(candidate: str) -> str:
+    path = Path(candidate).expanduser()
+    if not path.is_absolute():
+        path = (REPO_ROOT / path).resolve()
+    return str(path)
+
+
 def unity_cli_path(explicit: str | None = None) -> str | None:
     if explicit:
-        return explicit
-    return resolve_tool_path(config_key="unity_cli", env_keys=["UNITY_CLI"])
+        return normalize_tool_path(explicit)
+    configured = resolve_tool_path(config_key="unity_cli", env_keys=["UNITY_CLI"])
+    return normalize_tool_path(configured) if configured else None
+
+
+def validate_tool_path(tool_path: str) -> list[str]:
+    path = Path(tool_path)
+    if not path.exists():
+        return [f"Unity CLI path does not exist: {tool_path}"]
+    if path.is_dir():
+        return [f"Unity CLI path points to a directory, expected an executable file: {tool_path}"]
+    return []
 
 
 def validate_unity_project(project_path: Path) -> list[str]:
@@ -62,12 +79,14 @@ def build_build_command(project_path: Path, unity_path: str, build_target: str, 
     ]
 
 
-def emit_payload(action: str, command: list[str], project_path: Path, validation_failures: list[str]) -> None:
+def emit_payload(action: str, command: list[str], project_path: Path, tool_path: str, validation_failures: list[str]) -> None:
     print(
         json.dumps(
             {
                 "action": action,
                 "project_path": str(project_path),
+                "tool_path": tool_path,
+                "tool_path_exists": not any("Unity CLI path" in item for item in validation_failures),
                 "command": command,
                 "validation_failures": validation_failures,
             },
@@ -113,22 +132,24 @@ def main() -> int:
         return 1
 
     failures = validate_unity_project(project_path)
-    if failures and not args.dry_run:
-        for item in failures:
-            print(f"ERROR: {item}")
-        return 1
+    failures.extend(validate_tool_path(unity_path))
 
     if args.action == "test":
         command = build_test_command(project_path, unity_path, args.test_platform, Path(args.results_path).resolve(), args.log_file)
     else:
         command = build_build_command(project_path, unity_path, args.build_target, args.execute_method, args.log_file)
 
-    if args.dry_run:
-        emit_payload(args.action, command, project_path, failures)
-        return 0
-
     if args.json:
-        emit_payload(args.action, command, project_path, failures)
+        emit_payload(args.action, command, project_path, unity_path, failures)
+    if failures:
+        if not args.json:
+            for item in failures:
+                print(f"ERROR: {item}")
+        return 1
+    if args.dry_run:
+        if not args.json:
+            emit_payload(args.action, command, project_path, unity_path, failures)
+        return 0
     return subprocess.run(command, cwd=REPO_ROOT, check=False).returncode
 
 

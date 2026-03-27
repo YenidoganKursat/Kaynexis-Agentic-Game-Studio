@@ -15,13 +15,20 @@ DEFAULT_CONFIG = "Development"
 DEFAULT_ARCHIVE_DIR = REPO_ROOT / "build" / "unreal"
 
 
+def normalize_tool_path(candidate: str) -> str:
+    path = Path(candidate).expanduser()
+    if not path.is_absolute():
+        path = (REPO_ROOT / path).resolve()
+    return str(path)
+
+
 def resolve_uat_path(explicit: str | None = None) -> str | None:
     if explicit:
-        return explicit
+        return normalize_tool_path(explicit)
 
     uat = resolve_tool_path(config_key="unreal_uat", env_keys=["UNREAL_UAT"])
     if uat:
-        return uat
+        return normalize_tool_path(uat)
 
     editor = resolve_tool_path(config_key="unreal_editor", env_keys=["UNREAL_EDITOR"])
     if not editor:
@@ -39,6 +46,15 @@ def resolve_uat_path(explicit: str | None = None) -> str | None:
         if path.exists():
             return str(path)
     return None
+
+
+def validate_tool_path(tool_path: str) -> list[str]:
+    path = Path(tool_path)
+    if not path.exists():
+        return [f"Unreal UAT path does not exist: {tool_path}"]
+    if path.is_dir():
+        return [f"Unreal UAT path points to a directory, expected a script or executable file: {tool_path}"]
+    return []
 
 
 def find_uproject(project_path: Path) -> Path | None:
@@ -74,13 +90,15 @@ def build_package_command(uat_path: str, uproject_path: Path, platform: str, cli
     ]
 
 
-def emit_payload(command: list[str], project_path: Path, uproject_path: Path, validation_failures: list[str]) -> None:
+def emit_payload(command: list[str], project_path: Path, uproject_path: Path, tool_path: str, validation_failures: list[str]) -> None:
     print(
         json.dumps(
             {
                 "action": "package",
                 "project_path": str(project_path),
                 "uproject": str(uproject_path),
+                "tool_path": tool_path,
+                "tool_path_exists": not any("Unreal UAT path" in item for item in validation_failures),
                 "command": command,
                 "validation_failures": validation_failures,
             },
@@ -116,10 +134,7 @@ def main() -> int:
     project_path = Path(args.project_path).resolve()
     uproject_path = Path(args.uproject).resolve() if args.uproject else find_uproject(project_path)
     failures = validate_unreal_project(project_path, uproject_path)
-    if failures and not args.dry_run:
-        for item in failures:
-            print(f"ERROR: {item}")
-        return 1
+    failures.extend(validate_tool_path(uat_path))
 
     command = build_package_command(
         uat_path=uat_path,
@@ -129,12 +144,17 @@ def main() -> int:
         archive_dir=Path(args.archive_dir).resolve(),
     )
 
-    if args.dry_run:
-        emit_payload(command, project_path, uproject_path or Path("Missing.uproject"), failures)
-        return 0
-
     if args.json:
-        emit_payload(command, project_path, uproject_path or Path("Missing.uproject"), failures)
+        emit_payload(command, project_path, uproject_path or Path("Missing.uproject"), uat_path, failures)
+    if failures:
+        if not args.json:
+            for item in failures:
+                print(f"ERROR: {item}")
+        return 1
+    if args.dry_run:
+        if not args.json:
+            emit_payload(command, project_path, uproject_path or Path("Missing.uproject"), uat_path, failures)
+        return 0
     return subprocess.run(command, cwd=REPO_ROOT, check=False).returncode
 
 

@@ -18,4 +18,10 @@ public:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "StarterKit")
     float ContactDamage = 10.0f;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "StarterKit")
+    float PulseWindupSeconds = 1.2f;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "StarterKit")
+    float PulseRadius = 300.0f;
 };

@@ -3,9 +3,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 from pathlib import Path
 
-from _studio_common import ACTIVE_DIR, REPO_ROOT, detect_engine, has_substantive_files, repo_summary
+from _studio_common import ACTIVE_DIR, REPO_ROOT, engine_detection_report, has_substantive_files, repo_summary
+from validate_docs import collect_doc_findings
 
 CRITICAL_DOCS = [
     "game-brief.md",
@@ -25,20 +27,44 @@ def main() -> int:
 
     missing_docs = [name for name in CRITICAL_DOCS if not (ACTIVE_DIR / name).exists()]
     findings: list[dict[str, str]] = []
-    if detect_engine() == "unknown":
+    engine_report = engine_detection_report()
+    resolved_engine = str(engine_report["resolved_engine"])
+    if resolved_engine == "unknown":
         findings.append({"severity": "high", "finding": "Engine could not be detected from common repo clues.", "next": "Confirm engine in studio/docs/active/engine-profile.md"})
-    if detect_engine() == "godot" and not (REPO_ROOT / "export_presets.cfg").exists():
+    if engine_report["mismatch"]:
+        findings.append(
+            {
+                "severity": "high",
+                "finding": f"Configured primary engine '{engine_report['configured_slug']}' disagrees with repo clues that still look like '{engine_report['clue_engine']}'.",
+                "next": "Treat studio.toml as the source of truth and remove or relocate stale engine-native root files that imply a different primary engine.",
+            }
+        )
+    if resolved_engine == "godot" and not (REPO_ROOT / "export_presets.cfg").exists():
         findings.append({"severity": "high", "finding": "Godot export presets are missing.", "next": "Add export_presets.cfg before treating the repo as release-ready."})
-    if detect_engine() == "godot" and not (REPO_ROOT / "scripts" / "godot_smoke.py").exists():
+    if resolved_engine == "godot" and not (REPO_ROOT / "scripts" / "godot_smoke.py").exists():
         findings.append({"severity": "medium", "finding": "Godot smoke automation is missing.", "next": "Restore scripts/godot_smoke.py and wire it into local validation."})
     if missing_docs:
         findings.append({"severity": "high", "finding": f"Missing critical active docs: {', '.join(missing_docs)}", "next": "Run bootstrap_studio.py or create the docs manually."})
+    doc_errors, doc_warnings = collect_doc_findings()
+    if doc_errors:
+        findings.append({"severity": "high", "finding": f"Active docs are semantically stale or inconsistent: {doc_errors[0]}", "next": "Run validate_docs.py, then fix the active docs until they reflect the configured project truth."})
+    elif doc_warnings:
+        findings.append({"severity": "medium", "finding": f"Active docs still have unresolved placeholders or warnings: {doc_warnings[0]}", "next": "Resolve the warning and rerun validate_docs.py."})
     if not has_substantive_files(REPO_ROOT / "tests"):
         findings.append({"severity": "medium", "finding": "Tests directory exists but has no substantive tests/files.", "next": "Add smoke/regression coverage or explicit manual validation docs."})
     if not has_substantive_files(REPO_ROOT / "src"):
         findings.append({"severity": "medium", "finding": "Runtime source directory is empty or only placeholders exist.", "next": "Confirm engine-native source layout or update engine-profile.md."})
     if not has_substantive_files(REPO_ROOT / "assets"):
         findings.append({"severity": "low", "finding": "Assets directory is empty or only placeholders exist.", "next": "Fine for a fresh repo; document the actual content pipeline once assets land."})
+    if (REPO_ROOT / ".git").exists():
+        remote_result = subprocess.run(["git", "remote"], cwd=REPO_ROOT, check=False, capture_output=True, text=True)
+        if not [line.strip() for line in remote_result.stdout.splitlines() if line.strip()]:
+            findings.append({"severity": "medium", "finding": "No git remote is configured, so GitHub workflows and governance are only theoretical.", "next": "Create a remote and push the repository before treating CI or ruleset guidance as active."})
+    build_pipeline_path = ACTIVE_DIR / "build-pipeline.md"
+    if build_pipeline_path.exists():
+        text = build_pipeline_path.read_text(encoding="utf-8")
+        if "real editor/export jobs only count as complete once engine binaries are present on the runner" in text:
+            findings.append({"severity": "medium", "finding": "Real engine-native release validation is still deferred behind external tool installation.", "next": "Wire Unity, Unreal, or Godot binaries into local or CI runners before claiming shipping-grade build coverage."})
 
     summary = repo_summary()
     payload = {
@@ -60,7 +86,7 @@ def main() -> int:
                 print(f"[{item['severity'].upper()}] {item['finding']}")
                 print(f"  Next: {item['next']}")
         else:
-            print("No major structural gaps found.")
+            print("No major structural gaps detected by the current radar checks.")
     return 0 if args.warn_only or not findings else 1
 
 if __name__ == "__main__":

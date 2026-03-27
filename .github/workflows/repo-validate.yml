@@ -15,7 +15,11 @@ permissions:
 jobs:
   repo-validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
@@ -23,13 +27,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
         with:
-          python-version: "3.13"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install Python dependencies
         run: python3 -m pip install -r requirements.txt
 
+      - name: Mark engine tool stubs executable
+        run: chmod +x tools/engine-stubs/unity/Unity tools/engine-stubs/unreal/RunUAT.sh
+
       - name: Compile Python files
         run: python3 -m compileall -q scripts docs studio evals tests
+
+      - name: Validate workflows
+        run: python3 scripts/validate_workflows.py
 
       - name: Validate repo
         run: make validate
@@ -50,7 +60,43 @@ jobs:
         run: python3 scripts/codex_studio.py checklist --task "Implement the first combat room"
 
       - name: Smoke Unity adapter command generation
-        run: python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --unity-path /Applications/Unity/Hub/Editor/6000.0.0f1/Unity --dry-run --json
+        run: python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --unity-path tools/engine-stubs/unity/Unity --dry-run --json
 
       - name: Smoke Unreal adapter command generation
-        run: python3 scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --uat-path /Applications/Epic/UE_5.5/Engine/Build/BatchFiles/RunUAT.sh --dry-run --json
+        run: python3 scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --uat-path tools/engine-stubs/unreal/RunUAT.sh --dry-run --json
+
+      - name: Build CI artifact report
+        run: python3 scripts/ci_artifact_report.py --label repo-validate-${{ matrix.python-version }} --output-dir build/ci/repo-validate/${{ matrix.python-version }}
+
+      - name: Upload CI artifact report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: repo-validate-${{ matrix.python-version }}
+          path: build/ci/repo-validate/${{ matrix.python-version }}
+          if-no-files-found: error
+
+  ci-artifacts:
+    needs: repo-validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Generate consolidated CI artifact report
+        run: python3 scripts/ci_artifact_report.py --label consolidated --output-dir build/ci/consolidated
+
+      - name: Upload consolidated CI artifact report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ci-artifacts-consolidated
+          path: build/ci/consolidated
+          if-no-files-found: error

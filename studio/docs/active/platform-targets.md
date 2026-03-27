@@ -1,4 +1,4 @@
-# Platform Targets — kaynexisGame
+# Platform Targets — Codex Game Studio Pro Max
 
 ## Supported platforms
 | Platform | Priority | Input | Perf target | Special constraints |

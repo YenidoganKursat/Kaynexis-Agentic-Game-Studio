@@ -48,6 +48,15 @@ engine = "unreal-5"
 owner = "unreal-specialist"
 
 [[item]]
+id = "unreal-mechanic-primitives"
+title = "Unreal mechanic primitives are chosen explicitly"
+severity = "required"
+applies_when = "Any movement, contact, camera, animation, spawn, or authored-data mechanic change"
+validation = "State which Unreal-native primitives own the feature, such as Character, Pawn, Actor, Component, Data Asset, Blueprint, collision primitives, or GAS"
+engine = "unreal-5"
+owner = "unreal-specialist"
+
+[[item]]
 id = "unreal-navigation-ai-stack"
 title = "Navigation, query, and decision systems are assigned deliberately"
 severity = "required"

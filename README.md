@@ -1,84 +1,296 @@
 # Codex Game Studio Pro Max
 
-A Codex-first multi-engine studio operating system for building games iteratively with durable repo state.
+> Plan. Route. Research. Validate. Ship.
 
-This repository is the planning, routing, checklist, research, validation, and starter-kit layer around a real game project. The sample Godot slice is only a reference proof, not the primary product. The primary product is the system that lets Codex and a human operator keep designing, validating, and shipping work across Godot, Unity, and Unreal without falling back to ad-hoc chat memory.
+A Codex-first multi-engine studio operating system for turning fuzzy game ideas into durable, engine-aware, testable work. The current Godot slice is a reference proof, not the main product. The main product is the system that helps a human operator and Codex keep working from repo truth instead of fragile chat memory across Godot, Unity, and Unreal.
 
-## What it includes
+`codex-first` `multi-engine` `game-development` `godot` `unity` `ue5` `starter-kits` `checklists` `research` `ci-cd` `developer-tooling`
 
-- One root config surface in `studio.toml`
-- A front-door CLI in `python3 scripts/codex_studio.py`
-- Codex-local agents in `.codex/agents/`
-- Reusable skills in `.agents/skills/`
-- Layered starter kits for `godot-4`, `unity-6`, and `unreal-5`
-- Layered checklist manifests for base, engine, discipline, milestone, and custom rules
-- Live project truth in `studio/docs/active/`
-- Research-backed engine and production notes in `docs/research/game-development/`
-- Engine-specific class/editor/object maps and agent guidance for Godot, Unity, and Unreal
-- Validation, eval, CI, Docker, and GitHub governance surfaces
+Supported engine families: `Godot 4`, `Unity 6`, `Unreal 5`
+Current reference implementation: `Godot 4`
+
+## Why this repo exists
+
+Game projects usually decay in the same ways:
+
+- key decisions live in chat instead of the repo
+- engine setup is half-documented and half-tribal knowledge
+- feature briefs, risks, and validation paths drift apart
+- CI only checks files, not the actual working contract
+- research gets done once, then disappears
+
+This repo exists to stop that drift.
+
+It gives you:
+
+- one source of truth in `studio.toml`
+- one front-door CLI in `python3 scripts/codex_studio.py`
+- one routing system for tasks, agents, docs, research, and checklists
+- one starter-kit contract for `godot-4`, `unity-6`, and `unreal-5`
+- one validation surface for docs, kits, evals, workflows, Docker, and active project state
+
+## Multi-engine support, explicitly
+
+This repo is not Godot-only.
+
+- Godot 4: root reference slice in `src/`, smoke/export helpers, active project baseline
+- Unity 6: starter kit with runtime scripts, editor build entrypoint, ScriptableObject surface, prefab/script folders, and edit-mode tests
+- Unreal 5: starter kit with gameplay framework classes, health component, data asset surface, config defaults, Blueprint/content guidance, and packaging adapter flow
+
+The shared system layer treats all three as first-class engine families for routing, checklists, research, and CI contract smoke.
+
+## What this repo is
+
+- a studio operating system for Codex-centered game development
+- a planning and execution layer that survives across sessions
+- a multi-engine starter-kit and validation platform
+- a checklist and research system for gameplay, tools, pipeline, and production work
+
+## What this repo is not
+
+- not a finished commercial game
+- not a full replacement for real engine editors
+- not a fake "supports every engine" README with no adapter contract behind it
+- not a one-off prompt pack that only works if someone remembers the thread history
+
+## At a glance
+
+- `studio.toml` holds project identity, engine selection, platforms, genre, checklist config, research policy, and tool paths
+- `scripts/codex_studio.py` is the wizard-first entry point
+- `studio/starter-kits/` contains engine adapters and scaffolds
+- `studio/checklists/` contains mergeable checklist layers
+- `studio/docs/active/` contains the living project state
+- `docs/research/game-development/` contains durable research notes
+- `.codex/agents/` and `.agents/skills/` define Codex behavior
+- `.github/workflows/` and `Makefile` define CI/CD and local equivalents
+
+## Typical flow
+
+```mermaid
+flowchart LR
+  idea["Task or game idea"] --> route["codex_studio next"]
+  route --> docs["Active docs"]
+  route --> checklists["Checklist layers"]
+  route --> research["Research refs"]
+  route --> kits["Starter kits"]
+  docs --> validate["Doctor, evals, CI"]
+  checklists --> validate
+  research --> validate
+  kits --> validate
+  validate --> output["Implementation, build, release, or next iteration"]
+```
 
 ## Fastest start
 
-Guided setup:
+Wizard mode:
 
 ```bash
 python3 scripts/codex_studio.py init
 ```
 
-That flow lets you pick engine, platform, and genre, writes `studio.toml`, seeds active docs, and runs the shared validation path.
-
-Direct setup:
+Direct setup examples:
 
 ```bash
+# Godot action prototype
 python3 scripts/codex_studio.py init \
-  --project-name "Your Game" \
+  --project-name "Signal Forge" \
   --engine godot-4 \
   --platform pc-premium \
   --genre action-roguelite \
   --yes
+
+# Unity tactics prototype
+python3 scripts/codex_studio.py init \
+  --project-name "Grid Breakers" \
+  --engine unity-6 \
+  --platform pc-premium \
+  --genre tactical-rpg \
+  --yes
+
+# Unreal co-op survival baseline
+python3 scripts/codex_studio.py init \
+  --project-name "Drift Colony" \
+  --engine unreal-5 \
+  --platform console-premium \
+  --genre co-op-survival \
+  --yes
 ```
 
-## Front-door workflow
+## Real command examples
 
-Use the repo through these six modes first:
+### Route the next task
 
-- `python3 scripts/codex_studio.py init`
-- `python3 scripts/codex_studio.py next "Describe the next task"`
-- `python3 scripts/codex_studio.py checklist --task "Describe the next task"`
-- `python3 scripts/codex_studio.py research --category systems --title "Save loop architecture"`
-- `python3 scripts/codex_studio.py doctor`
-- `python3 scripts/codex_studio.py engine --list`
+```bash
+python3 scripts/codex_studio.py next \
+  "Implement a performant 2D enemy pathfinding pass for Unity" \
+  --json
+```
 
-The legacy entry points still work:
+Example output excerpt:
 
-- `scripts/start_game_studio.py` -> `init`
-- `scripts/setup_repo.py` -> setup backend
-- `scripts/route_task.py` -> `next`
+```json
+{
+  "route": "combat / gameplay",
+  "skills": ["combat-loop", "mechanic-design", "gameplay-slice"],
+  "agents": ["combat_designer", "gameplay_programmer", "qa_tester"],
+  "engine_kit": {
+    "id": "unity-6",
+    "engine": "unity",
+    "version_family": "6000.x"
+  },
+  "research_refs": [
+    "docs/research/game-development/engines/unity-6-class-editor-object-map.md",
+    "docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md",
+    "docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md",
+    "docs/research/game-development/systems/ai-navigation-and-entity-scale-architecture.md"
+  ]
+}
+```
 
-## First 15 minutes
+### Render a merged checklist
 
-1. Run `python3 scripts/codex_studio.py init`
-2. Open `studio.toml`
-3. Open `studio/docs/active/game-brief.md`
-4. Open `studio/docs/active/engine-profile.md`
-5. Open `studio/docs/active/current-sprint.md`
-6. Run `python3 scripts/codex_studio.py next "Describe the next gameplay or pipeline task"`
-7. Run `python3 scripts/codex_studio.py checklist --task "Describe the same task"`
-8. Run `python3 scripts/run_local_evals.py`
+```bash
+python3 scripts/codex_studio.py checklist \
+  --task "Ship the first Godot combat room" \
+  --json
+```
 
-## Multi-engine support model
+Example output excerpt:
 
-This repo uses starter-kit parity, not fake feature parity:
+```json
+{
+  "engine": "godot-4",
+  "disciplines": ["gameplay"],
+  "items": [
+    {
+      "id": "godot-static-smoke",
+      "title": "Static smoke covers scene nodes, scripts, and export presets",
+      "validation": "Run python3 scripts/godot_smoke.py --static-only"
+    },
+    {
+      "id": "gameplay-readability",
+      "title": "Core action remains readable before adding depth",
+      "validation": "Document the teach/read/react loop in the active feature doc"
+    }
+  ]
+}
+```
 
-- Godot 4 starter kit: scene/script/export baseline plus smoke helpers
-- Unity 6 starter kit: package/asmdef/test-command baseline
-- Unreal 5 starter kit: project/module/package-command baseline
+### Scaffold a research note
 
-Inspect them with:
+```bash
+python3 scripts/codex_studio.py research \
+  --category systems \
+  --title "Combat readability baseline"
+```
+
+That creates a dated note from the shared research template and keeps the result inside the repo instead of burying it in chat history.
+
+### Inspect engine support
+
+```bash
+python3 scripts/codex_studio.py engine --list --json
+```
+
+Example output excerpt:
+
+```json
+[
+  {
+    "id": "godot-4",
+    "engine": "godot",
+    "version_family": "4.x"
+  },
+  {
+    "id": "unity-6",
+    "engine": "unity",
+    "version_family": "6000.x"
+  },
+  {
+    "id": "unreal-5",
+    "engine": "unreal",
+    "version_family": "5.x"
+  }
+]
+```
+
+## Common workflows
+
+### 1. Solo Godot prototype
+
+```bash
+python3 scripts/codex_studio.py init --engine godot-4 --genre action-roguelite --yes
+python3 scripts/codex_studio.py next "Design the first combat room"
+python3 scripts/codex_studio.py checklist --task "Implement the first combat room"
+python3 scripts/godot_smoke.py --static-only
+python3 -m pytest -q tests/test_godot_surface.py
+```
+
+### 2. Unity architecture and performance pass
+
+```bash
+python3 scripts/codex_studio.py next "Refactor combat into a pooled projectile system for Unity"
+python3 scripts/codex_studio.py checklist --task "Refactor combat into a pooled projectile system for Unity"
+python3 scripts/unity_adapter.py test \
+  --project-path studio/starter-kits/unity-6/scaffold \
+  --unity-path tools/engine-stubs/unity/Unity \
+  --dry-run --json
+```
+
+### 3. Unreal packaging prep
+
+```bash
+python3 scripts/codex_studio.py next "Prepare the first Unreal package flow for Win64"
+python3 scripts/unreal_adapter.py package \
+  --project-path studio/starter-kits/unreal-5/scaffold \
+  --uat-path tools/engine-stubs/unreal/RunUAT.sh \
+  --platform Win64 \
+  --dry-run --json
+python3 scripts/validate_engine_kits.py --engine unreal-5
+```
+
+### 4. Repo-wide health pass
+
+```bash
+python3 scripts/codex_studio.py doctor
+python3 scripts/run_local_evals.py --json
+python3 scripts/validate_workflows.py --json
+make ci-local
+```
+
+## Engine support model
+
+Each engine family now has a four-layer research pack:
+
+- architecture baseline
+- class/editor/object ownership map
+- 2D/3D class and mechanic guide
+- navigation, damage, and performance guide
+
+Examples:
+
+- `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
+- `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
+- `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
+
+Those guides are where the repo spells out the most-used classes, object ownership, mechanic patterns, writing style expectations, and common mistakes for each engine family.
+
+This repo uses starter-kit parity, not fake gameplay parity.
+
+| Engine | Kit ID | What is included | Local smoke path | Real editor requirement |
+| --- | --- | --- | --- | --- |
+| Godot | `godot-4` | scene/script/export baseline and reference combat slice | `python3 scripts/godot_smoke.py --static-only` | `GODOT_BIN` for runtime smoke/export |
+| Unity | `unity-6` | package, asmdef, runtime sample, adapter, test/build command contract | `python3 scripts/unity_adapter.py ... --dry-run --json` | `UNITY_CLI` for editor-backed test/build |
+| Unreal | `unreal-5` | project/module scaffold, gameplay sample surface, adapter, packaging contract | `python3 scripts/unreal_adapter.py ... --dry-run --json` | `UNREAL_UAT` or `UNREAL_EDITOR` for engine-backed packaging |
+
+Inspect or validate all kits:
 
 ```bash
 python3 scripts/codex_studio.py engine --list
-python3 scripts/validate_engine_kits.py
+python3 scripts/validate_engine_kits.py --json
+python3 scripts/starter_kit_contract_smoke.py --engine godot-4 --json
+python3 scripts/starter_kit_contract_smoke.py --engine unity-6 --json
+python3 scripts/starter_kit_contract_smoke.py --engine unreal-5 --json
 ```
 
 ## Checklist system
@@ -91,56 +303,75 @@ Checklist resolution is layered and deterministic:
 4. `milestone`
 5. `custom`
 
-Example:
+Custom rules live in `studio/checklists/custom/`.
 
-```bash
-python3 scripts/codex_studio.py checklist --task "Implement the first combat room"
-```
+This means a single task can automatically pull:
 
-Custom overrides live in `studio/checklists/custom/`.
+- repo-health checks
+- engine-specific architecture checks
+- gameplay or tools discipline checks
+- milestone rules like `prototype` or `build-release`
+- your own custom studio rules
 
 ## Research system
 
-Research is now a durable part of the workflow instead of a side note.
+Research is part of the workflow, not a side quest.
 
-- Engine notes: `docs/research/game-development/engines/`
-- Agent guide: `docs/reference/engine-agent-guidelines.md`
-- Production notes: `docs/research/game-development/production/`
-- Policy: `docs/research/game-development/policy.md`
-- Template: `docs/research/game-development/templates/research-note.md`
+Core research zones:
 
-Scaffold a new note with:
+- `docs/research/game-development/engines/`
+- `docs/research/game-development/systems/`
+- `docs/research/game-development/production/`
+- `docs/research/game-development/genre/`
+
+Good places to start:
+
+- `docs/research/game-development/engines/godot-4-class-editor-object-map.md`
+- `docs/research/game-development/engines/unity-6-class-editor-object-map.md`
+- `docs/research/game-development/engines/unreal-5-class-editor-object-map.md`
+- `docs/research/game-development/systems/combat-damage-and-effects-architecture.md`
+- `docs/research/game-development/systems/ai-navigation-and-entity-scale-architecture.md`
+- `docs/research/game-development/genre/genre-example-matrix.md`
+
+## CI/CD and release surface
+
+This repo ships with a broad CI/CD layer and local equivalents.
+
+| Workflow or command | Role | Output |
+| --- | --- | --- |
+| `make ci-local` | local CI-equivalent stack | `build/ci/local/` |
+| `make ci-workflows` | validate workflow definitions themselves | JSON workflow report |
+| `make starter-kit-smoke` | contract smoke across engines | per-engine smoke output |
+| `make ci-report` | generate CI artifact summaries | `build/ci/local/ci-report.json` and `.md` |
+| `.github/workflows/repo-validate.yml` | PR validation matrix | workflow artifacts |
+| `.github/workflows/starter-kit-contracts.yml` | starter-kit contract smoke | engine artifact bundles |
+| `.github/workflows/release-readiness.yml` | manual release-readiness bundle | build metadata artifact |
+| `.github/workflows/nightly-audit.yml` | scheduled repo audit | audit artifact |
+
+Example local CI stack:
 
 ```bash
-python3 scripts/codex_studio.py research --category systems --title "Combat readability baseline"
+make ci-workflows
+python3 scripts/run_local_evals.py --json
+python3 -m pytest -q tests
+python3 scripts/ci_artifact_report.py --output-dir build/ci/manual-check --label manual-check --json
+make docker-verify
 ```
 
-## Validation surface
+See `docs/reference/ci-cd-architecture.md` for the full workflow map.
 
-Common commands:
+## Docker helper environment
 
-- `python3 scripts/codex_studio.py doctor`
-- `python3 scripts/validate_engine_kits.py`
-- `python3 scripts/run_local_evals.py`
-- `make validate`
-- `make ci-local`
+If you want an isolated Ubuntu 24.04 + Python tooling shell:
 
-Godot reference-slice validation:
+```bash
+docker compose build
+docker compose run --rm app
+```
 
-- `python3 scripts/godot_smoke.py --static-only`
-- `python3 scripts/godot_smoke.py`
-- `python3 -m pytest -q tests/test_godot_surface.py`
-- `python3 scripts/godot_export.py --preset "Linux/X11"`
+Inside the container, the repository is mounted at `/app`.
 
-Unity and Unreal adapter command generation:
-
-- `python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --dry-run --json`
-- `python3 scripts/unity_adapter.py build --project-path studio/starter-kits/unity-6/scaffold --dry-run --json`
-- `python3 scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --dry-run --json`
-
-When local engine paths are configured, the same adapter entry points can run the real editor or packaging commands instead of only printing them.
-
-## Repo map
+## Repository map
 
 ```text
 studio.toml
@@ -151,66 +382,86 @@ studio/docs/active/
 docs/research/game-development/
 .codex/agents/
 .agents/skills/
+.github/workflows/
+tools/engine-stubs/
+tests/
 ```
 
-## GitHub and ops
+## Suggested GitHub metadata
 
-The repo includes `CODEOWNERS`, issue forms, PR template, CI workflows, contribution and security docs, eval fixtures, and Docker-based helper validation.
+Suggested repository description:
 
-For maintainer setup, branch protection, and rulesets, use `docs/setup/github-maintainer-setup.md`.
+> A Codex-first multi-engine studio operating system for planning, routing, research, starter kits, and CI/CD.
 
-## Environment
+Suggested topics:
 
-Start from `.env.example` if you need local tool paths or API keys.
+- `codex`
+- `multi-engine`
+- `game-development`
+- `game-studio`
+- `developer-tooling`
+- `starter-kits`
+- `checklists`
+- `ci-cd`
+- `godot`
+- `godot-engine`
+- `unity`
+- `unity3d`
+- `ue5`
+- `unreal-engine`
+- `game-architecture`
+- `research-driven-development`
 
-An optional `.env.example` is included for local tooling and integrations. Start with `docs/setup/secrets-and-env.md` before creating a real `.env`.
+Apply these later from the GitHub UI or with `gh repo edit`. See `docs/setup/github-maintainer-setup.md`.
 
-## Optional Codex Hooks
+## First 15 minutes
 
-Repo-local hooks are scaffolded but disabled by default because the Codex hooks feature is still experimental.
+1. Run `python3 scripts/codex_studio.py init`
+2. Open `studio.toml`
+3. Open `studio/docs/active/game-brief.md`
+4. Open `studio/docs/active/engine-profile.md`
+5. Open `studio/docs/active/current-sprint.md`
+6. Run `python3 scripts/codex_studio.py next "Describe the next gameplay or pipeline task"`
+7. Run `python3 scripts/codex_studio.py checklist --task "Describe the same task"`
+8. Run `python3 scripts/run_local_evals.py`
+9. Run `python3 scripts/codex_studio.py doctor`
 
-Enable them with:
+## FAQ
 
-```bash
-make hooks-enable
-```
+### Is the Godot sample the main product?
 
-Disable them with:
+No. The Godot slice is a reference proof. The main product is the studio operating system around it.
 
-```bash
-make hooks-disable
-```
+### Does Unity and Unreal support require a local installation?
 
-## Recommended Skill Entry Points
+For real builds, yes. Contract smoke works with repo-local stubs, but editor-backed coverage starts when `UNITY_CLI`, `UNREAL_UAT`, or `UNREAL_EDITOR` points to a real installation.
 
-Use these first when the next move is unclear:
+### Can I use only one engine?
 
-- `$studio-start`
-- `$intake-router`
-- `$project-radar`
-- `$feature-brief`
+Yes. Set your primary engine in `studio.toml` and ignore the other kits until you need them.
 
-## Optional Docker Helper Environment
+### Can I add custom rules for my own team?
 
-This repo includes a lightweight Ubuntu 24.04 + Python container for users who want an isolated helper shell for the scripts and docs workflow.
+Yes. Put them in `studio/checklists/custom/` and route/checklist resolution will merge them after base, engine, discipline, and milestone layers.
 
-Build and enter it with:
+### Is Docker required?
 
-```bash
-docker compose build
-docker compose run --rm app
-```
+No. Docker is optional and only meant as a helper environment for scripts, docs, and validation tools.
 
-Inside the container, the repository is mounted at `/app`.
+### Can I keep my own language in project docs?
 
-## Further Reading
+Yes, but the repo defaults to English-first onboarding and CLI output so the system stays easier to share, automate, and review.
 
+## Further reading
+
+- `docs/setup/first-hour-walkthrough.md`
+- `docs/reference/engine-selection-guide.md`
+- `docs/reference/workflow-recipes.md`
+- `docs/reference/task-prompt-examples.md`
+- `docs/reference/command-cheatsheet.md`
+- `docs/reference/ci-cd-architecture.md`
+- `docs/reference/engine-agent-guidelines.md`
+- `docs/setup/getting-started.md`
+- `docs/setup/github-maintainer-setup.md`
 - `codex-game-studio-v3-roadmap.md`
 - `CHANGELOG.md`
-
-## Notes
-
-- This template is intentionally opinionated: broad coverage, but narrow execution slices.
-- The nested `AGENTS.md` files let Codex behave differently in `src/`, `tests/`, `assets/`, `studio/docs/`, `prototypes/`, and `tools/`.
-- The git hooks are optional, but recommended for teams using this repo seriously.
-- Adapt the agent roster and skill set once your actual engine, platform, and production constraints become concrete.

@@ -20,6 +20,7 @@ Structure:
 
 - `engines/` for engine architecture and workflow notes
 - `engines/*-class-editor-object-map.md` for the runtime/editor ownership model of each supported engine
+- `engines/*-2d-3d-class-and-mechanic-guide.md` for the most-used 2D/3D classes, object usage patterns, mechanic recipes, writing style, and pitfalls in each supported engine
 - `engines/*-2d-3d-navigation-damage-performance.md` for per-engine gameplay system, pathfinding, damage, and scale guidance
 - `systems/` for gameplay/system design notes such as loop/state ownership, combat architecture, AI/navigation, and save/progression boundaries
 - `production/` for release, CI, and content pipeline notes

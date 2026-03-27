@@ -9,8 +9,9 @@ import sys
 import tomllib
 from pathlib import Path
 
-from _studio_common import ACTIVE_DIR, REPO_ROOT, detect_engine, find_godot_binary, repo_summary, unresolved_placeholders
-from studio_core import STUDIO_CONFIG_PATH, available_starter_kits, research_notes, validate_research_note
+from _studio_common import ACTIVE_DIR, REPO_ROOT, engine_detection_report, find_godot_binary, repo_summary, unresolved_placeholders
+from studio_core import STUDIO_CONFIG_PATH, available_starter_kits, configured_project_name, research_notes, validate_research_note
+from validate_docs import collect_doc_findings
 from validate_repo_layout import REQUIRED_PATHS
 
 HOOKS = ("pre-commit", "pre-push", "commit-msg")
@@ -46,6 +47,9 @@ COMMUNITY_FILES = [
 ]
 LOCAL_EVALS_PATH = REPO_ROOT / "scripts" / "run_local_evals.py"
 ENGINE_KIT_VALIDATOR_PATH = REPO_ROOT / "scripts" / "validate_engine_kits.py"
+WORKFLOW_VALIDATOR_PATH = REPO_ROOT / "scripts" / "validate_workflows.py"
+CI_ARTIFACT_REPORT_PATH = REPO_ROOT / "scripts" / "ci_artifact_report.py"
+STARTER_KIT_SMOKE_PATH = REPO_ROOT / "scripts" / "starter_kit_contract_smoke.py"
 UNITY_ADAPTER_PATH = REPO_ROOT / "scripts" / "unity_adapter.py"
 UNREAL_ADAPTER_PATH = REPO_ROOT / "scripts" / "unreal_adapter.py"
 EVALS_DIR = REPO_ROOT / "evals"
@@ -53,6 +57,7 @@ HOOKS_CONFIG_PATH = REPO_ROOT / ".codex" / "hooks.json"
 ENV_EXAMPLE_PATH = REPO_ROOT / ".env.example"
 SECRETS_DOC_PATH = REPO_ROOT / "docs" / "setup" / "secrets-and-env.md"
 CODEX_COMPAT_DOC_PATH = REPO_ROOT / "docs" / "reference" / "codex-compatibility.md"
+CI_CD_ARCHITECTURE_DOC_PATH = REPO_ROOT / "docs" / "reference" / "ci-cd-architecture.md"
 BASELINE_SCRIPT_PATH = REPO_ROOT / "scripts" / "seed_project_baseline.py"
 GODOT_SMOKE_SCRIPT_PATH = REPO_ROOT / "scripts" / "godot_smoke.py"
 GODOT_EXPORT_SCRIPT_PATH = REPO_ROOT / "scripts" / "godot_export.py"
@@ -226,6 +231,26 @@ def main() -> int:
     )
     checks.append(
         make_check(
+            "workflow-validator",
+            "pass" if WORKFLOW_VALIDATOR_PATH.exists() else "warn",
+            "Workflow validator script is present." if WORKFLOW_VALIDATOR_PATH.exists() else "Workflow validator script is missing.",
+            next_step=None if WORKFLOW_VALIDATOR_PATH.exists() else "Restore scripts/validate_workflows.py.",
+        )
+    )
+    checks.append(
+        make_check(
+            "ci-reporting",
+            "pass" if CI_ARTIFACT_REPORT_PATH.exists() and STARTER_KIT_SMOKE_PATH.exists() and CI_CD_ARCHITECTURE_DOC_PATH.exists() else "warn",
+            "CI artifact reporting, starter-kit smoke, and CI/CD docs are present."
+            if CI_ARTIFACT_REPORT_PATH.exists() and STARTER_KIT_SMOKE_PATH.exists() and CI_CD_ARCHITECTURE_DOC_PATH.exists()
+            else "CI/CD reporting surface is incomplete.",
+            next_step=None
+            if CI_ARTIFACT_REPORT_PATH.exists() and STARTER_KIT_SMOKE_PATH.exists() and CI_CD_ARCHITECTURE_DOC_PATH.exists()
+            else "Restore scripts/ci_artifact_report.py, scripts/starter_kit_contract_smoke.py, and docs/reference/ci-cd-architecture.md.",
+        )
+    )
+    checks.append(
+        make_check(
             "engine-adapters",
             "pass" if UNITY_ADAPTER_PATH.exists() and UNREAL_ADAPTER_PATH.exists() else "warn",
             "Unity and Unreal adapter scripts are present."
@@ -349,13 +374,19 @@ def main() -> int:
             )
         )
 
-    engine = detect_engine()
+    engine_report = engine_detection_report()
+    engine = str(engine_report["resolved_engine"])
+    engine_detail = f"Resolved engine: {engine} via {engine_report['source']}."
+    if engine_report["configured_slug"]:
+        engine_detail = f"Primary engine: {engine_report['configured_slug']} -> {engine}. Source: {engine_report['source']}."
+    if engine_report["mismatch"]:
+        engine_detail += f" Repo clues still look like {engine_report['clue_engine']}."
     checks.append(
         make_check(
             "engine-detection",
-            "pass" if engine != "unknown" else "warn",
-            f"Detected engine: {engine}." if engine != "unknown" else "Engine is still unknown from repo clues.",
-            next_step=None if engine != "unknown" else "Update studio/docs/active/engine-profile.md and add engine-native files when they exist.",
+            "pass" if engine != "unknown" and not engine_report["mismatch"] else "warn",
+            engine_detail if engine != "unknown" else "Engine is still unknown from studio.toml and repo clues.",
+            next_step=None if engine != "unknown" and not engine_report["mismatch"] else "Align studio.toml with the real primary engine or remove stale engine-native files that now act as misleading clues.",
         )
     )
 
@@ -396,12 +427,44 @@ def main() -> int:
             )
         )
 
-    unresolved = summarize_placeholders()
-    if unresolved:
-        details = "; ".join(f"{name}: {', '.join(values)}" for name, values in unresolved.items())
-        checks.append(make_check("active-docs", "warn", f"Some active docs still contain placeholders: {details}", next_step="Fill in the placeholder values or rerun setup with the correct project metadata."))
+    doc_errors, doc_warnings = collect_doc_findings()
+    if doc_errors:
+        checks.append(
+            make_check(
+                "active-doc-quality",
+                "warn",
+                f"Active docs have semantic issues: {doc_errors[0]}",
+                next_step="Run python3 scripts/validate_docs.py and resolve stale titles, template text, or unresolved QA notes.",
+            )
+        )
+    elif doc_warnings:
+        checks.append(
+            make_check(
+                "active-doc-quality",
+                "warn",
+                f"Active docs have warnings: {doc_warnings[0]}",
+                next_step="Resolve remaining placeholder warnings and rerun validate_docs.py.",
+            )
+        )
     else:
-        checks.append(make_check("active-docs", "pass", "No unresolved placeholders found in active docs."))
+        checks.append(make_check("active-doc-quality", "pass", "Active docs match the configured project identity and contain no template-default text."))
+
+    readme_heading = REPO_ROOT.joinpath("README.md").read_text(encoding="utf-8").splitlines()[0].strip() if (REPO_ROOT / "README.md").exists() else ""
+    project_name = configured_project_name(REPO_ROOT.name)
+    identity_status = "pass" if project_name in readme_heading else "warn"
+    identity_detail = (
+        f"README and studio.toml agree on project identity: {project_name}."
+        if identity_status == "pass"
+        else f"README heading does not reflect the configured project name '{project_name}'."
+    )
+    checks.append(
+        make_check(
+            "project-identity",
+            identity_status,
+            identity_detail,
+            next_step=None if identity_status == "pass" else "Align README and active docs with studio.toml so the repo has one authoritative identity.",
+        )
+    )
 
     config = load_project_config()
     agents_config = config.get("agents", {}) if isinstance(config.get("agents"), dict) else {}

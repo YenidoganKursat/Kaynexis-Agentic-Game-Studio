@@ -11,6 +11,8 @@ from _studio_common import REPO_ROOT, build_genre_replacements
 from studio_core import resolve_checklists, research_notes, validate_research_note
 
 EVALS_DIR = REPO_ROOT / "evals"
+UNITY_STUB = REPO_ROOT / "tools" / "engine-stubs" / "unity" / "Unity"
+UNREAL_STUB = REPO_ROOT / "tools" / "engine-stubs" / "unreal" / "RunUAT.sh"
 
 
 def load_cases(path: Path) -> list[dict[str, object]]:
@@ -114,6 +116,35 @@ def run_engine_kits_eval() -> list[str]:
     return failures
 
 
+def run_workflow_surface_eval() -> list[str]:
+    failures: list[str] = []
+    expected = load_cases(EVALS_DIR / "workflow_surface" / "expected_workflows.json")
+    script = REPO_ROOT / "scripts" / "validate_workflows.py"
+    result = subprocess.run(
+        [sys.executable, str(script), "--json"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        payload = json.loads(result.stdout or "{}")
+        failures.extend(payload.get("failures", []))
+        return failures
+
+    payload = json.loads(result.stdout)
+    summaries = payload.get("workflows", {})
+    for workflow_name, expected_jobs in expected.items():
+        if workflow_name not in summaries:
+            failures.append(f"workflow surface missing '{workflow_name}'")
+            continue
+        actual_jobs = set(summaries[workflow_name].get("jobs", []))
+        missing_jobs = sorted(set(expected_jobs) - actual_jobs)
+        if missing_jobs:
+            failures.append(f"{workflow_name} missing expected jobs: {', '.join(missing_jobs)}")
+    return failures
+
+
 def run_checklist_eval() -> list[str]:
     failures: list[str] = []
     items = resolve_checklists(engine_slug="godot-4", disciplines=["gameplay"], milestone="prototype", agent_name="gameplay_programmer")
@@ -135,7 +166,7 @@ def run_engine_adapter_eval() -> list[str]:
                 "--project-path",
                 str(REPO_ROOT / "studio" / "starter-kits" / "unity-6" / "scaffold"),
                 "--unity-path",
-                "/Applications/Unity/Hub/Editor/6000.0.0f1/Unity",
+                str(UNITY_STUB),
                 "--dry-run",
                 "--json",
             ],
@@ -149,7 +180,7 @@ def run_engine_adapter_eval() -> list[str]:
                 "--project-path",
                 str(REPO_ROOT / "studio" / "starter-kits" / "unreal-5" / "scaffold"),
                 "--uat-path",
-                "/Applications/Epic/UE_5.5/Engine/Build/BatchFiles/RunUAT.sh",
+                str(UNREAL_STUB),
                 "--dry-run",
                 "--json",
             ],
@@ -202,6 +233,28 @@ def run_research_surface_eval() -> list[str]:
     return failures
 
 
+def run_ci_report_eval() -> list[str]:
+    failures: list[str] = []
+    script = REPO_ROOT / "scripts" / "ci_artifact_report.py"
+    output_dir = REPO_ROOT / "build" / "ci" / "eval"
+    result = subprocess.run(
+        [sys.executable, str(script), "--output-dir", str(output_dir), "--json"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        failures.append(f"ci_artifact_report failed during eval: {result.stderr.strip() or result.stdout.strip()}")
+        return failures
+    payload = json.loads(result.stdout)
+    for key in ("json", "markdown"):
+        path = Path(payload[key])
+        if not path.exists():
+            failures.append(f"ci artifact report missing generated file: {path}")
+    return failures
+
+
 def run_godot_surface_eval() -> list[str]:
     failures: list[str] = []
     expectations = load_cases(EVALS_DIR / "godot_surface" / "expectations.json")
@@ -246,10 +299,12 @@ def main() -> int:
         "genre_guidance": run_genre_guidance_eval(),
         "doctor_surface": run_doctor_surface_eval(),
         "engine_kits": run_engine_kits_eval(),
+        "workflow_surface": run_workflow_surface_eval(),
         "engine_adapters": run_engine_adapter_eval(),
         "route_task_engines": run_route_task_engine_eval(),
         "checklists": run_checklist_eval(),
         "research_surface": run_research_surface_eval(),
+        "ci_report": run_ci_report_eval(),
         "godot_surface": run_godot_surface_eval(),
     }
     total_failures = sum(len(items) for items in failures.values())

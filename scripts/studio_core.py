@@ -10,7 +10,7 @@ from collections import OrderedDict
 from pathlib import Path
 from typing import Any
 
-from _studio_common import REPO_ROOT, detect_engine, write_text
+from _studio_common import REPO_ROOT, default_engine_version, detect_engine, write_text
 
 STUDIO_CONFIG_PATH = REPO_ROOT / "studio.toml"
 STARTER_KITS_DIR = REPO_ROOT / "studio" / "starter-kits"
@@ -102,6 +102,8 @@ ENGINE_TEXT_HINTS: dict[str, tuple[str, ...]] = {
     "unreal-5": ("unreal", "unreal 5", "ue5"),
 }
 
+MATCH_SPLIT_RE = re.compile(r"[^a-z0-9]+")
+
 DISCIPLINE_RESEARCH_REFS: dict[str, list[str]] = {
     "build-release": [
         "docs/research/game-development/production/release-validation.md",
@@ -135,16 +137,19 @@ ENGINE_RESEARCH_REFS: dict[str, list[str]] = {
     "godot-4": [
         "docs/research/game-development/engines/godot-4-architecture.md",
         "docs/research/game-development/engines/godot-4-class-editor-object-map.md",
+        "docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/godot-4-2d-3d-navigation-damage-performance.md",
     ],
     "unity-6": [
         "docs/research/game-development/engines/unity-6-architecture.md",
         "docs/research/game-development/engines/unity-6-class-editor-object-map.md",
+        "docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md",
     ],
     "unreal-5": [
         "docs/research/game-development/engines/unreal-5-architecture.md",
         "docs/research/game-development/engines/unreal-5-class-editor-object-map.md",
+        "docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unreal-5-2d-3d-navigation-damage-performance.md",
     ],
 }
@@ -217,11 +222,21 @@ def load_studio_config() -> dict[str, Any]:
     return load_toml(STUDIO_CONFIG_PATH)
 
 
+def configured_project_name(default: str | None = None) -> str:
+    project = load_studio_config().get("project", {})
+    if isinstance(project, dict):
+        name = str(project.get("name", "")).strip()
+        if name:
+            return name
+    return default or REPO_ROOT.name
+
+
 def dump_inline_list(items: list[str]) -> str:
     return "[" + ", ".join(json.dumps(item) for item in items) + "]"
 
 
 def sync_studio_config(project_name: str, engine: str, engine_version: str, platform: str, genre: str) -> None:
+    engine_version = engine_version or default_engine_version(engine)
     config = load_studio_config()
     project = config.setdefault("project", {})
     project["name"] = project_name
@@ -376,23 +391,43 @@ def available_checklists(layer: str) -> list[str]:
     return sorted(path.stem for path in directory.glob("*.toml"))
 
 
+def build_match_context(text: str) -> dict[str, object]:
+    tokens = tuple(token for token in MATCH_SPLIT_RE.split(text.lower()) if token)
+    return {"tokens": set(tokens), "normalized": " ".join(tokens)}
+
+
+def keyword_matches_context(context: dict[str, object], keyword: str) -> bool:
+    normalized_keyword = " ".join(token for token in MATCH_SPLIT_RE.split(keyword.lower()) if token)
+    if not normalized_keyword:
+        return False
+    if " " in normalized_keyword:
+        normalized_text = str(context["normalized"])
+        return f" {normalized_keyword} " in f" {normalized_text} "
+    return normalized_keyword in context["tokens"]
+
+
+def count_keyword_matches(text: str, keywords: tuple[str, ...] | list[str]) -> int:
+    context = build_match_context(text)
+    return sum(1 for keyword in keywords if keyword_matches_context(context, keyword))
+
+
 def infer_disciplines_from_task(task: str) -> list[str]:
-    lowered = task.lower()
+    context = build_match_context(task)
     matches: list[str] = []
     for slug, keywords in TASK_DISCIPLINE_KEYWORDS.items():
-        if any(keyword in lowered for keyword in keywords):
+        if any(keyword_matches_context(context, keyword) for keyword in keywords):
             matches.append(slug)
     if not matches:
         matches.append("research")
-    if "gameplay" not in matches and "mechanic" in lowered:
+    if "gameplay" not in matches and keyword_matches_context(context, "mechanic"):
         matches.append("gameplay")
     return matches
 
 
 def infer_engine_from_text(text: str) -> str | None:
-    lowered = text.lower()
+    context = build_match_context(text)
     for slug, hints in ENGINE_TEXT_HINTS.items():
-        if any(hint in lowered for hint in hints):
+        if any(keyword_matches_context(context, hint) for hint in hints):
             return slug
     return None
 

@@ -5,7 +5,15 @@ import argparse
 import json
 
 from _studio_common import detect_active_genre, parse_preset_metadata, preset_path
-from studio_core import infer_engine_from_text, primary_engine_slug, related_research_refs, resolve_checklists, starter_kit_summary
+from studio_core import (
+    build_match_context,
+    infer_engine_from_text,
+    keyword_matches_context,
+    primary_engine_slug,
+    related_research_refs,
+    resolve_checklists,
+    starter_kit_summary,
+)
 
 ROUTES = [
     {
@@ -226,10 +234,10 @@ def main() -> int:
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON.")
     args = parser.parse_args()
 
-    task = args.task.lower()
+    match_context = build_match_context(args.task)
     scores = []
     for route in ROUTES:
-        score = sum(1 for kw in route["keywords"] if kw in task)
+        score = sum(1 for kw in route["keywords"] if keyword_matches_context(match_context, kw))
         if score:
             scores.append((score, route.get("priority", 1), route))
     scores.sort(key=lambda item: (item[0], item[1]), reverse=True)

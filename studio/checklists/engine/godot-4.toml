@@ -57,6 +57,15 @@ engine = "godot-4"
 owner = "godot-specialist"
 
 [[item]]
+id = "godot-mechanic-primitives"
+title = "Godot mechanic primitives are chosen explicitly"
+severity = "required"
+applies_when = "Any movement, contact, camera, animation, or authored-data mechanic change"
+validation = "State which Godot-native primitives own the feature, such as CharacterBody, Area, RigidBody, Camera, AnimationTree, PackedScene, or Resource"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
 id = "godot-navigation-choice"
 title = "NavigationServer versus custom AStar usage is chosen on purpose"
 severity = "required"

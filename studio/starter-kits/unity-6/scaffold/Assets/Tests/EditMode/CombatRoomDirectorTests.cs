@@ -13,6 +13,7 @@ namespace StarterKit.EditModeTests
             var director = gameObject.AddComponent<CombatRoomDirector>();
 
             StringAssert.Contains("Starter slice:", director.DescribeSlice());
+            StringAssert.Contains("Next expansion", director.DescribeNextExpansion());
 
             Object.DestroyImmediate(gameObject);
         }

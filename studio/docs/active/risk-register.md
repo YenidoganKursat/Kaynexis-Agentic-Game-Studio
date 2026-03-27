@@ -1,4 +1,4 @@
-# Risk Register — kaynexisGame
+# Risk Register — Codex Game Studio Pro Max
 
 ## Risk table
 | Risk | Area | Severity | Probability | Mitigation | Owner |

@@ -48,6 +48,15 @@ engine = "unity-6"
 owner = "unity-specialist"
 
 [[item]]
+id = "unity-mechanic-primitives"
+title = "Unity mechanic primitives are chosen explicitly"
+severity = "required"
+applies_when = "Any movement, contact, camera, animation, spawn, or authored-data mechanic change"
+validation = "State which Unity-native primitives own the feature, such as CharacterController, Rigidbody, Collider/Trigger, Camera, Animator, Prefab, ObjectPool, or ScriptableObject"
+engine = "unity-6"
+owner = "unity-specialist"
+
+[[item]]
 id = "unity-navigation-choice"
 title = "AI Navigation versus custom graph logic is chosen on purpose"
 severity = "required"

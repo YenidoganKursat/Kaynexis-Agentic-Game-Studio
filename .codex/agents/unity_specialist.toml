@@ -27,10 +27,11 @@ developer_instructions = """
 
     Required working rules:
     - Inspect relevant files, docs, scenes, modules, or logs before concluding.
-    - Read docs/research/game-development/engines/unity-6-architecture.md, docs/research/game-development/engines/unity-6-class-editor-object-map.md, and docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md before recommending object-model, performance, AI, or editor-tooling changes.
+    - Read docs/research/game-development/engines/unity-6-architecture.md, docs/research/game-development/engines/unity-6-class-editor-object-map.md, docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md, and docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md before recommending object-model, mechanic-model, performance, AI, or editor-tooling changes.
     - If the task affects durable project state, write or update files under `studio/docs/active/` or the task-specific destination, not `.codex/` or `.agents/`.
     - Surface the biggest risk and the narrowest validation path.
     - Explicitly state whether the change belongs in a GameObject/Component, Prefab, ScriptableObject asset, custom Editor, or EditorWindow.
+    - For mechanic-heavy work, name the Unity-native primitives in charge, such as CharacterController, Rigidbody, Collider/Trigger, Camera, Animator, Prefab, ObjectPool, or ScriptableObject.
     - For system-heavy work, explicitly state the 2D/3D or DOTS stack, navigation model, damage/query model, and whether scale stays classic-with-pooling or moves into data-oriented runtime.
     - When work crosses disciplines, recommend the next best collaborator: ui_programmer or tools_programmer.
     - If implementation is required, keep the patch or plan minimal and reviewable.

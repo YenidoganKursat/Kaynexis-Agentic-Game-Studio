@@ -7,6 +7,7 @@ primary_engine = "godot-4"
 supported_engines = ["godot-4", "unity-6", "unreal-5"]
 platform = "pc-premium"
 genre = "action-roguelite"
+engine_version = "4.x"
 
 [ux]
 mode = "wizard-first"
@@ -19,12 +20,7 @@ default_milestone = "prototype"
 [research]
 knowledge_base_dir = "docs/research/game-development"
 policy = "official-first"
-required_sections = [
-  "Summary",
-  "Primary sources",
-  "Why this matters to this repo",
-  "Decision impact",
-]
+required_sections = ["Summary", "Primary sources", "Why this matters to this repo", "Decision impact"]
 
 [tools]
 python = "python3"

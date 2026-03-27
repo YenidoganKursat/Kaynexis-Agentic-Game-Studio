@@ -12,9 +12,13 @@
   "community-health",
   "github-automation",
   "local-evals",
+  "workflow-validator",
+  "ci-reporting",
   "engine-adapters",
   "env-surface",
   "codex-compatibility",
   "research-knowledge-base",
-  "codex-hooks"
+  "codex-hooks",
+  "active-doc-quality",
+  "project-identity"
 ]

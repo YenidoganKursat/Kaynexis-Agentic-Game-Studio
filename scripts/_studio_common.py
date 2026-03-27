@@ -7,6 +7,7 @@ import json
 import os
 import re
 import shutil
+import tomllib
 from pathlib import Path
 from typing import Iterable
 
@@ -15,6 +16,22 @@ TEMPLATE_DIR = REPO_ROOT / "studio" / "docs" / "templates"
 ACTIVE_DIR = REPO_ROOT / "studio" / "docs" / "active"
 PRESET_DIR = REPO_ROOT / "studio" / "presets"
 PLACEHOLDER_FILENAMES = {".gitkeep", "AGENTS.md"}
+PROJECT_SCOPED_ACTIVE_DOCS = {
+    "art-direction-lite.md",
+    "audio-direction-lite.md",
+    "build-pipeline.md",
+    "content-pipeline.md",
+    "current-sprint.md",
+    "decision-log.md",
+    "engine-profile.md",
+    "game-brief.md",
+    "localization-glossary.md",
+    "milestones.md",
+    "monetization-guardrails.md",
+    "platform-targets.md",
+    "risk-register.md",
+    "telemetry-schema.md",
+}
 
 PLACEHOLDER_DEFAULTS = {
     "PROJECT_NAME": "Untitled Project",
@@ -51,6 +68,18 @@ ENGINE_HINTS = {
     "godot": ["project.godot", ".tscn", ".tres", ".gd"],
     "unity": ["Assets", "ProjectSettings", "Packages/manifest.json"],
     "unreal": [".uproject", "Config", "Content", "Source"],
+}
+
+ENGINE_SLUG_TO_FAMILY = {
+    "godot-4": "godot",
+    "unity-6": "unity",
+    "unreal-5": "unreal",
+}
+
+ENGINE_VERSION_DEFAULTS = {
+    "godot-4": "4.x",
+    "unity-6": "6000.x",
+    "unreal-5": "5.x",
 }
 
 GENRE_STARTER_GUIDANCE = {
@@ -283,6 +312,29 @@ def build_bootstrap_replacements(project_name: str, engine: str, engine_version:
     return replacements
 
 
+def sync_active_doc_titles(project_name: str) -> list[Path]:
+    updated: list[Path] = []
+    for path in sorted(ACTIVE_DIR.glob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        original = text
+
+        if "Untitled Project" in text:
+            text = text.replace("Untitled Project", project_name)
+
+        if path.name in PROJECT_SCOPED_ACTIVE_DOCS:
+            lines = text.splitlines()
+            if lines and lines[0].startswith("# "):
+                match = re.match(r"^(# [^—]+?)(?:\s+—\s+.+)?$", lines[0].strip())
+                if match:
+                    lines[0] = f"{match.group(1)} — {project_name}"
+                    text = "\n".join(lines)
+
+        if text != original:
+            write_text(path, text)
+            updated.append(path)
+    return updated
+
+
 def has_substantive_files(directory: Path, ignored_names: set[str] | None = None) -> bool:
     ignored_names = ignored_names or PLACEHOLDER_FILENAMES
     if not directory.exists():
@@ -297,18 +349,77 @@ def unresolved_placeholders(text: str) -> list[str]:
     return sorted(set(re.findall(r"\{[A-Z0-9_]+\}", text)))
 
 
-def detect_engine(root: Path | None = None) -> str:
+def load_root_studio_config(root: Path | None = None) -> dict[str, object]:
     root = root or REPO_ROOT
-    # Godot
+    path = root / "studio.toml"
+    if not path.exists():
+        return {}
+    try:
+        return tomllib.loads(path.read_text(encoding="utf-8"))
+    except tomllib.TOMLDecodeError:
+        return {}
+
+
+def configured_engine_slug(root: Path | None = None) -> str | None:
+    config = load_root_studio_config(root)
+    project = config.get("project", {})
+    if isinstance(project, dict):
+        engine = str(project.get("primary_engine", "")).strip()
+        if engine:
+            return engine
+    return None
+
+
+def engine_family_from_slug(engine_slug: str | None) -> str:
+    if not engine_slug:
+        return "unknown"
+    return ENGINE_SLUG_TO_FAMILY.get(engine_slug, "unknown")
+
+
+def default_engine_version(engine_slug: str | None) -> str:
+    if not engine_slug:
+        return "TBD"
+    return ENGINE_VERSION_DEFAULTS.get(engine_slug, "TBD")
+
+
+def detect_engine_from_clues(root: Path | None = None) -> str:
+    root = root or REPO_ROOT
     if (root / "project.godot").exists():
         return "godot"
-    # Unity
     if (root / "Assets").exists() and (root / "ProjectSettings").exists():
         return "unity"
-    # Unreal
     if any(root.glob("*.uproject")) or ((root / "Config").exists() and (root / "Content").exists()):
         return "unreal"
     return "unknown"
+
+
+def engine_detection_report(root: Path | None = None) -> dict[str, object]:
+    root = root or REPO_ROOT
+    configured_slug = configured_engine_slug(root)
+    configured_family = engine_family_from_slug(configured_slug)
+    clue_engine = detect_engine_from_clues(root)
+
+    if configured_family != "unknown":
+        resolved_engine = configured_family
+        source = "studio.toml"
+    else:
+        resolved_engine = clue_engine
+        source = "repo-clues"
+
+    mismatch = configured_family != "unknown" and clue_engine != "unknown" and configured_family != clue_engine
+    return {
+        "configured_slug": configured_slug,
+        "configured_family": configured_family,
+        "clue_engine": clue_engine,
+        "resolved_engine": resolved_engine,
+        "source": source,
+        "mismatch": mismatch,
+    }
+
+
+def detect_engine(root: Path | None = None) -> str:
+    report = engine_detection_report(root)
+    return str(report["resolved_engine"])
 
 
 def find_godot_binary() -> str | None:
@@ -377,8 +488,12 @@ def append_preset_pack(engine: str | None = None, platform: str | None = None, g
 
 
 def repo_summary() -> dict[str, object]:
+    engine_report = engine_detection_report()
     return {
-        "engine": detect_engine(),
+        "engine": engine_report["resolved_engine"],
+        "engine_source": engine_report["source"],
+        "configured_engine": engine_report["configured_slug"] or "",
+        "engine_clue": engine_report["clue_engine"],
         "has_src": (REPO_ROOT / "src").exists(),
         "has_tests": (REPO_ROOT / "tests").exists(),
         "has_assets": (REPO_ROOT / "assets").exists(),

@@ -1,0 +1,46 @@
+# CI/CD Architecture
+
+## Goals
+- Keep local validation and GitHub Actions aligned instead of maintaining two different truths
+- Produce artifacts that explain what CI actually checked
+- Separate contract-level engine validation from real editor-backed validation
+
+## Workflow map
+- `repo-validate.yml`: Python matrix for repo validation, evals, tests, routing smoke, adapter smoke, and artifact reports
+- `docker-smoke.yml`: helper container build and smoke import, plus uploaded report
+- `starter-kit-contracts.yml`: engine-by-engine contract smoke for Godot, Unity, and Unreal starter kits
+- `release-readiness.yml`: manual readiness bundle for a named release check
+- `nightly-audit.yml`: scheduled full-stack audit that runs the local CI equivalent and uploads a nightly bundle
+
+## Local commands
+- `make validate`: fast layout/docs/assets/workflow validation
+- `make ci-local`: compile, workflow validation, doctor, evals, tests, docs validation, and CI artifact report
+- `make ci-workflows`: validate the GitHub workflow surface itself
+- `make ci-report`: generate `build/ci/latest/ci-report.json` and `build/ci/latest/ci-report.md`
+- `make starter-kit-smoke`: run contract smoke across all supported engines
+
+## Artifact outputs
+- `build/ci/repo-validate/<python-version>`: per-matrix validation artifacts
+- `build/ci/consolidated`: post-matrix summary
+- `build/ci/starter-kit/<engine>`: per-engine contract smoke outputs
+- `build/ci/release`: manual release-readiness bundle
+- `build/ci/nightly`: scheduled audit bundle
+
+## Validation layers
+- Repo structure: `scripts/validate_repo_layout.py`
+- Active docs semantic quality: `scripts/validate_docs.py`
+- Workflow surface: `scripts/validate_workflows.py`
+- Starter-kit manifests and command references: `scripts/validate_engine_kits.py`
+- Engine contract smoke: `scripts/starter_kit_contract_smoke.py`
+- Workflow/eval regression: `scripts/run_local_evals.py`
+- CI artifact reporting: `scripts/ci_artifact_report.py`
+
+## Engine policy
+- Godot can run real runtime/export checks when `GODOT_BIN` exists
+- Unity and Unreal use repo-local stubs in CI for adapter contract smoke
+- Full editor-backed CI only counts once `UNITY_CLI`, `UNREAL_UAT`, or `UNREAL_EDITOR` is wired to real installations
+
+## Failure handling
+- If `validate_workflows.py` fails, treat it as CI infrastructure drift, not a content bug
+- If `starter_kit_contract_smoke.py` fails, treat it as engine-surface regression before feature regression
+- If `ci-report` shows external dependencies, do not present the pipeline as shipping-ready

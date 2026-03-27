@@ -40,3 +40,15 @@ jobs:
 
       - name: Run smoke import
         run: docker compose run --rm app python -c "import requests, numpy, pandas, dotenv; print('docker-ok')"
+
+      - name: Capture docker smoke report
+        run: |
+          mkdir -p build/ci/docker-smoke
+          printf "docker-ok\n" > build/ci/docker-smoke/result.txt
+
+      - name: Upload docker smoke report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: docker-smoke-report
+          path: build/ci/docker-smoke
+          if-no-files-found: error

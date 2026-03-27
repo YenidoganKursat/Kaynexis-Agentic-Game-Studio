@@ -1,4 +1,4 @@
-# Build Pipeline — kaynexisGame
+# Build Pipeline — Codex Game Studio Pro Max
 
 ## Build graph
 - Source -> route/checklist/research alignment -> repo validation -> starter-kit validation -> local evals -> engine-native smoke -> package -> artifact -> distribution
@@ -7,17 +7,22 @@
 - Local: `make ci-local`
 - Front door: `python3 scripts/codex_studio.py`
 - CI: `.github/workflows/repo-validate.yml`
+- Starter-kit matrix: `.github/workflows/starter-kit-contracts.yml`
+- Release gate bundle: `.github/workflows/release-readiness.yml`
+- Nightly audit: `.github/workflows/nightly-audit.yml`
 - Container check: `.github/workflows/docker-smoke.yml` and `make docker-verify`
-- Release: add engine-native export jobs once the real project is wired
+- Adapter contract smoke: repo-local Unity/Unreal tool stubs keep dry-run checks honest in CI
+- Release: real editor/export jobs only count as complete once engine binaries are present on the runner
 
 ## Engine contracts
 - Godot 4: `python3 scripts/godot_smoke.py --static-only`, optional runtime smoke, then `python3 scripts/godot_export.py --preset "..."`
-- Unity 6: starter-kit structure plus documented batchmode test/build commands in active docs
-- Unreal 5: starter-kit structure plus documented build/package commands in active docs
+- Unity 6: use `tools/engine-stubs/unity/Unity` for command-contract smoke; switch to a real `UNITY_CLI` path for editor-backed tests/builds
+- Unreal 5: use `tools/engine-stubs/unreal/RunUAT.sh` for command-contract smoke; switch to a real `UNREAL_UAT` or `UNREAL_EDITOR` path for packaging work
 
 ## Artifacts & versioning
 - Keep artifact names deterministic
 - Store release notes, validation commands, and build provenance alongside artifacts
+- Emit `build/ci/*` report bundles so CI failures have portable evidence instead of only console logs
 - Add symbols or crash artifacts once the engine-specific build pipeline exists
 
 ## Failure / rollback
