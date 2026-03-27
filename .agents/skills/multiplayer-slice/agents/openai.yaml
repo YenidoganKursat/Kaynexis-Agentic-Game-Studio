@@ -1,0 +1,6 @@
+interface:
+  display_name: "Multiplayer Slice"
+  short_description: "Design or implement one multiplayer feature slice with authority model, sync expectations, latency assumptions, and desync validation. Use for online or co-op work."
+  default_prompt: "$multiplayer-slice "
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Quest Flow"
+  short_description: "Shape mission/quest structure with objectives, branching, dependencies, fail states, and recovery logic. Use for narrative or systemic missions."
+  default_prompt: "$quest-flow "
+policy:
+  allow_implicit_invocation: true

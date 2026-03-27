@@ -1,0 +1,6 @@
+interface:
+  display_name: "Localization Pass"
+  short_description: "Prepare text, UI, formatting, glossary, and extraction workflow for localization. Use before shipping in multiple languages or when text structure changes heavily."
+  default_prompt: "$localization-pass "
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Patch Hotfix"
+  short_description: "Frame and execute a minimal-risk hotfix with rollback posture, targeted validation, and communication notes. Use for urgent crashes, blockers, or severe regressions."
+  default_prompt: "$patch-hotfix "
+policy:
+  allow_implicit_invocation: false

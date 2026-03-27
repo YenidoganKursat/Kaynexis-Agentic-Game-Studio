@@ -1,0 +1,6 @@
+interface:
+  display_name: "Puzzle Design"
+  short_description: "Design puzzle logic, affordances, hinting, failure recovery, and readability. Use for spatial, systemic, or sequence puzzles."
+  default_prompt: "$puzzle-design "
+policy:
+  allow_implicit_invocation: true

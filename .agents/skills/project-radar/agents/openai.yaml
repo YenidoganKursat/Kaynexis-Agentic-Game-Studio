@@ -1,0 +1,6 @@
+interface:
+  display_name: "Project Radar"
+  short_description: "Scan the repository for the highest-impact gaps across code, docs, tests, build pipeline, and release risk. Use when you need a fast health check before starting work."
+  default_prompt: "$project-radar "
+policy:
+  allow_implicit_invocation: true

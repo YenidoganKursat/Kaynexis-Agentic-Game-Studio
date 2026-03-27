@@ -1,0 +1,6 @@
+interface:
+  display_name: "Marketing Beat Brief"
+  short_description: "Create a concise beat plan for announce/demo/update moments, with core message, assets, proof points, and community follow-up. Use for festivals, demos, betas, or patch launches."
+  default_prompt: "$marketing-beat-brief "
+policy:
+  allow_implicit_invocation: true

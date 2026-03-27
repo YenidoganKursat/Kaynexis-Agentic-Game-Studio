@@ -1,0 +1,6 @@
+interface:
+  display_name: "Engine Setup"
+  short_description: "Audit or frame engine-specific project setup, folder conventions, packages/plugins, and build assumptions. Use for Godot, Unity, or Unreal setup and repo structure decisions."
+  default_prompt: "$engine-setup "
+policy:
+  allow_implicit_invocation: true

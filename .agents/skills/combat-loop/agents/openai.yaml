@@ -1,0 +1,6 @@
+interface:
+  display_name: "Combat Loop"
+  short_description: "Design or tune a combat loop including enemy roles, feedback, pacing, damage model, and skill expression. Use for combat-heavy slices and balance passes."
+  default_prompt: "$combat-loop "
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Mechanic Design"
+  short_description: "Specify a single player mechanic with verbs, inputs, feedback, tuning surfaces, edge cases, and testability. Use for movement, abilities, interactions, or systemic verbs."
+  default_prompt: "$mechanic-design "
+policy:
+  allow_implicit_invocation: true

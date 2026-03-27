@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kaynexis-python
+    working_dir: /app
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/app

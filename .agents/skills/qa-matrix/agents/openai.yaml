@@ -1,0 +1,6 @@
+interface:
+  display_name: "QA Matrix"
+  short_description: "Create a lean but meaningful test matrix from a feature or milestone. Use before calling a feature done or preparing a playtest/release."
+  default_prompt: "$qa-matrix "
+policy:
+  allow_implicit_invocation: true

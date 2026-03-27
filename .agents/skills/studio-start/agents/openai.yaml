@@ -1,0 +1,6 @@
+interface:
+  display_name: "Studio Start"
+  short_description: "Bootstrap or audit a game repository, seed active docs, and align engine, platforms, scope, milestones, and immediate risks. Use when starting a new project or adopting this template."
+  default_prompt: "$studio-start "
+policy:
+  allow_implicit_invocation: true

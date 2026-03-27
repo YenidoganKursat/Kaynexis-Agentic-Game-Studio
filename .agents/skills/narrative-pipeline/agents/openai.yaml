@@ -1,0 +1,6 @@
+interface:
+  display_name: "Narrative Pipeline"
+  short_description: "Organize story beats, dialogue production, branching constraints, and implementation-ready narrative docs. Use for narrative-heavy features or content pipelines."
+  default_prompt: "$narrative-pipeline "
+policy:
+  allow_implicit_invocation: true

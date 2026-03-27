@@ -1,0 +1,6 @@
+interface:
+  display_name: "Economy Balance"
+  short_description: "Design or rebalance currencies, sinks, progression prices, drop rates, and anti-exploit safeguards. Use for shops, crafting, meta loops, or F2P economies."
+  default_prompt: "$economy-balance "
+policy:
+  allow_implicit_invocation: true

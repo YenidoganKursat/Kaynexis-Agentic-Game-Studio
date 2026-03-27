@@ -1,0 +1,6 @@
+interface:
+  display_name: "Scope Rescue"
+  short_description: "Reduce an overgrown milestone into a realistic vertical slice with explicit cuts, preserves, and risks. Use when the plan is too broad, behind schedule, or internally inconsistent."
+  default_prompt: "$scope-rescue "
+policy:
+  allow_implicit_invocation: true

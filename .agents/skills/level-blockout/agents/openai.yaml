@@ -1,0 +1,6 @@
+interface:
+  display_name: "Level Blockout"
+  short_description: "Frame a level blockout with routing, pacing, encounter slots, visibility, gating, and teaching beats. Use before detailed art or scripting."
+  default_prompt: "$level-blockout "
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Backend Foundation"
+  short_description: "Frame service contracts, auth assumptions, matchmaking/persistence scope, and operational boundaries. Use before serious backend implementation or live features."
+  default_prompt: "$backend-foundation "
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tutorial Onboarding"
+  short_description: "Plan and validate first-session onboarding, teaching order, messaging, and skill ramp. Use when players are confused or new complexity is added."
+  default_prompt: "$tutorial-onboarding "
+policy:
+  allow_implicit_invocation: true

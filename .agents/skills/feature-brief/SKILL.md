@@ -1,0 +1,47 @@
+---
+name: feature-brief
+description: Turn a feature idea into a buildable contract with player outcome, acceptance criteria, risks, and validation. Use before implementing anything non-trivial.
+---
+
+# Feature Brief
+
+## When to use
+Turn a feature idea into a buildable contract with player outcome, acceptance criteria, risks, and validation. Use before implementing anything non-trivial.
+
+## Inputs to gather
+- feature goal
+- player value
+- constraints
+- existing systems
+
+## Recommended roles
+- `game_designer`
+- `lead_programmer`
+- `qa_lead`
+
+## Primary docs / outputs
+- `studio/docs/templates/feature-brief.md`
+- `studio/docs/active/decision-log.md`
+
+## Workflow
+1. Inspect the current repo/docs state first and cite concrete evidence.
+2. Choose the smallest useful output that moves the project forward.
+3. Express the work as a feature, mechanic, or content contract that engineering and QA can consume.
+4. Update or create durable docs when the result should persist.
+5. Recommend the next best role or skill if more work remains.
+
+## Category rules
+- Lead with player outcome, then define scope, acceptance criteria, and edge cases.
+- Keep mechanics and content contracts buildable by engineering and testable by QA.
+- Surface tradeoffs among clarity, depth, scope, and production cost.
+
+## Deliverables
+- feature brief
+- acceptance criteria
+- implementation notes
+- test focus
+
+## Validation bar
+- acceptance criteria present
+- risks/dependencies surfaced
+- next implementation or test path clear

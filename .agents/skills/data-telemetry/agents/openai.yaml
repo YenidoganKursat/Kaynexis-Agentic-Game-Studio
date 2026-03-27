@@ -1,0 +1,6 @@
+interface:
+  display_name: "Data Telemetry"
+  short_description: "Define event schemas, funnels, metrics, and privacy-safe instrumentation. Use when a feature needs measurement, balancing data, or live observation."
+  default_prompt: "$data-telemetry "
+policy:
+  allow_implicit_invocation: true

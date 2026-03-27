@@ -1,0 +1,6 @@
+interface:
+  display_name: "Art Style Pack"
+  short_description: "Create a lightweight art direction pack with pillars, references, asset priorities, readability, and pipeline constraints. Use early in visual development or when coherence drifts."
+  default_prompt: "$art-style-pack "
+policy:
+  allow_implicit_invocation: true

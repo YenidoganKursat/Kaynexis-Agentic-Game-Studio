@@ -1,0 +1,6 @@
+interface:
+  display_name: "Performance Pass"
+  short_description: "Frame a performance investigation or optimization pass with budgets, measurements, bottlenecks, and smallest high-impact fixes. Use for FPS, load times, memory, thermal, or battery issues."
+  default_prompt: "$perf-pass "
+policy:
+  allow_implicit_invocation: true

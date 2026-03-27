@@ -1,0 +1,6 @@
+interface:
+  display_name: "Web Build Readiness"
+  short_description: "Prepare a build for web delivery, browser constraints, load-time budgets, input quirks, and CDN/embedding assumptions. Use for demos, marketing beats, or web-first products."
+  default_prompt: "$web-build-readiness "
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,17 @@
+# Example Codex rules file.
+# Save as ~/.codex/rules/default.rules or a project-scoped rules file if you want to activate it.
+
+prefix_rule(
+    pattern = ["gh", "pr", ["view", "checks", "status"]],
+    decision = "prompt",
+    justification = "Allow read-only GitHub inspection with explicit approval",
+    match = [
+        "gh pr view 42",
+        "gh pr checks 42",
+        "gh pr status",
+    ],
+    not_match = [
+        "gh pr create",
+        "gh pr merge 42",
+    ],
+)

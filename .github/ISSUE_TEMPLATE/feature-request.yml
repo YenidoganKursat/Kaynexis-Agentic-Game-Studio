@@ -1,0 +1,26 @@
+name: Feature request
+description: Propose a new feature or workflow improvement
+title: "[Feature] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What user need or repo gap does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation idea
+      description: How would we know this is successful?
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and tradeoffs

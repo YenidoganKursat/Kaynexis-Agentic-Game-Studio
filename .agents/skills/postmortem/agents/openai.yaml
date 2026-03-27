@@ -1,0 +1,6 @@
+interface:
+  display_name: "Postmortem"
+  short_description: "Capture what happened, what worked, what failed, and what should change after a sprint, milestone, incident, or release. Use after meaningful outcomes."
+  default_prompt: "$postmortem "
+policy:
+  allow_implicit_invocation: true

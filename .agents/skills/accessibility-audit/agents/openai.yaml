@@ -1,0 +1,6 @@
+interface:
+  display_name: "Accessibility Audit"
+  short_description: "Audit a feature or build for control, readability, timing, color, subtitle, and assist-option risks. Use during feature review or release prep."
+  default_prompt: "$accessibility-audit "
+policy:
+  allow_implicit_invocation: true

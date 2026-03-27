@@ -1,0 +1,6 @@
+interface:
+  display_name: "Build Pipeline"
+  short_description: "Design or harden CI/build/package flows, environment assumptions, versioning, and artifacts. Use for reproducible builds and release engineering."
+  default_prompt: "$build-pipeline "
+policy:
+  allow_implicit_invocation: true
