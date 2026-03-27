@@ -1,0 +1,6 @@
+interface:
+  display_name: "Metaprogression Loop"
+  short_description: "Shape between-run or long-term progression with unlocks, retention beats, reset value, and pacing. Use for roguelites, service games, or multi-session arcs."
+  default_prompt: "$metaprogression-loop "
+policy:
+  allow_implicit_invocation: true

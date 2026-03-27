@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tools Pipeline"
+  short_description: "Design or implement a small internal tool, import/export helper, or editor workflow improvement. Use when content production is blocked by manual repetitive work."
+  default_prompt: "$tools-pipeline "
+policy:
+  allow_implicit_invocation: true

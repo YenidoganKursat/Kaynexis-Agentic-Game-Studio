@@ -1,0 +1,19 @@
+id = "build-release"
+title = "Build And Release"
+layer = "discipline"
+
+[[item]]
+id = "build-command-deterministic"
+title = "Build/export commands are deterministic and documented"
+severity = "required"
+applies_when = "Any pipeline or artifact change"
+validation = "Update studio/docs/active/build-pipeline.md and matching CLI or workflow steps"
+owner = "build-release"
+
+[[item]]
+id = "artifact-contract"
+title = "Artifact names and destinations are stable"
+severity = "recommended"
+applies_when = "Packaging, release, or demo prep"
+validation = "Check artifact path examples in docs and workflows"
+owner = "producer"

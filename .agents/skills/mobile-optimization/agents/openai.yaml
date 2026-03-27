@@ -1,0 +1,6 @@
+interface:
+  display_name: "Mobile Optimization"
+  short_description: "Adapt a feature or build for mobile performance, controls, memory, battery, and session design. Use for iOS/Android releases or mobile-focused slices."
+  default_prompt: "$mobile-optimization "
+policy:
+  allow_implicit_invocation: true

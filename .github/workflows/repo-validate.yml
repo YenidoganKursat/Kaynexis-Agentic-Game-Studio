@@ -1,0 +1,56 @@
+name: Repo Validate
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+      - "codex/**"
+
+permissions:
+  contents: read
+
+jobs:
+  repo-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Compile Python files
+        run: python3 -m compileall -q scripts docs studio evals tests
+
+      - name: Validate repo
+        run: make validate
+
+      - name: Run doctor
+        run: python3 scripts/doctor.py
+
+      - name: Run local evals
+        run: python3 scripts/run_local_evals.py
+
+      - name: Run pytest
+        run: python3 -m pytest -q tests
+
+      - name: Smoke front-door routing
+        run: python3 scripts/codex_studio.py next "Implement the first combat room"
+
+      - name: Smoke checklist resolution
+        run: python3 scripts/codex_studio.py checklist --task "Implement the first combat room"
+
+      - name: Smoke Unity adapter command generation
+        run: python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --unity-path /Applications/Unity/Hub/Editor/6000.0.0f1/Unity --dry-run --json
+
+      - name: Smoke Unreal adapter command generation
+        run: python3 scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --uat-path /Applications/Epic/UE_5.5/Engine/Build/BatchFiles/RunUAT.sh --dry-run --json

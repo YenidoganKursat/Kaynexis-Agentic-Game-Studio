@@ -1,0 +1,19 @@
+; Engine configuration file.
+; Minimal Godot 4 baseline scaffold for the repository starter.
+
+config_version=5
+
+[application]
+
+config/name="kaynexisGame"
+run/main_scene="res://src/main.tscn"
+config/features=PackedStringArray("4.2")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[rendering]
+
+renderer/rendering_method="forward_plus"

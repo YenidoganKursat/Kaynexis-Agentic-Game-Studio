@@ -1,0 +1,6 @@
+interface:
+  display_name: "Intake Router"
+  short_description: "Triage an incoming request and recommend the best next skill, agents, docs, and validation plan. Use first when the task is ambiguous, broad, or cross-functional. Do not use for already well-scoped single-step edits."
+  default_prompt: "$intake-router "
+policy:
+  allow_implicit_invocation: true

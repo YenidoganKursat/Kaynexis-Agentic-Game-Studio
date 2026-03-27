@@ -1,0 +1,42 @@
+name: Docker Smoke
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - Dockerfile
+      - docker-compose.yml
+      - requirements.txt
+      - .github/workflows/docker-smoke.yml
+  push:
+    branches:
+      - main
+      - master
+      - "codex/**"
+    paths:
+      - Dockerfile
+      - docker-compose.yml
+      - requirements.txt
+      - .github/workflows/docker-smoke.yml
+
+permissions:
+  contents: read
+
+jobs:
+  docker-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - name: Show Docker version
+        run: |
+          docker version
+          docker compose version
+
+      - name: Build helper image
+        run: docker compose build
+
+      - name: Run smoke import
+        run: docker compose run --rm app python -c "import requests, numpy, pandas, dotenv; print('docker-ok')"

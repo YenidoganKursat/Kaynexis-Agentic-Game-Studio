@@ -1,0 +1,6 @@
+interface:
+  display_name: "Release Gate"
+  short_description: "Run a ship/no-ship review that aggregates quality, cert, performance, and communication readiness into a clear recommendation. Use before demo, beta, or launch."
+  default_prompt: "$release-gate "
+policy:
+  allow_implicit_invocation: false

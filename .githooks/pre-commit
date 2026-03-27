@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+python3 scripts/validate_repo_layout.py
+python3 scripts/validate_docs.py
+python3 scripts/validate_assets.py

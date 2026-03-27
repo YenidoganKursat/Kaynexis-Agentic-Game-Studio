@@ -1,0 +1,6 @@
+interface:
+  display_name: "Feature Brief"
+  short_description: "Turn a feature idea into a buildable contract with player outcome, acceptance criteria, risks, and validation. Use before implementing anything non-trivial."
+  default_prompt: "$feature-brief "
+policy:
+  allow_implicit_invocation: true

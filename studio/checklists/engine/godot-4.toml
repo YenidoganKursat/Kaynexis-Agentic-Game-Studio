@@ -1,0 +1,84 @@
+id = "godot-4"
+title = "Godot 4"
+layer = "engine"
+
+[[item]]
+id = "godot-main-scene"
+title = "Main scene remains explicit and deterministic"
+severity = "required"
+applies_when = "Any scene/bootstrap change"
+validation = "Verify project.godot points to res://src/main.tscn or the documented replacement"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
+id = "godot-static-smoke"
+title = "Static smoke covers scene nodes, scripts, and export presets"
+severity = "required"
+applies_when = "Any Godot runtime or export change"
+validation = "Run python3 scripts/godot_smoke.py --static-only"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
+id = "godot-runtime-smoke"
+title = "Runtime smoke is attempted when a local binary exists"
+severity = "recommended"
+applies_when = "Before external sharing or build automation changes"
+validation = "Run python3 scripts/godot_smoke.py"
+engine = "godot-4"
+owner = "qa"
+
+[[item]]
+id = "godot-scene-resource-boundary"
+title = "Scene hierarchy and shared data are separated on purpose"
+severity = "recommended"
+applies_when = "Any Godot architecture or content-authoring change"
+validation = "Document whether the new responsibility belongs in a scene/node or a Resource and keep it aligned with the engine object-model docs"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
+id = "godot-tool-script-safety"
+title = "Editor-time scripts are used deliberately and safely"
+severity = "recommended"
+applies_when = "Any @tool, editor dock, or inspector-plugin change"
+validation = "Confirm the change really needs editor-time execution and note the recovery/validation path"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
+id = "godot-world-stack-choice"
+title = "Godot slice declares whether 2D, 3D, or a constrained hybrid owns the feature"
+severity = "required"
+applies_when = "Any new gameplay system, AI, movement, or combat feature"
+validation = "Document whether the feature is fundamentally Node2D or Node3D driven and why"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
+id = "godot-navigation-choice"
+title = "NavigationServer versus custom AStar usage is chosen on purpose"
+severity = "required"
+applies_when = "Any pathfinding, traversal, or AI locomotion change"
+validation = "State whether the feature uses nav regions/agents or explicit AStarGraph logic and tie the choice to world representation"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
+id = "godot-damage-contact-model"
+title = "Hit detection uses a clear contact model"
+severity = "required"
+applies_when = "Any damage, projectile, melee, or trigger-volume change"
+validation = "Document whether contact is owned by Area signals, body collisions, or direct space-state queries plus collision layers/masks"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
+id = "godot-scale-representation"
+title = "High-count visuals and entities have an explicit scale strategy"
+severity = "recommended"
+applies_when = "Crowds, bullet fields, repeated props, or swarm effects"
+validation = "Decide whether plain scenes/nodes are sufficient or if MultiMesh/server APIs are required by measured scale"
+engine = "godot-4"
+owner = "godot-specialist"

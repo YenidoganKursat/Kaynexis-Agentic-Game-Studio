@@ -1,0 +1,6 @@
+interface:
+  display_name: "Save System"
+  short_description: "Design or implement save/load behavior, checkpoints, migrations, and corruption recovery. Use whenever state persistence changes."
+  default_prompt: "$save-system "
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,27 @@
+id = "gameplay"
+title = "Gameplay"
+layer = "discipline"
+
+[[item]]
+id = "gameplay-readability"
+title = "Core action remains readable before adding depth"
+severity = "required"
+applies_when = "Combat, movement, or encounter work"
+validation = "Document the teach/read/react loop in the active feature doc"
+owner = "game-designer"
+
+[[item]]
+id = "gameplay-failure-loop"
+title = "Failure feedback and recovery are explicit"
+severity = "required"
+applies_when = "Health, checkpoints, retries, or punishment loops"
+validation = "Validate the failure state and the return-to-play path"
+owner = "qa"
+
+[[item]]
+id = "gameplay-system-contract"
+title = "System ownership is explicit before scaling combat, AI, or traversal"
+severity = "recommended"
+applies_when = "Pathfinding, AI, damage, projectile, or combat-system work"
+validation = "Document the world stack, navigation model, contact model, and scale risk in the feature brief or active doc"
+owner = "technical-director"

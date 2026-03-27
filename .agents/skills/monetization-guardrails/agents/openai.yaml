@@ -1,0 +1,6 @@
+interface:
+  display_name: "Monetization Guardrails"
+  short_description: "Review monetization design for fairness, player trust, platform constraints, and ethical guardrails. Use for F2P offers, bundles, ads, battle passes, or economy pressure."
+  default_prompt: "$monetization-guardrails "
+policy:
+  allow_implicit_invocation: false

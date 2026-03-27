@@ -1,0 +1,30 @@
+id = "unity-6"
+engine = "unity"
+version_family = "6000.x"
+required_markers = [
+  "Assets",
+  "Assets/Scenes/CombatRoom.unity",
+  "Assets/Scripts/Runtime/StarterKit.Runtime.asmdef",
+  "Assets/Scripts/Runtime/CombatRoomDirector.cs",
+  "Assets/Scripts/Runtime/EnemyArchetype.cs",
+  "Assets/Tests/EditMode/StarterKit.EditMode.asmdef",
+  "Assets/Tests/EditMode/CombatRoomDirectorTests.cs",
+  "Packages/manifest.json",
+  "ProjectSettings/ProjectVersion.txt",
+]
+bootstrap_command = "python3 scripts/codex_studio.py init --engine unity-6"
+smoke_commands = [
+  "python3 scripts/validate_engine_kits.py --engine unity-6",
+  "python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --dry-run --json",
+]
+export_commands = [
+  "python3 scripts/unity_adapter.py build --project-path studio/starter-kits/unity-6/scaffold --dry-run --json",
+  "Mirror the batchmode build command in GitHub Actions once the real project is connected",
+]
+supported_platforms = ["pc-premium", "mobile-f2p", "web-demo", "console-premium"]
+seed_docs = ["studio/docs/active/engine-profile.md", "studio/docs/active/build-pipeline.md", "studio/docs/active/content-pipeline.md"]
+validation_steps = [
+  "Validate that Packages/manifest.json and asmdef boundaries stay deterministic.",
+  "Keep the intended test CLI command documented even when the editor binary is external.",
+  "Treat package version drift as a build-pipeline issue, not a one-off exception.",
+]

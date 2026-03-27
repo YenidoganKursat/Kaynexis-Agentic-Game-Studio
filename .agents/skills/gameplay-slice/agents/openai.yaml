@@ -1,0 +1,6 @@
+interface:
+  display_name: "Gameplay Slice"
+  short_description: "Implement one validated gameplay slice with acceptance criteria, touched files, and explicit validation. Use for scoped mechanics, interactions, or player-facing feature work."
+  default_prompt: "$gameplay-slice "
+policy:
+  allow_implicit_invocation: true

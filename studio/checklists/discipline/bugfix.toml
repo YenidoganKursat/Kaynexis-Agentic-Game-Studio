@@ -1,0 +1,19 @@
+id = "bugfix"
+title = "Bugfix"
+layer = "discipline"
+
+[[item]]
+id = "bugfix-repro"
+title = "Bug has reproducible steps before the fix"
+severity = "required"
+applies_when = "Crash, regression, or functional bug work"
+validation = "Write down one deterministic repro path"
+owner = "qa"
+
+[[item]]
+id = "bugfix-regression-proof"
+title = "Fix has one proof path that would fail before the patch"
+severity = "required"
+applies_when = "Any bugfix"
+validation = "Run a targeted smoke, test, or manual loop"
+owner = "lead-programmer"

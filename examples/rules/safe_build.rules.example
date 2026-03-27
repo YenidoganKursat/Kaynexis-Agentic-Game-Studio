@@ -1,0 +1,16 @@
+# Example Codex rules file for common local validation commands.
+
+prefix_rule(
+    pattern = [["npm", "pnpm"], "run", ["lint", "test", "build"]],
+    decision = "allow",
+    justification = "Common repo-local validation commands",
+    match = [
+        "npm run lint",
+        "pnpm run test",
+        "pnpm run build",
+    ],
+    not_match = [
+        "npm publish",
+        "pnpm add lodash",
+    ],
+)

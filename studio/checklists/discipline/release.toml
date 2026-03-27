@@ -1,0 +1,19 @@
+id = "release"
+title = "Release"
+layer = "discipline"
+
+[[item]]
+id = "release-known-issues"
+title = "Known issues and ship blockers are explicit"
+severity = "required"
+applies_when = "Demo, milestone, or release work"
+validation = "Update the release note or active build doc with blockers"
+owner = "release-manager"
+
+[[item]]
+id = "release-artifact-check"
+title = "The exact build artifact path is documented"
+severity = "required"
+applies_when = "Any packaging or external sharing work"
+validation = "Point to the build command and expected artifact location"
+owner = "build-release"

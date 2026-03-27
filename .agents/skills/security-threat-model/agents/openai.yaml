@@ -1,0 +1,6 @@
+interface:
+  display_name: "Security Threat Model"
+  short_description: "Build a repo- or feature-level threat model with abuse paths, trust boundaries, exploit severity, and mitigations. Use for backend, economy, multiplayer, auth, or modding work."
+  default_prompt: "$security-threat-model "
+policy:
+  allow_implicit_invocation: false

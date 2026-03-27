@@ -1,0 +1,38 @@
+# Optional Codex CLI profiles
+# Profiles are experimental and may change. The IDE extension may not support them yet.
+# Copy the profiles you want into ~/.codex/config.toml or a trusted project .codex/config.toml.
+
+model = "gpt-5.4"
+review_model = "gpt-5.4"
+model_reasoning_effort = "medium"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+web_search = "cached"
+
+[profiles.deep-review]
+model = "gpt-5.4"
+review_model = "gpt-5.4"
+model_reasoning_effort = "high"
+approval_policy = "on-request"
+
+[profiles.fast-explore]
+model = "gpt-5.4-mini"
+review_model = "gpt-5.4"
+model_reasoning_effort = "medium"
+approval_policy = "on-request"
+
+[profiles.docs-heavy]
+model = "gpt-5.4-mini"
+model_reasoning_effort = "medium"
+web_search = "cached"
+
+[profiles.hotfix]
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+approval_policy = "on-request"
+
+[profiles.release-gate]
+model = "gpt-5.4"
+review_model = "gpt-5.4"
+model_reasoning_effort = "high"
+approval_policy = "on-request"

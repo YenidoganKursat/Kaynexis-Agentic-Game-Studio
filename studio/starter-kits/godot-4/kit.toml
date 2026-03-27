@@ -1,0 +1,17 @@
+id = "godot-4"
+engine = "godot"
+version_family = "4.x"
+required_markers = ["project.godot", "src/main.tscn", "src/main.gd"]
+bootstrap_command = "python3 scripts/codex_studio.py init --engine godot-4"
+smoke_commands = ["python3 scripts/godot_smoke.py --static-only", "python3 scripts/godot_smoke.py"]
+export_commands = [
+  "python3 scripts/godot_export.py --preset \"Linux/X11\"",
+  "python3 scripts/godot_export.py --preset \"Windows Desktop\"",
+]
+supported_platforms = ["pc-premium", "web-demo", "console-premium"]
+seed_docs = ["studio/docs/active/engine-profile.md", "studio/docs/active/build-pipeline.md", "studio/docs/active/current-sprint.md"]
+validation_steps = [
+  "Run the static smoke checks before touching scenes or exports.",
+  "Run runtime smoke when a local Godot binary is available.",
+  "Keep export presets aligned with the starter-kit contract.",
+]

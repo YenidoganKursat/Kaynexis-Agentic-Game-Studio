@@ -1,0 +1,29 @@
+name: Infra or routing change
+description: Propose changes to AGENTS, agents, skills, setup, routing, evals, or CI
+title: "[Infra] "
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Which files or surfaces are affected?
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected behavior change
+      description: What should change for contributors or Codex?
+    validations:
+      required: true
+  - type: textarea
+    id: eval
+    attributes:
+      label: Eval or regression plan
+      description: Which prompts, datasets, or checks should guard this change?
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: Risks

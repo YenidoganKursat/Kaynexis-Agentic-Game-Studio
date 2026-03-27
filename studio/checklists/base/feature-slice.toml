@@ -1,0 +1,27 @@
+id = "feature-slice"
+title = "Feature Slice"
+layer = "base"
+
+[[item]]
+id = "feature-brief-exists"
+title = "Feature is grounded in a durable brief or active doc"
+severity = "required"
+applies_when = "Any non-trivial implementation"
+validation = "Link the task to studio/docs/active or a generated feature brief"
+owner = "producer"
+
+[[item]]
+id = "validation-path-exists"
+title = "Feature has one narrow validation path"
+severity = "required"
+applies_when = "Any slice larger than a tiny fix"
+validation = "Document one test, smoke, or manual loop that proves the change"
+owner = "qa"
+
+[[item]]
+id = "research-linked"
+title = "Relevant research and engine caveats are linked before implementation"
+severity = "recommended"
+applies_when = "New system, new engine flow, or architecture-sensitive work"
+validation = "Reference at least one note from docs/research/game-development"
+owner = "technical-director"

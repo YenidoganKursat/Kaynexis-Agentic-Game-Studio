@@ -1,0 +1,6 @@
+interface:
+  display_name: "Audio Style Pack"
+  short_description: "Create an audio direction pack covering pillars, mix hierarchy, sonic language, and implementation priorities. Use early or when the game lacks coherent sound direction."
+  default_prompt: "$audio-style-pack "
+policy:
+  allow_implicit_invocation: true

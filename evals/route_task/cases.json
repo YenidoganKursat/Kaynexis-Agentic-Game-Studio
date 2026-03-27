@@ -1,0 +1,44 @@
+[
+  {
+    "task": "Investigate save corruption after crash",
+    "expected_route": "save / persistence",
+    "expected_skills": ["save-system", "qa-matrix"],
+    "expected_docs": ["studio/docs/templates/save-migration-plan.md"]
+  },
+  {
+    "task": "Improve subtitle readability in settings and HUD",
+    "expected_route": "ui / ux / accessibility",
+    "expected_skills": ["ui-flow", "accessibility-audit"],
+    "expected_docs": ["studio/docs/templates/accessibility-pass.md"]
+  },
+  {
+    "task": "Plan a Steam demo launch beat and store page assets",
+    "expected_route": "release / storefront / marketing",
+    "expected_skills": ["storefront-launch", "marketing-beat-brief"],
+    "expected_docs": ["studio/docs/templates/storefront-checklist.md"]
+  },
+  {
+    "task": "Prototype co-op lobby matchmaking and sync flow",
+    "expected_route": "multiplayer / backend",
+    "expected_skills": ["multiplayer-slice", "backend-foundation"],
+    "expected_docs": ["studio/docs/templates/feature-brief.md"]
+  },
+  {
+    "task": "Prepare Unity batchmode packaging and asmdef validation",
+    "expected_route": "engine / tooling / packaging",
+    "expected_skills": ["engine-setup", "build-pipeline"],
+    "expected_docs": ["studio/docs/active/engine-profile.md"]
+  },
+  {
+    "task": "Wire UE5 BuildCookRun packaging for the prototype",
+    "expected_route": "engine / tooling / packaging",
+    "expected_skills": ["engine-setup", "build-pipeline"],
+    "expected_docs": ["studio/docs/active/engine-profile.md"]
+  },
+  {
+    "task": "Implement Unity combat room",
+    "expected_route": "combat / gameplay",
+    "expected_skills": ["combat-loop", "mechanic-design"],
+    "expected_docs": ["studio/docs/templates/feature-brief.md"]
+  }
+]

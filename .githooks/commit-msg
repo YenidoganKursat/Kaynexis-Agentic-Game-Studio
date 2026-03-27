@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MSG_FILE="${1:-}"
+if [[ -z "${MSG_FILE}" || ! -f "${MSG_FILE}" ]]; then
+  exit 0
+fi
+
+FIRST_LINE="$(head -n 1 "$MSG_FILE")"
+if [[ ! "$FIRST_LINE" =~ ^(feat|fix|docs|chore|refactor|test|build|perf|design|release|ops)(\(.+\))?:\  ]]; then
+  echo "Commit message should start with one of:"
+  echo "  feat:, fix:, docs:, chore:, refactor:, test:, build:, perf:, design:, release:, ops:"
+  echo "Example: feat(combat): add parry timing window"
+  exit 1
+fi

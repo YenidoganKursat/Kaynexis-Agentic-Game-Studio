@@ -1,0 +1,19 @@
+id = "save"
+title = "Save And Persistence"
+layer = "discipline"
+
+[[item]]
+id = "save-happy-path"
+title = "Save and load happy path is explicit"
+severity = "required"
+applies_when = "Save, checkpoint, or profile work"
+validation = "Write down one save -> quit -> load validation loop"
+owner = "save-system"
+
+[[item]]
+id = "save-failure-path"
+title = "Migration or corruption handling is considered"
+severity = "recommended"
+applies_when = "Schema changes or persistence refactors"
+validation = "Document one failure or migration assumption"
+owner = "qa"

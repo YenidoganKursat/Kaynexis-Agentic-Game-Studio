@@ -1,0 +1,6 @@
+interface:
+  display_name: "LiveOps Calendar"
+  short_description: "Plan a lightweight live-ops cadence with beats, offers/events, rewards, and operational risks. Use for service-like updates without overengineering."
+  default_prompt: "$liveops-calendar "
+policy:
+  allow_implicit_invocation: true

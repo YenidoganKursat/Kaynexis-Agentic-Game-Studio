@@ -1,0 +1,6 @@
+interface:
+  display_name: "Storefront Launch"
+  short_description: "Prepare store page, build packaging assumptions, feature messaging, screenshots/trailer needs, and launch checklist. Use before public demo or release."
+  default_prompt: "$storefront-launch "
+policy:
+  allow_implicit_invocation: true

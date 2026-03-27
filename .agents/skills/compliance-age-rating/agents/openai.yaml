@@ -1,0 +1,6 @@
+interface:
+  display_name: "Compliance & Age Rating"
+  short_description: "Review content and product structure for age-rating, disclosure, privacy, and player-safety implications. Use when shipping publicly across stores or regions."
+  default_prompt: "$compliance-age-rating "
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,12 @@
+id = "demo"
+title = "Demo"
+layer = "milestone"
+
+[[item]]
+id = "demo-stability"
+title = "Demo path is stable and externally presentable"
+severity = "required"
+applies_when = "Demo or festival build"
+validation = "Record the build path, known issues, and recovery plan"
+milestone = "demo"
+owner = "release-manager"

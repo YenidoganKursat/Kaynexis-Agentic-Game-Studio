@@ -1,0 +1,75 @@
+id = "unreal-5"
+title = "Unreal 5"
+layer = "engine"
+
+[[item]]
+id = "unreal-module-boundaries"
+title = "Source, Content, and Config boundaries stay explicit"
+severity = "required"
+applies_when = "Any Unreal starter-kit or packaging change"
+validation = "Check StarterKit.uproject, Config/, Content/, and Source/ against the starter-kit contract"
+engine = "unreal-5"
+owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-package-command-documented"
+title = "Cook/package command remains documented before automation"
+severity = "required"
+applies_when = "Any Unreal release-path work"
+validation = "Update studio/docs/active/build-pipeline.md with the intended package command"
+engine = "unreal-5"
+owner = "build-release"
+
+[[item]]
+id = "unreal-object-ownership"
+title = "UObject, Actor, and Component ownership is explicit"
+severity = "recommended"
+applies_when = "Any Unreal gameplay, architecture, or editor-exposed change"
+validation = "Document whether the responsibility belongs in a UObject, Actor, or Component before implementation"
+engine = "unreal-5"
+owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-editor-surface"
+title = "Blueprint and Details-panel exposure is intentional"
+severity = "required"
+applies_when = "Any UPROPERTY, Blueprint, or designer-facing Unreal change"
+validation = "Describe what appears in Details or Blueprint defaults and how it will be validated in-editor"
+engine = "unreal-5"
+owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-world-stack-choice"
+title = "Unreal slice declares whether Paper2D, 3D gameplay framework, or hybrid owns the feature"
+severity = "required"
+applies_when = "Any new gameplay system, AI slice, or presentation layer decision"
+validation = "Document whether the feature is Paper2D, standard 3D, or a constrained hybrid before implementation"
+engine = "unreal-5"
+owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-navigation-ai-stack"
+title = "Navigation, query, and decision systems are assigned deliberately"
+severity = "required"
+applies_when = "Any pathfinding, AI locomotion, target selection, or behavior-state change"
+validation = "State whether navmesh, EQS, StateTree, or a justified custom graph owns each concern"
+engine = "unreal-5"
+owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-damage-framework"
+title = "Simple damage pipeline versus GAS is chosen on purpose"
+severity = "required"
+applies_when = "Any combat, attribute, ability, or multiplayer-sensitive damage feature"
+validation = "Document whether the feature stays on collision plus TakeDamage or moves into the Gameplay Ability System"
+engine = "unreal-5"
+owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-scale-representation"
+title = "Actor scale assumptions are checked before crowds or swarms grow"
+severity = "recommended"
+applies_when = "Crowds, many repeated props, projectile storms, or large-scale AI"
+validation = "Decide whether the feature should remain Actor-based or use instancing or Mass"
+engine = "unreal-5"
+owner = "unreal-specialist"

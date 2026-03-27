@@ -1,0 +1,75 @@
+id = "unity-6"
+title = "Unity 6"
+layer = "engine"
+
+[[item]]
+id = "unity-package-contract"
+title = "Packages and asmdef boundaries stay explicit"
+severity = "required"
+applies_when = "Any Unity starter-kit or runtime structure change"
+validation = "Check Packages/manifest.json and asmdef layout against the starter-kit contract"
+engine = "unity-6"
+owner = "unity-specialist"
+
+[[item]]
+id = "unity-cli-command-documented"
+title = "Batchmode test/build command stays documented"
+severity = "required"
+applies_when = "Any build pipeline or editor path change"
+validation = "Update studio/docs/active/build-pipeline.md with the intended CLI command"
+engine = "unity-6"
+owner = "build-release"
+
+[[item]]
+id = "unity-object-ownership"
+title = "GameObject, Component, Prefab, and ScriptableObject ownership stays explicit"
+severity = "recommended"
+applies_when = "Any Unity architecture, content, or tooling change"
+validation = "Document whether the responsibility belongs in a scene object, prefab, or shared asset"
+engine = "unity-6"
+owner = "unity-specialist"
+
+[[item]]
+id = "unity-editor-runtime-separation"
+title = "Editor-only code stays separate from runtime code"
+severity = "required"
+applies_when = "Any custom inspector, EditorWindow, or UnityEditor API change"
+validation = "Confirm UnityEditor dependencies stay in editor-only code paths and document the intended editor surface"
+engine = "unity-6"
+owner = "unity-specialist"
+
+[[item]]
+id = "unity-world-stack-choice"
+title = "Unity feature declares whether built-in 2D, built-in 3D, or DOTS owns the runtime"
+severity = "required"
+applies_when = "Any new gameplay system, physics feature, or AI slice"
+validation = "Document the runtime stack before implementation and avoid mixing 2D/3D assumptions by accident"
+engine = "unity-6"
+owner = "unity-specialist"
+
+[[item]]
+id = "unity-navigation-choice"
+title = "AI Navigation versus custom graph logic is chosen on purpose"
+severity = "required"
+applies_when = "Any pathfinding, navmesh, or traversal change"
+validation = "State whether the feature uses AI Navigation/navmesh or a custom graph/grid and justify the choice with the world model"
+engine = "unity-6"
+owner = "unity-specialist"
+
+[[item]]
+id = "unity-damage-query-contract"
+title = "Damage and sensing systems stay layer-aware and allocation-aware"
+severity = "required"
+applies_when = "Any damage, projectile, trigger, raycast, or sensing change"
+validation = "Document trigger/collision ownership, layer filtering, and whether NonAlloc queries or pooling are required"
+engine = "unity-6"
+owner = "unity-specialist"
+
+[[item]]
+id = "unity-scale-representation"
+title = "Classic object model versus data-oriented scale path is explicit"
+severity = "recommended"
+applies_when = "Large crowds, many projectiles, or heavy simulation systems"
+validation = "Decide whether pooling is enough or whether Entities/Burst/Unity Physics should own the scale problem"
+engine = "unity-6"
+owner = "unity-specialist"

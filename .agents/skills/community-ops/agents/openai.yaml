@@ -1,0 +1,6 @@
+interface:
+  display_name: "Community Ops"
+  short_description: "Plan playtests, betas, patch-note communication, feedback intake, and community moderation loops. Use around demos, betas, and release updates."
+  default_prompt: "$community-ops "
+policy:
+  allow_implicit_invocation: true

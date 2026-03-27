@@ -1,0 +1,16 @@
+{
+  "required_scene_nodes": [
+    "Player",
+    "PulseWarden",
+    "Hud"
+  ],
+  "required_presets": [
+    "Linux/X11",
+    "Windows Desktop"
+  ],
+  "required_scripts": [
+    "src/main.gd",
+    "src/player.gd",
+    "src/pulse_warden.gd"
+  ]
+}

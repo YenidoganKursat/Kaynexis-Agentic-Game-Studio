@@ -1,0 +1,6 @@
+interface:
+  display_name: "UI Flow"
+  short_description: "Design or implement one UI flow with screen states, transitions, copy needs, and validation. Use for menus, HUD flows, settings, or onboarding screens."
+  default_prompt: "$ui-flow "
+policy:
+  allow_implicit_invocation: true

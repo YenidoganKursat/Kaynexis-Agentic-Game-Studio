@@ -1,0 +1,29 @@
+id = "unreal-5"
+engine = "unreal"
+version_family = "5.x"
+required_markers = [
+  "StarterKit.uproject",
+  "Config",
+  "Content",
+  "Content/Maps/README.md",
+  "Source",
+  "Source/StarterKit/StarterKitGameModeBase.h",
+  "Source/StarterKit/StarterKitGameModeBase.cpp",
+  "Source/StarterKit/StarterKitEnemyArchetype.h",
+]
+bootstrap_command = "python3 scripts/codex_studio.py init --engine unreal-5"
+smoke_commands = [
+  "python3 scripts/validate_engine_kits.py --engine unreal-5",
+  "python3 scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --dry-run --json",
+]
+export_commands = [
+  "python3 scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --platform Win64 --dry-run --json",
+  "Mirror the package command in GitHub Actions once the real project exists",
+]
+supported_platforms = ["pc-premium", "console-premium"]
+seed_docs = ["studio/docs/active/engine-profile.md", "studio/docs/active/build-pipeline.md", "studio/docs/active/platform-targets.md"]
+validation_steps = [
+  "Maintain clear Source vs Content boundaries.",
+  "Treat plugin/module sprawl as a first-class architecture risk.",
+  "Document cook/package assumptions before content scale grows.",
+]

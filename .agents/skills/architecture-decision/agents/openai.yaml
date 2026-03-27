@@ -1,0 +1,6 @@
+interface:
+  display_name: "Architecture Decision"
+  short_description: "Write or revise an ADR for technical decisions with significant maintenance, performance, or pipeline impact. Do not use for tiny local refactors."
+  default_prompt: "$architecture-decision "
+policy:
+  allow_implicit_invocation: true

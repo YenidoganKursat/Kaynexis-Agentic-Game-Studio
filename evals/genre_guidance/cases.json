@@ -1,0 +1,20 @@
+[
+  {
+    "genre": "action-roguelite",
+    "expected_name": "Action Roguelite",
+    "expected_first_feature": "First Combat Room",
+    "required_skills": ["$combat-loop", "$qa-matrix"]
+  },
+  {
+    "genre": "cozy-sim",
+    "expected_name": "Cozy Sim",
+    "expected_first_feature": "First Cozy Day",
+    "required_skills": ["$ui-flow", "$accessibility-audit"]
+  },
+  {
+    "genre": "puzzle",
+    "expected_name": "Puzzle",
+    "expected_first_feature": "First Puzzle Sequence",
+    "required_skills": ["$puzzle-design", "$qa-matrix"]
+  }
+]
