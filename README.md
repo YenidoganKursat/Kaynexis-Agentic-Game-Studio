@@ -108,16 +108,41 @@ Default output paths:
 - `build/linux/kaynexis-agentic-game-studio.x86_64`
 - `build/windows/kaynexis-agentic-game-studio.exe`
 
+## Validation
+
+The repository also includes a lightweight validation surface:
+
+- `python3 scripts/godot_smoke.py --static-only`
+- `python3 scripts/godot_smoke.py`
+- `python3 -m pytest -q tests/test_godot_surface.py`
+
+If you prefer Make targets:
+
+- `make validate`
+- `make test`
+- `make smoke`
+- `make export-linux`
+- `make export-windows`
+
 ## Project Structure
 
 ```text
 project.godot
 export_presets.cfg
+Makefile
+scripts/
+  godot_smoke.py
+  godot_export.py
 src/
   main.tscn
   main.gd
   player.gd
   pulse_warden.gd
+tests/
+  manual-smoke.md
+  test_godot_surface.py
+assets/
+  README.md
 ```
 
 ## Current Design Strengths
