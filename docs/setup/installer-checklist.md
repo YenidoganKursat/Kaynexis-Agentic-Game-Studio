@@ -41,7 +41,7 @@ Use this checklist when you are the person standing up the repo for a team or ne
 
 ## Before Starting Real Implementation
 
-- Route the first real task with `python3 scripts/route_task.py`.
+- Route the first real task with `python3 scripts/codex_studio.py next "Describe the first real task"`.
 - Create a feature brief or bug report instead of jumping straight into code.
 - Create an eval plan before changing shared instructions, agents, or routing behavior.
 - Decide whether `src/`, engine-native folders, or another layout is the true runtime source path.

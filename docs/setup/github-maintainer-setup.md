@@ -1,6 +1,6 @@
 # GitHub Maintainer Setup
 
-Use this after creating the remote repository.
+Use this when creating or auditing the remote repository.
 
 ## What is already prepared
 
@@ -52,14 +52,16 @@ Suggested topics:
 
 1. Confirm `.github/CODEOWNERS`
    Update `@YenidoganKursat` if your real GitHub handle or team differs.
-2. Create the remote repository on GitHub
-3. Add the remote and push the local `main` branch
+2. Create the remote repository on GitHub if it does not exist yet
+3. Add the remote and push the local `main` branch if the local repo is not connected yet
 4. Apply the description and topics
 5. Enable GitHub Issues and Pull Requests
 6. Enable private vulnerability reporting if available
 7. Review Dependabot settings
 8. Create repo labels that match your issue workflow if you want labels on forms later
 9. Turn on rulesets for `main`
+
+If the repository already has a working `origin`, skip the create/add/push steps and treat this as a GitHub policy and metadata audit.
 
 ## Minimal shell commands
 

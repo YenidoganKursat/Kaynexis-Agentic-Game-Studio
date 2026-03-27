@@ -9,6 +9,6 @@
 
 ## Dependencies
 - `studio.toml` and starter-kit manifests stay current
-- Remote repository and branch ruleset setup
+- Hosted repository policy and branch ruleset setup
 - Engine-native project files and export settings
 - First test or manual validation artifact beyond template placeholders
