@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://src/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://src/player.gd" id="2_player"]
+[ext_resource type="Script" path="res://src/pulse_warden.gd" id="3_warden"]
+
+[sub_resource type="CircleShape2D" id="1_player_shape"]
+radius = 18.0
+
+[sub_resource type="CircleShape2D" id="2_warden_shape"]
+radius = 28.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+enabled = true
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(280, 360)
+script = ExtResource("2_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("1_player_shape")
+
+[node name="PulseWarden" type="Area2D" parent="."]
+position = Vector2(860, 360)
+script = ExtResource("3_warden")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PulseWarden"]
+shape = SubResource("2_warden_shape")
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="TitleLabel" type="Label" parent="Hud"]
+offset_left = 32.0
+offset_top = 24.0
+theme_override_font_sizes/font_size = 30
+text = "First Combat Room"
+
+[node name="StatusLabel" type="Label" parent="Hud"]
+offset_left = 32.0
+offset_top = 68.0
+offset_right = 1180.0
+theme_override_font_sizes/font_size = 16
+text = "Status"
+
+[node name="ObjectiveLabel" type="Label" parent="Hud"]
+offset_left = 32.0
+offset_top = 98.0
+offset_right = 1180.0
+theme_override_font_sizes/font_size = 18
+text = "Objective"
+
+[node name="ChoiceLabel" type="Label" parent="Hud"]
+offset_left = 32.0
+offset_top = 616.0
+offset_right = 1232.0
+theme_override_font_sizes/font_size = 18
+text = ""
+
+[node name="ResultLabel" type="Label" parent="Hud"]
+offset_left = 32.0
+offset_top = 652.0
+offset_right = 1232.0
+theme_override_font_sizes/font_size = 16
+text = ""
