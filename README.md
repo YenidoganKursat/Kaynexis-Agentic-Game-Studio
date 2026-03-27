@@ -7,7 +7,19 @@ A Codex-first multi-engine studio operating system for turning fuzzy game ideas 
 `codex-first` `multi-engine` `game-development` `godot` `unity` `ue5` `starter-kits` `checklists` `research` `ci-cd` `developer-tooling`
 
 Supported engine families: `Godot 4`, `Unity 6`, `Unreal 5`
-Current reference implementation: `Godot 4`
+Root runtime reference today: `Godot 4`
+
+## Engine families in one view
+
+This repo is designed around three first-class engine families at the studio-system level.
+
+| Engine family | Repo-level support | Starter-kit surface | Research surface | Adapter / validation surface |
+| --- | --- | --- | --- | --- |
+| `godot-4` | root-facing reference slice, active-doc baseline, export presets | scene/script runtime, smoke/export helpers | architecture, object model, class/mechanic, navigation/damage/performance | `scripts/godot_smoke.py`, `scripts/godot_export.py`, Godot checklist items |
+| `unity-6` | starter-kit-first support with editor/runtime/test separation | runtime scripts, editor entrypoint, asmdef layout, prefab and ScriptableObject folders, edit-mode tests | architecture, object model, class/mechanic, navigation/damage/performance | `scripts/unity_adapter.py`, starter-kit smoke, Unity checklist items |
+| `unreal-5` | starter-kit-first support with gameplay framework and packaging structure | gameplay classes, health component, config defaults, Blueprint/content guidance | architecture, object model, class/mechanic, navigation/damage/performance | `scripts/unreal_adapter.py`, starter-kit smoke, Unreal checklist items |
+
+If you choose Unity or Unreal, the repo is not asking you to "translate a Godot template." It already includes engine-specific starter-kit, research, checklist, and CI contract surfaces for those engines.
 
 ## Why this repo exists
 
@@ -33,9 +45,9 @@ It gives you:
 
 This repo is not Godot-only.
 
-- Godot 4: root reference slice in `src/`, smoke/export helpers, active project baseline
-- Unity 6: starter kit with runtime scripts, editor build entrypoint, ScriptableObject surface, prefab/script folders, and edit-mode tests
-- Unreal 5: starter kit with gameplay framework classes, health component, data asset surface, config defaults, Blueprint/content guidance, and packaging adapter flow
+- Godot 4: root reference slice in `src/`, smoke/export helpers, active project baseline, and engine-specific mechanic guidance
+- Unity 6: starter kit with runtime scripts, editor build entrypoint, ScriptableObject surface, prefab/script folders, edit-mode tests, and engine-specific mechanic guidance
+- Unreal 5: starter kit with gameplay framework classes, health component, data asset surface, config defaults, Blueprint/content guidance, packaging adapter flow, and engine-specific mechanic guidance
 
 The shared system layer treats all three as first-class engine families for routing, checklists, research, and CI contract smoke.
 
@@ -114,6 +126,15 @@ python3 scripts/codex_studio.py init \
   --platform console-premium \
   --genre co-op-survival \
   --yes
+```
+
+After choosing an engine, immediately read the engine pack:
+
+```bash
+sed -n '1,80p' docs/research/game-development/engines/README.md
+sed -n '1,120p' docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md
+sed -n '1,120p' docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md
+sed -n '1,120p' docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md
 ```
 
 ## Real command examples
@@ -275,6 +296,15 @@ Examples:
 
 Those guides are where the repo spells out the most-used classes, object ownership, mechanic patterns, writing style expectations, and common mistakes for each engine family.
 
+Use those notes to answer questions like:
+
+- which class or object should own player movement in this engine
+- which object should own contact, damage, and sensing
+- where shared tuning data should live
+- which editor surface designers are supposed to touch
+- what naming and writing style the engine expects
+- what mistakes usually make the mechanic brittle or slow
+
 This repo uses starter-kit parity, not fake gameplay parity.
 
 | Engine | Kit ID | What is included | Local smoke path | Real editor requirement |
@@ -282,6 +312,12 @@ This repo uses starter-kit parity, not fake gameplay parity.
 | Godot | `godot-4` | scene/script/export baseline and reference combat slice | `python3 scripts/godot_smoke.py --static-only` | `GODOT_BIN` for runtime smoke/export |
 | Unity | `unity-6` | package, asmdef, runtime sample, adapter, test/build command contract | `python3 scripts/unity_adapter.py ... --dry-run --json` | `UNITY_CLI` for editor-backed test/build |
 | Unreal | `unreal-5` | project/module scaffold, gameplay sample surface, adapter, packaging contract | `python3 scripts/unreal_adapter.py ... --dry-run --json` | `UNREAL_UAT` or `UNREAL_EDITOR` for engine-backed packaging |
+
+Starter-kit docs:
+
+- `studio/starter-kits/godot-4/kit.toml`
+- `studio/starter-kits/unity-6/README.md`
+- `studio/starter-kits/unreal-5/README.md`
 
 Inspect or validate all kits:
 
@@ -327,8 +363,11 @@ Core research zones:
 Good places to start:
 
 - `docs/research/game-development/engines/godot-4-class-editor-object-map.md`
+- `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/unity-6-class-editor-object-map.md`
+- `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/unreal-5-class-editor-object-map.md`
+- `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/systems/combat-damage-and-effects-architecture.md`
 - `docs/research/game-development/systems/ai-navigation-and-entity-scale-architecture.md`
 - `docs/research/game-development/genre/genre-example-matrix.md`
@@ -432,6 +471,10 @@ Apply these later from the GitHub UI or with `gh repo edit`. See `docs/setup/git
 
 No. The Godot slice is a reference proof. The main product is the studio operating system around it.
 
+### Is this repo biased toward Godot?
+
+The root runtime example is currently Godot-based, but the repo-level operating system is intentionally multi-engine. Unity and Unreal already have dedicated starter kits, adapters, checklists, CI contract smoke, and engine-specific class/mechanic research.
+
 ### Does Unity and Unreal support require a local installation?
 
 For real builds, yes. Contract smoke works with repo-local stubs, but editor-backed coverage starts when `UNITY_CLI`, `UNREAL_UAT`, or `UNREAL_EDITOR` points to a real installation.
@@ -456,6 +499,10 @@ Yes, but the repo defaults to English-first onboarding and CLI output so the sys
 
 - `docs/setup/first-hour-walkthrough.md`
 - `docs/reference/engine-selection-guide.md`
+- `docs/research/game-development/engines/README.md`
+- `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
+- `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
+- `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
 - `docs/reference/workflow-recipes.md`
 - `docs/reference/task-prompt-examples.md`
 - `docs/reference/command-cheatsheet.md`

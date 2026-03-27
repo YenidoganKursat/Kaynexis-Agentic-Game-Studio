@@ -4,6 +4,8 @@ This guide is for the person setting up the repository for the first time.
 
 This is a multi-engine repo. You can start with `godot-4`, `unity-6`, or `unreal-5`. The current reference slice happens to be Godot-based, but the studio OS, starter-kit contract, adapters, research notes, and checklist system are shared across all three engine families.
 
+You are not expected to default to Godot unless you actually want Godot. Unity and Unreal are fully represented in the repo's planning, routing, research, checklist, and CI contract surfaces.
+
 ## Prerequisites
 
 Required:
@@ -117,6 +119,13 @@ If you want the engine-specific mechanic and class guidance immediately:
 sed -n '1,120p' docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md
 sed -n '1,120p' docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md
 sed -n '1,120p' docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md
+```
+
+For engine-specific starter-kit expectations, also read:
+
+```bash
+sed -n '1,120p' studio/starter-kits/unity-6/README.md
+sed -n '1,120p' studio/starter-kits/unreal-5/README.md
 ```
 
 ## Recommended First Feature Flow

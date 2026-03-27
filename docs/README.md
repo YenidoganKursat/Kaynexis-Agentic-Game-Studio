@@ -55,3 +55,5 @@ If you are doing engine-specific work, start here:
 - `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
+
+Those guides exist so the repo does not silently collapse back into a Godot-only mental model. They explain the most-used classes, objects, mechanic ownership patterns, writing style expectations, and common mistakes for each engine family.

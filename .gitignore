@@ -49,3 +49,4 @@ Intermediate/
 # Local secrets
 .env
 .env.*
+!.env.example

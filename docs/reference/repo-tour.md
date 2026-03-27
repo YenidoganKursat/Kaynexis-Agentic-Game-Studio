@@ -37,6 +37,13 @@ Use these when you want to explain how to operate the template itself.
 - `studio/checklists/engine/` — engine-specific checklist rules for Godot, Unity, and Unreal
 - `docs/research/game-development/engines/` — engine-specific architecture, class/editor/object, 2D/3D class-mechanic, and performance notes
 
+If you want proof that the repo is not Godot-only, inspect these first:
+
+- `studio/starter-kits/unity-6/README.md`
+- `studio/starter-kits/unreal-5/README.md`
+- `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
+- `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
+
 This repo is not Godot-only. The current `src/` runtime sample is Godot-based, but the operating system, adapters, starter kits, checklists, research, and CI contracts are shared across all supported engine families.
 
 ## GitHub Surfaces

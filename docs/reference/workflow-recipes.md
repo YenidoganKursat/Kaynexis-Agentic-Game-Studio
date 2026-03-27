@@ -9,6 +9,7 @@ Use them when you want a reliable path instead of inventing your own flow every 
 Use this when the repo is fresh or the project identity changed.
 
 ```bash
+# Replace --engine with godot-4, unity-6, or unreal-5 depending on the real project.
 python3 scripts/codex_studio.py init \
   --project-name "Your Game" \
   --engine godot-4 \
@@ -23,6 +24,7 @@ Then open:
 - `studio/docs/active/game-brief.md`
 - `studio/docs/active/engine-profile.md`
 - `studio/docs/active/current-sprint.md`
+- the matching `docs/research/game-development/engines/*-2d-3d-class-and-mechanic-guide.md`
 
 ## Recipe: Turn an idea into a real slice
 
