@@ -65,3 +65,5 @@ For deeper design references, also read:
 - If you care most about tactical clarity and build planning, start with `tactical-rpg`.
 
 If you know the genre but want to know how to build it, use `docs/research/game-development/genre/genre-development-playbook.md` next.
+
+A good rhythm is: choose the genre preset -> read the example matrix -> read the development playbook -> write the feature brief -> then route the first slice.

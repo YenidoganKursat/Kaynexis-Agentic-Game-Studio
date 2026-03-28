@@ -65,6 +65,7 @@ The genre layer is broader than the original combat-heavy presets. The repo now 
 - `tactical-rpg`
 
 If the game is still fuzzy, start with [genre presets](docs/reference/genre-presets.md), then read the deeper contrast-set notes in [genre research](docs/research/game-development/genre/README.md).
+If the genre is chosen but you need to know how to build it, read [genre development playbook](docs/research/game-development/genre/genre-development-playbook.md) next.
 
 ## Why this repo exists
 
@@ -204,6 +205,7 @@ If your next task sounds like one of these, start with the matching reference pa
 | save/load, checkpoints, migrations, meta progression, runtime vs persistent state | `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md` |
 | scoping a genre, comparing inspirations, spotting common failure modes | `docs/research/game-development/genre/genre-design-pattern-catalog.md` and `docs/research/game-development/genre/genre-example-matrix.md` |
 | choosing a new genre family | `docs/reference/genre-presets.md` then the matching `docs/research/game-development/genre/*-architecture.md` note |
+| turning that genre into a concrete first slice | `docs/research/game-development/genre/genre-development-playbook.md` |
 | needing a concrete example slice for Godot, Unity, or Unreal | `docs/reference/engine-examples.md` |
 | content pipeline, release confidence, CI/CD expectations | `docs/research/game-development/production/content-pipeline.md`, `docs/research/game-development/production/release-validation.md`, and `docs/reference/ci-cd-architecture.md` |
 | platform deltas across PC, web, mobile, and console | `docs/research/game-development/production/platform-readiness-pc-web-mobile-console.md` |
