@@ -72,6 +72,11 @@ USER_GUIDE_FILES = {
         "## Good `next` examples",
         "## When to make a feature brief first",
     ],
+    "docs/reference/engine-examples.md": [
+        "## Example slices by engine",
+        "## Same mechanic, three engine examples",
+        "## Example validation paths",
+    ],
     "docs/reference/handoff-contracts.md": [
         "## Required fields",
         "## Good handoff behavior",

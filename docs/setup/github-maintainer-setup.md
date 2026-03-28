@@ -155,6 +155,7 @@ Repo CI now also includes:
 - a doc-sync guard workflow that fails when code or workflow changes are not mirrored by the relevant docs
 - a quality gate that enforces the minimum CI health score before release-readiness or nightly reports are accepted
 - the engine research index now includes visuals/animation playbooks, so sprite, texture, animation, and VFX changes should keep the relevant docs in sync before merge
+- the user-facing engine examples page at `docs/reference/engine-examples.md` now sits inside the doc-validation surface, so engine example changes should be reviewed with the same care as engine-selection or workflow updates
 - the genre support surface now includes city-builder, life-sim, hero-shooter, and soulslike preset families, so new presets should update the docs, examples, and starter content together rather than drifting separately
 - the genre support surface now also includes auto-battler, grand-strategy, and stealth preset families, so new presets should update the docs, examples, and starter content together rather than drifting separately
 

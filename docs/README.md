@@ -29,6 +29,7 @@ That belongs in `studio/docs/active/`.
 - `reference/repo-tour.md`
 - `reference/command-cheatsheet.md`
 - `reference/engine-selection-guide.md`
+- `reference/engine-examples.md`
 - `reference/workflow-recipes.md`
 - `reference/task-prompt-examples.md`
 - `reference/code-review.md`
@@ -58,6 +59,7 @@ That belongs in `studio/docs/active/`.
 If you are doing engine-specific work, start here:
 
 - `docs/research/game-development/engines/README.md`
+- `docs/reference/engine-examples.md`
 - `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`

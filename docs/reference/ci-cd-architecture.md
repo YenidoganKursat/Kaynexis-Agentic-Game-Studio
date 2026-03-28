@@ -46,6 +46,7 @@
 - Doc sync guard: `scripts/doc_sync_guard.py`
 - CI quality gate: `scripts/ci_quality_gate.py`
 - Engine research now includes visuals/animation playbooks, so sprite, texture, animation, and VFX changes stay visible to both routing and doc-sync checks.
+- The user-facing engine example page at `docs/reference/engine-examples.md` is also part of the doc-validation surface, so changes to engine examples should be reviewed alongside the matching engine-selection and workflow docs.
 - Genre research now includes additional presets and architecture notes for city-builder, life-sim, hero-shooter, and soulslike support, so updates to those presets should keep the matching catalog, example matrix, and active starter docs in sync.
 - Genre research now also includes auto-battler, grand-strategy, and stealth support, so those preset families should follow the same sync rule before merge.
 

@@ -35,6 +35,7 @@ What this repo gives you for Godot:
 - static smoke and export helper scripts
 - Godot-specific research and checklist coverage
 - a class/mechanic guide that maps common 2D and 3D work onto `CharacterBody`, `Area`, `RigidBody`, `Camera`, `AnimationTree`, `PackedScene`, and `Resource`
+- concrete example slices and cross-engine comparisons in `docs/reference/engine-examples.md`
 
 Commands:
 
@@ -65,6 +66,7 @@ What this repo gives you for Unity:
 - adapter commands for test/build contract smoke
 - Unity-specific performance, navigation, and object-model research
 - a class/mechanic guide that maps common 2D and 3D work onto `CharacterController`, `Rigidbody`, colliders/triggers, `Animator`, Prefabs, pooling, and `ScriptableObject`
+- concrete example slices and cross-engine comparisons in `docs/reference/engine-examples.md`
 
 Commands:
 
@@ -97,6 +99,7 @@ What this repo gives you for Unreal:
 - adapter commands for package contract smoke
 - Unreal-specific research on architecture, object model, navigation, damage, and scale
 - a class/mechanic guide that maps common 2D and 3D work onto `Character`, `Pawn`, `Actor`, `Component`, Data Asset, Blueprint, collision primitives, and GAS boundaries
+- concrete example slices and cross-engine comparisons in `docs/reference/engine-examples.md`
 
 Commands:
 
@@ -176,3 +179,5 @@ Do this deliberately:
 5. run the new engine’s contract smoke path
 
 Do not silently switch engines only in docs or only in runtime files.
+
+If you need concrete examples before you decide, read `docs/reference/engine-examples.md` and compare the same mechanic in each engine family.

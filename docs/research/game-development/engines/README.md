@@ -27,3 +27,5 @@ What each note does:
 - `*-2d-3d-navigation-damage-performance.md` explains navigation, damage/contact, and scale/performance decisions.
 - `*-systems-playbook.md` explains controls, UI, inventory, abilities, encounters, save flow, and performance-sensitive ownership decisions.
 - `*-visuals-animation-playbook.md` explains sprites, textures, images, animation playback, VFX, and UI presentation ownership decisions.
+
+If you want concrete side-by-side examples before you choose a mechanic or slice, also read `docs/reference/engine-examples.md`.

@@ -19,6 +19,7 @@ The repo already ships with durable reference packs for all supported engine fam
 | engine object model | which runtime class, data object, editor surface, or authored asset should own the work | `docs/research/game-development/engines/*-class-editor-object-map.md` |
 | engine mechanic mapping | which 2D and 3D classes, nodes, components, actors, or assets to use for common mechanics | `docs/research/game-development/engines/*-2d-3d-class-and-mechanic-guide.md` |
 | engine performance patterns | navigation, damage, pooling, pathfinding, and scale decisions | `docs/research/game-development/engines/*-2d-3d-navigation-damage-performance.md` |
+| engine examples | concrete Godot, Unity, and Unreal task examples and small slice patterns | `docs/reference/engine-examples.md` |
 | academic foundations | MDA, GameFlow, SDT, game feel, usability, accessibility, AI/pathfinding, and difficulty adaptation | `docs/research/game-development/foundations/README.md` |
 | game systems architecture | combat, save/progression, loop/state ownership, AI/entity scale | `docs/research/game-development/systems/README.md` |
 | genre design patterns | loop shape, risk profile, and example games by genre | `docs/research/game-development/genre/README.md` |
@@ -182,6 +183,7 @@ If your next task sounds like one of these, start with the matching reference pa
 | player movement, combat verbs, sensing, collisions, cameras, animation ownership | `docs/research/game-development/engines/*-2d-3d-class-and-mechanic-guide.md` |
 | runtime vs data vs editor ownership | `docs/research/game-development/engines/*-class-editor-object-map.md` |
 | visuals, animation, sprites, particles, and UI presentation ownership | `docs/research/game-development/engines/*-visuals-animation-playbook.md` |
+| concrete engine examples and cross-engine comparison | `docs/reference/engine-examples.md` |
 | AI architecture, A*, behavior trees, GOAP, or hierarchical planning tradeoffs | `docs/research/game-development/foundations/ai-pathfinding-and-decision-foundations.md` |
 | flow, motivation, engagement, player psychology, or why a loop should work | `docs/research/game-development/foundations/design-frameworks-mda-gameflow-and-sdt.md` |
 | game feel, readability, usability, accessibility, or feedback quality | `docs/research/game-development/foundations/game-feel-usability-and-accessibility-foundations.md` |
@@ -202,6 +204,7 @@ If your next task sounds like one of these, start with the matching reference pa
 | save/load, checkpoints, migrations, meta progression, runtime vs persistent state | `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md` |
 | scoping a genre, comparing inspirations, spotting common failure modes | `docs/research/game-development/genre/genre-design-pattern-catalog.md` and `docs/research/game-development/genre/genre-example-matrix.md` |
 | choosing a new genre family | `docs/reference/genre-presets.md` then the matching `docs/research/game-development/genre/*-architecture.md` note |
+| needing a concrete example slice for Godot, Unity, or Unreal | `docs/reference/engine-examples.md` |
 | content pipeline, release confidence, CI/CD expectations | `docs/research/game-development/production/content-pipeline.md`, `docs/research/game-development/production/release-validation.md`, and `docs/reference/ci-cd-architecture.md` |
 | platform deltas across PC, web, mobile, and console | `docs/research/game-development/production/platform-readiness-pc-web-mobile-console.md` |
 | live incident, hotfix, and rollback decisions | `docs/research/game-development/production/incident-hotfix-and-rollback.md` |

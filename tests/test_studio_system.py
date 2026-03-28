@@ -182,6 +182,7 @@ def test_user_facing_guides_are_part_of_doc_validation_surface() -> None:
         "docs/README.md",
         "docs/setup/first-hour-walkthrough.md",
         "docs/reference/engine-selection-guide.md",
+        "docs/reference/engine-examples.md",
         "docs/reference/workflow-recipes.md",
         "docs/reference/task-prompt-examples.md",
         "docs/reference/handoff-contracts.md",

@@ -33,6 +33,7 @@ Use this quick rule:
 - choose `unreal-5` when you want a heavier 3D, systems, or packaging-oriented pipeline and plan around Unreal-native concepts early
 
 If you are unsure, read `docs/reference/engine-selection-guide.md` first.
+If you want concrete examples before you choose, open `docs/reference/engine-examples.md` too.
 
 ## Step 2: Initialize the repo
 

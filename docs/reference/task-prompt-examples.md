@@ -88,6 +88,23 @@ python3 scripts/codex_studio.py next \
   "Plan the sprite atlas and animation pass for Unity"
 ```
 
+Engine comparisons:
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Compare the best Godot, Unity, and Unreal ownership model for a controller-first upgrade screen"
+```
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Show me the concrete 2D and 3D class choices for a stealth prototype in each engine"
+```
+
+```bash
+python3 scripts/codex_studio.py next \
+  "List the best starter slice for a combat room in Godot, Unity, and Unreal and explain the differences"
+```
+
 Skills and upgrades:
 
 ```bash
