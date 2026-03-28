@@ -72,9 +72,10 @@ Commands:
 python3 scripts/codex_studio.py init --engine unity-6 --yes
 python3 scripts/unity_adapter.py test \
   --project-path studio/starter-kits/unity-6/scaffold \
-  --unity-path tools/engine-stubs/unity/Unity \
   --dry-run --json
 ```
+
+If a local Unity editor is not auto-detected, add `--unity-path tools/engine-stubs/unity/Unity` and treat the result as contract smoke rather than release-grade validation.
 
 ## Pick Unreal 5 when
 

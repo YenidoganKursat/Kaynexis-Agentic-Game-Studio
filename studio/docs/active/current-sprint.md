@@ -7,7 +7,7 @@
 - Confirm engine and repo layout decisions
 - Confirm `studio.toml`, starter-kit, and checklist assumptions
 - Harden the Godot reference slice so it stays trustworthy
-- Keep Unity and Unreal support honest at adapter/contract level until real editor automation is configured
+- Keep Unity and Unreal support honest at adapter/contract level until full editor-backed validation exists for every engine
 - Establish one repeatable validation path
 - Keep docs, evals, and routing in sync with the chosen workflow
 
@@ -17,7 +17,7 @@
 - Full progression or release polish
 
 ## Top blockers
-- Real Unity and Unreal tool paths are still external | Owner: technical_director | Mitigation: keep adapter contracts green with stubs, then wire real CLI/UAT paths before claiming full editor integration
+- Unity editor coverage is available locally, but the detected install is not yet the final release-grade baseline; Unreal tooling is still external | Owner: technical_director | Mitigation: keep adapter contracts green, prefer a stable Unity editor for shipping validation, and wire real Unreal CLI/UAT paths before claiming full editor integration
 - Runtime export confidence still depends on a local Godot binary or a runner with Godot installed | Owner: lead_programmer | Mitigation: keep static smoke green and add runtime smoke where `GODOT_BIN` is available
 - Hosted GitHub ruleset is active on `main`, but it currently enforces only the always-on `repo-validate` matrix | Owner: producer | Mitigation: keep the ruleset audited and add more required checks only when their workflows are not path-filtered
 

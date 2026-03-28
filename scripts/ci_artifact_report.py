@@ -16,6 +16,7 @@ from _studio_common import (
     find_unreal_editor,
     find_unreal_uat,
     repo_summary,
+    unity_editor_channel,
     write_text,
 )
 from studio_core import available_starter_kits, load_studio_config
@@ -61,6 +62,7 @@ def build_report(label: str | None = None) -> dict[str, object]:
             "godot_bin": find_godot_binary(),
             "unity_cli": find_unity_cli(),
             "unity_hub": find_unity_hub(),
+            "unity_channel": unity_editor_channel(find_unity_cli()),
             "unreal_editor": find_unreal_editor(),
             "unreal_uat": find_unreal_uat(),
         },
@@ -78,6 +80,7 @@ def build_report(label: str | None = None) -> dict[str, object]:
                 "Set GODOT_BIN to enable runtime smoke and export checks." if not find_godot_binary() else None,
                 "Unity Hub is present, but no Unity editor CLI is configured yet." if find_unity_hub() and not find_unity_cli() else None,
                 "Install Unity and set UNITY_CLI for editor-backed validation." if not find_unity_hub() and not find_unity_cli() else None,
+                "Detected Unity editor install is prerelease; use a stable editor before treating coverage as release-grade." if unity_editor_channel(find_unity_cli()) in {"alpha", "beta"} else None,
                 "Install Unreal Engine and set UNREAL_UAT or UNREAL_EDITOR for engine-backed packaging validation." if not find_unreal_uat() and not find_unreal_editor() else None,
             ]
             if item

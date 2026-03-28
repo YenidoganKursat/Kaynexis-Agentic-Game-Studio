@@ -38,6 +38,7 @@ def test_ci_artifact_report_generates_files() -> None:
     assert report["project"]["name"] == "Kaynexis Agentic Game Studio"
     assert "unity_cli" in report["runtime"]
     assert "unity_hub" in report["runtime"]
+    assert "unity_channel" in report["runtime"]
     assert "unreal_uat" in report["runtime"]
     assert "unreal_editor" in report["runtime"]
 

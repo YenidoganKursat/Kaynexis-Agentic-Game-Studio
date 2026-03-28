@@ -533,6 +533,17 @@ def find_unity_cli() -> str | None:
     return _first_existing_path(path_candidates)
 
 
+def unity_editor_channel(tool_path: str | None) -> str | None:
+    if not tool_path:
+        return None
+    normalized = tool_path.lower()
+    if re.search(r"/editor/[^/]*a\d+", normalized) or "alpha" in normalized:
+        return "alpha"
+    if re.search(r"/editor/[^/]*b\d+", normalized) or "beta" in normalized:
+        return "beta"
+    return "stable"
+
+
 def find_unreal_editor() -> str | None:
     configured = _existing_configured_or_env_path("unreal_editor", ["UNREAL_EDITOR"])
     if configured:

@@ -16,7 +16,7 @@
 
 ## Engine contracts
 - Godot 4: `python3 scripts/godot_smoke.py --static-only`, optional runtime smoke, then `python3 scripts/godot_export.py --preset "..."`
-- Unity 6: use `tools/engine-stubs/unity/Unity` for command-contract smoke; switch to a real `UNITY_CLI` path for editor-backed tests/builds
+- Unity 6: the adapter auto-detects standard macOS Unity Hub installs when available; otherwise use `tools/engine-stubs/unity/Unity` for contract smoke only, or set a real `UNITY_CLI` path for editor-backed tests/builds
 - Unreal 5: use `tools/engine-stubs/unreal/RunUAT.sh` for command-contract smoke; switch to a real `UNREAL_UAT` or `UNREAL_EDITOR` path for packaging work
 
 ## Artifacts & versioning

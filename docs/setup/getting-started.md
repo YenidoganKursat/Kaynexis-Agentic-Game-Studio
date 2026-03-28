@@ -170,9 +170,10 @@ Unity 6:
 ```bash
 python3 scripts/unity_adapter.py test \
   --project-path studio/starter-kits/unity-6/scaffold \
-  --unity-path tools/engine-stubs/unity/Unity \
   --dry-run --json
 ```
+
+If no local Unity editor is auto-detected, rerun the same command with `--unity-path tools/engine-stubs/unity/Unity` for contract smoke only.
 
 Unreal 5:
 

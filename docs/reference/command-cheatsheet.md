@@ -111,9 +111,11 @@ python3 scripts/godot_export.py --preset "Windows Desktop"
 Unity command generation:
 
 ```bash
-python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --unity-path tools/engine-stubs/unity/Unity --dry-run --json
-python3 scripts/unity_adapter.py build --project-path studio/starter-kits/unity-6/scaffold --unity-path tools/engine-stubs/unity/Unity --dry-run --json
+python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --dry-run --json
+python3 scripts/unity_adapter.py build --project-path studio/starter-kits/unity-6/scaffold --dry-run --json
 ```
+
+If a local Unity editor is not auto-detected, append `--unity-path tools/engine-stubs/unity/Unity` for stub-backed contract smoke.
 
 Unreal command generation:
 

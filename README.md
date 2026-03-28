@@ -458,9 +458,10 @@ python3 scripts/codex_studio.py checklist \
   --task "Design a performant 2D enemy pathfinding setup for Unity rooms with blockers"
 python3 scripts/unity_adapter.py test \
   --project-path studio/starter-kits/unity-6/scaffold \
-  --unity-path tools/engine-stubs/unity/Unity \
   --dry-run --json
 ```
+
+If a local Unity editor is not auto-detected, append `--unity-path tools/engine-stubs/unity/Unity` for contract smoke only.
 
 ### Unreal packaging and release prep
 
@@ -535,9 +536,10 @@ python3 scripts/codex_studio.py next "Refactor combat into a pooled projectile s
 python3 scripts/codex_studio.py checklist --task "Refactor combat into a pooled projectile system for Unity"
 python3 scripts/unity_adapter.py test \
   --project-path studio/starter-kits/unity-6/scaffold \
-  --unity-path tools/engine-stubs/unity/Unity \
   --dry-run --json
 ```
+
+If Unity is not installed locally, add `--unity-path tools/engine-stubs/unity/Unity` to keep the adapter contract smoke reproducible.
 
 ### 3. Unreal packaging prep
 

@@ -103,7 +103,6 @@ Unity:
 ```bash
 python3 scripts/unity_adapter.py test \
   --project-path studio/starter-kits/unity-6/scaffold \
-  --unity-path tools/engine-stubs/unity/Unity \
   --dry-run --json
 ```
 
@@ -116,7 +115,7 @@ python3 scripts/unreal_adapter.py package \
   --dry-run --json
 ```
 
-Use the stub-backed commands for contract shape only. Use real engine paths when you want editor-backed confidence.
+Unity auto-detects standard local editor installs when possible. If no local editor is present, add `--unity-path tools/engine-stubs/unity/Unity` for contract shape only. Keep the Unreal stub command for contract smoke unless a real `UNREAL_UAT` or `UNREAL_EDITOR` path is available.
 
 ## Recipe: Pre-merge confidence pass
 

@@ -17,7 +17,11 @@ Use this when creating or auditing the remote repository.
 
 ## Suggested public metadata
 
-Suggested repository name:
+Suggested repository slug:
+
+> Kaynexis-Agentic-Game-Studio
+
+Suggested public display title:
 
 > Kaynexis Agentic Game Studio
 

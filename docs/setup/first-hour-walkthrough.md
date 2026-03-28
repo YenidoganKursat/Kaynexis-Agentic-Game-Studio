@@ -142,9 +142,10 @@ Unity:
 ```bash
 python3 scripts/unity_adapter.py test \
   --project-path studio/starter-kits/unity-6/scaffold \
-  --unity-path tools/engine-stubs/unity/Unity \
   --dry-run --json
 ```
+
+If Unity is not installed on the machine yet, add `--unity-path tools/engine-stubs/unity/Unity` to keep this as contract smoke instead of editor-backed validation.
 
 Unreal:
 

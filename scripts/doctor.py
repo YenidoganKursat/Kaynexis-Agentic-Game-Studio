@@ -20,6 +20,7 @@ from _studio_common import (
     find_unreal_uat,
     load_root_studio_config,
     repo_summary,
+    unity_editor_channel,
     unresolved_placeholders,
 )
 from studio_core import STUDIO_CONFIG_PATH, available_starter_kits, configured_project_name, research_notes, validate_research_note
@@ -394,7 +395,18 @@ def main() -> int:
         unity_cli = find_unity_cli()
         unity_hub = find_unity_hub()
         if unity_cli:
-            checks.append(make_check("unity-cli", "pass", f"Unity editor CLI found at {unity_cli}."))
+            unity_channel = unity_editor_channel(unity_cli)
+            if unity_channel == "stable":
+                checks.append(make_check("unity-cli", "pass", f"Unity editor CLI found at {unity_cli}."))
+            else:
+                checks.append(
+                    make_check(
+                        "unity-cli",
+                        "warn",
+                        f"Unity editor CLI found at {unity_cli}, but the install appears to be a {unity_channel} build.",
+                        next_step="Prefer a stable Unity editor install for release-bound validation, or keep this as non-release local coverage only.",
+                    )
+                )
         elif unity_hub:
             checks.append(
                 make_check(
