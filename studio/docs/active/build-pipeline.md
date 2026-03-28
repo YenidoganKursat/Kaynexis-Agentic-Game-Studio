@@ -7,12 +7,14 @@
 - Local: `make ci-local`
 - Front door: `python3 scripts/codex_studio.py`
 - CI: `.github/workflows/repo-validate.yml`
+- Doc sync gate: `.github/workflows/doc-sync.yml`
 - Starter-kit matrix: `.github/workflows/starter-kit-contracts.yml`
 - Release gate bundle: `.github/workflows/release-readiness.yml`
 - Nightly audit: `.github/workflows/nightly-audit.yml`
 - Container check: `.github/workflows/docker-smoke.yml` and `make docker-verify`
 - Adapter contract smoke: repo-local Unity/Unreal tool stubs keep dry-run checks honest in CI
 - Release: real editor/export jobs only count as complete once engine binaries are present on the runner
+- Repo validation now includes a doc-sync guard and a minimum CI quality gate, so code or workflow changes must be accompanied by the docs they affect
 
 ## Engine contracts
 - Godot 4: `python3 scripts/godot_smoke.py --static-only`, optional runtime smoke, then `python3 scripts/godot_export.py --preset "..."`
@@ -29,3 +31,4 @@
 - If validation or evals regress, stop before merge
 - If Docker or workflow changes break, revert the smallest change first
 - Record release or infra regressions in `studio/docs/active/risk-register.md` and an eval plan when shared behavior changed
+- If the doc-sync guard fails, update the impacted docs before merging instead of bypassing the gate

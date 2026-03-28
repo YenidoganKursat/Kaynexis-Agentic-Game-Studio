@@ -44,6 +44,8 @@ ci-local: ## Run the local CI-equivalent checks
 	$(PYTHON) scripts/validate_docs.py
 	$(PYTHON) scripts/validate_assets.py
 	$(PYTHON) scripts/ci_artifact_report.py --output-dir build/ci/local
+	$(PYTHON) scripts/doc_sync_guard.py --json
+	$(PYTHON) scripts/ci_quality_gate.py --report build/ci/local/ci-report.json --min-score 80 --minimum-readiness validation-ready
 
 validate: ## Run layout, docs, and asset validation
 	$(PYTHON) scripts/validate_workflows.py
@@ -94,6 +96,13 @@ engine-kits: ## Validate all starter-kit manifests and scaffold markers
 
 ci-workflows: ## Validate GitHub workflow coverage and action pinning
 	$(PYTHON) scripts/validate_workflows.py
+
+ci-doc-sync: ## Fail if changed code likely needs docs updates
+	$(PYTHON) scripts/doc_sync_guard.py --json
+
+ci-quality: ## Generate and enforce the local CI quality gate
+	$(PYTHON) scripts/ci_artifact_report.py --output-dir build/ci/latest
+	$(PYTHON) scripts/ci_quality_gate.py --report build/ci/latest/ci-report.json --min-score 80 --minimum-readiness validation-ready
 
 ci-report: ## Generate CI health artifacts into build/ci/latest
 	$(PYTHON) scripts/ci_artifact_report.py --output-dir build/ci/latest

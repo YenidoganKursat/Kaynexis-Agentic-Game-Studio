@@ -8,6 +8,7 @@ Use this when creating or auditing the remote repository.
 - issue forms under `.github/ISSUE_TEMPLATE/`
 - `.github/pull_request_template.md`
 - `.github/workflows/repo-validate.yml`
+- `.github/workflows/doc-sync.yml`
 - `.github/workflows/docker-smoke.yml`
 - `.github/workflows/starter-kit-contracts.yml`
 - `.github/workflows/release-readiness.yml`
@@ -147,6 +148,11 @@ If you want a clean triage surface from day one, these are a good baseline:
 ## Actions security defaults
 
 GitHub recommends pinning actions to full commit SHAs. The workflows in this repo pin the first-party actions they use (`actions/checkout`, `actions/setup-python`, and `actions/upload-artifact`) and `scripts/validate_workflows.py` enforces that policy.
+
+Repo CI now also includes:
+
+- a doc-sync guard workflow that fails when code or workflow changes are not mirrored by the relevant docs
+- a quality gate that enforces the minimum CI health score before release-readiness or nightly reports are accepted
 
 ## References
 

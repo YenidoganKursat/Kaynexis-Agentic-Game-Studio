@@ -127,6 +127,8 @@ CI/CD helpers:
 
 ```bash
 make ci-workflows
+make ci-doc-sync
+make ci-quality
 make ci-report
 make starter-kit-smoke
 python3 scripts/starter_kit_contract_smoke.py --engine unity-6 --json
