@@ -100,13 +100,43 @@ If the team is still deciding what kind of game it is making, or if a feature de
 
 - `research/game-development/genre/genre-design-pattern-catalog.md`
 - `research/game-development/genre/genre-example-matrix.md`
+- `research/game-development/genre/auto-battler-architecture.md`
 - `research/game-development/genre/deckbuilder-roguelike-architecture.md`
 - `research/game-development/genre/survivorlike-architecture.md`
 - `research/game-development/genre/colony-sim-architecture.md`
+- `research/game-development/genre/grand-strategy-architecture.md`
+- `research/game-development/genre/stealth-architecture.md`
 - `research/game-development/genre/factory-automation-architecture.md`
 - `research/game-development/genre/metroidvania-architecture.md`
+- `research/game-development/genre/city-builder-architecture.md`
+- `research/game-development/genre/life-sim-architecture.md`
+- `research/game-development/genre/hero-shooter-architecture.md`
+- `research/game-development/genre/soulslike-architecture.md`
 
 Those notes exist so the repo does not flatten every project into the same first-slice advice. They explain dominant loops, first systems that usually break, and what to study from official game pages before scoping work.
+
+### Genre families now covered
+
+- `action-roguelite` for readable combat runs and build variety
+- `deckbuilder-roguelike` for sequencing, reward health, and route tension
+- `co-op-survival` for shared scarcity and session authority
+- `auto-battler` for draft economy, board placement, and round resolution
+- `cozy-sim` for routines, attachment, and low-friction progression
+- `extraction-lite` for risk economy and extraction clarity
+- `grand-strategy` for long-horizon diplomacy and campaign state
+- `survivorlike` for density readability and short-run escalation
+- `narrative-adventure` for authored state and choice visibility
+- `platformer` for movement feel and camera support
+- `puzzle` for teach/test/twist sequencing
+- `stealth` for patrol readability and detection fairness
+- `colony-sim` for agent priorities and crisis recovery
+- `city-builder` for zoning, transport, and simulation legibility
+- `factory-automation` for throughput, logistics, and scale tooling
+- `life-sim` for routine, identity, and relationship state
+- `hero-shooter` for role kits and objective readability
+- `metroidvania` for traversal gates and return loops
+- `soulslike` for telegraph reading and recovery mastery
+- `tactical-rpg` for forecastable combat and build depth
 
 ## Execution Glue Highlights
 

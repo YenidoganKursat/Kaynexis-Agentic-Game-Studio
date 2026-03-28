@@ -45,15 +45,22 @@ The genre layer is broader than the original combat-heavy presets. The repo now 
 - `action-roguelite`
 - `deckbuilder-roguelike`
 - `co-op-survival`
+- `auto-battler`
 - `cozy-sim`
 - `extraction-lite`
+- `grand-strategy`
 - `survivorlike`
 - `narrative-adventure`
 - `platformer`
 - `puzzle`
+- `stealth`
 - `colony-sim`
 - `factory-automation`
+- `city-builder`
+- `life-sim`
+- `hero-shooter`
 - `metroidvania`
+- `soulslike`
 - `tactical-rpg`
 
 If the game is still fuzzy, start with [genre presets](docs/reference/genre-presets.md), then read the deeper contrast-set notes in [genre research](docs/research/game-development/genre/README.md).
@@ -105,6 +112,7 @@ The repo now includes the connective tissue that usually gets lost between plann
 - a planning and execution layer that survives across sessions
 - a multi-engine starter-kit and validation platform
 - a checklist and research system for gameplay, tools, pipeline, and production work
+- a genre-aware support layer that can steer action, strategy, simulation, stealth, life-sim, hero-shooter, auto-battler, and soulslike projects without collapsing everything into one default combat recipe
 
 ## What this repo is not
 
@@ -112,6 +120,21 @@ The repo now includes the connective tissue that usually gets lost between plann
 - not a full replacement for real engine editors
 - not a fake "supports every engine" README with no adapter contract behind it
 - not a one-off prompt pack that only works if someone remembers the thread history
+- not a Godot-only template pretending to be multi-engine
+
+## New support families
+
+These genre families now have dedicated preset, contrast-set, and architecture notes:
+
+- `auto-battler` for draft economy, small-board placement, and round resolution
+- `grand-strategy` for realm planning, diplomacy, and campaign-scale persistence
+- `stealth` for patrol readability, suspicion states, and objective routing
+- `city-builder` for zoning, transport bottlenecks, and simulation legibility
+- `life-sim` for routine, identity, relationships, and long-horizon attachment
+- `hero-shooter` for role kits, objective play, and teamfight readability
+- `soulslike` for telegraph reading, stamina commitment, and recovery mastery
+
+Each family points at a different first-risk profile, so the repo can stop offering the same opening advice for every idea.
 
 ## At a glance
 
@@ -158,6 +181,7 @@ If your next task sounds like one of these, start with the matching reference pa
 | choosing between Godot, Unity, and Unreal | `docs/reference/engine-selection-guide.md` |
 | player movement, combat verbs, sensing, collisions, cameras, animation ownership | `docs/research/game-development/engines/*-2d-3d-class-and-mechanic-guide.md` |
 | runtime vs data vs editor ownership | `docs/research/game-development/engines/*-class-editor-object-map.md` |
+| visuals, animation, sprites, particles, and UI presentation ownership | `docs/research/game-development/engines/*-visuals-animation-playbook.md` |
 | AI architecture, A*, behavior trees, GOAP, or hierarchical planning tradeoffs | `docs/research/game-development/foundations/ai-pathfinding-and-decision-foundations.md` |
 | flow, motivation, engagement, player psychology, or why a loop should work | `docs/research/game-development/foundations/design-frameworks-mda-gameflow-and-sdt.md` |
 | game feel, readability, usability, accessibility, or feedback quality | `docs/research/game-development/foundations/game-feel-usability-and-accessibility-foundations.md` |
@@ -177,6 +201,7 @@ If your next task sounds like one of these, start with the matching reference pa
 | state machines, update order, run loop structure, pausing, phase ownership | `docs/research/game-development/systems/gameplay-loop-state-and-update-architecture.md` |
 | save/load, checkpoints, migrations, meta progression, runtime vs persistent state | `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md` |
 | scoping a genre, comparing inspirations, spotting common failure modes | `docs/research/game-development/genre/genre-design-pattern-catalog.md` and `docs/research/game-development/genre/genre-example-matrix.md` |
+| choosing a new genre family | `docs/reference/genre-presets.md` then the matching `docs/research/game-development/genre/*-architecture.md` note |
 | content pipeline, release confidence, CI/CD expectations | `docs/research/game-development/production/content-pipeline.md`, `docs/research/game-development/production/release-validation.md`, and `docs/reference/ci-cd-architecture.md` |
 | platform deltas across PC, web, mobile, and console | `docs/research/game-development/production/platform-readiness-pc-web-mobile-console.md` |
 | live incident, hotfix, and rollback decisions | `docs/research/game-development/production/incident-hotfix-and-rollback.md` |
@@ -188,11 +213,11 @@ If your next task sounds like one of these, start with the matching reference pa
 ```mermaid
 flowchart LR
   idea["Task or game idea"] --> route["codex_studio next"]
-  route --> docs["Active docs"]
-  route --> checklists["Checklist layers"]
-  route --> research["Research refs"]
-  route --> kits["Starter kits"]
-  docs --> validate["Doctor, evals, CI"]
+route --> docs["Active docs"]
+route --> checklists["Checklist layers"]
+route --> research["Research refs"]
+route --> kits["Starter kits"]
+docs --> validate["Doctor, evals, CI"]
   checklists --> validate
   research --> validate
   kits --> validate
@@ -233,6 +258,30 @@ python3 scripts/codex_studio.py init \
   --engine unity-6 \
   --platform pc-premium \
   --genre tactical-rpg \
+  --yes
+
+# City-builder planning prototype
+python3 scripts/codex_studio.py init \
+  --project-name "Transit Bloom" \
+  --engine unreal-5 \
+  --platform pc-premium \
+  --genre city-builder \
+  --yes
+
+# Stealth infiltration prototype
+python3 scripts/codex_studio.py init \
+  --project-name "Silent Route" \
+  --engine godot-4 \
+  --platform pc-premium \
+  --genre stealth \
+  --yes
+
+# Auto-battler prototype
+python3 scripts/codex_studio.py init \
+  --project-name "Board Circuit" \
+  --engine unity-6 \
+  --platform pc-premium \
+  --genre auto-battler \
   --yes
 
 # Unreal co-op survival baseline
