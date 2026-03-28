@@ -553,18 +553,21 @@ ENGINE_RESEARCH_REFS: dict[str, list[str]] = {
         "docs/research/game-development/engines/godot-4-class-editor-object-map.md",
         "docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/godot-4-2d-3d-navigation-damage-performance.md",
+        "docs/research/game-development/engines/godot-4-systems-playbook.md",
     ],
     "unity-6": [
         "docs/research/game-development/engines/unity-6-architecture.md",
         "docs/research/game-development/engines/unity-6-class-editor-object-map.md",
         "docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md",
+        "docs/research/game-development/engines/unity-6-systems-playbook.md",
     ],
     "unreal-5": [
         "docs/research/game-development/engines/unreal-5-architecture.md",
         "docs/research/game-development/engines/unreal-5-class-editor-object-map.md",
         "docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unreal-5-2d-3d-navigation-damage-performance.md",
+        "docs/research/game-development/engines/unreal-5-systems-playbook.md",
     ],
 }
 

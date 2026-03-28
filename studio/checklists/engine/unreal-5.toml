@@ -82,3 +82,30 @@ applies_when = "Crowds, many repeated props, projectile storms, or large-scale A
 validation = "Decide whether the feature should remain Actor-based or use instancing or Mass"
 engine = "unreal-5"
 owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-input-system-choice"
+title = "Enhanced Input mappings and player-mappable settings stay explicit"
+severity = "required"
+applies_when = "Any controls, pause, remap, or camera input change"
+validation = "Document the action mapping ownership and where player mapping settings persist"
+engine = "unreal-5"
+owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-ui-stack-choice"
+title = "UMG, viewmodels, and Blueprint exposure stay intentional"
+severity = "required"
+applies_when = "Any HUD, menu, settings, or onboarding UI change"
+validation = "State the widget owner, the data owner, and how the UI is validated in-editor"
+engine = "unreal-5"
+owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-data-and-save-boundary"
+title = "Data assets, gameplay state, and SaveGame projections stay separate"
+severity = "required"
+applies_when = "Any inventory, upgrade, ability, or save/progression change"
+validation = "Document which values live in a Data Asset, which live at runtime, and which are serialized to save data"
+engine = "unreal-5"
+owner = "unreal-specialist"

@@ -11,8 +11,9 @@ When a task is engine-specific, the agent should read in this order:
 3. The matching engine class/editor/object map in `docs/research/game-development/engines/`
 4. The matching 2D/3D class and mechanic guide in `docs/research/game-development/engines/`
 5. The matching 2D/3D, navigation, damage, and performance note in `docs/research/game-development/engines/`
-6. The matching engine checklist in `studio/checklists/engine/`
-7. The relevant active docs such as `build-pipeline.md`, `current-sprint.md`, or `content-pipeline.md`
+6. The matching systems playbook in `docs/research/game-development/engines/`
+7. The matching engine checklist in `studio/checklists/engine/`
+8. The relevant active docs such as `build-pipeline.md`, `current-sprint.md`, or `content-pipeline.md`
 
 When a task is system-specific, add the matching systems note before implementation:
 
@@ -62,6 +63,11 @@ When a task is system-specific, add the matching systems note before implementat
   - what navigation model is in charge: native navmesh/server stack versus explicit graph/grid
   - what damage/contact model is in charge: overlaps, collision callbacks, direct queries, or ability/effect framework
   - what scale lever is in charge: ordinary authored objects versus instancing, pooling, servers, DOTS, or Mass
+- For controls, UI, inventory, abilities, and save work, also state:
+  - what input owner is in charge: engine action maps, input assets, or a bespoke remap layer
+  - what UI owner is in charge: HUD widgets, menu screens, editor windows, or overlay canvases
+  - what authored-data owner is in charge: `Resource`, `ScriptableObject`, `Data Asset`, or another shared asset type
+  - what persistence owner is in charge: live object state versus save projection versus meta progression
 - For inventory tasks, explicitly separate:
   - item definition data
   - runtime slot or stack state

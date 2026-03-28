@@ -91,3 +91,30 @@ applies_when = "Crowds, bullet fields, repeated props, or swarm effects"
 validation = "Decide whether plain scenes/nodes are sufficient or if MultiMesh/server APIs are required by measured scale"
 engine = "godot-4"
 owner = "godot-specialist"
+
+[[item]]
+id = "godot-input-map-and-remap"
+title = "InputMap actions and remapping stay explicit"
+severity = "required"
+applies_when = "Any control, pause, remap, or camera input change"
+validation = "Document the action names, device assumptions, and where remap persistence lives"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
+id = "godot-ui-layering"
+title = "UI, HUD, and menu state use clear Control and CanvasLayer ownership"
+severity = "required"
+applies_when = "Any HUD, menu, pause, or onboarding UI change"
+validation = "Document which nodes are UI-only, which layer stays above the world, and which gameplay data is projected"
+engine = "godot-4"
+owner = "godot-specialist"
+
+[[item]]
+id = "godot-ability-save-boundary"
+title = "Abilities, upgrades, and save state keep durable and runtime ownership separate"
+severity = "required"
+applies_when = "Any upgrade, inventory, save, or progression change"
+validation = "State which data is live runtime state, which is shared authored data, and which is persistence projection"
+engine = "godot-4"
+owner = "godot-specialist"

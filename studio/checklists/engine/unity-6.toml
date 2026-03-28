@@ -82,3 +82,30 @@ applies_when = "Large crowds, many projectiles, or heavy simulation systems"
 validation = "Decide whether pooling is enough or whether Entities/Burst/Unity Physics should own the scale problem"
 engine = "unity-6"
 owner = "unity-specialist"
+
+[[item]]
+id = "unity-input-system-choice"
+title = "Input System action assets and remap behavior stay explicit"
+severity = "required"
+applies_when = "Any controls, pause, rebinding, or camera input change"
+validation = "Document the action map names, device assumptions, and remap persistence path"
+engine = "unity-6"
+owner = "unity-specialist"
+
+[[item]]
+id = "unity-ui-stack-choice"
+title = "UI Toolkit versus uGUI choice is deliberate"
+severity = "required"
+applies_when = "Any HUD, menu, settings, or onboarding UI change"
+validation = "State which UI stack owns the flow and how gameplay data is projected into it"
+engine = "unity-6"
+owner = "unity-specialist"
+
+[[item]]
+id = "unity-asset-state-boundary"
+title = "ScriptableObject data and runtime state stay separate"
+severity = "required"
+applies_when = "Any item, inventory, upgrade, or save/progression change"
+validation = "Document which fields belong in a shared asset and which fields belong in live runtime state"
+engine = "unity-6"
+owner = "unity-specialist"

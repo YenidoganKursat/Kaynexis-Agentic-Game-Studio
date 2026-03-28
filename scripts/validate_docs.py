@@ -220,6 +220,7 @@ RESEARCH_GUIDE_FILES = {
     "docs/research/game-development/engines/README.md": [
         "Recommended read order for an engine-specific task",
         "*-2d-3d-class-and-mechanic-guide.md",
+        "*-systems-playbook.md",
     ],
     "docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md": [
         "## Summary",
@@ -229,6 +230,13 @@ RESEARCH_GUIDE_FILES = {
         "## Writing style and naming",
         "## What to watch out for",
     ],
+    "docs/research/game-development/engines/godot-4-systems-playbook.md": [
+        "## Summary",
+        "## Primary sources",
+        "## Why this matters to this repo",
+        "## Decision impact",
+        "## Input and controls",
+    ],
     "docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md": [
         "## Summary",
         "## 2D building blocks",
@@ -237,6 +245,13 @@ RESEARCH_GUIDE_FILES = {
         "## Writing style and naming",
         "## What to watch out for",
     ],
+    "docs/research/game-development/engines/unity-6-systems-playbook.md": [
+        "## Summary",
+        "## Primary sources",
+        "## Why this matters to this repo",
+        "## Decision impact",
+        "## Input and controls",
+    ],
     "docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md": [
         "## Summary",
         "## 2D building blocks",
@@ -244,6 +259,13 @@ RESEARCH_GUIDE_FILES = {
         "## Common mechanic patterns",
         "## Writing style and naming",
         "## What to watch out for",
+    ],
+    "docs/research/game-development/engines/unreal-5-systems-playbook.md": [
+        "## Summary",
+        "## Primary sources",
+        "## Why this matters to this repo",
+        "## Decision impact",
+        "## Input and controls",
     ],
 }
 

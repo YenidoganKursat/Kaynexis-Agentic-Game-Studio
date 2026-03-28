@@ -186,6 +186,9 @@ def test_engine_research_guides_are_part_of_doc_validation_surface() -> None:
         "docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md",
+        "docs/research/game-development/engines/godot-4-systems-playbook.md",
+        "docs/research/game-development/engines/unity-6-systems-playbook.md",
+        "docs/research/game-development/engines/unreal-5-systems-playbook.md",
     }
     assert expected.issubset(RESEARCH_GUIDE_FILES.keys())
 
@@ -231,9 +234,20 @@ def test_route_task_surfaces_engine_system_note_for_navigation_and_damage() -> N
     assert payload["route"] == "combat / gameplay"
     assert payload["engine_kit"]["id"] == "unity-6"
     assert "docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md" in payload["research_refs"]
+    assert "docs/research/game-development/engines/unity-6-systems-playbook.md" in payload["research_refs"]
     item_ids = {item["id"] for item in payload["checklists"]}
     assert "unity-navigation-choice" in item_ids
     assert "unity-damage-query-contract" in item_ids
+
+
+def test_route_task_surfaces_engine_system_playbooks_for_ui_and_inventory() -> None:
+    ui_payload = run_json("scripts/route_task.py", "Design a Godot HUD and menu screen flow", "--json")
+    assert ui_payload["engine_kit"]["id"] == "godot-4"
+    assert "docs/research/game-development/engines/godot-4-systems-playbook.md" in ui_payload["research_refs"]
+
+    inventory_payload = run_json("scripts/route_task.py", "Implement a Unreal inventory and equipment screen", "--json")
+    assert inventory_payload["engine_kit"]["id"] == "unreal-5"
+    assert "docs/research/game-development/engines/unreal-5-systems-playbook.md" in inventory_payload["research_refs"]
 
 
 def test_route_task_surfaces_crafting_and_party_research_refs() -> None:
