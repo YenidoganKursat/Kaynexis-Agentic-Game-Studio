@@ -1,4 +1,4 @@
-# Content Pipeline — Codex Game Studio Pro Max
+# Content Pipeline — Kaynexis Agentic Game Studio
 
 ## Content types
 - Engine-native scenes/prefabs/maps

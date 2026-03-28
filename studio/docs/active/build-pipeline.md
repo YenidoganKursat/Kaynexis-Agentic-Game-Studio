@@ -1,4 +1,4 @@
-# Build Pipeline — Codex Game Studio Pro Max
+# Build Pipeline — Kaynexis Agentic Game Studio
 
 ## Build graph
 - Source -> route/checklist/research alignment -> repo validation -> starter-kit validation -> local evals -> engine-native smoke -> package -> artifact -> distribution

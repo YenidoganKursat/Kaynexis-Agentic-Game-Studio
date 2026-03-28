@@ -19,7 +19,7 @@ Use this when creating or auditing the remote repository.
 
 Suggested repository name:
 
-> Codex Game Studio Pro Max
+> Kaynexis Agentic Game Studio
 
 Suggested short description:
 
@@ -115,10 +115,13 @@ Based on GitHub rulesets and CODEOWNERS guidance, set up a branch ruleset for `m
 - blocks force pushes
 - requires pull requests
 - requires code owner review
-- requires the `repo-validate` check
-- requires the `starter-kit-contracts` check
-- requires the `docker-smoke` check when Docker surfaces matter
+- requires the always-on `repo-validate` matrix jobs
+- only requires `starter-kit-contracts` or `docker-smoke` if those workflows are always-on for the branches you protect
 - optionally requires a future engine export check once a Godot-capable or editor-backed runner exists
+
+Current hosted-repo note:
+
+- The public `main` branch now has an active ruleset enforcing pull requests, code-owner review, linear history, force-push protection, delete protection, and required `repo-validate (3.11)` / `repo-validate (3.13)` checks.
 
 ## Suggested labels
 

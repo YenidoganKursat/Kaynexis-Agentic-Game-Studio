@@ -7,7 +7,17 @@ import subprocess
 from datetime import datetime, UTC
 from pathlib import Path
 
-from _studio_common import REPO_ROOT, detect_engine, find_godot_binary, repo_summary, write_text
+from _studio_common import (
+    REPO_ROOT,
+    detect_engine,
+    find_godot_binary,
+    find_unity_cli,
+    find_unity_hub,
+    find_unreal_editor,
+    find_unreal_uat,
+    repo_summary,
+    write_text,
+)
 from studio_core import available_starter_kits, load_studio_config
 from validate_docs import collect_doc_findings
 from validate_engine_kits import validate_kit
@@ -49,6 +59,10 @@ def build_report(label: str | None = None) -> dict[str, object]:
         "runtime": {
             "detected_engine": detect_engine(),
             "godot_bin": find_godot_binary(),
+            "unity_cli": find_unity_cli(),
+            "unity_hub": find_unity_hub(),
+            "unreal_editor": find_unreal_editor(),
+            "unreal_uat": find_unreal_uat(),
         },
         "quality": {
             "doc_errors": doc_errors,
@@ -62,8 +76,9 @@ def build_report(label: str | None = None) -> dict[str, object]:
             for item in [
                 "Configure a git remote before treating GitHub policy as active." if not ((remotes or "").splitlines()) else None,
                 "Set GODOT_BIN to enable runtime smoke and export checks." if not find_godot_binary() else None,
-                "Replace Unity tool stubs with UNITY_CLI for editor-backed validation." if not str(config.get("tools", {}).get("unity_cli", "")).strip() else None,
-                "Replace Unreal tool stubs with UNREAL_UAT or UNREAL_EDITOR for engine-backed packaging validation." if not (str(config.get("tools", {}).get("unreal_uat", "")).strip() or str(config.get("tools", {}).get("unreal_editor", "")).strip()) else None,
+                "Unity Hub is present, but no Unity editor CLI is configured yet." if find_unity_hub() and not find_unity_cli() else None,
+                "Install Unity and set UNITY_CLI for editor-backed validation." if not find_unity_hub() and not find_unity_cli() else None,
+                "Install Unreal Engine and set UNREAL_UAT or UNREAL_EDITOR for engine-backed packaging validation." if not find_unreal_uat() and not find_unreal_editor() else None,
             ]
             if item
         ],

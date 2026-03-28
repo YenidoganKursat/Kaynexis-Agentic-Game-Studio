@@ -222,6 +222,8 @@ Feature brief + ADR + test plan:
 python3 scripts/scaffold_feature.py "Core Combat" --with-adr --with-test-plan
 ```
 
+This now creates the feature brief plus default `handoff-*.md` and `traceability-*.md` docs unless you explicitly pass `--no-handoff` or `--no-traceability`.
+
 Bug triage docs:
 
 ```bash

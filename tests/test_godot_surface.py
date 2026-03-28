@@ -22,3 +22,15 @@ def test_godot_static_surface() -> None:
     assert payload["failures"] == []
     assert {"Player", "PulseWarden", "Hud", "ArenaBounds"}.issubset(set(payload["static"]["scene_nodes"]))
     assert {"Linux/X11", "Windows Desktop"}.issubset(set(payload["static"]["presets"]))
+
+
+def test_godot_slice_has_local_telemetry_wiring() -> None:
+    telemetry_script = (REPO_ROOT / "src" / "telemetry.gd").read_text(encoding="utf-8")
+    main_script = (REPO_ROOT / "src" / "main.gd").read_text(encoding="utf-8")
+
+    assert "TELEMETRY_LOG_PATH" in telemetry_script
+    assert "combat_room_start" in main_script
+    assert "combat_room_fail" in main_script
+    assert "combat_room_clear" in main_script
+    assert "upgrade_selected" in main_script
+    assert "dash_used" in main_script

@@ -1,4 +1,4 @@
-# Milestones — Codex Game Studio Pro Max
+# Milestones — Kaynexis Agentic Game Studio
 
 ## Milestones
 | Milestone | Goal | Exit criteria | Target window | Risks |
@@ -9,6 +9,6 @@
 
 ## Dependencies
 - `studio.toml` and starter-kit manifests stay current
-- Hosted repository policy and branch ruleset setup
+- Hosted repository policy and `main` ruleset stay aligned with real workflow coverage
 - Engine-native project files and export settings
 - First test or manual validation artifact beyond template placeholders

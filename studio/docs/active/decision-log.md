@@ -1,4 +1,4 @@
-# Decision Log — Codex Game Studio Pro Max
+# Decision Log — Kaynexis Agentic Game Studio
 
 ## Recent decisions
 | Date | Decision | Status | Owner | Follow-up |

@@ -34,6 +34,12 @@ def test_ci_artifact_report_generates_files() -> None:
     payload = json.loads(result.stdout)
     assert Path(payload["json"]).exists()
     assert Path(payload["markdown"]).exists()
+    report = json.loads(Path(payload["json"]).read_text())
+    assert report["project"]["name"] == "Kaynexis Agentic Game Studio"
+    assert "unity_cli" in report["runtime"]
+    assert "unity_hub" in report["runtime"]
+    assert "unreal_uat" in report["runtime"]
+    assert "unreal_editor" in report["runtime"]
 
 
 def test_starter_kit_contract_smoke_unity_surface() -> None:

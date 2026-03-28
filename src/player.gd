@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal dash_started
+signal position_reset
+
 @export var move_speed := 240.0
 @export var dash_speed := 680.0
 @export var dash_duration := 0.18
@@ -34,6 +37,7 @@ func _physics_process(delta: float) -> void:
             dash_timer = dash_duration
             dash_cooldown_timer = dash_cooldown
             velocity = facing * dash_speed
+            emit_signal("dash_started")
         else:
             velocity = input_vector * move_speed
 
@@ -62,6 +66,7 @@ func reset_to_spawn() -> void:
     global_position = spawn_position
     velocity = Vector2.ZERO
     dash_timer = 0.0
+    emit_signal("position_reset")
     queue_redraw()
 
 

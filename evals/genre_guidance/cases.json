@@ -12,9 +12,21 @@
     "required_skills": ["$ui-flow", "$accessibility-audit"]
   },
   {
+    "genre": "deckbuilder-roguelike",
+    "expected_name": "Deckbuilder Roguelike",
+    "expected_first_feature": "First Deck Run",
+    "required_skills": ["$mechanic-design", "$metaprogression-loop"]
+  },
+  {
     "genre": "puzzle",
     "expected_name": "Puzzle",
     "expected_first_feature": "First Puzzle Sequence",
     "required_skills": ["$puzzle-design", "$qa-matrix"]
+  },
+  {
+    "genre": "metroidvania",
+    "expected_name": "Metroidvania",
+    "expected_first_feature": "First Traversal Gate",
+    "required_skills": ["$level-blockout", "$mechanic-design"]
   }
 ]

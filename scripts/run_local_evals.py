@@ -201,6 +201,22 @@ def run_engine_adapter_eval() -> list[str]:
     return failures
 
 
+def run_agent_metadata_eval() -> list[str]:
+    failures: list[str] = []
+    script = REPO_ROOT / "scripts" / "validate_agent_metadata.py"
+    result = subprocess.run(
+        [sys.executable, str(script), "--json"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        payload = json.loads(result.stdout or "{}")
+        failures.extend(payload.get("errors", []))
+    return failures
+
+
 def run_route_task_engine_eval() -> list[str]:
     failures: list[str] = []
     cases = [
@@ -301,6 +317,7 @@ def main() -> int:
         "engine_kits": run_engine_kits_eval(),
         "workflow_surface": run_workflow_surface_eval(),
         "engine_adapters": run_engine_adapter_eval(),
+        "agent_metadata": run_agent_metadata_eval(),
         "route_task_engines": run_route_task_engine_eval(),
         "checklists": run_checklist_eval(),
         "research_surface": run_research_surface_eval(),

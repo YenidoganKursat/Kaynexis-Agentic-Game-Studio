@@ -36,6 +36,8 @@ python3 scripts/codex_studio.py checklist --task "Add a short-range parry that r
 python3 scripts/scaffold_feature.py "Parry Mechanic" --with-adr --with-test-plan
 ```
 
+The scaffold now also writes a default handoff contract and traceability doc so the slice is easier to review and continue.
+
 Good outcome:
 
 - one routed task

@@ -44,7 +44,7 @@ def test_studio_config_defaults() -> None:
     assert config["project"]["primary_engine"] == "godot-4"
     assert set(config["project"]["supported_engines"]) == {"godot-4", "unity-6", "unreal-5"}
     assert config["ux"]["mode"] == "wizard-first"
-    assert config["project"]["name"] == "Codex Game Studio Pro Max"
+    assert config["project"]["name"] == "Kaynexis Agentic Game Studio"
 
 
 def test_engine_version_defaults_are_engine_aware() -> None:
@@ -134,6 +134,14 @@ def test_genre_guidance_includes_reference_games_and_design_focus() -> None:
     assert "Dead Cells" in payload["GENRE_REFERENCE_GAMES"]
     assert "Dominant loop" in payload["GENRE_DESIGN_FOCUS"]
 
+    deckbuilder_payload = build_genre_replacements("deckbuilder-roguelike")
+    assert "Slay the Spire" in deckbuilder_payload["GENRE_REFERENCE_GAMES"]
+    assert deckbuilder_payload["GENRE_FIRST_FEATURE"] == "First Deck Run"
+
+    metroidvania_payload = build_genre_replacements("metroidvania")
+    assert "Metroid Dread" in metroidvania_payload["GENRE_REFERENCE_GAMES"]
+    assert "world graph" in metroidvania_payload["GENRE_DESIGN_FOCUS"]
+
 
 def test_active_docs_have_no_semantic_template_defaults() -> None:
     errors, warnings = collect_doc_findings()
@@ -148,18 +156,50 @@ def test_user_facing_guides_are_part_of_doc_validation_surface() -> None:
         "docs/reference/engine-selection-guide.md",
         "docs/reference/workflow-recipes.md",
         "docs/reference/task-prompt-examples.md",
+        "docs/reference/handoff-contracts.md",
+        "docs/reference/feature-traceability.md",
+        "docs/reference/doc-sync-audit.md",
+        "docs/reference/balance-simulator.md",
+        "docs/examples/README.md",
     }
     assert expected.issubset(USER_GUIDE_FILES.keys())
 
 
 def test_engine_research_guides_are_part_of_doc_validation_surface() -> None:
     expected = {
+        "docs/research/game-development/foundations/README.md",
+        "docs/research/game-development/foundations/design-frameworks-mda-gameflow-and-sdt.md",
+        "docs/research/game-development/foundations/game-feel-usability-and-accessibility-foundations.md",
+        "docs/research/game-development/foundations/ai-pathfinding-and-decision-foundations.md",
+        "docs/research/game-development/foundations/difficulty-balance-and-adaptation-foundations.md",
+        "docs/research/game-development/genre/README.md",
+        "docs/research/game-development/genre/genre-design-pattern-catalog.md",
+        "docs/research/game-development/genre/genre-example-matrix.md",
+        "docs/research/game-development/genre/deckbuilder-roguelike-architecture.md",
+        "docs/research/game-development/genre/survivorlike-architecture.md",
+        "docs/research/game-development/genre/colony-sim-architecture.md",
+        "docs/research/game-development/genre/factory-automation-architecture.md",
+        "docs/research/game-development/genre/metroidvania-architecture.md",
+        "docs/research/game-development/production/platform-readiness-pc-web-mobile-console.md",
+        "docs/research/game-development/production/incident-hotfix-and-rollback.md",
         "docs/research/game-development/engines/README.md",
         "docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md",
     }
     assert expected.issubset(RESEARCH_GUIDE_FILES.keys())
+
+
+def test_scaffold_feature_creates_handoff_and_traceability_by_default(tmp_path: Path) -> None:
+    payload = run_json(
+        "scripts/scaffold_feature.py",
+        "Parry Mechanic",
+        "--output-dir",
+        str(tmp_path),
+        "--json",
+    )
+    created = {Path(path).name for path in payload["created"]}
+    assert {"feature-parry-mechanic.md", "handoff-parry-mechanic.md", "traceability-parry-mechanic.md"}.issubset(created)
 
 
 def test_route_task_contract_surface() -> None:
@@ -196,6 +236,29 @@ def test_route_task_surfaces_engine_system_note_for_navigation_and_damage() -> N
     assert "unity-damage-query-contract" in item_ids
 
 
+def test_route_task_surfaces_crafting_and_party_research_refs() -> None:
+    crafting_payload = run_json("scripts/route_task.py", "Design a crafting bench and recipe unlock flow", "--json")
+    assert crafting_payload["route"] == "combat / gameplay"
+    assert "docs/research/game-development/systems/crafting-recipes-and-resource-flow-architecture.md" in crafting_payload["research_refs"]
+
+    companion_payload = run_json("scripts/route_task.py", "Implement companion follower AI and squad formation rules", "--json")
+    assert companion_payload["route"] == "combat / gameplay"
+    assert "docs/research/game-development/systems/party-companion-and-squad-architecture.md" in companion_payload["research_refs"]
+
+
+def test_route_task_surfaces_dialogue_and_quest_state_research_refs() -> None:
+    payload = run_json("scripts/route_task.py", "Implement a branching dialogue scene with quest stage progression", "--json")
+    assert payload["route"] == "narrative / quest"
+    assert "docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md" in payload["research_refs"]
+
+
+def test_route_task_surfaces_hotfix_and_rollback_research() -> None:
+    payload = run_json("scripts/route_task.py", "Prepare a hotfix rollback plan for a crash", "--json")
+    assert payload["route"] == "bug / crash / regression"
+    assert "docs/research/game-development/production/incident-hotfix-and-rollback.md" in payload["research_refs"]
+    assert "studio/docs/templates/release-checklist.md" in payload["docs"]
+
+
 def test_route_task_uses_performance_route_for_pooling_and_alloc_work() -> None:
     payload = run_json("scripts/route_task.py", "Optimize Unity projectile pooling and allocations", "--json")
     assert payload["route"] == "performance"
@@ -211,6 +274,13 @@ def test_route_task_avoids_false_positive_substring_matches() -> None:
 
     starter_payload = run_json("scripts/route_task.py", "Research starter task flow", "--json")
     assert starter_payload["route"] == "fallback"
+
+
+def test_route_task_surfaces_handoff_and_traceability_route() -> None:
+    payload = run_json("scripts/route_task.py", "Prepare a clean handoff and traceability packet for the next milestone", "--json")
+    assert payload["route"] == "handoff / traceability / doc sync"
+    assert "studio/docs/templates/handoff-contract.md" in payload["docs"]
+    assert "docs/reference/feature-traceability.md" in payload["research_refs"]
 
 
 def test_checklist_task_infers_build_release_for_packaging_work() -> None:
@@ -249,6 +319,42 @@ def test_engine_adapters_dry_run_surface() -> None:
     )
     assert "BuildCookRun" in " ".join(unreal_payload["command"])
     assert unreal_payload["validation_failures"] == []
+
+
+def test_doc_sync_audit_and_balance_simulator_surface() -> None:
+    doc_sync_payload = run_json(
+        "scripts/doc_sync_audit.py",
+        "scripts/route_task.py",
+        "studio/presets/genre/metroidvania.md",
+        "--json",
+    )
+    suggested_docs = {item["doc"] for item in doc_sync_payload["recommendations"]}
+    assert "docs/reference/ci-cd-architecture.md" in suggested_docs
+    assert "docs/reference/genre-presets.md" in suggested_docs
+
+    balance_payload = run_json(
+        "scripts/balance_simulator.py",
+        "--runs",
+        "1000",
+        "--success-rate",
+        "0.55",
+        "--reward-win",
+        "18",
+        "--reward-loss",
+        "7",
+        "--upgrade-cost",
+        "90",
+        "--seed",
+        "42",
+        "--json",
+    )
+    assert balance_payload["runs"] == 1000
+    assert balance_payload["average_runs_to_afford"] >= 1
+
+
+def test_agent_metadata_validator_passes() -> None:
+    payload = run_json("scripts/validate_agent_metadata.py", "--json")
+    assert payload == {"errors": []}
 
 
 def test_unity_and_unreal_starter_kits_expose_richer_sample_slice_markers() -> None:
@@ -290,6 +396,113 @@ def test_save_tasks_surface_save_architecture_research() -> None:
     assert "docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md" in payload["research_refs"]
 
 
+def test_inventory_tasks_surface_inventory_and_save_research() -> None:
+    payload = run_json(
+        "scripts/codex_studio.py",
+        "checklist",
+        "--task",
+        "Design inventory and equipment persistence boundaries for the player loadout",
+        "--json",
+    )
+    assert "gameplay" in payload["disciplines"]
+    assert "save" in payload["disciplines"]
+    assert "docs/research/game-development/systems/inventory-equipment-and-item-architecture.md" in payload["research_refs"]
+    assert "docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md" in payload["research_refs"]
+
+
+def test_character_tasks_surface_character_architecture_research() -> None:
+    payload = run_json(
+        "scripts/route_task.py",
+        "Design the player character locomotion and ability ownership model for Unity",
+        "--json",
+    )
+    assert payload["route"] == "combat / gameplay"
+    assert "docs/research/game-development/systems/character-controller-ability-and-state-architecture.md" in payload["research_refs"]
+    assert "docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md" in payload["research_refs"]
+
+
+def test_enemy_tasks_surface_enemy_architecture_research() -> None:
+    payload = run_json(
+        "scripts/route_task.py",
+        "Design enemy patrol, aggro, and encounter behavior for Unreal",
+        "--json",
+    )
+    assert payload["route"] == "combat / gameplay"
+    assert "docs/research/game-development/systems/enemy-roster-behavior-and-encounter-architecture.md" in payload["research_refs"]
+    assert "docs/research/game-development/engines/unreal-5-2d-3d-navigation-damage-performance.md" in payload["research_refs"]
+
+
+def test_route_task_surfaces_academic_foundations_for_ai_and_flow() -> None:
+    ai_payload = run_json(
+        "scripts/route_task.py",
+        "Compare A* and behavior tree tradeoffs for enemy decision architecture",
+        "--json",
+    )
+    assert "docs/research/game-development/foundations/ai-pathfinding-and-decision-foundations.md" in ai_payload["research_refs"]
+
+    flow_payload = run_json(
+        "scripts/route_task.py",
+        "Research motivation and flow goals for the core loop",
+        "--json",
+    )
+    assert "docs/research/game-development/foundations/design-frameworks-mda-gameflow-and-sdt.md" in flow_payload["research_refs"]
+
+
+def test_controls_tasks_surface_control_and_ui_research() -> None:
+    payload = run_json(
+        "scripts/codex_studio.py",
+        "checklist",
+        "--task",
+        "Design controller remapping and pause flow for keyboard and gamepad parity",
+        "--json",
+    )
+    assert "ui-ux" in payload["disciplines"]
+    assert "docs/research/game-development/systems/input-controls-camera-and-remapping-architecture.md" in payload["research_refs"]
+    assert "docs/research/game-development/systems/ui-hud-menu-and-screen-flow-architecture.md" in payload["research_refs"]
+
+
+def test_checklist_surfaces_accessibility_and_difficulty_foundations() -> None:
+    accessibility_payload = run_json(
+        "scripts/codex_studio.py",
+        "checklist",
+        "--task",
+        "Improve game feel, readability, and accessibility for combat feedback",
+        "--json",
+    )
+    assert "docs/research/game-development/foundations/game-feel-usability-and-accessibility-foundations.md" in accessibility_payload["research_refs"]
+
+    difficulty_payload = run_json(
+        "scripts/codex_studio.py",
+        "checklist",
+        "--task",
+        "Tune difficulty pacing and evaluate dynamic difficulty adaptation",
+        "--json",
+    )
+    assert "docs/research/game-development/foundations/difficulty-balance-and-adaptation-foundations.md" in difficulty_payload["research_refs"]
+
+
+def test_upgrade_tasks_surface_ability_upgrade_research() -> None:
+    payload = run_json(
+        "scripts/route_task.py",
+        "Separate authored skill definitions, current-run upgrades, and durable meta unlocks",
+        "--json",
+    )
+    assert payload["route"] == "combat / gameplay"
+    assert "docs/research/game-development/systems/abilities-skill-trees-upgrades-and-build-architecture.md" in payload["research_refs"]
+    assert "docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md" in payload["research_refs"]
+
+
+def test_interaction_tasks_surface_interaction_research() -> None:
+    payload = run_json(
+        "scripts/route_task.py",
+        "Design pickup prompts, interaction validation, and loot persistence for reward chests",
+        "--json",
+    )
+    assert payload["route"] == "combat / gameplay"
+    assert "docs/research/game-development/systems/interactions-pickups-and-world-object-architecture.md" in payload["research_refs"]
+    assert "docs/research/game-development/systems/inventory-equipment-and-item-architecture.md" in payload["research_refs"]
+
+
 def test_detect_engine_prefers_configured_engine_over_root_file_clues(tmp_path: Path) -> None:
     (tmp_path / "studio.toml").write_text('[project]\nprimary_engine = "unreal-5"\n', encoding="utf-8")
     (tmp_path / "project.godot").write_text("; clue only\n", encoding="utf-8")
@@ -310,9 +523,20 @@ def test_research_notes_seeded() -> None:
     assert any(path.name == "combat-damage-and-effects-architecture.md" for path in notes)
     assert any(path.name == "ai-navigation-and-entity-scale-architecture.md" for path in notes)
     assert any(path.name == "save-progression-and-runtime-data-architecture.md" for path in notes)
+    assert any(path.name == "inventory-equipment-and-item-architecture.md" for path in notes)
+    assert any(path.name == "character-controller-ability-and-state-architecture.md" for path in notes)
+    assert any(path.name == "enemy-roster-behavior-and-encounter-architecture.md" for path in notes)
+    assert any(path.name == "input-controls-camera-and-remapping-architecture.md" for path in notes)
+    assert any(path.name == "ui-hud-menu-and-screen-flow-architecture.md" for path in notes)
+    assert any(path.name == "abilities-skill-trees-upgrades-and-build-architecture.md" for path in notes)
+    assert any(path.name == "interactions-pickups-and-world-object-architecture.md" for path in notes)
     assert any(path.name == "unity-6-class-editor-object-map.md" for path in notes)
     assert any(path.name == "unity-6-2d-3d-class-and-mechanic-guide.md" for path in notes)
     assert any(path.name == "unity-6-2d-3d-navigation-damage-performance.md" for path in notes)
     assert any(path.name == "unreal-5-class-editor-object-map.md" for path in notes)
     assert any(path.name == "unreal-5-2d-3d-class-and-mechanic-guide.md" for path in notes)
     assert any(path.name == "unreal-5-2d-3d-navigation-damage-performance.md" for path in notes)
+    assert any(path.name == "design-frameworks-mda-gameflow-and-sdt.md" for path in notes)
+    assert any(path.name == "game-feel-usability-and-accessibility-foundations.md" for path in notes)
+    assert any(path.name == "ai-pathfinding-and-decision-foundations.md" for path in notes)
+    assert any(path.name == "difficulty-balance-and-adaptation-foundations.md" for path in notes)

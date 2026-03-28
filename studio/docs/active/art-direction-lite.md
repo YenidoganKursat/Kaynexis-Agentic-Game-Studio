@@ -1,4 +1,4 @@
-# Art Direction Lite — Codex Game Studio Pro Max
+# Art Direction Lite — Kaynexis Agentic Game Studio
 
 ## Visual pillars
 - Clear silhouettes and readable threat timing over decoration-first detail

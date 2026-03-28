@@ -36,8 +36,14 @@ That belongs in `studio/docs/active/`.
 - `reference/genre-presets.md`
 - `reference/codex-compatibility.md`
 - `reference/engine-agent-guidelines.md`
+- `reference/handoff-contracts.md`
+- `reference/feature-traceability.md`
+- `reference/doc-sync-audit.md`
+- `reference/balance-simulator.md`
+- `examples/README.md`
 - `research/openai-codex-infra-findings.md`
 - `research/game-development/README.md`
+- `research/game-development/foundations/README.md`
 - `research/game-development/engines/README.md`
 
 ## Responsibility Split
@@ -57,3 +63,59 @@ If you are doing engine-specific work, start here:
 - `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
 
 Those guides exist so the repo does not silently collapse back into a Godot-only mental model. They explain the most-used classes, objects, mechanic ownership patterns, writing style expectations, and common mistakes for each engine family.
+
+## Academic Foundations Highlights
+
+If a design discussion is getting fuzzy or purely opinion-based, start here:
+
+- `research/game-development/foundations/design-frameworks-mda-gameflow-and-sdt.md`
+- `research/game-development/foundations/game-feel-usability-and-accessibility-foundations.md`
+- `research/game-development/foundations/ai-pathfinding-and-decision-foundations.md`
+- `research/game-development/foundations/difficulty-balance-and-adaptation-foundations.md`
+
+Those notes exist so the repo can reason from canonical theory and standards, not just implementation habits.
+
+## Systems Research Highlights
+
+If the task is about inventory, character state, enemy architecture, or save/combat boundaries, start here:
+
+- `research/game-development/systems/inventory-equipment-and-item-architecture.md`
+- `research/game-development/systems/character-controller-ability-and-state-architecture.md`
+- `research/game-development/systems/enemy-roster-behavior-and-encounter-architecture.md`
+- `research/game-development/systems/crafting-recipes-and-resource-flow-architecture.md`
+- `research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md`
+- `research/game-development/systems/party-companion-and-squad-architecture.md`
+- `research/game-development/systems/input-controls-camera-and-remapping-architecture.md`
+- `research/game-development/systems/ui-hud-menu-and-screen-flow-architecture.md`
+- `research/game-development/systems/abilities-skill-trees-upgrades-and-build-architecture.md`
+- `research/game-development/systems/interactions-pickups-and-world-object-architecture.md`
+- `research/game-development/systems/combat-damage-and-effects-architecture.md`
+- `research/game-development/systems/save-progression-and-runtime-data-architecture.md`
+
+Those notes exist so the repo does not reduce system-heavy work to "just add another script." They define ownership, persistence, authored-data boundaries, encounter roles, and the main scaling risks.
+
+## Genre Research Highlights
+
+If the team is still deciding what kind of game it is making, or if a feature depends on genre-specific constraints, start here:
+
+- `research/game-development/genre/genre-design-pattern-catalog.md`
+- `research/game-development/genre/genre-example-matrix.md`
+- `research/game-development/genre/deckbuilder-roguelike-architecture.md`
+- `research/game-development/genre/survivorlike-architecture.md`
+- `research/game-development/genre/colony-sim-architecture.md`
+- `research/game-development/genre/factory-automation-architecture.md`
+- `research/game-development/genre/metroidvania-architecture.md`
+
+Those notes exist so the repo does not flatten every project into the same first-slice advice. They explain dominant loops, first systems that usually break, and what to study from official game pages before scoping work.
+
+## Execution Glue Highlights
+
+If the repo is drifting between planning, implementation, QA, and release, start here:
+
+- `reference/handoff-contracts.md`
+- `reference/feature-traceability.md`
+- `reference/doc-sync-audit.md`
+- `reference/balance-simulator.md`
+- `examples/README.md`
+
+Those docs and tools exist to keep repo truth connected from feature brief to release impact instead of letting important context dissolve into chat.

@@ -46,6 +46,55 @@ python3 scripts/codex_studio.py next \
   "Design a performant 2D enemy pathfinding setup for Unity rooms with blockers"
 ```
 
+Inventory and equipment:
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Design inventory, equipment, and persistence boundaries for a roguelite loadout system"
+```
+
+Character architecture:
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Define the player character locomotion, ability, and animation ownership model for Unreal"
+```
+
+Enemy architecture:
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Design enemy patrol, aggro, and encounter roles for the first biome"
+```
+
+Controls and remapping:
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Design controller remapping, pause flow, and keyboard/gamepad parity for the settings menu"
+```
+
+UI and HUD:
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Design a compact upgrade screen and HUD state flow for controller-first navigation"
+```
+
+Skills and upgrades:
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Separate authored skill definitions, current-run upgrades, and durable meta unlocks"
+```
+
+Interactions and pickups:
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Design pickup prompts, interaction validation, and loot persistence for reward chests"
+```
+
 Build and release:
 
 ```bash
@@ -108,11 +157,38 @@ UI:
 
 - "Design a compact upgrade choice screen that fits controller-first navigation."
 - "Add a pause menu flow with resume, restart, and settings."
+- "Define keyboard, gamepad, and UI focus rules before adding remapping."
 
 Save systems:
 
 - "Define what should persist after a failed run versus what resets."
 - "Plan a migration-safe save structure for progression unlocks."
+- "Separate item definitions, runtime inventory state, and persistent equipment state."
+
+Character architecture:
+
+- "Decide what owns dash validation, locomotion, animation transitions, and stamina costs."
+- "Define how player state, equipment state, and temporary combat state stay separate."
+
+Enemy architecture:
+
+- "Define enemy archetype data versus runtime behavior state before adding a second faction."
+- "Plan patrol, aggro, and encounter-role boundaries before scaling enemy count."
+
+Controls and UI architecture:
+
+- "Decide which action map powers gameplay, which powers menus, and where rebinding is saved."
+- "Define what the camera reacts to and what it must never silently control."
+
+Skills and upgrades:
+
+- "Separate authored skill definitions, current-run upgrades, and durable profile unlocks."
+- "Decide which system owns cooldown state, stack rules, and upgrade UI projection."
+
+Interactions:
+
+- "Define how pickup prompts, interaction checks, and loot grants stay separate."
+- "Choose whether prompts are proximity-only, facing-based, or target-selection based before adding content scale."
 
 Performance:
 

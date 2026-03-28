@@ -1,4 +1,4 @@
-# Monetization Guardrails — Codex Game Studio Pro Max
+# Monetization Guardrails — Kaynexis Agentic Game Studio
 
 ## Allowed patterns
 - Premium purchase with transparent scope and no hidden monetization layers

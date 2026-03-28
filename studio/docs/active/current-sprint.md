@@ -1,4 +1,4 @@
-# Current Sprint — Codex Game Studio Pro Max
+# Current Sprint — Kaynexis Agentic Game Studio
 
 ## Sprint goal
 - Prove the first playable slice around `First Combat Room`
@@ -19,7 +19,7 @@
 ## Top blockers
 - Real Unity and Unreal tool paths are still external | Owner: technical_director | Mitigation: keep adapter contracts green with stubs, then wire real CLI/UAT paths before claiming full editor integration
 - Runtime export confidence still depends on a local Godot binary or a runner with Godot installed | Owner: lead_programmer | Mitigation: keep static smoke green and add runtime smoke where `GODOT_BIN` is available
-- GitHub remote exists, but branch rulesets and stricter review policy still need to be confirmed on the hosted repo | Owner: producer | Mitigation: audit the live repository against `docs/setup/github-maintainer-setup.md`
+- Hosted GitHub ruleset is active on `main`, but it currently enforces only the always-on `repo-validate` matrix | Owner: producer | Mitigation: keep the ruleset audited and add more required checks only when their workflows are not path-filtered
 
 ## Definition of done
 - The first slice remains fair, bounded, and validated

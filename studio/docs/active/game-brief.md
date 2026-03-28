@@ -1,4 +1,4 @@
-# Game Brief — Codex Game Studio Pro Max
+# Game Brief — Kaynexis Agentic Game Studio
 
 ## High concept
 - Codex-first Action Roguelite project focused on a small but high-quality first playable slice

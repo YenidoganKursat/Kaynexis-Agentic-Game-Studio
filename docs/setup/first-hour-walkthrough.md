@@ -165,6 +165,8 @@ Use a short brief before a non-trivial slice:
 python3 scripts/scaffold_feature.py "Tutorial Enemy Attack" --with-adr --with-test-plan
 ```
 
+That scaffold also creates default handoff and traceability docs, which is useful even for solo work because it keeps the next step explicit.
+
 Do this especially when:
 
 - the task changes gameplay rules

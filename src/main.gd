@@ -2,6 +2,7 @@ extends Node2D
 
 const ARENA_RECT := Rect2(Vector2(96.0, 96.0), Vector2(1088.0, 528.0))
 const HIT_FLASH_DURATION := 0.35
+const Telemetry := preload("res://src/telemetry.gd")
 
 @onready var player = $Player
 @onready var pulse_warden = $PulseWarden
@@ -16,11 +17,24 @@ var pulse_contact_resolved := false
 var upgrade_pending := false
 var upgrade_taken := ""
 var hit_flash_timer := 0.0
+var damage_taken := 0
+var room_started_at_msec := 0
+var telemetry := Telemetry.new()
 
 
 func _ready() -> void:
     player.set_arena_bounds(ARENA_RECT)
+    player.dash_started.connect(_on_dash_started)
     pulse_warden.room_cleared.connect(_on_room_cleared)
+    telemetry.log_event(
+        "session_start",
+        {
+            "platform": OS.get_name(),
+            "engine": "godot-4",
+            "slice": "first_combat_room",
+        }
+    )
+    _start_room("initial_load")
     _refresh_hud()
     queue_redraw()
     print("First combat room ready")
@@ -65,18 +79,39 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _player_hit() -> void:
     player_health -= 1
+    damage_taken += 1
     hit_flash_timer = HIT_FLASH_DURATION
     player.reset_to_spawn()
 
     if player_health <= 0:
+        telemetry.log_event(
+            "combat_room_fail",
+            {
+                "room_id": "first_combat_room",
+                "fail_reason": "health_depleted",
+                "remaining_health": 0,
+                "damage_taken": damage_taken,
+                "clear_time_s": _room_elapsed_seconds(),
+            }
+        )
         player_health = 3
         upgrade_pending = false
         upgrade_taken = ""
         pulse_warden.reset_room()
+        _start_room("retry_after_fail")
 
 
 func _on_room_cleared() -> void:
     upgrade_pending = true
+    telemetry.log_event(
+        "combat_room_clear",
+        {
+            "room_id": "first_combat_room",
+            "clear_time_s": _room_elapsed_seconds(),
+            "damage_taken": damage_taken,
+            "remaining_health": player_health,
+        }
+    )
 
 
 func _apply_upgrade(kind: String) -> void:
@@ -87,6 +122,14 @@ func _apply_upgrade(kind: String) -> void:
         player.apply_dash_upgrade()
         upgrade_taken = "Phase Module"
     upgrade_pending = false
+    telemetry.log_event(
+        "upgrade_selected",
+        {
+            "room_id": "first_combat_room",
+            "upgrade_id": kind,
+            "offered_ids": ["speed", "dash"],
+        }
+    )
 
 
 func _build_objective_text() -> String:
@@ -118,6 +161,34 @@ func _refresh_hud() -> void:
         result_label.text = "Goal: read the telegraph, commit to the dash, then claim one upgrade."
     else:
         result_label.text = "Slice clear: %s unlocked. This room is ready to branch into a second enemy or a second wave." % upgrade_taken
+
+
+func _start_room(reason: String) -> void:
+    damage_taken = 0
+    room_started_at_msec = Time.get_ticks_msec()
+    telemetry.log_event(
+        "combat_room_start",
+        {
+            "room_id": "first_combat_room",
+            "restart_reason": reason,
+            "difficulty_seed": "reference_slice_v1",
+        }
+    )
+
+
+func _room_elapsed_seconds() -> float:
+    return snappedf(float(Time.get_ticks_msec() - room_started_at_msec) / 1000.0, 0.01)
+
+
+func _on_dash_started() -> void:
+    telemetry.log_event(
+        "dash_used",
+        {
+            "room_id": "first_combat_room",
+            "remaining_health": player_health,
+            "elapsed_time_s": _room_elapsed_seconds(),
+        }
+    )
 
 
 func _draw() -> void:

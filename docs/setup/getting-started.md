@@ -147,6 +147,8 @@ python3 scripts/codex_studio.py research --category systems --title "Core Moveme
 python3 scripts/scaffold_feature.py "Core Movement" --with-adr --with-test-plan
 ```
 
+By default this also produces handoff and traceability docs so the feature can move cleanly from brief to implementation to validation.
+
 8. Generate a QA matrix before calling the slice done:
 
 ```bash
