@@ -45,6 +45,7 @@
 - Doc sync audit reminders: `scripts/doc_sync_audit.py`
 - Doc sync guard: `scripts/doc_sync_guard.py`
 - CI quality gate: `scripts/ci_quality_gate.py`
+- Engine research now includes visuals/animation playbooks, so sprite, texture, animation, and VFX changes stay visible to both routing and doc-sync checks.
 
 ## Engine policy
 - Godot can run real runtime/export checks when `GODOT_BIN` exists

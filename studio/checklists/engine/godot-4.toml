@@ -118,3 +118,12 @@ applies_when = "Any upgrade, inventory, save, or progression change"
 validation = "State which data is live runtime state, which is shared authored data, and which is persistence projection"
 engine = "godot-4"
 owner = "godot-specialist"
+
+[[item]]
+id = "godot-visuals-animation-owner"
+title = "Sprite, texture, animation, and VFX ownership stays explicit"
+severity = "required"
+applies_when = "Any sprite, image, texture, animation, particle, or visual-effect change"
+validation = "Document whether Sprite2D, AnimatedSprite2D, TextureRect, AnimationPlayer, AnimationTree, AnimatedSprite3D, MeshInstance3D, or GPUParticles owns the presentation and whether it is world-facing or UI-facing"
+engine = "godot-4"
+owner = "godot-specialist"

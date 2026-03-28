@@ -17,6 +17,7 @@ Recommended read order for an engine-specific task:
 3. `*-2d-3d-class-and-mechanic-guide.md`
 4. `*-2d-3d-navigation-damage-performance.md`
 5. `*-systems-playbook.md`
+6. `*-visuals-animation-playbook.md`
 
 What each note does:
 
@@ -25,3 +26,4 @@ What each note does:
 - `*-2d-3d-class-and-mechanic-guide.md` explains the most-used classes, object types, mechanic patterns, writing style expectations, and common mistakes for 2D and 3D work.
 - `*-2d-3d-navigation-damage-performance.md` explains navigation, damage/contact, and scale/performance decisions.
 - `*-systems-playbook.md` explains controls, UI, inventory, abilities, encounters, save flow, and performance-sensitive ownership decisions.
+- `*-visuals-animation-playbook.md` explains sprites, textures, images, animation playback, VFX, and UI presentation ownership decisions.

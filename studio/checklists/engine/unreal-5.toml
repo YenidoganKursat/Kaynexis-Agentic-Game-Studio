@@ -109,3 +109,12 @@ applies_when = "Any inventory, upgrade, ability, or save/progression change"
 validation = "Document which values live in a Data Asset, which live at runtime, and which are serialized to save data"
 engine = "unreal-5"
 owner = "unreal-specialist"
+
+[[item]]
+id = "unreal-visuals-animation-owner"
+title = "Sprite, animation, UI, and VFX ownership stays explicit"
+severity = "required"
+applies_when = "Any sprite, animation, particle, or UI-image change"
+validation = "Document whether the feature is owned by Paper2D, Animation Blueprint, UMG/Widget Blueprint, or Niagara, and state how the in-editor validation loop proves it"
+engine = "unreal-5"
+owner = "unreal-specialist"

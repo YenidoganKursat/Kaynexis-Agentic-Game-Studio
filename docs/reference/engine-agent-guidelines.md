@@ -12,8 +12,9 @@ When a task is engine-specific, the agent should read in this order:
 4. The matching 2D/3D class and mechanic guide in `docs/research/game-development/engines/`
 5. The matching 2D/3D, navigation, damage, and performance note in `docs/research/game-development/engines/`
 6. The matching systems playbook in `docs/research/game-development/engines/`
-7. The matching engine checklist in `studio/checklists/engine/`
-8. The relevant active docs such as `build-pipeline.md`, `current-sprint.md`, or `content-pipeline.md`
+7. The matching visuals, images, and animation playbook in `docs/research/game-development/engines/`
+8. The matching engine checklist in `studio/checklists/engine/`
+9. The relevant active docs such as `build-pipeline.md`, `current-sprint.md`, or `content-pipeline.md`
 
 When a task is system-specific, add the matching systems note before implementation:
 
@@ -33,6 +34,7 @@ When a task is system-specific, add the matching systems note before implementat
 - Class/editor/object map: `docs/research/game-development/engines/godot-4-class-editor-object-map.md`
 - Common classes/mechanics: `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
 - Systems/performance: `docs/research/game-development/engines/godot-4-2d-3d-navigation-damage-performance.md`
+- Visuals/animation: `docs/research/game-development/engines/godot-4-visuals-animation-playbook.md`
 - Checklist: `studio/checklists/engine/godot-4.toml`
 
 ### Unity 6
@@ -40,6 +42,7 @@ When a task is system-specific, add the matching systems note before implementat
 - Class/editor/object map: `docs/research/game-development/engines/unity-6-class-editor-object-map.md`
 - Common classes/mechanics: `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
 - Systems/performance: `docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md`
+- Visuals/animation: `docs/research/game-development/engines/unity-6-visuals-animation-playbook.md`
 - Checklist: `studio/checklists/engine/unity-6.toml`
 
 ### Unreal 5
@@ -47,6 +50,7 @@ When a task is system-specific, add the matching systems note before implementat
 - Class/editor/object map: `docs/research/game-development/engines/unreal-5-class-editor-object-map.md`
 - Common classes/mechanics: `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
 - Systems/performance: `docs/research/game-development/engines/unreal-5-2d-3d-navigation-damage-performance.md`
+- Visuals/animation: `docs/research/game-development/engines/unreal-5-visuals-animation-playbook.md`
 - Checklist: `studio/checklists/engine/unreal-5.toml`
 
 ## Shared rules for all engine-specialized agents
@@ -101,6 +105,13 @@ When a task is system-specific, add the matching systems note before implementat
   - focus/navigation behavior
   - blocked gameplay state
   - copy/accessibility expectations
+- For visuals, image, sprite, animation, texture, or VFX tasks, explicitly separate:
+  - source art or texture asset
+  - world versus UI presentation
+  - animation playback owner
+  - particle or VFX owner
+  - material or shader owner
+  - runtime projection versus authored data
 - For ability and upgrade tasks, explicitly separate:
   - authored definition data
   - current-run granted state

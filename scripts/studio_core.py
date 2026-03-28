@@ -327,6 +327,34 @@ TASK_CONTEXT_RESEARCH_REFS: dict[str, dict[str, Any]] = {
             "docs/research/game-development/systems/input-controls-camera-and-remapping-architecture.md",
         ],
     },
+    "visuals": {
+        "keywords": (
+            "sprite",
+            "sprites",
+            "sprite sheet",
+            "spritesheet",
+            "texture",
+            "textures",
+            "image",
+            "images",
+            "icon",
+            "icons",
+            "animation",
+            "animated",
+            "flipbook",
+            "particle",
+            "particles",
+            "vfx",
+            "visual effect",
+            "visual effects",
+        ),
+        "refs": [
+            "docs/research/game-development/foundations/game-feel-usability-and-accessibility-foundations.md",
+            "docs/research/game-development/engines/godot-4-visuals-animation-playbook.md",
+            "docs/research/game-development/engines/unity-6-visuals-animation-playbook.md",
+            "docs/research/game-development/engines/unreal-5-visuals-animation-playbook.md",
+        ],
+    },
     "abilities": {
         "keywords": (
             "skill",
@@ -554,6 +582,7 @@ ENGINE_RESEARCH_REFS: dict[str, list[str]] = {
         "docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/godot-4-2d-3d-navigation-damage-performance.md",
         "docs/research/game-development/engines/godot-4-systems-playbook.md",
+        "docs/research/game-development/engines/godot-4-visuals-animation-playbook.md",
     ],
     "unity-6": [
         "docs/research/game-development/engines/unity-6-architecture.md",
@@ -561,6 +590,7 @@ ENGINE_RESEARCH_REFS: dict[str, list[str]] = {
         "docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md",
         "docs/research/game-development/engines/unity-6-systems-playbook.md",
+        "docs/research/game-development/engines/unity-6-visuals-animation-playbook.md",
     ],
     "unreal-5": [
         "docs/research/game-development/engines/unreal-5-architecture.md",
@@ -568,6 +598,7 @@ ENGINE_RESEARCH_REFS: dict[str, list[str]] = {
         "docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md",
         "docs/research/game-development/engines/unreal-5-2d-3d-navigation-damage-performance.md",
         "docs/research/game-development/engines/unreal-5-systems-playbook.md",
+        "docs/research/game-development/engines/unreal-5-visuals-animation-playbook.md",
     ],
 }
 

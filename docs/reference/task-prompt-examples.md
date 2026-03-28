@@ -81,6 +81,13 @@ python3 scripts/codex_studio.py next \
   "Design a compact upgrade screen and HUD state flow for controller-first navigation"
 ```
 
+Visuals and presentation:
+
+```bash
+python3 scripts/codex_studio.py next \
+  "Plan the sprite atlas and animation pass for Unity"
+```
+
 Skills and upgrades:
 
 ```bash
@@ -169,6 +176,12 @@ Character architecture:
 
 - "Decide what owns dash validation, locomotion, animation transitions, and stamina costs."
 - "Define how player state, equipment state, and temporary combat state stay separate."
+
+Visuals and presentation:
+
+- "Plan the sprite atlas, animation playback, and UI image ownership for the Unity HUD."
+- "Define whether Paper2D, Animation Blueprints, or Niagara owns the new Unreal effect."
+- "Separate Godot sprite presentation, animation state, and VFX triggers before implementation."
 
 Enemy architecture:
 

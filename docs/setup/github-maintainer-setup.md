@@ -153,6 +153,7 @@ Repo CI now also includes:
 
 - a doc-sync guard workflow that fails when code or workflow changes are not mirrored by the relevant docs
 - a quality gate that enforces the minimum CI health score before release-readiness or nightly reports are accepted
+- the engine research index now includes visuals/animation playbooks, so sprite, texture, animation, and VFX changes should keep the relevant docs in sync before merge
 
 ## References
 

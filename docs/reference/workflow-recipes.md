@@ -72,6 +72,7 @@ python3 scripts/codex_studio.py next "Design boss encounter state ownership"
 ```
 
 Before implementation, make sure the final task references at least one relevant research note.
+If the task is visual or presentation-heavy, also read the matching `*-visuals-animation-playbook.md` for the engine before writing code or content.
 
 ## Recipe: Prepare for a performance pass
 

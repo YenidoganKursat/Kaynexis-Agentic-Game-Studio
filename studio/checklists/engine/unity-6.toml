@@ -109,3 +109,12 @@ applies_when = "Any item, inventory, upgrade, or save/progression change"
 validation = "Document which fields belong in a shared asset and which fields belong in live runtime state"
 engine = "unity-6"
 owner = "unity-specialist"
+
+[[item]]
+id = "unity-visuals-animation-owner"
+title = "Sprite, texture, animation, and VFX ownership stays explicit"
+severity = "required"
+applies_when = "Any sprite, texture, animation, particle, or UI-image change"
+validation = "Document whether the feature is owned by the sprite pipeline, Animator, UI Toolkit, uGUI, or ParticleSystem, and state where the sprite atlas or texture import boundary lives"
+engine = "unity-6"
+owner = "unity-specialist"
