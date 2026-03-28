@@ -12,6 +12,7 @@ That guided setup shows the same options in a simple menu and then creates `stud
 
 For deeper design references, also read:
 
+- `docs/research/game-development/genre/genre-development-playbook.md`
 - `docs/research/game-development/genre/genre-design-pattern-catalog.md`
 - `docs/research/game-development/genre/genre-example-matrix.md`
 
@@ -62,3 +63,5 @@ For deeper design references, also read:
 - If you care most about patrol readability and route control, start with `stealth`.
 - If you care most about stamina mastery and telegraph readability, start with `soulslike`.
 - If you care most about tactical clarity and build planning, start with `tactical-rpg`.
+
+If you know the genre but want to know how to build it, use `docs/research/game-development/genre/genre-development-playbook.md` next.

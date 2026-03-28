@@ -28,5 +28,6 @@ Structure:
 - `systems/` for gameplay/system design notes such as loop/state ownership, combat architecture, AI/navigation, save/progression boundaries, inventory/equipment, crafting/resource flow, character controller boundaries, enemy/encounter architecture, dialogue and quest state, party/companion structure, input/remap structure, UI flow, ability/upgrade systems, and world interactions
 - `production/` for release, CI, and content pipeline notes
 - `genre/` for genre-specific architectural guidance, contrast sets, and example game matrices
+- `genre/genre-development-playbook.md` for how to build and validate each supported genre family
 - `genre/*-architecture.md` for deeper dives into specific genre families such as deckbuilder roguelikes, survivorlikes, colony sims, factory automation games, and metroidvanias
 - `templates/` for reusable note scaffolds

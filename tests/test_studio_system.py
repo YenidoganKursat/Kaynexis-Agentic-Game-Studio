@@ -203,6 +203,7 @@ def test_engine_research_guides_are_part_of_doc_validation_surface() -> None:
         "docs/research/game-development/foundations/difficulty-balance-and-adaptation-foundations.md",
         "docs/research/game-development/README.md",
         "docs/research/game-development/genre/README.md",
+        "docs/research/game-development/genre/genre-development-playbook.md",
         "docs/research/game-development/genre/genre-design-pattern-catalog.md",
         "docs/research/game-development/genre/genre-example-matrix.md",
         "docs/research/game-development/genre/auto-battler-architecture.md",

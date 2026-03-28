@@ -16,6 +16,7 @@
 - Release: real editor/export jobs only count as complete once engine binaries are present on the runner
 - Repo validation now includes a doc-sync guard and a minimum CI quality gate, so code or workflow changes must be accompanied by the docs they affect
 - The example surface in `docs/reference/engine-examples.md` is part of that doc-sync scope, so engine example updates should be validated like other engine support docs
+- The genre development playbook at `docs/research/game-development/genre/genre-development-playbook.md` is part of the same sync scope, so build-facing genre changes should update the playbook, the preset catalog, and the active starter together
 - When adding or revising genre presets, keep the matching architecture note, example matrix row, and starter doc updated together so the support surface stays truthful for teams choosing city-builder, life-sim, hero-shooter, or soulslike paths
 - The same rule now applies to auto-battler, grand-strategy, and stealth support as well, because those families change route, checklist, and first-slice advice together.
 

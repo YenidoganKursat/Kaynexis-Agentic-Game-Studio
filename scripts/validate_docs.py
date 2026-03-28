@@ -150,6 +150,7 @@ RESEARCH_GUIDE_FILES = {
     ],
     "docs/research/game-development/genre/README.md": [
         "Recommended starting notes",
+        "genre-development-playbook.md",
         "auto-battler-architecture.md",
         "deckbuilder-roguelike-architecture.md",
         "survivorlike-architecture.md",
@@ -162,6 +163,15 @@ RESEARCH_GUIDE_FILES = {
         "soulslike-architecture.md",
         "factory-automation-architecture.md",
         "metroidvania-architecture.md",
+    ],
+    "docs/research/game-development/genre/genre-development-playbook.md": [
+        "## Summary",
+        "## Primary sources",
+        "## Why this matters to this repo",
+        "## Decision impact",
+        "## How to use this playbook",
+        "## Shared development sequence for every genre",
+        "## Genre-by-genre guidance",
     ],
     "docs/research/game-development/genre/genre-design-pattern-catalog.md": [
         "### Auto-battler",

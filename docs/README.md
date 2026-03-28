@@ -46,6 +46,8 @@ That belongs in `studio/docs/active/`.
 - `research/game-development/README.md`
 - `research/game-development/foundations/README.md`
 - `research/game-development/engines/README.md`
+- `research/game-development/genre/README.md`
+- `research/game-development/genre/genre-development-playbook.md`
 
 ## Responsibility Split
 
@@ -60,6 +62,8 @@ If you are doing engine-specific work, start here:
 
 - `docs/research/game-development/engines/README.md`
 - `docs/reference/engine-examples.md`
+- `docs/research/game-development/genre/README.md`
+- `docs/research/game-development/genre/genre-development-playbook.md`
 - `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
@@ -100,6 +104,7 @@ Those notes exist so the repo does not reduce system-heavy work to "just add ano
 
 If the team is still deciding what kind of game it is making, or if a feature depends on genre-specific constraints, start here:
 
+- `research/game-development/genre/genre-development-playbook.md`
 - `research/game-development/genre/genre-design-pattern-catalog.md`
 - `research/game-development/genre/genre-example-matrix.md`
 - `research/game-development/genre/auto-battler-architecture.md`
