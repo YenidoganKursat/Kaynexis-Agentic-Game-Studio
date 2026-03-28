@@ -11,3 +11,7 @@ Recommended starting notes:
 - `colony-sim-architecture.md`
 - `factory-automation-architecture.md`
 - `metroidvania-architecture.md`
+- `city-builder-architecture.md`
+- `life-sim-architecture.md`
+- `hero-shooter-architecture.md`
+- `soulslike-architecture.md`

@@ -142,6 +142,22 @@ def test_genre_guidance_includes_reference_games_and_design_focus() -> None:
     assert "Metroid Dread" in metroidvania_payload["GENRE_REFERENCE_GAMES"]
     assert "world graph" in metroidvania_payload["GENRE_DESIGN_FOCUS"]
 
+    city_builder_payload = build_genre_replacements("city-builder")
+    assert "Cities: Skylines II" in city_builder_payload["GENRE_REFERENCE_GAMES"]
+    assert "transport/pathing" in city_builder_payload["GENRE_DESIGN_FOCUS"]
+
+    life_sim_payload = build_genre_replacements("life-sim")
+    assert "The Sims 4" in life_sim_payload["GENRE_REFERENCE_GAMES"]
+    assert "relationship graphs" in life_sim_payload["GENRE_DESIGN_FOCUS"]
+
+    hero_shooter_payload = build_genre_replacements("hero-shooter")
+    assert "Overwatch 2" in hero_shooter_payload["GENRE_REFERENCE_GAMES"]
+    assert "objective" in hero_shooter_payload["GENRE_DESIGN_FOCUS"]
+
+    soulslike_payload = build_genre_replacements("soulslike")
+    assert "ELDEN RING" in soulslike_payload["GENRE_REFERENCE_GAMES"]
+    assert "telegraph" in soulslike_payload["GENRE_DESIGN_FOCUS"]
+
 
 def test_active_docs_have_no_semantic_template_defaults() -> None:
     errors, warnings = collect_doc_findings()
@@ -179,6 +195,10 @@ def test_engine_research_guides_are_part_of_doc_validation_surface() -> None:
         "docs/research/game-development/genre/deckbuilder-roguelike-architecture.md",
         "docs/research/game-development/genre/survivorlike-architecture.md",
         "docs/research/game-development/genre/colony-sim-architecture.md",
+        "docs/research/game-development/genre/city-builder-architecture.md",
+        "docs/research/game-development/genre/life-sim-architecture.md",
+        "docs/research/game-development/genre/hero-shooter-architecture.md",
+        "docs/research/game-development/genre/soulslike-architecture.md",
         "docs/research/game-development/genre/factory-automation-architecture.md",
         "docs/research/game-development/genre/metroidvania-architecture.md",
         "docs/research/game-development/production/platform-readiness-pc-web-mobile-console.md",

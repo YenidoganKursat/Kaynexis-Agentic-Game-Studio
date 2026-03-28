@@ -51,8 +51,12 @@
 | `platformer` | `Dead Cells` as action-platformer contrast | movement feel, retry cadence, hazard readability | input/camera frustration |
 | `puzzle` | `Portal 2` | teach/test/twist sequencing, chamber escalation | rule ambiguity |
 | `colony-sim` | `RimWorld`, `Against the Storm` | job priorities, crisis readability, long-session state | simulation opacity |
+| `city-builder` | `Cities: Skylines II` | zoning, demand curves, transport clarity | unreadable city-scale bottlenecks |
 | `factory-automation` | `Factorio`, `Satisfactory` | throughput visibility, bottleneck debugging, scale tooling | unreadable logistics or expensive simulation |
+| `life-sim` | `The Sims 4`, `Animal Crossing: New Horizons` | routine texture, relationships, long-session identity | chores and relationship opacity |
+| `hero-shooter` | `Overwatch 2` | hero role clarity, objective pacing, teamfight readability | heroes blur together or objective confusion |
 | `metroidvania` | `Metroid Dread`, `Hollow Knight` | world memory, traversal gating, return-loop reward | arbitrary gates or dead backtracking |
+| `soulslike` | `ELDEN RING` | telegraph clarity, stamina commitment, recovery fairness | punishment feels arbitrary |
 | `tactical-rpg` | `Fire Emblem Engage` | forecast clarity, mobility vs tactics balance, choice density | decision paralysis or broken mobility |
 
 ## Quick application notes
@@ -69,8 +73,12 @@
   - movement mastery -> platformer
   - insight and rule discovery -> puzzle
   - emergent colony management -> colony-sim
+  - city-scale planning -> city-builder
   - logistics and throughput scaling -> factory-automation
+  - life routine and identity -> life-sim
+  - hero kit and objective matches -> hero-shooter
   - exploration through gated traversal -> metroidvania
+  - stamina challenge and recovery mastery -> soulslike
   - forecastable consequence planning -> tactical-rpg
 
 ### If the project blends two presets

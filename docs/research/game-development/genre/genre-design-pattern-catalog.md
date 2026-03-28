@@ -10,8 +10,11 @@
   - action-roguelite -> encounter readability and build variance
   - deckbuilder-roguelike -> state clarity, reward pool health, and route tension
   - co-op survival -> social coordination, resource pressure, and network resilience
+  - city-builder -> simulation legibility, demand curves, and bottleneck diagnosis
   - cozy sim -> routine legibility, low-friction progression, and environment attachment
   - extraction-lite -> raid fairness, secure economy, and extraction clarity
+  - hero-shooter -> role clarity, objective pacing, and teamfight readability
+  - life-sim -> routine texture, relationship state, and life-event content throughput
   - survivorlike -> density readability, scale-safe updates, and upgrade cadence
   - narrative adventure -> state tracking, content throughput, and choice legibility
   - platformer -> movement feel, camera support, and restart cadence
@@ -19,6 +22,7 @@
   - colony-sim -> simulation legibility, agent priorities, and crisis recovery
   - factory-automation -> throughput clarity, composable systems, and scale tooling
   - metroidvania -> world-memory support, gate clarity, and return-path payoff
+  - soulslike -> telegraph readability, recovery fairness, and shortcut-driven mastery
   - tactical RPG -> forecast readability, turn consequences, and complexity pacing
 
 ## Primary sources
@@ -39,8 +43,12 @@
 - [Against the Storm on Steam](https://store.steampowered.com/app/1336490/Against_the_Storm/)
 - [Factorio official site](https://www.factorio.com/)
 - [Satisfactory on Steam](https://store.steampowered.com/app/526870/Satisfactory/)
+- [Cities: Skylines II official site](https://www.paradoxinteractive.com/games/cities-skylines-ii/about)
+- [The Sims 4 official site](https://www.ea.com/games/the-sims/the-sims-4)
+- [Overwatch 2 official site](https://overwatch.blizzard.com/)
 - [Metroid Dread official site](https://metroid.nintendo.com/dread/)
 - [Hollow Knight official site](https://www.hollowknight.com/)
+- [ELDEN RING official site](https://en.bandainamcoent.eu/elden-ring/elden-ring)
 - [Fire Emblem Engage Ask the Developer](https://www.nintendo.com/en-gb/News/2023/January/Ask-the-Developer-Vol-8-Fire-Emblem-Engage-Chapter-3-2329633.html)
 
 ## Why this matters to this repo
@@ -210,6 +218,67 @@
 - Example inference:
   - `RimWorld` foregrounds emergent stories through needs, incidents, and autonomous colonist behavior.
   - `Against the Storm` foregrounds repeated settlement cycles, pressure systems, and management clarity under varied conditions.
+
+### City-builder
+- Dominant loop:
+  - zone or place a district
+  - provide services and transport
+  - inspect demand and bottlenecks
+  - rebalance the city
+- Architectural priority:
+  - simulation legibility
+  - transport/pathing clarity
+  - overlays and inspection tools
+- First system that breaks:
+  - the city becomes unreadable before the simulation becomes interesting
+- Example inference:
+  - `Cities: Skylines II` foregrounds zoning, traffic, and city-scale simulation clarity.
+
+### Life sim
+- Dominant loop:
+  - create or choose a character and home
+  - follow a routine
+  - personalize identity and relationships
+  - unlock new life changes
+- Architectural priority:
+  - character and household state
+  - calendar or schedule systems
+  - relationship graphs and customization ownership
+- First system that breaks:
+  - routine turns into chores or state becomes opaque
+- Example inference:
+  - `The Sims 4` foregrounds character creation, household expression, and life-state progression.
+  - `Animal Crossing: New Horizons` foregrounds place attachment, customization, and low-pressure social routines.
+
+### Hero shooter
+- Dominant loop:
+  - choose a hero
+  - contest an objective
+  - coordinate with the team
+  - swap or adapt to counterplay
+- Architectural priority:
+  - hero kit identity
+  - objective and map rules
+  - network authority and readability
+- First system that breaks:
+  - heroes blur together or the objective becomes unreadable at speed
+- Example inference:
+  - `Overwatch 2` foregrounds role clarity, teamfight readability, and objective pacing.
+
+### Soulslike
+- Dominant loop:
+  - explore a dangerous space
+  - read telegraphs
+  - commit stamina
+  - recover after risk
+- Architectural priority:
+  - telegraph windows and stamina
+  - checkpoint/recovery rules
+  - world gating and shortcut support
+- First system that breaks:
+  - punishment feels arbitrary instead of instructive
+- Example inference:
+  - `ELDEN RING` foregrounds stamina commitment, exploration pressure, and learning through repeated risk.
 
 ### Factory automation
 - Dominant loop:

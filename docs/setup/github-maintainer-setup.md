@@ -111,6 +111,7 @@ gh repo edit OWNER/REPO \
 - rulesets enabled for `main`
 - Actions enabled for the repository
 - no secrets are required for the current default workflows
+- if you expand genre support, keep `docs/reference/genre-presets.md`, the genre research index, and `studio/docs/active/genre-starter.md` synchronized with the new preset files
 - if you later wire OpenAI, Sentry, release uploads, or engine-backed build jobs, add those secrets only then
 
 ## Recommended ruleset
@@ -154,6 +155,7 @@ Repo CI now also includes:
 - a doc-sync guard workflow that fails when code or workflow changes are not mirrored by the relevant docs
 - a quality gate that enforces the minimum CI health score before release-readiness or nightly reports are accepted
 - the engine research index now includes visuals/animation playbooks, so sprite, texture, animation, and VFX changes should keep the relevant docs in sync before merge
+- the genre support surface now includes city-builder, life-sim, hero-shooter, and soulslike preset families, so new presets should update the docs, examples, and starter content together rather than drifting separately
 
 ## References
 

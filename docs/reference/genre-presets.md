@@ -29,8 +29,12 @@ For deeper design references, also read:
 | `platformer` | Movement mastery and cadence | One teach-test-twist movement gauntlet | Camera frustration |
 | `puzzle` | Rule clarity and satisfying player insight | One rule taught, tested, then twisted | Rule ambiguity |
 | `colony-sim` | Agent priorities, crisis recovery, and layered simulation | One small colony with one need, one job source, one crisis | Simulation opacity |
+| `city-builder` | City-scale planning, demand curves, and transport bottlenecks | One district with one solvable bottleneck | Unreadable city-scale bottlenecks |
 | `factory-automation` | Throughput, logistics, and scale through player-built systems | One production chain with one solvable bottleneck | Unreadable logistics |
+| `life-sim` | Routine, identity, relationships, and long-horizon attachment | One character routine with one visible life change | Chores and relationship opacity |
+| `hero-shooter` | Role kits, objective play, and teamfight readability | One hero with one objective mode | Heroes blur together |
 | `metroidvania` | Exploration, traversal gates, and return loops | One mini-zone with one traversal unlock and one shortcut | Arbitrary gating |
+| `soulslike` | Telegraph reading, stamina commitment, and recovery mastery | One small duel with one checkpoint | Punishment feels arbitrary |
 | `tactical-rpg` | Forecastable combat and build depth | One small skirmish with one meaningful build choice | Decision paralysis |
 
 ## Good defaults
@@ -45,6 +49,10 @@ For deeper design references, also read:
 - If you care most about risk economy and session stakes, start with `extraction-lite`.
 - If you care most about swarm pressure, build escalation, and short-run intensity, start with `survivorlike`.
 - If you care most about systemic management, agent priorities, and recoverable disasters, start with `colony-sim`.
+- If you care most about city-scale planning and transport bottlenecks, start with `city-builder`.
 - If you care most about throughput puzzles, logistics, and scale, start with `factory-automation`.
+- If you care most about routine, identity, and relationship state, start with `life-sim`.
+- If you care most about role kits and objective matches, start with `hero-shooter`.
 - If you care most about world memory, traversal gating, and exploration payoff, start with `metroidvania`.
+- If you care most about stamina mastery and telegraph readability, start with `soulslike`.
 - If you care most about tactical clarity and build planning, start with `tactical-rpg`.

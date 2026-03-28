@@ -93,6 +93,11 @@ GENRE_STARTER_GUIDANCE = {
         "GENRE_FIRST_FEATURE": "First Co-op Night",
         "GENRE_ROUTE_EXAMPLE": "Build the first two-player survive-the-night loop",
     },
+    "city-builder": {
+        "GENRE_FIRST_SLICE": "- One small district with zoning or placement rules\n- One demand loop or services system that can be read at a glance\n- One bottleneck overlay the player can use to fix a problem",
+        "GENRE_FIRST_FEATURE": "First District Plan",
+        "GENRE_ROUTE_EXAMPLE": "Prototype the first city-builder district with one demand overlay",
+    },
     "cozy-sim": {
         "GENRE_FIRST_SLICE": "- One short daily routine\n- One place or relationship that visibly improves\n- One clear low-stress reward beat",
         "GENRE_FIRST_FEATURE": "First Cozy Day",
@@ -107,6 +112,16 @@ GENRE_STARTER_GUIDANCE = {
         "GENRE_FIRST_SLICE": "- One raid with loot pickup and one extraction point\n- Clear risk of loss on failure\n- One safe meta-bank or stash outcome",
         "GENRE_FIRST_FEATURE": "First Extraction Run",
         "GENRE_ROUTE_EXAMPLE": "Prototype the first raid with one extraction point and stash outcome",
+    },
+    "hero-shooter": {
+        "GENRE_FIRST_SLICE": "- One hero with a distinct role and cooldown kit\n- One objective-driven map or mode\n- One teamfight readability pass for VFX, UI, and callouts",
+        "GENRE_FIRST_FEATURE": "First Hero Kit",
+        "GENRE_ROUTE_EXAMPLE": "Prototype the first hero kit and objective loop",
+    },
+    "life-sim": {
+        "GENRE_FIRST_SLICE": "- One character creation flow or household setup\n- One daily routine loop with a visible relationship or home change\n- One time or calendar system that makes days feel distinct",
+        "GENRE_FIRST_FEATURE": "First Life Routine",
+        "GENRE_ROUTE_EXAMPLE": "Prototype the first life-sim routine with one relationship or home progression beat",
     },
     "survivorlike": {
         "GENRE_FIRST_SLICE": "- One arena with continuous spawn pressure\n- One auto-attack or low-friction attack verb\n- One level-up reward choice that changes survival texture",
@@ -143,6 +158,11 @@ GENRE_STARTER_GUIDANCE = {
         "GENRE_FIRST_FEATURE": "First Traversal Gate",
         "GENRE_ROUTE_EXAMPLE": "Build the first metroidvania traversal gate and return path",
     },
+    "soulslike": {
+        "GENRE_FIRST_SLICE": "- One small combat space with one dangerous enemy and one safe return point\n- One stamina-driven attack, dodge, or guard verb\n- One checkpoint and corpse-recovery rule that is easy to explain",
+        "GENRE_FIRST_FEATURE": "First Soulslike Duel",
+        "GENRE_ROUTE_EXAMPLE": "Prototype the first stamina-driven duel and checkpoint loop",
+    },
     "tactical-rpg": {
         "GENRE_FIRST_SLICE": "- One small skirmish with readable forecasted outcomes\n- One meaningful build or loadout choice\n- One terrain or positioning lesson",
         "GENRE_FIRST_FEATURE": "First Tactical Skirmish",
@@ -159,6 +179,10 @@ GENRE_REFERENCE_GUIDANCE = {
         "GENRE_REFERENCE_GAMES": "- `Don't Starve Together` -> study shared scarcity, role expression, and co-op recovery",
         "GENRE_DESIGN_FOCUS": "- Dominant loop: gather -> coordinate -> survive -> rebuild\n- Architecture watch: authority for inventory, resource state, and session failure\n- First risk: desync pain or ambiguous shared state",
     },
+    "city-builder": {
+        "GENRE_REFERENCE_GAMES": "- `Cities: Skylines II` -> study zoning, demand curves, transport readability, and city-scale simulation",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: zone -> provision services -> inspect demand -> rebalance the city\n- Architecture watch: data ownership, transport/pathing cost, overlays, and save trust\n- First risk: the city becomes unreadable before the simulation becomes interesting",
+    },
     "cozy-sim": {
         "GENRE_REFERENCE_GAMES": "- `Stardew Valley` -> study routine breadth, long-term attachment, and low-friction progression\n- `Animal Crossing: New Horizons` -> study persistent place-making and customization-driven reward texture",
         "GENRE_DESIGN_FOCUS": "- Dominant loop: daily routine -> visible improvement -> stronger attachment\n- Architecture watch: persistent world state, schedules, and friction-light UI\n- First risk: chores becoming grind or interface sprawl",
@@ -170,6 +194,14 @@ GENRE_REFERENCE_GUIDANCE = {
     "extraction-lite": {
         "GENRE_REFERENCE_GAMES": "- `Hunt: Showdown` -> study extraction pressure, information play, and fair high-stakes loss",
         "GENRE_DESIGN_FOCUS": "- Dominant loop: gear up -> risk more -> extract or lose gains\n- Architecture watch: economy trust, loot authority, and extraction-state clarity\n- First risk: unfair loss or exploit-driven economy collapse",
+    },
+    "hero-shooter": {
+        "GENRE_REFERENCE_GAMES": "- `Overwatch 2` -> study hero kits, objective pacing, role clarity, and teamfight readability",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: choose hero -> contest objective -> swap or coordinate -> win together\n- Architecture watch: hero data, map objectives, network authority, killfeed/telemetry, and VFX clarity\n- First risk: balance or visual confusion destroying role identity",
+    },
+    "life-sim": {
+        "GENRE_REFERENCE_GAMES": "- `The Sims 4` -> study character creation, relationship state, and long-term life routines\n- `Animal Crossing: New Horizons` -> study customization, attachment to place, and low-pressure social routines",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: create -> routine -> personalize -> deepen bonds -> unlock life changes\n- Architecture watch: character state, calendar/time, relationship graphs, customization pipeline, and save persistence\n- First risk: routine turns into chores or content throughput overwhelms clarity",
     },
     "survivorlike": {
         "GENRE_REFERENCE_GAMES": "- `Vampire Survivors` -> study enemy density, low-input survival expression, and timed build escalation\n- `Brotato` -> study compact arena pacing, stat-readable upgrades, and short-run build identity",
@@ -198,6 +230,10 @@ GENRE_REFERENCE_GUIDANCE = {
     "metroidvania": {
         "GENRE_REFERENCE_GAMES": "- `Metroid Dread` -> study ability-gated traversal, pursuit pressure, and map-guided return flow\n- `Hollow Knight` -> study world memory, mood-driven exploration, and traversal mastery opening old spaces",
         "GENRE_DESIGN_FOCUS": "- Dominant loop: explore -> hit a gate -> gain movement power -> return with new access\n- Architecture watch: world graph ownership, ability-gate clarity, and backtracking reward structure\n- First risk: players lose spatial memory or gates feel arbitrary instead of exciting",
+    },
+    "soulslike": {
+        "GENRE_REFERENCE_GAMES": "- `ELDEN RING` -> study telegraph readability, checkpoint recovery, open-world challenge, and stamina-driven combat pacing",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: explore -> read telegraphs -> commit stamina -> recover after risk\n- Architecture watch: animation telegraph windows, checkpoint/recovery, enemy timing, world gating, and death economy\n- First risk: fairness feels arbitrary if readability or recovery rules are weak",
     },
     "tactical-rpg": {
         "GENRE_REFERENCE_GAMES": "- `Fire Emblem Engage` -> study forecast clarity, turn consequence readability, and mobility-vs-tactics balance",
