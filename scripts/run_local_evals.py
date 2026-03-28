@@ -271,6 +271,28 @@ def run_ci_report_eval() -> list[str]:
     return failures
 
 
+def run_doc_sync_eval() -> list[str]:
+    failures: list[str] = []
+    script = REPO_ROOT / "scripts" / "doc_sync_audit.py"
+    result = subprocess.run(
+        [sys.executable, str(script), "src/main.gd", "scripts/route_task.py", "studio/presets/genre/metroidvania.md", "--json"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        failures.append(f"doc_sync_audit failed during eval: {result.stderr.strip() or result.stdout.strip()}")
+        return failures
+    payload = json.loads(result.stdout)
+    docs = {item["doc"] for item in payload.get("recommendations", [])}
+    expected = {"docs/reference/ci-cd-architecture.md", "docs/reference/genre-presets.md"}
+    missing = expected - docs
+    if missing:
+        failures.append(f"doc sync audit missing expected docs: {', '.join(sorted(missing))}")
+    return failures
+
+
 def run_godot_surface_eval() -> list[str]:
     failures: list[str] = []
     expectations = load_cases(EVALS_DIR / "godot_surface" / "expectations.json")
@@ -322,6 +344,7 @@ def main() -> int:
         "checklists": run_checklist_eval(),
         "research_surface": run_research_surface_eval(),
         "ci_report": run_ci_report_eval(),
+        "doc_sync": run_doc_sync_eval(),
         "godot_surface": run_godot_surface_eval(),
     }
     total_failures = sum(len(items) for items in failures.values())

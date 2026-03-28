@@ -18,6 +18,7 @@
 - `make ci-workflows`: validate the GitHub workflow surface itself
 - `make ci-report`: generate `build/ci/latest/ci-report.json` and `build/ci/latest/ci-report.md`
 - `make starter-kit-smoke`: run contract smoke across all supported engines
+- `python3 scripts/doc_sync_audit.py --json`: surface docs that likely need review after code or content changes
 
 ## Artifact outputs
 - `build/ci/repo-validate/<python-version>`: per-matrix validation artifacts
@@ -25,6 +26,7 @@
 - `build/ci/starter-kit/<engine>`: per-engine contract smoke outputs
 - `build/ci/release`: manual release-readiness bundle
 - `build/ci/nightly`: scheduled audit bundle
+- `build/ci/*/ci-report.*`: scored CI reports with readiness and external dependency summaries
 
 ## Validation layers
 - Repo structure: `scripts/validate_repo_layout.py`
@@ -34,13 +36,16 @@
 - Engine contract smoke: `scripts/starter_kit_contract_smoke.py`
 - Workflow/eval regression: `scripts/run_local_evals.py`
 - CI artifact reporting: `scripts/ci_artifact_report.py`
+- Doc sync audit reminders: `scripts/doc_sync_audit.py`
 
 ## Engine policy
 - Godot can run real runtime/export checks when `GODOT_BIN` exists
 - Unity and Unreal use repo-local stubs in CI for adapter contract smoke
 - Full editor-backed CI only counts once `UNITY_CLI`, `UNREAL_UAT`, or `UNREAL_EDITOR` is wired to real installations
+- CI reports include a simple quality score and readiness label so the team can tell when the repo is validation-ready versus release-ready
 
 ## Failure handling
 - If `validate_workflows.py` fails, treat it as CI infrastructure drift, not a content bug
 - If `starter_kit_contract_smoke.py` fails, treat it as engine-surface regression before feature regression
 - If `ci-report` shows external dependencies, do not present the pipeline as shipping-ready
+- If `doc_sync_audit` suggests a doc after a code change, review the linked doc before merging

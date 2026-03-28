@@ -36,6 +36,8 @@ def test_ci_artifact_report_generates_files() -> None:
     assert Path(payload["markdown"]).exists()
     report = json.loads(Path(payload["json"]).read_text())
     assert report["project"]["name"] == "Kaynexis Agentic Game Studio"
+    assert 0 <= report["quality"]["score"] <= 100
+    assert report["quality"]["readiness"] in {"needs-attention", "validation-ready", "release-ready"}
     assert "unity_cli" in report["runtime"]
     assert "unity_hub" in report["runtime"]
     assert "unity_channel" in report["runtime"]
@@ -54,3 +56,18 @@ def test_starter_kit_contract_smoke_unity_surface() -> None:
     assert result.returncode == 0, result.stderr or result.stdout
     payload = json.loads(result.stdout)
     assert payload["failures"] == []
+
+
+def test_doc_sync_audit_is_surface_checked() -> None:
+    result = subprocess.run(
+        [sys.executable, str(REPO_ROOT / "scripts" / "doc_sync_audit.py"), "src/main.gd", "scripts/route_task.py", "studio/presets/genre/metroidvania.md", "--json"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+    payload = json.loads(result.stdout)
+    recommended = {item["doc"] for item in payload["recommendations"]}
+    assert "docs/reference/ci-cd-architecture.md" in recommended
+    assert "docs/reference/genre-presets.md" in recommended

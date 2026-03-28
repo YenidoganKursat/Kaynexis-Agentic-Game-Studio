@@ -41,6 +41,24 @@ def build_report(label: str | None = None) -> dict[str, object]:
     starter_kit_failures = {engine: validate_kit(engine) for engine in available_starter_kits()}
 
     remotes = git_output("remote")
+    external_dependencies = [
+        item
+        for item in [
+            "Configure a git remote before treating GitHub policy as active." if not ((remotes or "").splitlines()) else None,
+            "Set GODOT_BIN to enable runtime smoke and export checks." if not find_godot_binary() else None,
+            "Unity Hub is present, but no Unity editor CLI is configured yet." if find_unity_hub() and not find_unity_cli() else None,
+            "Install Unity and set UNITY_CLI for editor-backed validation." if not find_unity_hub() and not find_unity_cli() else None,
+            "Detected Unity editor install is prerelease; use a stable editor before treating coverage as release-grade." if unity_editor_channel(find_unity_cli()) in {"alpha", "beta"} else None,
+            "Install Unreal Engine and set UNREAL_UAT or UNREAL_EDITOR for engine-backed packaging validation." if not find_unreal_uat() and not find_unreal_editor() else None,
+        ]
+        if item
+    ]
+    doc_penalty = len(doc_errors) * 12 + len(doc_warnings) * 4
+    workflow_penalty = len(workflow_failures) * 12
+    kit_penalty = sum(len(items) for items in starter_kit_failures.values()) * 8
+    dependency_penalty = len(external_dependencies) * 4
+    quality_score = max(0, min(100, 100 - doc_penalty - workflow_penalty - kit_penalty - dependency_penalty))
+    readiness = "release-ready" if quality_score >= 90 and not external_dependencies else "validation-ready" if quality_score >= 75 else "needs-attention"
     report = {
         "generated_at_utc": datetime.now(UTC).replace(microsecond=0).isoformat(),
         "label": label or "ci-report",
@@ -71,20 +89,17 @@ def build_report(label: str | None = None) -> dict[str, object]:
             "doc_warnings": doc_warnings,
             "workflow_failures": workflow_failures,
             "starter_kit_failures": starter_kit_failures,
+            "score": quality_score,
+            "readiness": readiness,
+            "penalties": {
+                "doc_errors": doc_penalty,
+                "workflow_failures": workflow_penalty,
+                "starter_kit_failures": kit_penalty,
+                "external_dependencies": dependency_penalty,
+            },
         },
         "workflow_summary": workflow_summaries,
-        "external_dependencies": [
-            item
-            for item in [
-                "Configure a git remote before treating GitHub policy as active." if not ((remotes or "").splitlines()) else None,
-                "Set GODOT_BIN to enable runtime smoke and export checks." if not find_godot_binary() else None,
-                "Unity Hub is present, but no Unity editor CLI is configured yet." if find_unity_hub() and not find_unity_cli() else None,
-                "Install Unity and set UNITY_CLI for editor-backed validation." if not find_unity_hub() and not find_unity_cli() else None,
-                "Detected Unity editor install is prerelease; use a stable editor before treating coverage as release-grade." if unity_editor_channel(find_unity_cli()) in {"alpha", "beta"} else None,
-                "Install Unreal Engine and set UNREAL_UAT or UNREAL_EDITOR for engine-backed packaging validation." if not find_unreal_uat() and not find_unreal_editor() else None,
-            ]
-            if item
-        ],
+        "external_dependencies": external_dependencies,
     }
     return report
 
@@ -99,6 +114,8 @@ def render_markdown(report: dict[str, object]) -> str:
         f"- Label: {report['label']}",
         f"- Branch: {report['git']['branch'] or 'unknown'}",
         f"- SHA: {report['git']['sha'] or 'unknown'}",
+        f"- Quality score: {report['quality']['score']} / 100",
+        f"- Readiness: {report['quality']['readiness']}",
         "",
         "## Project surface",
         f"- Primary engine: {project['primary_engine']}",
@@ -111,6 +128,7 @@ def render_markdown(report: dict[str, object]) -> str:
         f"- Doc warnings: {len(quality['doc_warnings'])}",
         f"- Workflow failures: {len(quality['workflow_failures'])}",
         f"- Starter-kit failures: {sum(len(items) for items in quality['starter_kit_failures'].values())}",
+        f"- Penalties: {quality['penalties']}",
         "",
         "## External dependencies",
     ]
