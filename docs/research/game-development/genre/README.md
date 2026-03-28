@@ -6,8 +6,11 @@ Recommended starting notes:
 
 - `genre-design-pattern-catalog.md`
 - `genre-example-matrix.md`
+- `auto-battler-architecture.md`
 - `deckbuilder-roguelike-architecture.md`
 - `survivorlike-architecture.md`
+- `grand-strategy-architecture.md`
+- `stealth-architecture.md`
 - `colony-sim-architecture.md`
 - `factory-automation-architecture.md`
 - `metroidvania-architecture.md`

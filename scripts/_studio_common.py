@@ -93,6 +93,11 @@ GENRE_STARTER_GUIDANCE = {
         "GENRE_FIRST_FEATURE": "First Co-op Night",
         "GENRE_ROUTE_EXAMPLE": "Build the first two-player survive-the-night loop",
     },
+    "auto-battler": {
+        "GENRE_FIRST_SLICE": "- One draft or shop phase\n- One small board with clear unit placement rules\n- One combat resolution phase with visible round outcomes",
+        "GENRE_FIRST_FEATURE": "First Auto-Battler Board",
+        "GENRE_ROUTE_EXAMPLE": "Prototype the first auto-battler board and round economy",
+    },
     "city-builder": {
         "GENRE_FIRST_SLICE": "- One small district with zoning or placement rules\n- One demand loop or services system that can be read at a glance\n- One bottleneck overlay the player can use to fix a problem",
         "GENRE_FIRST_FEATURE": "First District Plan",
@@ -112,6 +117,11 @@ GENRE_STARTER_GUIDANCE = {
         "GENRE_FIRST_SLICE": "- One raid with loot pickup and one extraction point\n- Clear risk of loss on failure\n- One safe meta-bank or stash outcome",
         "GENRE_FIRST_FEATURE": "First Extraction Run",
         "GENRE_ROUTE_EXAMPLE": "Prototype the first raid with one extraction point and stash outcome",
+    },
+    "grand-strategy": {
+        "GENRE_FIRST_SLICE": "- One small realm or faction view\n- One event, diplomacy, or policy decision that changes the map state\n- One long-horizon save state with visible consequences",
+        "GENRE_FIRST_FEATURE": "First Realm Turn",
+        "GENRE_ROUTE_EXAMPLE": "Prototype the first grand-strategy realm turn with one policy or diplomacy choice",
     },
     "hero-shooter": {
         "GENRE_FIRST_SLICE": "- One hero with a distinct role and cooldown kit\n- One objective-driven map or mode\n- One teamfight readability pass for VFX, UI, and callouts",
@@ -142,6 +152,11 @@ GENRE_STARTER_GUIDANCE = {
         "GENRE_FIRST_SLICE": "- One clearly taught rule\n- One test room and one twist room\n- One hint or recovery path for misunderstanding",
         "GENRE_FIRST_FEATURE": "First Puzzle Sequence",
         "GENRE_ROUTE_EXAMPLE": "Design the first teach-test-twist puzzle sequence",
+    },
+    "stealth": {
+        "GENRE_FIRST_SLICE": "- One patrol space with one guard route\n- One stealth verb or visibility mechanic\n- One detection or alarm rule that is easy to read",
+        "GENRE_FIRST_FEATURE": "First Stealth Infiltration",
+        "GENRE_ROUTE_EXAMPLE": "Prototype the first stealth infiltration with one readable detection rule",
     },
     "colony-sim": {
         "GENRE_FIRST_SLICE": "- One small colony state with a few agents\n- One need, one job source, and one recoverable crisis\n- One UI view that explains why an agent chose a job",
@@ -179,6 +194,10 @@ GENRE_REFERENCE_GUIDANCE = {
         "GENRE_REFERENCE_GAMES": "- `Don't Starve Together` -> study shared scarcity, role expression, and co-op recovery",
         "GENRE_DESIGN_FOCUS": "- Dominant loop: gather -> coordinate -> survive -> rebuild\n- Architecture watch: authority for inventory, resource state, and session failure\n- First risk: desync pain or ambiguous shared state",
     },
+    "auto-battler": {
+        "GENRE_REFERENCE_GAMES": "- `Teamfight Tactics` -> study draft economy, board positioning, and round-to-round adaptation",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: draft or shop -> place units -> resolve round -> adapt\n- Architecture watch: shop pool health, board state, combat resolution, and match UI\n- First risk: roster or economy opacity making outcomes feel random",
+    },
     "city-builder": {
         "GENRE_REFERENCE_GAMES": "- `Cities: Skylines II` -> study zoning, demand curves, transport readability, and city-scale simulation",
         "GENRE_DESIGN_FOCUS": "- Dominant loop: zone -> provision services -> inspect demand -> rebalance the city\n- Architecture watch: data ownership, transport/pathing cost, overlays, and save trust\n- First risk: the city becomes unreadable before the simulation becomes interesting",
@@ -194,6 +213,10 @@ GENRE_REFERENCE_GUIDANCE = {
     "extraction-lite": {
         "GENRE_REFERENCE_GAMES": "- `Hunt: Showdown` -> study extraction pressure, information play, and fair high-stakes loss",
         "GENRE_DESIGN_FOCUS": "- Dominant loop: gear up -> risk more -> extract or lose gains\n- Architecture watch: economy trust, loot authority, and extraction-state clarity\n- First risk: unfair loss or exploit-driven economy collapse",
+    },
+    "grand-strategy": {
+        "GENRE_REFERENCE_GAMES": "- `Crusader Kings III` -> study character-driven dynasties, long-horizon state, and event pacing\n- `Stellaris` -> study empire-scale simulation, systemic choice, and macro progression",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: choose a long-horizon plan -> react to events -> expand influence -> preserve the run or campaign\n- Architecture watch: realm state, diplomacy, event systems, and save trust\n- First risk: the UI or state model becoming too dense to reason about",
     },
     "hero-shooter": {
         "GENRE_REFERENCE_GAMES": "- `Overwatch 2` -> study hero kits, objective pacing, role clarity, and teamfight readability",
@@ -218,6 +241,10 @@ GENRE_REFERENCE_GUIDANCE = {
     "puzzle": {
         "GENRE_REFERENCE_GAMES": "- `Portal 2` -> study teach/test/twist sequencing and authored escalation",
         "GENRE_DESIGN_FOCUS": "- Dominant loop: observe rule -> test hypothesis -> learn hidden constraint\n- Architecture watch: rule clarity, misunderstanding recovery, and hint discipline\n- First risk: rule ambiguity or accidental solves",
+    },
+    "stealth": {
+        "GENRE_REFERENCE_GAMES": "- `HITMAN World of Assassination` -> study detection fairness, patrol logic, and sandbox objective solving",
+        "GENRE_DESIGN_FOCUS": "- Dominant loop: scout -> manipulate visibility or noise -> execute objective -> exit\n- Architecture watch: AI perception, suspicion states, level geometry, and sound or visibility rules\n- First risk: detection feeling arbitrary instead of readable",
     },
     "colony-sim": {
         "GENRE_REFERENCE_GAMES": "- `RimWorld` -> study agent-driven story emergence, need pressure, and recoverable disasters\n- `Against the Storm` -> study pressure cycles, settlement-specific constraints, and economy clarity under repeated runs",

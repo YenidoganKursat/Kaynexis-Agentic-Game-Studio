@@ -138,6 +138,14 @@ def test_genre_guidance_includes_reference_games_and_design_focus() -> None:
     assert "Slay the Spire" in deckbuilder_payload["GENRE_REFERENCE_GAMES"]
     assert deckbuilder_payload["GENRE_FIRST_FEATURE"] == "First Deck Run"
 
+    auto_battler_payload = build_genre_replacements("auto-battler")
+    assert "Teamfight Tactics" in auto_battler_payload["GENRE_REFERENCE_GAMES"]
+    assert "board" in auto_battler_payload["GENRE_DESIGN_FOCUS"]
+
+    grand_strategy_payload = build_genre_replacements("grand-strategy")
+    assert "Crusader Kings III" in grand_strategy_payload["GENRE_REFERENCE_GAMES"]
+    assert "diplomacy" in grand_strategy_payload["GENRE_DESIGN_FOCUS"]
+
     metroidvania_payload = build_genre_replacements("metroidvania")
     assert "Metroid Dread" in metroidvania_payload["GENRE_REFERENCE_GAMES"]
     assert "world graph" in metroidvania_payload["GENRE_DESIGN_FOCUS"]
@@ -153,6 +161,10 @@ def test_genre_guidance_includes_reference_games_and_design_focus() -> None:
     hero_shooter_payload = build_genre_replacements("hero-shooter")
     assert "Overwatch 2" in hero_shooter_payload["GENRE_REFERENCE_GAMES"]
     assert "objective" in hero_shooter_payload["GENRE_DESIGN_FOCUS"]
+
+    stealth_payload = build_genre_replacements("stealth")
+    assert "HITMAN World of Assassination" in stealth_payload["GENRE_REFERENCE_GAMES"]
+    assert "detection" in stealth_payload["GENRE_DESIGN_FOCUS"]
 
     soulslike_payload = build_genre_replacements("soulslike")
     assert "ELDEN RING" in soulslike_payload["GENRE_REFERENCE_GAMES"]
@@ -192,8 +204,11 @@ def test_engine_research_guides_are_part_of_doc_validation_surface() -> None:
         "docs/research/game-development/genre/README.md",
         "docs/research/game-development/genre/genre-design-pattern-catalog.md",
         "docs/research/game-development/genre/genre-example-matrix.md",
+        "docs/research/game-development/genre/auto-battler-architecture.md",
         "docs/research/game-development/genre/deckbuilder-roguelike-architecture.md",
         "docs/research/game-development/genre/survivorlike-architecture.md",
+        "docs/research/game-development/genre/grand-strategy-architecture.md",
+        "docs/research/game-development/genre/stealth-architecture.md",
         "docs/research/game-development/genre/colony-sim-architecture.md",
         "docs/research/game-development/genre/city-builder-architecture.md",
         "docs/research/game-development/genre/life-sim-architecture.md",

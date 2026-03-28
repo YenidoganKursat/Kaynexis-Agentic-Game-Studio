@@ -44,12 +44,15 @@
 | `action-roguelite` | `Dead Cells`, `Risk of Rain 2` | repetition loop, build variety, scaling pressure | run variety collapse |
 | `deckbuilder-roguelike` | `Slay the Spire`, `Balatro` | reward pool health, state readability, route planning | solved decks or unreadable card states |
 | `co-op-survival` | `Don't Starve Together` | shared resource truth, social recovery, session stakes | desync and inventory ambiguity |
+| `auto-battler` | `Teamfight Tactics` | draft economy, board positioning, round pacing | roster opacity or board confusion |
 | `cozy-sim` | `Stardew Valley`, `Animal Crossing: New Horizons` | routine texture, attachment to place, low-friction progression | grind and UI sprawl |
 | `extraction-lite` | `Hunt: Showdown` | extraction clarity, sound/information play, economy trust | unfair loss and exploit pressure |
+| `grand-strategy` | `Crusader Kings III`, `Stellaris` | realm state, diplomacy, event pacing | UI density or state overload |
 | `survivorlike` | `Vampire Survivors`, `Brotato` | density readability, upgrade cadence, performance ceilings | clutter and spawn/perf collapse |
 | `narrative-adventure` | `Life is Strange`, `Pentiment` | scene flow, choice visibility, content throughput | branch/state bugs |
 | `platformer` | `Dead Cells` as action-platformer contrast | movement feel, retry cadence, hazard readability | input/camera frustration |
 | `puzzle` | `Portal 2` | teach/test/twist sequencing, chamber escalation | rule ambiguity |
+| `stealth` | `HITMAN World of Assassination` | detection fairness, patrol readability, objective routing | detection feeling arbitrary |
 | `colony-sim` | `RimWorld`, `Against the Storm` | job priorities, crisis readability, long-session state | simulation opacity |
 | `city-builder` | `Cities: Skylines II` | zoning, demand curves, transport clarity | unreadable city-scale bottlenecks |
 | `factory-automation` | `Factorio`, `Satisfactory` | throughput visibility, bottleneck debugging, scale tooling | unreadable logistics or expensive simulation |
@@ -66,12 +69,15 @@
   - readable pressure -> action-roguelite
   - compact sequencing and route planning -> deckbuilder-roguelike
   - shared scarcity -> co-op-survival
+  - draft and board resolution -> auto-battler
   - low-stress routine -> cozy-sim
   - high-risk extraction -> extraction-lite
+  - long-horizon empire state -> grand-strategy
   - high-density survival pressure -> survivorlike
   - authored choice and consequence -> narrative-adventure
   - movement mastery -> platformer
   - insight and rule discovery -> puzzle
+  - detection and route control -> stealth
   - emergent colony management -> colony-sim
   - city-scale planning -> city-builder
   - logistics and throughput scaling -> factory-automation

@@ -47,6 +47,7 @@
 - CI quality gate: `scripts/ci_quality_gate.py`
 - Engine research now includes visuals/animation playbooks, so sprite, texture, animation, and VFX changes stay visible to both routing and doc-sync checks.
 - Genre research now includes additional presets and architecture notes for city-builder, life-sim, hero-shooter, and soulslike support, so updates to those presets should keep the matching catalog, example matrix, and active starter docs in sync.
+- Genre research now also includes auto-battler, grand-strategy, and stealth support, so those preset families should follow the same sync rule before merge.
 
 ## Engine policy
 - Godot can run real runtime/export checks when `GODOT_BIN` exists

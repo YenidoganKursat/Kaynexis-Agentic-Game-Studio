@@ -16,6 +16,7 @@
 - Release: real editor/export jobs only count as complete once engine binaries are present on the runner
 - Repo validation now includes a doc-sync guard and a minimum CI quality gate, so code or workflow changes must be accompanied by the docs they affect
 - When adding or revising genre presets, keep the matching architecture note, example matrix row, and starter doc updated together so the support surface stays truthful for teams choosing city-builder, life-sim, hero-shooter, or soulslike paths
+- The same rule now applies to auto-battler, grand-strategy, and stealth support as well, because those families change route, checklist, and first-slice advice together.
 
 ## Engine contracts
 - Godot 4: `python3 scripts/godot_smoke.py --static-only`, optional runtime smoke, then `python3 scripts/godot_export.py --preset "..."`

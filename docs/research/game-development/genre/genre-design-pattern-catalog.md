@@ -10,15 +10,18 @@
   - action-roguelite -> encounter readability and build variance
   - deckbuilder-roguelike -> state clarity, reward pool health, and route tension
   - co-op survival -> social coordination, resource pressure, and network resilience
+  - auto-battler -> draft economy, board readability, and round resolution clarity
   - city-builder -> simulation legibility, demand curves, and bottleneck diagnosis
   - cozy sim -> routine legibility, low-friction progression, and environment attachment
   - extraction-lite -> raid fairness, secure economy, and extraction clarity
+  - grand-strategy -> realm state, diplomacy, event pacing, and campaign trust
   - hero-shooter -> role clarity, objective pacing, and teamfight readability
   - life-sim -> routine texture, relationship state, and life-event content throughput
   - survivorlike -> density readability, scale-safe updates, and upgrade cadence
   - narrative adventure -> state tracking, content throughput, and choice legibility
   - platformer -> movement feel, camera support, and restart cadence
   - puzzle -> teach/test/twist sequencing and misunderstanding analysis
+  - stealth -> detection fairness, patrol readability, and objective routing
   - colony-sim -> simulation legibility, agent priorities, and crisis recovery
   - factory-automation -> throughput clarity, composable systems, and scale tooling
   - metroidvania -> world-memory support, gate clarity, and return-path payoff
@@ -34,10 +37,14 @@
 - [Stardew Valley official site](https://www.stardewvalley.net/)
 - [Don't Starve Together on Steam](https://store.steampowered.com/app/322330/Don_t_Starve_Together/)
 - [Hunt: Showdown early access release notes](https://www.huntshowdown.com/news/hunt-showdown-early-access-release-notes)
+- [Teamfight Tactics official site](https://teamfighttactics.leagueoflegends.com/)
 - [Vampire Survivors on Steam](https://store.steampowered.com/app/1794680/Vampire_Survivors/)
 - [Brotato on Steam](https://store.steampowered.com/app/1942280/Brotato/)
 - [Life is Strange official site](https://lifeisstrange.square-enix-games.com/en-us)
 - [Pentiment official site](https://pentiment.obsidian.net/)
+- [Crusader Kings III official site](https://www.paradoxinteractive.com/games/crusader-kings-iii)
+- [Stellaris official site](https://www.paradoxinteractive.com/games/stellaris)
+- [HITMAN World of Assassination official site](https://www.hitman.com/)
 - [Portal 2 on Steam](https://store.steampowered.com/app/620/Portal_2/)
 - [RimWorld on Steam](https://store.steampowered.com/app/294100/RimWorld/)
 - [Against the Storm on Steam](https://store.steampowered.com/app/1336490/Against_the_Storm/)
@@ -94,6 +101,21 @@
 - Example inference:
   - `Don't Starve Together` foregrounds fight/farm/build/explore cooperation and survival style expression.
 
+### Auto-battler
+- Dominant loop:
+  - draft or shop
+  - place units on a small board
+  - resolve the round automatically
+  - adapt the roster or economy
+- Architectural priority:
+  - draft economy
+  - board state clarity
+  - resolution logs
+- First system that breaks:
+  - pool opacity or board rules become hard to read
+- Example inference:
+  - `Teamfight Tactics` foregrounds shop economy, board placement, and round-to-round adaptation.
+
 ### Cozy sim
 - Dominant loop:
   - perform low-stress routine
@@ -140,6 +162,22 @@
   - unfair death, exploit economy, or unreadable extraction state
 - Example inference:
   - `Hunt: Showdown` foregrounds sound cues, extraction pressure, and high-value objective escape timing.
+
+### Grand strategy
+- Dominant loop:
+  - choose a long-horizon plan
+  - react to events and diplomacy
+  - expand or stabilize influence
+  - preserve the campaign or run
+- Architectural priority:
+  - realm state
+  - diplomacy and event systems
+  - campaign-scale save trust
+- First system that breaks:
+  - UI or state becomes too dense to reason about
+- Example inference:
+  - `Crusader Kings III` foregrounds character-driven dynasties and long-horizon state.
+  - `Stellaris` foregrounds empire-scale simulation and macro progression.
 
 ### Survivorlike
 - Dominant loop:
@@ -202,6 +240,21 @@
   - players solve by accident or fail to learn the intended rule
 - Example inference:
   - `Portal 2` foregrounds puzzle elements, chambers, and a much larger sequence of authored test spaces; this supports the classic teach-and-escalate structure.
+
+### Stealth
+- Dominant loop:
+  - scout a space
+  - observe patrols and visibility
+  - manipulate noise, timing, or line of sight
+  - execute the objective
+- Architectural priority:
+  - AI perception
+  - suspicion states
+  - level geometry and route readability
+- First system that breaks:
+  - detection feels arbitrary instead of readable
+- Example inference:
+  - `HITMAN World of Assassination` foregrounds detection fairness, patrol logic, and sandbox objective solving.
 
 ### Colony sim
 - Dominant loop:
