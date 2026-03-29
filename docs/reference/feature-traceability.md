@@ -22,6 +22,8 @@ Start from:
 - `docs/research/game-development/genre/genre-advanced-development-framework.md`
 - `studio/docs/templates/lorebook-brief.md`
 - `docs/reference/lorebook-methodology.md`
+- `studio/docs/templates/world-graph-brief.md`
+- `docs/reference/world-graph-methodology.md`
 
 ## Why this matters
 
@@ -50,6 +52,12 @@ For lorebook support work, traceability should also show:
 - which canon scope changed
 - whether the lorebook affected gameplay unlocks or only authored prose
 - which systems own the lorebook data, unlock logic, and save/load persistence
+
+For world graph or history work, traceability should also show:
+
+- which node and edge types were added or changed
+- whether the history model is append-only or snapshot-backed
+- which system owns canonical relationship truth and which systems only render it
 
 ## Bad traceability
 

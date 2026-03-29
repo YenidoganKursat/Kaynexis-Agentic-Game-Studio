@@ -74,6 +74,31 @@ python3 scripts/codex_studio.py next "Design boss encounter state ownership"
 Before implementation, make sure the final task references at least one relevant research note.
 If the task is visual or presentation-heavy, also read the matching `*-visuals-animation-playbook.md` for the engine before writing code or content.
 
+## Recipe: Build world graph or lorebook support
+
+Use this when the task affects canon, codices, faction histories, relationship networks, or timeline-driven world state.
+
+```bash
+python3 scripts/codex_studio.py next "Design a world graph that keeps faction history queryable without making dialogue own canon"
+python3 scripts/codex_studio.py checklist --task "Design a world graph that keeps faction history queryable without making dialogue own canon"
+python3 scripts/codex_studio.py research --category narrative --title "World graph relationship and history architecture"
+```
+
+Then read:
+
+- `docs/reference/world-graph-methodology.md`
+- `docs/reference/lorebook-methodology.md`
+- `docs/research/game-development/narrative/world-graph-relationship-history-architecture.md`
+- `docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md`
+
+Keep the brief explicit about:
+
+- canonical node types
+- canonical edge types
+- append-only history versus snapshot state
+- which system owns runtime deltas
+- the fast read path for the common graph query
+
 ## Recipe: Prepare for a performance pass
 
 Use this when FPS, memory, or scale is becoming risky.

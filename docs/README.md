@@ -33,6 +33,7 @@ That belongs in `studio/docs/active/`.
 - `reference/workflow-recipes.md`
 - `reference/task-prompt-examples.md`
 - `reference/lorebook-methodology.md`
+- `reference/world-graph-methodology.md`
 - `reference/code-review.md`
 - `reference/eval-strategy.md`
 - `reference/genre-presets.md`
@@ -105,11 +106,13 @@ Those notes exist so the repo does not reduce system-heavy work to "just add ano
 
 ## Narrative Research Highlights
 
-If the task is about story canon, lorebook structure, or narrative state, start here:
+If the task is about story canon, lorebook structure, world graphs, or narrative state, start here:
 
 - `reference/lorebook-methodology.md`
+- `reference/world-graph-methodology.md`
 - `research/game-development/narrative/README.md`
 - `research/game-development/narrative/lorebook-world-state-and-canon-architecture.md`
+- `research/game-development/narrative/world-graph-relationship-history-architecture.md`
 - `research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md`
 
 Those notes exist so story facts, unlocks, and dialogue references stay separate instead of drifting into one large script layer.

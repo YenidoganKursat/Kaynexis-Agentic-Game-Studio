@@ -14,6 +14,8 @@ Start from:
 - `docs/research/game-development/genre/genre-advanced-development-framework.md`
 - `studio/docs/templates/lorebook-brief.md`
 - `docs/reference/lorebook-methodology.md`
+- `studio/docs/templates/world-graph-brief.md`
+- `docs/reference/world-graph-methodology.md`
 
 ## Required fields
 
@@ -67,3 +69,9 @@ For lorebook-heavy work, the handoff should also say:
 - what unlocks a new lore entry
 - which system owns persistence of unlocked lore
 - whether the work changes canon or only presentation
+
+For world graph or history-heavy work, the handoff should also say:
+
+- which node and edge types are authoritative
+- whether history is append-only or snapshot-backed
+- which system owns fast reads for the common graph query

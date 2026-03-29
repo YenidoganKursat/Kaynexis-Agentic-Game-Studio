@@ -56,6 +56,7 @@ Use this when a game needs a durable world-knowledge layer for canon, story fact
 
 ## Related docs
 - `docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md`
+- `docs/reference/world-graph-methodology.md`
 - `docs/reference/feature-traceability.md`
 - `docs/reference/handoff-contracts.md`
 - `studio/docs/templates/lorebook-brief.md`

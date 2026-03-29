@@ -22,6 +22,7 @@
 - The starter-template surface also pulls in `docs/examples/README.md`, `reference/handoff-contracts.md`, and `reference/feature-traceability.md`, so build-facing template changes should keep those execution docs current too.
 - The genre advanced development framework now defines the maturity path for every supported genre family, so build readiness discussions should use it when deciding whether a genre is still in first-slice or already in scale-up mode.
 - The lorebook methodology now defines the narrative canon surface, so build readiness discussions should keep `docs/reference/lorebook-methodology.md`, the lorebook brief, and narrative research notes synchronized before implementation.
+- The world graph methodology now defines the relationship and history surface, so build readiness discussions should keep `docs/reference/world-graph-methodology.md`, the world graph brief, and narrative research notes synchronized before implementation.
 
 ## Engine contracts
 - Godot 4: `python3 scripts/godot_smoke.py --static-only`, optional runtime smoke, then `python3 scripts/godot_export.py --preset "..."`

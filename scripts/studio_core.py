@@ -228,6 +228,14 @@ DISCIPLINE_RESEARCH_REFS: dict[str, list[str]] = {
         "docs/research/game-development/systems/input-controls-camera-and-remapping-architecture.md",
         "docs/research/game-development/foundations/game-feel-usability-and-accessibility-foundations.md",
     ],
+    "narrative": [
+        "docs/reference/lorebook-methodology.md",
+        "docs/reference/world-graph-methodology.md",
+        "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md",
+        "docs/research/game-development/narrative/world-graph-relationship-history-architecture.md",
+        "docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md",
+        "docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md",
+    ],
 }
 
 TASK_CONTEXT_RESEARCH_REFS: dict[str, dict[str, Any]] = {
@@ -450,6 +458,32 @@ TASK_CONTEXT_RESEARCH_REFS: dict[str, dict[str, Any]] = {
         "refs": [
             "docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md",
             "docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md",
+        ],
+    },
+    "world_graph": {
+        "keywords": (
+            "world graph",
+            "relationship graph",
+            "faction network",
+            "history network",
+            "timeline",
+            "chronology",
+            "lineage",
+            "biography",
+            "organization",
+            "org chart",
+            "social graph",
+            "history",
+            "histories",
+            "event chain",
+            "canon map",
+            "map state",
+        ),
+        "refs": [
+            "docs/reference/world-graph-methodology.md",
+            "docs/research/game-development/narrative/world-graph-relationship-history-architecture.md",
+            "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md",
+            "docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md",
         ],
     },
     "lorebook": {

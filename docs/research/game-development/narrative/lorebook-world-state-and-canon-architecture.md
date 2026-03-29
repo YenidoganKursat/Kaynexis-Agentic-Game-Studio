@@ -88,6 +88,7 @@
 - If those questions cannot be answered clearly, the lorebook is still in concept territory.
 
 ## Related references
+- `docs/reference/world-graph-methodology.md`
 - `docs/reference/lorebook-methodology.md`
 - `docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md`
 - `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md`

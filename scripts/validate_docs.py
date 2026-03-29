@@ -51,6 +51,7 @@ USER_GUIDE_FILES = {
         "reference/workflow-recipes.md",
         "reference/task-prompt-examples.md",
         "reference/lorebook-methodology.md",
+        "reference/world-graph-methodology.md",
         "research/game-development/genre/genre-advanced-development-framework.md",
         "research/game-development/narrative/README.md",
     ],
@@ -73,8 +74,11 @@ USER_GUIDE_FILES = {
     "docs/reference/task-prompt-examples.md": [
         "## Strong task patterns",
         "## Lorebook and narrative",
+        "docs/reference/lorebook-methodology.md",
         "## Good `next` examples",
         "## When to make a feature brief first",
+        "## World graph and history",
+        "docs/reference/world-graph-methodology.md",
     ],
     "docs/reference/engine-examples.md": [
         "## Example slices by engine",
@@ -108,16 +112,27 @@ USER_GUIDE_FILES = {
         "## Good lorebook entry shape",
         "## Validation questions",
     ],
+    "docs/reference/world-graph-methodology.md": [
+        "## What a world graph is in this repo",
+        "## Core rule",
+        "## Recommended workflow",
+        "## Good world graph entry shape",
+        "## Performance guidance",
+        "## Validation questions",
+    ],
     "docs/examples/README.md": [
         "feature-brief-golden-example.md",
         "adr-golden-example.md",
         "handoff-contract-golden-example.md",
         "genre-starter-golden-example.md",
         "lorebook-brief-golden-example.md",
+        "world-graph-brief-golden-example.md",
     ],
     "docs/research/game-development/narrative/README.md": [
         "Recommended starting notes",
+        "docs/reference/world-graph-methodology.md",
         "lorebook-world-state-and-canon-architecture.md",
+        "world-graph-relationship-history-architecture.md",
     ],
 }
 
@@ -131,7 +146,9 @@ RESEARCH_GUIDE_FILES = {
     ],
     "docs/research/game-development/narrative/README.md": [
         "Recommended starting notes",
+        "docs/reference/world-graph-methodology.md",
         "lorebook-world-state-and-canon-architecture.md",
+        "world-graph-relationship-history-architecture.md",
     ],
     "docs/research/game-development/foundations/design-frameworks-mda-gameflow-and-sdt.md": [
         "## Summary",
@@ -207,6 +224,15 @@ RESEARCH_GUIDE_FILES = {
         "## Genre family support map",
     ],
     "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md": [
+        "## Summary",
+        "## Primary sources",
+        "## Why this matters to this repo",
+        "## Decision impact",
+        "## Architecture guidance",
+        "## What to watch out for",
+        "## Validation expectations",
+    ],
+    "docs/research/game-development/narrative/world-graph-relationship-history-architecture.md": [
         "## Summary",
         "## Primary sources",
         "## Why this matters to this repo",

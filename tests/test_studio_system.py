@@ -187,6 +187,7 @@ def test_user_facing_guides_are_part_of_doc_validation_surface() -> None:
         "docs/reference/workflow-recipes.md",
         "docs/reference/task-prompt-examples.md",
         "docs/reference/lorebook-methodology.md",
+        "docs/reference/world-graph-methodology.md",
         "docs/reference/handoff-contracts.md",
         "docs/reference/feature-traceability.md",
         "docs/reference/doc-sync-audit.md",
@@ -209,6 +210,7 @@ def test_engine_research_guides_are_part_of_doc_validation_surface() -> None:
         "docs/research/game-development/genre/genre-advanced-development-framework.md",
         "docs/research/game-development/narrative/README.md",
         "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md",
+        "docs/research/game-development/narrative/world-graph-relationship-history-architecture.md",
         "docs/research/game-development/genre/genre-design-pattern-catalog.md",
         "docs/research/game-development/genre/genre-example-matrix.md",
         "docs/research/game-development/genre/auto-battler-architecture.md",
@@ -326,6 +328,20 @@ def test_route_task_surfaces_lorebook_research_refs() -> None:
     payload = run_json("scripts/route_task.py", "Design a lorebook flow for faction canon and unlockable archive entries", "--json")
     assert payload["route"] == "narrative / lorebook"
     assert "docs/reference/lorebook-methodology.md" in payload["docs"]
+    assert "docs/examples/lorebook-brief-golden-example.md" in payload["docs"]
+    assert "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md" in payload["research_refs"]
+
+
+def test_route_task_surfaces_world_graph_research_refs() -> None:
+    payload = run_json(
+        "scripts/route_task.py",
+        "Design a world graph for faction history, organization ties, and codex reads",
+        "--json",
+    )
+    assert payload["route"] == "narrative / world graph"
+    assert "docs/reference/world-graph-methodology.md" in payload["docs"]
+    assert "docs/examples/world-graph-brief-golden-example.md" in payload["docs"]
+    assert "docs/research/game-development/narrative/world-graph-relationship-history-architecture.md" in payload["research_refs"]
     assert "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md" in payload["research_refs"]
 
 
@@ -594,6 +610,7 @@ def test_research_notes_seeded() -> None:
     assert any(path.name == "genre-example-matrix.md" for path in notes)
     assert any(path.name == "genre-advanced-development-framework.md" for path in notes)
     assert any(path.name == "lorebook-world-state-and-canon-architecture.md" for path in notes)
+    assert any(path.name == "world-graph-relationship-history-architecture.md" for path in notes)
     assert any(path.name == "godot-4-architecture.md" for path in notes)
     assert any(path.name == "godot-4-class-editor-object-map.md" for path in notes)
     assert any(path.name == "godot-4-2d-3d-class-and-mechanic-guide.md" for path in notes)
