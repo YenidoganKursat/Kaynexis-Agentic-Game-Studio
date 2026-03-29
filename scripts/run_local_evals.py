@@ -65,6 +65,8 @@ def run_genre_guidance_eval() -> list[str]:
             failures.append(
                 f"genre guidance first feature mismatch for '{case['genre']}': expected {case['expected_first_feature']}, got {payload.get('GENRE_FIRST_FEATURE')}"
             )
+        if not str(payload.get("GENRE_ADVANCED_GUIDE", "")).endswith("genre-advanced-development-framework.md"):
+            failures.append(f"genre guidance missing advanced framework guide for '{case['genre']}'")
         skills_block = str(payload.get("GENRE_SKILLS", ""))
         for skill in case.get("required_skills", []):
             if skill not in skills_block:

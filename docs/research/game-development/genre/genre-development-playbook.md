@@ -42,6 +42,11 @@
 6. Validate readability, pacing, and failure recovery before adding breadth.
 7. Only add adjacent systems after the first slice has a clear win and a clear failure mode.
 
+## Advanced development path
+- Once the first slice is stable, move from "does the loop work?" to "what does this genre need at scale?"
+- Use [Genre Advanced Development Framework](./genre-advanced-development-framework.md) to deepen state ownership, content throughput, performance, accessibility, and validation shape.
+- The advanced path should answer whether the genre can survive a larger project without collapsing into generic systems or unreadable state.
+
 ## Genre-by-genre guidance
 
 ### Action roguelite

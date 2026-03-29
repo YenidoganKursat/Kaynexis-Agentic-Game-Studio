@@ -26,6 +26,8 @@ When a task is system-specific, add the matching systems note before implementat
 - abilities, upgrades, perks, skill trees, cooldowns, or build variety -> `docs/research/game-development/systems/abilities-skill-trees-upgrades-and-build-architecture.md`
 - interactables, pickups, prompts, levers, chests, or world objects -> `docs/research/game-development/systems/interactions-pickups-and-world-object-architecture.md`
 - persistence or progression interaction -> `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md`
+- lorebook, codex, canon, archive, or unlockable world knowledge -> `docs/reference/lorebook-methodology.md` and `docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md`
+- world graph, faction network, history network, lineage, or organization graph -> `docs/reference/world-graph-methodology.md` and `docs/research/game-development/narrative/world-graph-relationship-history-architecture.md`
 
 ## Engine-specific knowledge index
 

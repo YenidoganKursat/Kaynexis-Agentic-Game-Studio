@@ -50,6 +50,9 @@
 - The genre development playbook at `docs/research/game-development/genre/genre-development-playbook.md` is also part of that surface, so new or revised genre build guidance should stay synchronized with the matching preset, example matrix, and starter docs.
 - Genre research now includes additional presets and architecture notes for city-builder, life-sim, hero-shooter, and soulslike support, so updates to those presets should keep the matching catalog, example matrix, and active starter docs in sync.
 - Genre research now also includes auto-battler, grand-strategy, and stealth support, so those preset families should follow the same sync rule before merge.
+- The starter-template surface now also includes `docs/examples/README.md`, `reference/handoff-contracts.md`, and `reference/feature-traceability.md`, so changes to genre starter docs should keep those references aligned with the template and with the advanced maturity framework.
+- The lorebook methodology at `docs/reference/lorebook-methodology.md` is now part of the same doc-sync surface, so lorebook briefs, canon notes, and example entries should stay aligned with narrative routing and quest guidance.
+- The world graph methodology at `docs/reference/world-graph-methodology.md` is now part of the same doc-sync surface, so relationship graphs, history notes, and example entries should stay aligned with narrative routing and quest guidance.
 
 ## Engine policy
 - Godot can run real runtime/export checks when `GODOT_BIN` exists

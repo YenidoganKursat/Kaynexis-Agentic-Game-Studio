@@ -18,6 +18,12 @@ Start from:
 - `docs/examples/feature-brief-golden-example.md`
 - `docs/examples/adr-golden-example.md`
 - `docs/examples/qa-matrix-golden-example.md`
+- `studio/docs/templates/genre-starter.md`
+- `docs/research/game-development/genre/genre-advanced-development-framework.md`
+- `studio/docs/templates/lorebook-brief.md`
+- `docs/reference/lorebook-methodology.md`
+- `studio/docs/templates/world-graph-brief.md`
+- `docs/reference/world-graph-methodology.md`
 
 ## Why this matters
 
@@ -34,6 +40,24 @@ Without traceability, teams forget:
 - explicit links between docs
 - concrete code/content paths instead of "misc gameplay changes"
 - clear release impact
+
+For genre support work, traceability should also show:
+
+- which genre family the change strengthens
+- whether the change affects first-slice guidance or mature support guidance
+- whether a preset, playbook, example matrix, or advanced framework changed
+
+For lorebook support work, traceability should also show:
+
+- which canon scope changed
+- whether the lorebook affected gameplay unlocks or only authored prose
+- which systems own the lorebook data, unlock logic, and save/load persistence
+
+For world graph or history work, traceability should also show:
+
+- which node and edge types were added or changed
+- whether the history model is append-only or snapshot-backed
+- which system owns canonical relationship truth and which systems only render it
 
 ## Bad traceability
 

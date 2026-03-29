@@ -14,10 +14,31 @@ Good tasks usually include at least two of these:
 - the validation goal
 
 Example:
-
 - "Implement a readable dodge cancel window for the first Godot combat room."
 - "Design a Unity-friendly save-state ownership model for mission progress."
 - "Prepare the first Unreal Win64 packaging path and document the constraints."
+
+## Lorebook and narrative
+
+If the task is about canon, lorebooks, world knowledge, or story bible work, include the stability rule and the unlock rule up front.
+Start with `docs/reference/lorebook-methodology.md` when the task is about durable canon and unlockable lore.
+
+Example:
+
+- "Design a lorebook flow that keeps faction canon stable while quest unlocks change between runs."
+
+## World graph and history
+
+If the task is about relationship graphs, faction networks, world history, or organizational structure, include the ownership rule, append-only rule, and fast-path rule up front.
+Start with `docs/reference/world-graph-methodology.md` when the task is about durable relationships and history projections.
+
+Example:
+
+- "Design a world graph flow that keeps faction history queryable without making every dialogue line own the canon."
+
+Example:
+
+- "Use the world graph methodology to design a faction network with stable ids, append-only history, and cached codex reads."
 
 ## Weak task patterns
 
@@ -214,6 +235,11 @@ Skills and upgrades:
 
 - "Separate authored skill definitions, current-run upgrades, and durable profile unlocks."
 - "Decide which system owns cooldown state, stack rules, and upgrade UI projection."
+
+World graph:
+
+- "Define the node and edge types, the append-only history layer, and the cached read model before implementation."
+- "Separate canonical relationship truth from runtime deltas and codex presentation."
 
 Interactions:
 

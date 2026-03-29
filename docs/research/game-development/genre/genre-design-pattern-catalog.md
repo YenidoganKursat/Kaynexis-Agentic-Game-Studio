@@ -62,6 +62,7 @@
 - Genre choice should shape more than tone. It should change which docs, checklists, and validation loops matter first.
 - Agents should stop giving the same first-slice advice to every genre. "Build one room and one enemy" makes sense for action-roguelites, but not for narrative adventure, cozy sim, or puzzle-first games.
 - The repo's genre presets are already useful quick starts, but they need a deeper design layer so teams can reason from example loops instead of just genre labels.
+- Once a first slice is chosen, the next step is not more examples; it is the advanced development framework that explains how the genre should scale.
 
 ## Decision impact
 - Genre-specific research should become part of the default reading path for feature ideation and scoping.

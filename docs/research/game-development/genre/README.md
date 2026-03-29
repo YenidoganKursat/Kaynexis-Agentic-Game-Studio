@@ -5,6 +5,7 @@ Use this folder for genre-specific structure notes, contrast sets, and loop-spec
 Recommended starting notes:
 
 - `genre-development-playbook.md`
+- `genre-advanced-development-framework.md`
 - `genre-design-pattern-catalog.md`
 - `genre-example-matrix.md`
 - `auto-battler-architecture.md`

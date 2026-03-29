@@ -66,4 +66,6 @@ For deeper design references, also read:
 
 If you know the genre but want to know how to build it, use `docs/research/game-development/genre/genre-development-playbook.md` next.
 
-A good rhythm is: choose the genre preset -> read the example matrix -> read the development playbook -> write the feature brief -> then route the first slice.
+If the first slice is already clear and you want to mature the genre into a stronger production model, use `docs/research/game-development/genre/genre-advanced-development-framework.md` after the playbook.
+
+A good rhythm is: choose the genre preset -> read the example matrix -> read the development playbook -> read the advanced framework -> write the feature brief -> then route the first slice.

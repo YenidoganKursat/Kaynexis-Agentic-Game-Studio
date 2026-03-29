@@ -228,6 +228,14 @@ DISCIPLINE_RESEARCH_REFS: dict[str, list[str]] = {
         "docs/research/game-development/systems/input-controls-camera-and-remapping-architecture.md",
         "docs/research/game-development/foundations/game-feel-usability-and-accessibility-foundations.md",
     ],
+    "narrative": [
+        "docs/reference/lorebook-methodology.md",
+        "docs/reference/world-graph-methodology.md",
+        "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md",
+        "docs/research/game-development/narrative/world-graph-relationship-history-architecture.md",
+        "docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md",
+        "docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md",
+    ],
 }
 
 TASK_CONTEXT_RESEARCH_REFS: dict[str, dict[str, Any]] = {
@@ -437,10 +445,65 @@ TASK_CONTEXT_RESEARCH_REFS: dict[str, dict[str, Any]] = {
             "approval",
             "relationship state",
             "scene state",
+            "lorebook",
+            "lore book",
+            "world bible",
+            "story bible",
+            "canon",
+            "codex",
+            "archive",
+            "bestiary",
+            "world knowledge",
         ),
         "refs": [
             "docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md",
             "docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md",
+        ],
+    },
+    "world_graph": {
+        "keywords": (
+            "world graph",
+            "relationship graph",
+            "faction network",
+            "history network",
+            "timeline",
+            "chronology",
+            "lineage",
+            "biography",
+            "organization",
+            "org chart",
+            "social graph",
+            "history",
+            "histories",
+            "event chain",
+            "canon map",
+            "map state",
+        ),
+        "refs": [
+            "docs/reference/world-graph-methodology.md",
+            "docs/research/game-development/narrative/world-graph-relationship-history-architecture.md",
+            "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md",
+            "docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md",
+        ],
+    },
+    "lorebook": {
+        "keywords": (
+            "lorebook",
+            "lore book",
+            "world bible",
+            "story bible",
+            "canon",
+            "codex",
+            "archive",
+            "bestiary",
+            "world knowledge",
+            "faction canon",
+            "story canon",
+        ),
+        "refs": [
+            "docs/reference/lorebook-methodology.md",
+            "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md",
+            "docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md",
         ],
     },
     "party": {
@@ -571,6 +634,27 @@ TASK_CONTEXT_RESEARCH_REFS: dict[str, dict[str, Any]] = {
         ),
         "refs": [
             "docs/research/game-development/foundations/difficulty-balance-and-adaptation-foundations.md",
+        ],
+    },
+    "genre_advanced": {
+        "keywords": (
+            "genre",
+            "preset",
+            "playbook",
+            "contrast set",
+            "contrast-set",
+            "maturity",
+            "scaling",
+            "advanced genre",
+            "genre support",
+            "genre architecture",
+            "genre model",
+        ),
+        "refs": [
+            "docs/research/game-development/genre/genre-advanced-development-framework.md",
+            "docs/research/game-development/genre/genre-development-playbook.md",
+            "docs/research/game-development/genre/genre-design-pattern-catalog.md",
+            "docs/research/game-development/genre/genre-example-matrix.md",
         ],
     },
 }
@@ -1001,6 +1085,11 @@ def related_research_refs(disciplines: list[str], engine_slug: str | None = None
             if any(keyword_matches_context(context, keyword) for keyword in item["keywords"]):
                 for path in item["refs"]:
                     refs[path] = None
+        if any(
+            keyword_matches_context(context, keyword)
+            for keyword in ("genre", "preset", "playbook", "contrast set", "contrast-set", "maturity", "scaling", "genre support", "genre architecture")
+        ):
+            refs["docs/research/game-development/genre/genre-advanced-development-framework.md"] = None
     return list(refs.keys())
 
 

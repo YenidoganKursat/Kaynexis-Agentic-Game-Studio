@@ -26,8 +26,13 @@ Structure:
 - `engines/*-systems-playbook.md` for input, UI, inventory, abilities, save, encounter, and performance ownership decisions in each supported engine
 - `engines/*-visuals-animation-playbook.md` for sprites, textures, images, animation, particle/VFX, and UI presentation ownership decisions in each supported engine
 - `systems/` for gameplay/system design notes such as loop/state ownership, combat architecture, AI/navigation, save/progression boundaries, inventory/equipment, crafting/resource flow, character controller boundaries, enemy/encounter architecture, dialogue and quest state, party/companion structure, input/remap structure, UI flow, ability/upgrade systems, and world interactions
+- `narrative/` for lorebook, canon, world graph, and world-state notes that support story-heavy games, codices, archives, faction networks, and structured world knowledge
 - `production/` for release, CI, and content pipeline notes
 - `genre/` for genre-specific architectural guidance, contrast sets, and example game matrices
 - `genre/genre-development-playbook.md` for how to build and validate each supported genre family
+- `genre/genre-advanced-development-framework.md` for how to mature each genre family into a production-ready support model
 - `genre/*-architecture.md` for deeper dives into specific genre families such as deckbuilder roguelikes, survivorlikes, colony sims, factory automation games, and metroidvanias
+- `narrative/README.md` for starting points when story canon, world graph, or lorebook architecture matter
+- `reference/world-graph-methodology.md` for durable relationship and history modeling
+- `reference/lorebook-methodology.md` for canon, codex, and unlockable lore
 - `templates/` for reusable note scaffolds

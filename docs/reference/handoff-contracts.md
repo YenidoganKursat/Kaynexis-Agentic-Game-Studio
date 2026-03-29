@@ -10,6 +10,12 @@ Start from:
 
 - `studio/docs/templates/handoff-contract.md`
 - `docs/examples/handoff-contract-golden-example.md`
+- `studio/docs/templates/genre-starter.md`
+- `docs/research/game-development/genre/genre-advanced-development-framework.md`
+- `studio/docs/templates/lorebook-brief.md`
+- `docs/reference/lorebook-methodology.md`
+- `studio/docs/templates/world-graph-brief.md`
+- `docs/reference/world-graph-methodology.md`
 
 ## Required fields
 
@@ -49,3 +55,23 @@ The receiving person should be able to answer:
 - what is risky
 - what should be validated next
 - who owns the next move
+
+For genre-heavy work, the handoff should also say:
+
+- which genre family is being supported
+- which loop or system is being matured
+- what the first failure mode is likely to be
+- whether the task is still first-slice work or already moving into maturity work
+
+For lorebook-heavy work, the handoff should also say:
+
+- which canon source of truth is being extended
+- what unlocks a new lore entry
+- which system owns persistence of unlocked lore
+- whether the work changes canon or only presentation
+
+For world graph or history-heavy work, the handoff should also say:
+
+- which node and edge types are authoritative
+- whether history is append-only or snapshot-backed
+- which system owns fast reads for the common graph query

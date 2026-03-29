@@ -17,3 +17,51 @@ severity = "recommended"
 applies_when = "Branching narrative or quest flow"
 validation = "Document one fallback or recovery path"
 owner = "quest"
+
+[[item]]
+id = "world-graph-stable-ids"
+title = "World graph nodes and edges use stable ids"
+severity = "required"
+applies_when = "Lorebook, world graph, faction network, or history work"
+validation = "List the node and edge ids that survive rewrite and localization"
+owner = "narrative"
+
+[[item]]
+id = "world-history-append-only"
+title = "History is append-only or snapshot-backed"
+severity = "required"
+applies_when = "Timeline, chronology, or event-history work"
+validation = "Describe which history events append, which snapshot, and which revision"
+owner = "narrative"
+
+[[item]]
+id = "relationship-ownership"
+title = "Relationship truth has one owner"
+severity = "required"
+applies_when = "Faction, party, organization, or social graph work"
+validation = "Name the system that owns relationship state and the systems that only read it"
+owner = "technical-director"
+
+[[item]]
+id = "graph-read-path"
+title = "Common graph reads have a fast path"
+severity = "recommended"
+applies_when = "World graph or history lookups likely happen in gameplay or codex screens"
+validation = "Describe the cached or indexed lookup path for the common read"
+owner = "programming"
+
+[[item]]
+id = "world-graph-projection-cache"
+title = "World graph uses a cached projection for hot reads"
+severity = "recommended"
+applies_when = "World graph, faction network, or history data is read during gameplay, UI, or codex scenes"
+validation = "Name the cached adjacency list, projection table, or denormalized read model used for the common query"
+owner = "programming"
+
+[[item]]
+id = "world-graph-edge-contract"
+title = "World graph edges are typed and auditable"
+severity = "required"
+applies_when = "World graph, relationship graph, or history work"
+validation = "List the allowed edge types and where each edge type gets its ownership or timestamp"
+owner = "technical-director"

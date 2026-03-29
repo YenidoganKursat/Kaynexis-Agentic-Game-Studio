@@ -133,6 +133,7 @@ def test_genre_guidance_includes_reference_games_and_design_focus() -> None:
     payload = build_genre_replacements("action-roguelite")
     assert "Dead Cells" in payload["GENRE_REFERENCE_GAMES"]
     assert "Dominant loop" in payload["GENRE_DESIGN_FOCUS"]
+    assert payload["GENRE_ADVANCED_GUIDE"].endswith("genre-advanced-development-framework.md")
 
     deckbuilder_payload = build_genre_replacements("deckbuilder-roguelike")
     assert "Slay the Spire" in deckbuilder_payload["GENRE_REFERENCE_GAMES"]
@@ -185,6 +186,8 @@ def test_user_facing_guides_are_part_of_doc_validation_surface() -> None:
         "docs/reference/engine-examples.md",
         "docs/reference/workflow-recipes.md",
         "docs/reference/task-prompt-examples.md",
+        "docs/reference/lorebook-methodology.md",
+        "docs/reference/world-graph-methodology.md",
         "docs/reference/handoff-contracts.md",
         "docs/reference/feature-traceability.md",
         "docs/reference/doc-sync-audit.md",
@@ -204,6 +207,10 @@ def test_engine_research_guides_are_part_of_doc_validation_surface() -> None:
         "docs/research/game-development/README.md",
         "docs/research/game-development/genre/README.md",
         "docs/research/game-development/genre/genre-development-playbook.md",
+        "docs/research/game-development/genre/genre-advanced-development-framework.md",
+        "docs/research/game-development/narrative/README.md",
+        "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md",
+        "docs/research/game-development/narrative/world-graph-relationship-history-architecture.md",
         "docs/research/game-development/genre/genre-design-pattern-catalog.md",
         "docs/research/game-development/genre/genre-example-matrix.md",
         "docs/research/game-development/genre/auto-battler-architecture.md",
@@ -315,6 +322,27 @@ def test_route_task_surfaces_dialogue_and_quest_state_research_refs() -> None:
     payload = run_json("scripts/route_task.py", "Implement a branching dialogue scene with quest stage progression", "--json")
     assert payload["route"] == "narrative / quest"
     assert "docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md" in payload["research_refs"]
+
+
+def test_route_task_surfaces_lorebook_research_refs() -> None:
+    payload = run_json("scripts/route_task.py", "Design a lorebook flow for faction canon and unlockable archive entries", "--json")
+    assert payload["route"] == "narrative / lorebook"
+    assert "docs/reference/lorebook-methodology.md" in payload["docs"]
+    assert "docs/examples/lorebook-brief-golden-example.md" in payload["docs"]
+    assert "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md" in payload["research_refs"]
+
+
+def test_route_task_surfaces_world_graph_research_refs() -> None:
+    payload = run_json(
+        "scripts/route_task.py",
+        "Design a world graph for faction history, organization ties, and codex reads",
+        "--json",
+    )
+    assert payload["route"] == "narrative / world graph"
+    assert "docs/reference/world-graph-methodology.md" in payload["docs"]
+    assert "docs/examples/world-graph-brief-golden-example.md" in payload["docs"]
+    assert "docs/research/game-development/narrative/world-graph-relationship-history-architecture.md" in payload["research_refs"]
+    assert "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md" in payload["research_refs"]
 
 
 def test_route_task_surfaces_hotfix_and_rollback_research() -> None:
@@ -580,6 +608,9 @@ def test_research_notes_seeded() -> None:
     assert (REPO_ROOT / "docs/research/game-development/engines/README.md").exists()
     assert any(path.name == "genre-design-pattern-catalog.md" for path in notes)
     assert any(path.name == "genre-example-matrix.md" for path in notes)
+    assert any(path.name == "genre-advanced-development-framework.md" for path in notes)
+    assert any(path.name == "lorebook-world-state-and-canon-architecture.md" for path in notes)
+    assert any(path.name == "world-graph-relationship-history-architecture.md" for path in notes)
     assert any(path.name == "godot-4-architecture.md" for path in notes)
     assert any(path.name == "godot-4-class-editor-object-map.md" for path in notes)
     assert any(path.name == "godot-4-2d-3d-class-and-mechanic-guide.md" for path in notes)
