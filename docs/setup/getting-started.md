@@ -157,6 +157,7 @@ python3 scripts/generate_qa_matrix.py "Core Movement"
 ```
 
 If `genre-starter.md` suggests a tighter first slice for your chosen genre, prefer that over a broader generic first task.
+Once that first slice is stable, use `docs/research/game-development/genre/genre-advanced-development-framework.md` to mature the genre into a stronger production model.
 
 ## Engine-specific first checks
 

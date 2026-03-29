@@ -25,6 +25,11 @@
 
 {GENRE_DESIGN_FOCUS}
 
+## Advanced genre guidance
+
+- Deeper theory and maturity path: `{GENRE_ADVANCED_GUIDE}`
+- Use this once the first slice is stable and you want to scale the genre into a production-ready support model.
+
 ## Recommended first skills
 
 {GENRE_SKILLS}

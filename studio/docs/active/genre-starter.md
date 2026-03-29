@@ -43,6 +43,11 @@
 - Architecture watch: separate run state from meta progression early
 - First risk: variety collapse or permanent power trivializing mastery
 
+## Advanced genre guidance
+
+- Deeper theory and maturity path: `docs/research/game-development/genre/genre-advanced-development-framework.md`
+- Use this once the first combat room is stable and you want to scale the action-roguelite support model into something a larger project can trust.
+
 ## Recommended first skills
 
 - $studio-start

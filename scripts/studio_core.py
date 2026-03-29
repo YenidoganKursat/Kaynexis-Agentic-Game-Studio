@@ -573,6 +573,27 @@ TASK_CONTEXT_RESEARCH_REFS: dict[str, dict[str, Any]] = {
             "docs/research/game-development/foundations/difficulty-balance-and-adaptation-foundations.md",
         ],
     },
+    "genre_advanced": {
+        "keywords": (
+            "genre",
+            "preset",
+            "playbook",
+            "contrast set",
+            "contrast-set",
+            "maturity",
+            "scaling",
+            "advanced genre",
+            "genre support",
+            "genre architecture",
+            "genre model",
+        ),
+        "refs": [
+            "docs/research/game-development/genre/genre-advanced-development-framework.md",
+            "docs/research/game-development/genre/genre-development-playbook.md",
+            "docs/research/game-development/genre/genre-design-pattern-catalog.md",
+            "docs/research/game-development/genre/genre-example-matrix.md",
+        ],
+    },
 }
 
 ENGINE_RESEARCH_REFS: dict[str, list[str]] = {
@@ -1001,6 +1022,11 @@ def related_research_refs(disciplines: list[str], engine_slug: str | None = None
             if any(keyword_matches_context(context, keyword) for keyword in item["keywords"]):
                 for path in item["refs"]:
                     refs[path] = None
+        if any(
+            keyword_matches_context(context, keyword)
+            for keyword in ("genre", "preset", "playbook", "contrast set", "contrast-set", "maturity", "scaling", "genre support", "genre architecture")
+        ):
+            refs["docs/research/game-development/genre/genre-advanced-development-framework.md"] = None
     return list(refs.keys())
 
 

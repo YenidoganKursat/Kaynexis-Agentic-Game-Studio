@@ -159,6 +159,8 @@ Repo CI now also includes:
 - the genre development playbook at `docs/research/game-development/genre/genre-development-playbook.md` now sits in the same research surface, so when a genre family changes, update the playbook, the preset catalog, the example matrix, and the active starter together
 - the genre support surface now includes city-builder, life-sim, hero-shooter, and soulslike preset families, so new presets should update the docs, examples, and starter content together rather than drifting separately
 - the genre support surface now also includes auto-battler, grand-strategy, and stealth preset families, so new presets should update the docs, examples, and starter content together rather than drifting separately
+- the genre advanced development framework at `docs/research/game-development/genre/genre-advanced-development-framework.md` now defines the maturity target, so if a genre family changes, update the preset, playbook, example matrix, starter docs, and maturity guide together
+- the handoff and traceability docs now sit in the same sync loop as genre starter changes, so `docs/examples/README.md`, `docs/reference/handoff-contracts.md`, and `docs/reference/feature-traceability.md` should stay aligned with starter-template updates
 
 ## References
 

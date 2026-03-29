@@ -133,6 +133,7 @@ def test_genre_guidance_includes_reference_games_and_design_focus() -> None:
     payload = build_genre_replacements("action-roguelite")
     assert "Dead Cells" in payload["GENRE_REFERENCE_GAMES"]
     assert "Dominant loop" in payload["GENRE_DESIGN_FOCUS"]
+    assert payload["GENRE_ADVANCED_GUIDE"].endswith("genre-advanced-development-framework.md")
 
     deckbuilder_payload = build_genre_replacements("deckbuilder-roguelike")
     assert "Slay the Spire" in deckbuilder_payload["GENRE_REFERENCE_GAMES"]
@@ -204,6 +205,7 @@ def test_engine_research_guides_are_part_of_doc_validation_surface() -> None:
         "docs/research/game-development/README.md",
         "docs/research/game-development/genre/README.md",
         "docs/research/game-development/genre/genre-development-playbook.md",
+        "docs/research/game-development/genre/genre-advanced-development-framework.md",
         "docs/research/game-development/genre/genre-design-pattern-catalog.md",
         "docs/research/game-development/genre/genre-example-matrix.md",
         "docs/research/game-development/genre/auto-battler-architecture.md",
@@ -580,6 +582,7 @@ def test_research_notes_seeded() -> None:
     assert (REPO_ROOT / "docs/research/game-development/engines/README.md").exists()
     assert any(path.name == "genre-design-pattern-catalog.md" for path in notes)
     assert any(path.name == "genre-example-matrix.md" for path in notes)
+    assert any(path.name == "genre-advanced-development-framework.md" for path in notes)
     assert any(path.name == "godot-4-architecture.md" for path in notes)
     assert any(path.name == "godot-4-class-editor-object-map.md" for path in notes)
     assert any(path.name == "godot-4-2d-3d-class-and-mechanic-guide.md" for path in notes)

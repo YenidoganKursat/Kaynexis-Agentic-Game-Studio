@@ -80,6 +80,7 @@ Read these before you do any real feature work:
 3. `studio/docs/active/engine-profile.md`
 4. `studio/docs/active/current-sprint.md`
 5. `studio/docs/active/risk-register.md`
+6. `docs/research/game-development/genre/genre-advanced-development-framework.md` if the first slice is already clear and you want to think about scaling the genre support surface.
 
 What you are checking for:
 

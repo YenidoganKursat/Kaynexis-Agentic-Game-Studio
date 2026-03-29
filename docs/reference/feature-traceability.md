@@ -18,6 +18,8 @@ Start from:
 - `docs/examples/feature-brief-golden-example.md`
 - `docs/examples/adr-golden-example.md`
 - `docs/examples/qa-matrix-golden-example.md`
+- `studio/docs/templates/genre-starter.md`
+- `docs/research/game-development/genre/genre-advanced-development-framework.md`
 
 ## Why this matters
 
@@ -34,6 +36,12 @@ Without traceability, teams forget:
 - explicit links between docs
 - concrete code/content paths instead of "misc gameplay changes"
 - clear release impact
+
+For genre support work, traceability should also show:
+
+- which genre family the change strengthens
+- whether the change affects first-slice guidance or mature support guidance
+- whether a preset, playbook, example matrix, or advanced framework changed
 
 ## Bad traceability
 

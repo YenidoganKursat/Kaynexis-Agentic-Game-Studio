@@ -50,6 +50,7 @@ USER_GUIDE_FILES = {
         "reference/engine-selection-guide.md",
         "reference/workflow-recipes.md",
         "reference/task-prompt-examples.md",
+        "research/game-development/genre/genre-advanced-development-framework.md",
     ],
     "docs/setup/first-hour-walkthrough.md": [
         "## Step 1: Choose the engine family",
@@ -146,11 +147,13 @@ RESEARCH_GUIDE_FILES = {
         "engines/",
         "systems/",
         "genre/",
+        "genre/genre-advanced-development-framework.md",
         "production/",
     ],
     "docs/research/game-development/genre/README.md": [
         "Recommended starting notes",
         "genre-development-playbook.md",
+        "genre-advanced-development-framework.md",
         "auto-battler-architecture.md",
         "deckbuilder-roguelike-architecture.md",
         "survivorlike-architecture.md",
@@ -172,6 +175,15 @@ RESEARCH_GUIDE_FILES = {
         "## How to use this playbook",
         "## Shared development sequence for every genre",
         "## Genre-by-genre guidance",
+    ],
+    "docs/research/game-development/genre/genre-advanced-development-framework.md": [
+        "## Summary",
+        "## Primary sources",
+        "## Why this matters to this repo",
+        "## Decision impact",
+        "## How to use this framework",
+        "## Maturity ladder",
+        "## Genre family support map",
     ],
     "docs/research/game-development/genre/genre-design-pattern-catalog.md": [
         "### Auto-battler",

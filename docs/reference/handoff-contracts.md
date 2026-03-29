@@ -10,6 +10,8 @@ Start from:
 
 - `studio/docs/templates/handoff-contract.md`
 - `docs/examples/handoff-contract-golden-example.md`
+- `studio/docs/templates/genre-starter.md`
+- `docs/research/game-development/genre/genre-advanced-development-framework.md`
 
 ## Required fields
 
@@ -49,3 +51,10 @@ The receiving person should be able to answer:
 - what is risky
 - what should be validated next
 - who owns the next move
+
+For genre-heavy work, the handoff should also say:
+
+- which genre family is being supported
+- which loop or system is being matured
+- what the first failure mode is likely to be
+- whether the task is still first-slice work or already moving into maturity work

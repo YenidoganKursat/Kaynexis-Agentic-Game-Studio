@@ -29,5 +29,6 @@ Structure:
 - `production/` for release, CI, and content pipeline notes
 - `genre/` for genre-specific architectural guidance, contrast sets, and example game matrices
 - `genre/genre-development-playbook.md` for how to build and validate each supported genre family
+- `genre/genre-advanced-development-framework.md` for how to mature each genre family into a production-ready support model
 - `genre/*-architecture.md` for deeper dives into specific genre families such as deckbuilder roguelikes, survivorlikes, colony sims, factory automation games, and metroidvanias
 - `templates/` for reusable note scaffolds

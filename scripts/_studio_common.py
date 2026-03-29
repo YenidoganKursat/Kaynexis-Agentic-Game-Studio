@@ -49,6 +49,7 @@ PLACEHOLDER_DEFAULTS = {
     "GENRE_ROUTE_EXAMPLE": "Describe the first genre-specific task",
     "GENRE_REFERENCE_GAMES": "- Add one or two contrast-set references.",
     "GENRE_DESIGN_FOCUS": "- Document the dominant loop and first failure risk.",
+    "GENRE_ADVANCED_GUIDE": "docs/research/game-development/genre/genre-advanced-development-framework.md",
     "TODAY": _dt.date.today().isoformat(),
     "FEATURE_NAME": "Example Feature",
     "DECISION_NAME": "Example Decision",
@@ -386,6 +387,7 @@ def build_genre_replacements(genre: str | None) -> dict[str, str]:
             "GENRE_ROUTE_EXAMPLE": f"Plan the first {genre_name.lower()} slice",
             "GENRE_REFERENCE_GAMES": "- Add one or two contrast-set references.",
             "GENRE_DESIGN_FOCUS": "- Document the dominant loop and first failure risk.",
+            "GENRE_ADVANCED_GUIDE": "docs/research/game-development/genre/genre-advanced-development-framework.md",
         }
 
     metadata = parse_preset_metadata(path)
@@ -406,6 +408,7 @@ def build_genre_replacements(genre: str | None) -> dict[str, str]:
         "GENRE_ROUTE_EXAMPLE": guidance.get("GENRE_ROUTE_EXAMPLE", f"Plan the first {genre_name.lower()} slice"),
         "GENRE_REFERENCE_GAMES": reference_guidance.get("GENRE_REFERENCE_GAMES", "- Add one or two contrast-set references."),
         "GENRE_DESIGN_FOCUS": reference_guidance.get("GENRE_DESIGN_FOCUS", "- Document the dominant loop and first failure risk."),
+        "GENRE_ADVANCED_GUIDE": "docs/research/game-development/genre/genre-advanced-development-framework.md",
     }
 
 

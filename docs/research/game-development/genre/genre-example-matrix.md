@@ -36,6 +36,7 @@
 ## Decision impact
 - Genre presets and first-slice docs should cite one or two example references from this matrix.
 - Future onboarding can surface this matrix directly in the setup wizard or `codex_studio.py init` help.
+- Teams that already know their contrast set should graduate from this matrix into the advanced genre framework before they start a real production backlog.
 
 ## Matrix
 

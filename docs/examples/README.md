@@ -11,5 +11,12 @@ Included now:
 - `perf-pass-golden-example.md`
 - `postmortem-golden-example.md`
 - `handoff-contract-golden-example.md`
+- `genre-starter-golden-example.md`
 
 These are not meant to be copied blindly. They show the level of specificity the repo expects.
+
+If you are building a genre-driven feature, compare the example to:
+
+- `docs/reference/genre-presets.md`
+- `docs/research/game-development/genre/genre-development-playbook.md`
+- `docs/research/game-development/genre/genre-advanced-development-framework.md`

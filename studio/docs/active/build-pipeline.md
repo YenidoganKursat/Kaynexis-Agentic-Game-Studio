@@ -19,6 +19,9 @@
 - The genre development playbook at `docs/research/game-development/genre/genre-development-playbook.md` is part of the same sync scope, so build-facing genre changes should update the playbook, the preset catalog, and the active starter together
 - When adding or revising genre presets, keep the matching architecture note, example matrix row, and starter doc updated together so the support surface stays truthful for teams choosing city-builder, life-sim, hero-shooter, or soulslike paths
 - The same rule now applies to auto-battler, grand-strategy, and stealth support as well, because those families change route, checklist, and first-slice advice together.
+- The starter-template surface also pulls in `docs/examples/README.md`, `reference/handoff-contracts.md`, and `reference/feature-traceability.md`, so build-facing template changes should keep those execution docs current too.
+- The genre advanced development framework now defines the maturity path for every supported genre family, so build readiness discussions should use it when deciding whether a genre is still in first-slice or already in scale-up mode.
+- The starter-template surface also pulls in `docs/examples/README.md`, `reference/handoff-contracts.md`, and `reference/feature-traceability.md`, so build-facing template changes should keep those execution docs current too.
 
 ## Engine contracts
 - Godot 4: `python3 scripts/godot_smoke.py --static-only`, optional runtime smoke, then `python3 scripts/godot_export.py --preset "..."`

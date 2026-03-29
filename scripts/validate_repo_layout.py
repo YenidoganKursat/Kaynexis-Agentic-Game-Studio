@@ -86,6 +86,7 @@ REQUIRED_PATHS = [
     "docs/research/game-development/systems/party-companion-and-squad-architecture.md",
     "docs/research/game-development/genre/genre-design-pattern-catalog.md",
     "docs/research/game-development/genre/genre-example-matrix.md",
+    "docs/research/game-development/genre/genre-advanced-development-framework.md",
     "docs/research/game-development/genre/deckbuilder-roguelike-architecture.md",
     "docs/research/game-development/genre/survivorlike-architecture.md",
     "docs/research/game-development/genre/colony-sim-architecture.md",
