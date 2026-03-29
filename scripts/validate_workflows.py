@@ -19,6 +19,11 @@ REQUIRED_WORKFLOWS: dict[str, dict[str, Any]] = {
         "triggers": {"workflow_dispatch", "pull_request", "push"},
         "needs_upload_artifact": True,
     },
+    "doc-sync.yml": {
+        "jobs": {"doc-sync"},
+        "triggers": {"workflow_dispatch", "pull_request", "push"},
+        "needs_upload_artifact": True,
+    },
     "docker-smoke.yml": {
         "jobs": {"docker-smoke"},
         "triggers": {"workflow_dispatch", "pull_request", "push"},
@@ -45,6 +50,22 @@ PINNED_ACTIONS = {
     "actions/checkout",
     "actions/setup-python",
     "actions/upload-artifact",
+}
+
+REQUIRED_RUN_SNIPPETS: dict[str, list[str]] = {
+    "repo-validate.yml": [
+        "scripts/doc_sync_guard.py",
+        "scripts/ci_quality_gate.py",
+    ],
+    "doc-sync.yml": [
+        "scripts/doc_sync_guard.py",
+    ],
+    "release-readiness.yml": [
+        "scripts/ci_quality_gate.py",
+    ],
+    "nightly-audit.yml": [
+        "scripts/ci_quality_gate.py",
+    ],
 }
 
 
@@ -80,6 +101,7 @@ def collect_workflow_summary(path: Path) -> dict[str, Any]:
     job_names = sorted(jobs.keys()) if isinstance(jobs, dict) else []
 
     uses_values: list[str] = []
+    run_values: list[str] = []
     upload_artifact_steps = 0
     matrix_keys: list[str] = []
     for job_name in job_names:
@@ -99,6 +121,9 @@ def collect_workflow_summary(path: Path) -> dict[str, Any]:
                 uses_values.append(uses_value)
                 if uses_value.startswith("actions/upload-artifact@"):
                     upload_artifact_steps += 1
+            run_value = step.get("run")
+            if isinstance(run_value, str):
+                run_values.append(run_value)
 
     return {
         "name": workflow.get("name", path.name),
@@ -108,6 +133,7 @@ def collect_workflow_summary(path: Path) -> dict[str, Any]:
         "upload_artifact_steps": upload_artifact_steps,
         "matrix_keys": sorted(set(matrix_keys)),
         "uses": uses_values,
+        "runs": run_values,
     }
 
 
@@ -151,6 +177,12 @@ def validate_workflows() -> tuple[list[str], dict[str, dict[str, Any]]]:
             action_name = uses_value.split("@", 1)[0]
             if action_name in PINNED_ACTIONS and not is_sha_pinned(uses_value):
                 failures.append(f"{name}: {action_name} should be pinned to a full commit SHA")
+
+        required_run_snippets = REQUIRED_RUN_SNIPPETS.get(name, [])
+        run_blob = "\n".join(summary["runs"])
+        for snippet in required_run_snippets:
+            if snippet not in run_blob:
+                failures.append(f"{name}: missing required run step containing {snippet}")
 
     return failures, summaries
 

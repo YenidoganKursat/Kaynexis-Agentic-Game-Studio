@@ -40,5 +40,11 @@
     "expected_route": "combat / gameplay",
     "expected_skills": ["combat-loop", "mechanic-design"],
     "expected_docs": ["studio/docs/templates/feature-brief.md"]
+  },
+  {
+    "task": "Prepare a clean handoff and traceability packet for the next milestone",
+    "expected_route": "handoff / traceability / doc sync",
+    "expected_skills": ["feature-brief", "qa-matrix"],
+    "expected_docs": ["studio/docs/templates/handoff-contract.md"]
   }
 ]

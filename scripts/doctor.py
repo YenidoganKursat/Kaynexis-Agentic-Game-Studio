@@ -9,7 +9,20 @@ import sys
 import tomllib
 from pathlib import Path
 
-from _studio_common import ACTIVE_DIR, REPO_ROOT, engine_detection_report, find_godot_binary, repo_summary, unresolved_placeholders
+from _studio_common import (
+    ACTIVE_DIR,
+    REPO_ROOT,
+    engine_detection_report,
+    find_godot_binary,
+    find_unity_cli,
+    find_unity_hub,
+    find_unreal_editor,
+    find_unreal_uat,
+    load_root_studio_config,
+    repo_summary,
+    unity_editor_channel,
+    unresolved_placeholders,
+)
 from studio_core import STUDIO_CONFIG_PATH, available_starter_kits, configured_project_name, research_notes, validate_research_note
 from validate_docs import collect_doc_findings
 from validate_repo_layout import REQUIRED_PATHS
@@ -93,7 +106,7 @@ def load_project_config() -> dict[str, object]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Check local tooling and repo health for Codex Game Studio.")
+    parser = argparse.ArgumentParser(description="Check local tooling and repo health for the studio operating system.")
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON.")
     parser.add_argument("--strict", action="store_true", help="Treat warnings as failures.")
     args = parser.parse_args()
@@ -374,6 +387,69 @@ def main() -> int:
             )
         )
 
+    config = load_root_studio_config()
+    project = config.get("project", {}) if isinstance(config.get("project"), dict) else {}
+    supported_engines = [str(item) for item in project.get("supported_engines", [])] if isinstance(project.get("supported_engines"), list) else []
+
+    if "unity-6" in supported_engines:
+        unity_cli = find_unity_cli()
+        unity_hub = find_unity_hub()
+        if unity_cli:
+            unity_channel = unity_editor_channel(unity_cli)
+            if unity_channel == "stable":
+                checks.append(make_check("unity-cli", "pass", f"Unity editor CLI found at {unity_cli}."))
+            else:
+                checks.append(
+                    make_check(
+                        "unity-cli",
+                        "warn",
+                        f"Unity editor CLI found at {unity_cli}, but the install appears to be a {unity_channel} build.",
+                        next_step="Prefer a stable Unity editor install for release-bound validation, or keep this as non-release local coverage only.",
+                    )
+                )
+        elif unity_hub:
+            checks.append(
+                make_check(
+                    "unity-cli",
+                    "warn",
+                    f"Unity Hub is installed at {unity_hub}, but no Unity editor CLI is configured.",
+                    next_step="Install a Unity editor version and set UNITY_CLI or tools.unity_cli in studio.toml for engine-backed validation.",
+                )
+            )
+        else:
+            checks.append(
+                make_check(
+                    "unity-cli",
+                    "warn",
+                    "No Unity editor CLI found.",
+                    next_step="Install Unity via Unity Hub and set UNITY_CLI or tools.unity_cli in studio.toml for engine-backed validation.",
+                )
+            )
+
+    if "unreal-5" in supported_engines:
+        unreal_uat = find_unreal_uat()
+        unreal_editor = find_unreal_editor()
+        if unreal_uat:
+            checks.append(make_check("unreal-cli", "pass", f"Unreal UAT found at {unreal_uat}."))
+        elif unreal_editor:
+            checks.append(
+                make_check(
+                    "unreal-cli",
+                    "warn",
+                    f"Unreal editor found at {unreal_editor}, but RunUAT was not resolved.",
+                    next_step="Set UNREAL_UAT or tools.unreal_uat in studio.toml so packaging validation can run reliably.",
+                )
+            )
+        else:
+            checks.append(
+                make_check(
+                    "unreal-cli",
+                    "warn",
+                    "No Unreal editor or UAT install found.",
+                    next_step="Install Unreal Engine and set UNREAL_UAT or UNREAL_EDITOR for engine-backed packaging validation.",
+                )
+            )
+
     engine_report = engine_detection_report()
     engine = str(engine_report["resolved_engine"])
     engine_detail = f"Resolved engine: {engine} via {engine_report['source']}."
@@ -466,9 +542,9 @@ def main() -> int:
         )
     )
 
-    config = load_project_config()
-    agents_config = config.get("agents", {}) if isinstance(config.get("agents"), dict) else {}
-    features_config = config.get("features", {}) if isinstance(config.get("features"), dict) else {}
+    codex_config = load_project_config()
+    agents_config = codex_config.get("agents", {}) if isinstance(codex_config.get("agents"), dict) else {}
+    features_config = codex_config.get("features", {}) if isinstance(codex_config.get("features"), dict) else {}
     max_depth = agents_config.get("max_depth")
     if isinstance(max_depth, int):
         if max_depth <= 1:

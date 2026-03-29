@@ -22,13 +22,16 @@ Design or implement one UI flow with screen states, transitions, copy needs, and
 ## Primary docs / outputs
 - `studio/docs/templates/feature-brief.md`
 - `studio/docs/templates/accessibility-pass.md`
+- `docs/research/game-development/systems/ui-hud-menu-and-screen-flow-architecture.md`
+- `docs/research/game-development/systems/input-controls-camera-and-remapping-architecture.md`
 
 ## Workflow
 1. Inspect the current repo/docs state first and cite concrete evidence.
-2. Choose the smallest useful output that moves the project forward.
-3. If code changes are involved, keep the patch tight and validate the changed behavior.
-4. Update or create durable docs when the result should persist.
-5. Recommend the next best role or skill if more work remains.
+2. Read the matching UI and control systems notes first when the task touches HUDs, menus, settings, onboarding, pause, or controller navigation.
+3. Choose the smallest useful output that moves the project forward.
+4. If code changes are involved, keep the patch tight and validate the changed behavior.
+5. Update or create durable docs when the result should persist.
+6. Recommend the next best role or skill if more work remains.
 
 ## Category rules
 - Map the actual files/systems first, then choose the smallest viable implementation slice.

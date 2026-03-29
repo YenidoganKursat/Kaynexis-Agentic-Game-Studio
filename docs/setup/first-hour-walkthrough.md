@@ -33,6 +33,7 @@ Use this quick rule:
 - choose `unreal-5` when you want a heavier 3D, systems, or packaging-oriented pipeline and plan around Unreal-native concepts early
 
 If you are unsure, read `docs/reference/engine-selection-guide.md` first.
+If you want concrete examples before you choose, open `docs/reference/engine-examples.md` too.
 
 ## Step 2: Initialize the repo
 
@@ -142,9 +143,10 @@ Unity:
 ```bash
 python3 scripts/unity_adapter.py test \
   --project-path studio/starter-kits/unity-6/scaffold \
-  --unity-path tools/engine-stubs/unity/Unity \
   --dry-run --json
 ```
+
+If Unity is not installed on the machine yet, add `--unity-path tools/engine-stubs/unity/Unity` to keep this as contract smoke instead of editor-backed validation.
 
 Unreal:
 
@@ -164,6 +166,8 @@ Use a short brief before a non-trivial slice:
 ```bash
 python3 scripts/scaffold_feature.py "Tutorial Enemy Attack" --with-adr --with-test-plan
 ```
+
+That scaffold also creates default handoff and traceability docs, which is useful even for solo work because it keeps the next step explicit.
 
 Do this especially when:
 

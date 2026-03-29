@@ -87,13 +87,14 @@ Read these in order:
 6. `docs/reference/engine-selection-guide.md`
 7. `docs/reference/workflow-recipes.md`
 8. `docs/reference/task-prompt-examples.md`
-9. `docs/research/game-development/README.md`
-10. `docs/research/game-development/engines/README.md`
-11. the matching `*-2d-3d-class-and-mechanic-guide.md` for your engine
-12. `docs/reference/repo-tour.md`
-13. `docs/reference/code-review.md`
-14. `docs/reference/eval-strategy.md`
-15. `docs/reference/command-cheatsheet.md`
+9. `docs/reference/engine-examples.md`
+10. `docs/research/game-development/README.md`
+11. `docs/research/game-development/engines/README.md`
+12. the matching `*-2d-3d-class-and-mechanic-guide.md` for your engine
+13. `docs/reference/repo-tour.md`
+14. `docs/reference/code-review.md`
+15. `docs/reference/eval-strategy.md`
+16. `docs/reference/command-cheatsheet.md`
 
 Then run:
 
@@ -147,6 +148,8 @@ python3 scripts/codex_studio.py research --category systems --title "Core Moveme
 python3 scripts/scaffold_feature.py "Core Movement" --with-adr --with-test-plan
 ```
 
+By default this also produces handoff and traceability docs so the feature can move cleanly from brief to implementation to validation.
+
 8. Generate a QA matrix before calling the slice done:
 
 ```bash
@@ -168,9 +171,10 @@ Unity 6:
 ```bash
 python3 scripts/unity_adapter.py test \
   --project-path studio/starter-kits/unity-6/scaffold \
-  --unity-path tools/engine-stubs/unity/Unity \
   --dry-run --json
 ```
+
+If no local Unity editor is auto-detected, rerun the same command with `--unity-path tools/engine-stubs/unity/Unity` for contract smoke only.
 
 Unreal 5:
 

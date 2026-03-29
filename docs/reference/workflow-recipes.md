@@ -36,6 +36,8 @@ python3 scripts/codex_studio.py checklist --task "Add a short-range parry that r
 python3 scripts/scaffold_feature.py "Parry Mechanic" --with-adr --with-test-plan
 ```
 
+The scaffold now also writes a default handoff contract and traceability doc so the slice is easier to review and continue.
+
 Good outcome:
 
 - one routed task
@@ -70,6 +72,7 @@ python3 scripts/codex_studio.py next "Design boss encounter state ownership"
 ```
 
 Before implementation, make sure the final task references at least one relevant research note.
+If the task is visual or presentation-heavy, also read the matching `*-visuals-animation-playbook.md` for the engine before writing code or content.
 
 ## Recipe: Prepare for a performance pass
 
@@ -101,7 +104,6 @@ Unity:
 ```bash
 python3 scripts/unity_adapter.py test \
   --project-path studio/starter-kits/unity-6/scaffold \
-  --unity-path tools/engine-stubs/unity/Unity \
   --dry-run --json
 ```
 
@@ -114,7 +116,23 @@ python3 scripts/unreal_adapter.py package \
   --dry-run --json
 ```
 
-Use the stub-backed commands for contract shape only. Use real engine paths when you want editor-backed confidence.
+Unity auto-detects standard local editor installs when possible. If no local editor is present, add `--unity-path tools/engine-stubs/unity/Unity` for contract shape only. Keep the Unreal stub command for contract smoke unless a real `UNREAL_UAT` or `UNREAL_EDITOR` path is available.
+
+## Recipe: Compare the same mechanic across engines
+
+Use this when you want concrete examples instead of abstract engine advice.
+
+```bash
+python3 scripts/codex_studio.py next "Compare the best Godot, Unity, and Unreal ownership model for a controller-first upgrade screen"
+python3 scripts/codex_studio.py next "Show me the concrete 2D and 3D class choices for a stealth prototype in each engine"
+python3 scripts/codex_studio.py next "List the best starter slice for a combat room in Godot, Unity, and Unreal and explain the differences"
+```
+
+Then read:
+
+- `docs/reference/engine-examples.md`
+- `docs/reference/engine-selection-guide.md`
+- the engine-specific `*-class-editor-object-map.md` and `*-systems-playbook.md` notes
 
 ## Recipe: Pre-merge confidence pass
 

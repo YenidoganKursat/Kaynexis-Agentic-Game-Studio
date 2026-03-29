@@ -1,5 +1,9 @@
 name: Nightly Audit
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
   schedule:
@@ -15,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
@@ -38,6 +44,9 @@ jobs:
 
       - name: Generate nightly audit report
         run: python3 scripts/ci_artifact_report.py --label nightly-audit --output-dir build/ci/nightly
+
+      - name: Run CI quality gate
+        run: python3 scripts/ci_quality_gate.py --report build/ci/nightly/ci-report.json --min-score 80 --minimum-readiness validation-ready
 
       - name: Upload nightly audit bundle
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

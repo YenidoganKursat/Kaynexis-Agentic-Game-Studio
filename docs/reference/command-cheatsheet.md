@@ -111,9 +111,11 @@ python3 scripts/godot_export.py --preset "Windows Desktop"
 Unity command generation:
 
 ```bash
-python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --unity-path tools/engine-stubs/unity/Unity --dry-run --json
-python3 scripts/unity_adapter.py build --project-path studio/starter-kits/unity-6/scaffold --unity-path tools/engine-stubs/unity/Unity --dry-run --json
+python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --dry-run --json
+python3 scripts/unity_adapter.py build --project-path studio/starter-kits/unity-6/scaffold --dry-run --json
 ```
+
+If a local Unity editor is not auto-detected, append `--unity-path tools/engine-stubs/unity/Unity` for stub-backed contract smoke.
 
 Unreal command generation:
 
@@ -125,6 +127,8 @@ CI/CD helpers:
 
 ```bash
 make ci-workflows
+make ci-doc-sync
+make ci-quality
 make ci-report
 make starter-kit-smoke
 python3 scripts/starter_kit_contract_smoke.py --engine unity-6 --json
@@ -221,6 +225,8 @@ Feature brief + ADR + test plan:
 ```bash
 python3 scripts/scaffold_feature.py "Core Combat" --with-adr --with-test-plan
 ```
+
+This now creates the feature brief plus default `handoff-*.md` and `traceability-*.md` docs unless you explicitly pass `--no-handoff` or `--no-traceability`.
 
 Bug triage docs:
 

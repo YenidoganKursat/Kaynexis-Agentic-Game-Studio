@@ -42,7 +42,7 @@ python3 scripts/seed_project_baseline.py --project-name "Your Game" --engine god
 python3 scripts/seed_project_baseline.py --project-name "Your Game" --engine unity-6 --platform pc-premium --genre tactical-rpg
 python3 scripts/seed_project_baseline.py --project-name "Your Game" --engine unreal-5 --platform console-premium --genre co-op-survival
 python3 scripts/starter_kit_contract_smoke.py --engine godot-4 --json
-python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --unity-path tools/engine-stubs/unity/Unity --dry-run --json
+python3 scripts/unity_adapter.py test --project-path studio/starter-kits/unity-6/scaffold --dry-run --json
 python3 scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --uat-path tools/engine-stubs/unreal/RunUAT.sh --dry-run --json
 python3 scripts/toggle_codex_hooks.py --status
 ```

@@ -1,0 +1,67 @@
+name: Doc Sync
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "src/**"
+      - "scripts/**"
+      - "studio/**"
+      - "docs/**"
+      - ".github/workflows/doc-sync.yml"
+  push:
+    branches:
+      - main
+      - master
+      - "codex/**"
+    paths:
+      - "src/**"
+      - "scripts/**"
+      - "studio/**"
+      - "docs/**"
+      - ".github/workflows/doc-sync.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  doc-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Resolve changed paths
+        run: |
+          mkdir -p build/ci/doc-sync
+          BASE_SHA="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            BASE_SHA="$(git rev-list --max-parents=0 HEAD | tail -n 1)"
+          fi
+          git diff --name-only "$BASE_SHA" HEAD > build/ci/doc-sync/changed-paths.txt
+
+      - name: Run doc sync guard
+        run: python3 scripts/doc_sync_guard.py --paths-file build/ci/doc-sync/changed-paths.txt --json > build/ci/doc-sync/doc-sync.json
+
+      - name: Upload doc sync report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: doc-sync-report
+          path: build/ci/doc-sync
+          if-no-files-found: error

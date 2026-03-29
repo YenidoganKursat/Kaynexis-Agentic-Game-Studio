@@ -1,4 +1,4 @@
-# Engine Profile — Codex Game Studio Pro Max
+# Engine Profile — Kaynexis Agentic Game Studio
 
 ## Engine
 - Engine: Godot 4

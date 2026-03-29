@@ -1,4 +1,4 @@
-# Audio Direction Lite — Codex Game Studio Pro Max
+# Audio Direction Lite — Kaynexis Agentic Game Studio
 
 ## Audio pillars
 - Critical gameplay timing cues always cut through the mix

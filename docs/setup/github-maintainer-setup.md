@@ -1,6 +1,6 @@
 # GitHub Maintainer Setup
 
-Use this after creating the remote repository.
+Use this when creating or auditing the remote repository.
 
 ## What is already prepared
 
@@ -8,6 +8,7 @@ Use this after creating the remote repository.
 - issue forms under `.github/ISSUE_TEMPLATE/`
 - `.github/pull_request_template.md`
 - `.github/workflows/repo-validate.yml`
+- `.github/workflows/doc-sync.yml`
 - `.github/workflows/docker-smoke.yml`
 - `.github/workflows/starter-kit-contracts.yml`
 - `.github/workflows/release-readiness.yml`
@@ -17,9 +18,13 @@ Use this after creating the remote repository.
 
 ## Suggested public metadata
 
-Suggested repository name:
+Suggested repository slug:
 
-> Codex Game Studio Pro Max
+> Kaynexis-Agentic-Game-Studio
+
+Suggested public display title:
+
+> Kaynexis Agentic Game Studio
 
 Suggested short description:
 
@@ -52,14 +57,16 @@ Suggested topics:
 
 1. Confirm `.github/CODEOWNERS`
    Update `@YenidoganKursat` if your real GitHub handle or team differs.
-2. Create the remote repository on GitHub
-3. Add the remote and push the local `main` branch
+2. Create the remote repository on GitHub if it does not exist yet
+3. Add the remote and push the local `main` branch if the local repo is not connected yet
 4. Apply the description and topics
 5. Enable GitHub Issues and Pull Requests
 6. Enable private vulnerability reporting if available
 7. Review Dependabot settings
 8. Create repo labels that match your issue workflow if you want labels on forms later
 9. Turn on rulesets for `main`
+
+If the repository already has a working `origin`, skip the create/add/push steps and treat this as a GitHub policy and metadata audit.
 
 ## Minimal shell commands
 
@@ -104,6 +111,7 @@ gh repo edit OWNER/REPO \
 - rulesets enabled for `main`
 - Actions enabled for the repository
 - no secrets are required for the current default workflows
+- if you expand genre support, keep `docs/reference/genre-presets.md`, the genre research index, and `studio/docs/active/genre-starter.md` synchronized with the new preset files
 - if you later wire OpenAI, Sentry, release uploads, or engine-backed build jobs, add those secrets only then
 
 ## Recommended ruleset
@@ -113,10 +121,13 @@ Based on GitHub rulesets and CODEOWNERS guidance, set up a branch ruleset for `m
 - blocks force pushes
 - requires pull requests
 - requires code owner review
-- requires the `repo-validate` check
-- requires the `starter-kit-contracts` check
-- requires the `docker-smoke` check when Docker surfaces matter
+- requires the always-on `repo-validate` matrix jobs
+- only requires `starter-kit-contracts` or `docker-smoke` if those workflows are always-on for the branches you protect
 - optionally requires a future engine export check once a Godot-capable or editor-backed runner exists
+
+Current hosted-repo note:
+
+- The public `main` branch now has an active ruleset enforcing pull requests, code-owner review, linear history, force-push protection, delete protection, and required `repo-validate (3.11)` / `repo-validate (3.13)` checks.
 
 ## Suggested labels
 
@@ -138,6 +149,16 @@ If you want a clean triage surface from day one, these are a good baseline:
 ## Actions security defaults
 
 GitHub recommends pinning actions to full commit SHAs. The workflows in this repo pin the first-party actions they use (`actions/checkout`, `actions/setup-python`, and `actions/upload-artifact`) and `scripts/validate_workflows.py` enforces that policy.
+
+Repo CI now also includes:
+
+- a doc-sync guard workflow that fails when code or workflow changes are not mirrored by the relevant docs
+- a quality gate that enforces the minimum CI health score before release-readiness or nightly reports are accepted
+- the engine research index now includes visuals/animation playbooks, so sprite, texture, animation, and VFX changes should keep the relevant docs in sync before merge
+- the user-facing engine examples page at `docs/reference/engine-examples.md` now sits inside the doc-validation surface, so engine example changes should be reviewed with the same care as engine-selection or workflow updates
+- the genre development playbook at `docs/research/game-development/genre/genre-development-playbook.md` now sits in the same research surface, so when a genre family changes, update the playbook, the preset catalog, the example matrix, and the active starter together
+- the genre support surface now includes city-builder, life-sim, hero-shooter, and soulslike preset families, so new presets should update the docs, examples, and starter content together rather than drifting separately
+- the genre support surface now also includes auto-battler, grand-strategy, and stealth preset families, so new presets should update the docs, examples, and starter content together rather than drifting separately
 
 ## References
 

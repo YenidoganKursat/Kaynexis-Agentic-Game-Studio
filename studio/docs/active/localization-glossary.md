@@ -1,4 +1,4 @@
-# Localization Glossary — Codex Game Studio Pro Max
+# Localization Glossary — Kaynexis Agentic Game Studio
 
 ## Term list
 | Source term | Meaning | Notes | Do not translate? |

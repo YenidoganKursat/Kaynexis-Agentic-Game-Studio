@@ -5,6 +5,14 @@
 - Preset slug: `action-roguelite`
 - Summary: Short runs, compounding build variety, readable combat, meaningful risk/reward, and strong reset value.
 
+## How this starter is used
+
+- This file is the active, generated starter for the currently selected genre.
+- It should mirror the public preset catalog and the matching architecture note instead of acting like a standalone one-off brief.
+- When a new genre family is added, update the preset, the example matrix, and the research note together so the starter stays trustworthy.
+- Treat the preset catalog as expandable, not fixed; the current support set now also includes auto-battler, grand-strategy, stealth, city-builder, life-sim, hero-shooter, and soulslike families.
+- Use `docs/research/game-development/genre/genre-development-playbook.md` when you want to know how to turn the preset into a real first slice instead of just a label.
+
 ## Default assumptions
 
 - 20–45 minute runs

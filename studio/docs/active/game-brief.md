@@ -1,9 +1,10 @@
-# Game Brief — Codex Game Studio Pro Max
+# Game Brief — Kaynexis Agentic Game Studio
 
 ## High concept
 - Codex-first Action Roguelite project focused on a small but high-quality first playable slice
 - Target audience: players who value readable action, replayable runs, and build experimentation
 - Reference titles / contrast set: Hades, Dead Cells, Risk of Rain 2
+- Current example baseline uses `godot-4` as the active engine, while the repo itself keeps Unity 6 and Unreal 5 starter-kit, checklist, research, and CI support ready
 
 ## Player fantasy
 - Survive a compact high-pressure encounter and come out stronger through clear build choices

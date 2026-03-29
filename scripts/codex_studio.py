@@ -222,7 +222,7 @@ def handle_checklist(args: argparse.Namespace) -> int:
         "milestone": args.milestone,
         "agent": args.agent,
         "items": items,
-        "research_refs": related_research_refs(disciplines, engine_slug=resolved_engine),
+        "research_refs": related_research_refs(disciplines, engine_slug=resolved_engine, task_text=args.task),
     }
     if args.json:
         print(json.dumps(payload, indent=2))

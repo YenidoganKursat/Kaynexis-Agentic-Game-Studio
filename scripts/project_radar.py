@@ -6,7 +6,20 @@ import json
 import subprocess
 from pathlib import Path
 
-from _studio_common import ACTIVE_DIR, REPO_ROOT, engine_detection_report, has_substantive_files, repo_summary
+from _studio_common import (
+    ACTIVE_DIR,
+    REPO_ROOT,
+    engine_detection_report,
+    find_godot_binary,
+    find_unity_cli,
+    find_unity_hub,
+    find_unreal_editor,
+    find_unreal_uat,
+    has_substantive_files,
+    load_root_studio_config,
+    repo_summary,
+    unity_editor_channel,
+)
 from validate_docs import collect_doc_findings
 
 CRITICAL_DOCS = [
@@ -29,6 +42,14 @@ def main() -> int:
     findings: list[dict[str, str]] = []
     engine_report = engine_detection_report()
     resolved_engine = str(engine_report["resolved_engine"])
+    config = load_root_studio_config()
+    project = config.get("project", {}) if isinstance(config.get("project"), dict) else {}
+    supported_engines = [str(item) for item in project.get("supported_engines", [])] if isinstance(project.get("supported_engines"), list) else []
+    unity_cli = find_unity_cli()
+    unity_channel = unity_editor_channel(unity_cli)
+    unity_hub = find_unity_hub()
+    unreal_uat = find_unreal_uat()
+    unreal_editor = find_unreal_editor()
     if resolved_engine == "unknown":
         findings.append({"severity": "high", "finding": "Engine could not be detected from common repo clues.", "next": "Confirm engine in studio/docs/active/engine-profile.md"})
     if engine_report["mismatch"]:
@@ -43,6 +64,23 @@ def main() -> int:
         findings.append({"severity": "high", "finding": "Godot export presets are missing.", "next": "Add export_presets.cfg before treating the repo as release-ready."})
     if resolved_engine == "godot" and not (REPO_ROOT / "scripts" / "godot_smoke.py").exists():
         findings.append({"severity": "medium", "finding": "Godot smoke automation is missing.", "next": "Restore scripts/godot_smoke.py and wire it into local validation."})
+    if "godot-4" in supported_engines and not find_godot_binary():
+        findings.append({"severity": "medium", "finding": "Godot support exists, but no local Godot binary is configured for runtime/export checks.", "next": "Install Godot 4.x or set GODOT_BIN before claiming engine-backed validation."})
+    if "unity-6" in supported_engines and not unity_cli:
+        next_step = "Install a Unity editor and set UNITY_CLI before claiming engine-backed Unity validation."
+        if unity_hub:
+            next_step = "Unity Hub is installed; add a Unity editor version and set UNITY_CLI before claiming engine-backed Unity validation."
+        findings.append({"severity": "medium", "finding": "Unity support exists, but no Unity editor CLI is configured.", "next": next_step})
+    elif "unity-6" in supported_engines and unity_channel in {"alpha", "beta"}:
+        findings.append(
+            {
+                "severity": "medium",
+                "finding": f"Unity support is editor-backed locally, but the detected editor install is {unity_channel}.",
+                "next": "Use a stable Unity editor install before treating local Unity coverage as release-grade evidence.",
+            }
+        )
+    if "unreal-5" in supported_engines and not (unreal_uat or unreal_editor):
+        findings.append({"severity": "medium", "finding": "Unreal support exists, but no Unreal editor/UAT install is configured.", "next": "Install Unreal Engine and set UNREAL_UAT or UNREAL_EDITOR before claiming engine-backed Unreal validation."})
     if missing_docs:
         findings.append({"severity": "high", "finding": f"Missing critical active docs: {', '.join(missing_docs)}", "next": "Run bootstrap_studio.py or create the docs manually."})
     doc_errors, doc_warnings = collect_doc_findings()
