@@ -11,3 +11,4 @@
 
 ## Implementation notes
 - Trigger logic, save/load implications, localization concerns
+- If this quest depends on canon or world knowledge, link the matching lorebook brief first

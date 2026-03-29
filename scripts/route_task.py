@@ -189,8 +189,25 @@ ROUTES = [
         ],
     },
     {
+        "name": "narrative / lorebook",
+        "keywords": ["lorebook", "lore book", "world bible", "story bible", "canon", "codex", "archive", "bestiary", "world knowledge"],
+        "discipline": "narrative",
+        "skills": ["narrative-pipeline", "quest-flow", "content-pipeline"],
+        "agents": ["narrative_director", "quest_designer", "localization_lead"],
+        "docs": [
+            "docs/reference/lorebook-methodology.md",
+            "studio/docs/templates/lorebook-brief.md",
+            "studio/docs/templates/quest-brief.md",
+        ],
+        "validation_steps": [
+            "Define the canon scope and the systems that own it.",
+            "Separate unlock rules from the text entries themselves.",
+            "Verify one lookup path, one unlock path, and one save/load resume path.",
+        ],
+    },
+    {
         "name": "narrative / quest",
-        "keywords": ["narrative", "story", "dialogue", "quest", "mission", "cutscene"],
+        "keywords": ["narrative", "story", "dialogue", "quest", "mission", "cutscene", "branching conversation"],
         "discipline": "narrative",
         "skills": ["narrative-pipeline", "quest-flow", "localization-pass"],
         "agents": ["narrative_director", "quest_designer", "localization_lead"],

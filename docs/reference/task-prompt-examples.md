@@ -14,10 +14,17 @@ Good tasks usually include at least two of these:
 - the validation goal
 
 Example:
-
 - "Implement a readable dodge cancel window for the first Godot combat room."
 - "Design a Unity-friendly save-state ownership model for mission progress."
 - "Prepare the first Unreal Win64 packaging path and document the constraints."
+
+## Lorebook and narrative
+
+If the task is about canon, lorebooks, world knowledge, or story bible work, include the stability rule and the unlock rule up front.
+
+Example:
+
+- "Design a lorebook flow that keeps faction canon stable while quest unlocks change between runs."
 
 ## Weak task patterns
 

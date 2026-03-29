@@ -50,7 +50,9 @@ USER_GUIDE_FILES = {
         "reference/engine-selection-guide.md",
         "reference/workflow-recipes.md",
         "reference/task-prompt-examples.md",
+        "reference/lorebook-methodology.md",
         "research/game-development/genre/genre-advanced-development-framework.md",
+        "research/game-development/narrative/README.md",
     ],
     "docs/setup/first-hour-walkthrough.md": [
         "## Step 1: Choose the engine family",
@@ -70,6 +72,7 @@ USER_GUIDE_FILES = {
     ],
     "docs/reference/task-prompt-examples.md": [
         "## Strong task patterns",
+        "## Lorebook and narrative",
         "## Good `next` examples",
         "## When to make a feature brief first",
     ],
@@ -98,10 +101,23 @@ USER_GUIDE_FILES = {
         "## What it estimates",
         "## When to use it",
     ],
+    "docs/reference/lorebook-methodology.md": [
+        "## What a lorebook is in this repo",
+        "## Core rule",
+        "## Recommended workflow",
+        "## Good lorebook entry shape",
+        "## Validation questions",
+    ],
     "docs/examples/README.md": [
         "feature-brief-golden-example.md",
         "adr-golden-example.md",
         "handoff-contract-golden-example.md",
+        "genre-starter-golden-example.md",
+        "lorebook-brief-golden-example.md",
+    ],
+    "docs/research/game-development/narrative/README.md": [
+        "Recommended starting notes",
+        "lorebook-world-state-and-canon-architecture.md",
     ],
 }
 
@@ -112,6 +128,10 @@ RESEARCH_GUIDE_FILES = {
         "game-feel-usability-and-accessibility-foundations.md",
         "ai-pathfinding-and-decision-foundations.md",
         "difficulty-balance-and-adaptation-foundations.md",
+    ],
+    "docs/research/game-development/narrative/README.md": [
+        "Recommended starting notes",
+        "lorebook-world-state-and-canon-architecture.md",
     ],
     "docs/research/game-development/foundations/design-frameworks-mda-gameflow-and-sdt.md": [
         "## Summary",
@@ -146,6 +166,7 @@ RESEARCH_GUIDE_FILES = {
         "foundations/",
         "engines/",
         "systems/",
+        "narrative/",
         "genre/",
         "genre/genre-advanced-development-framework.md",
         "production/",
@@ -184,6 +205,22 @@ RESEARCH_GUIDE_FILES = {
         "## How to use this framework",
         "## Maturity ladder",
         "## Genre family support map",
+    ],
+    "docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md": [
+        "## Summary",
+        "## Primary sources",
+        "## Why this matters to this repo",
+        "## Decision impact",
+        "## Architecture guidance",
+        "## What to watch out for",
+        "## Validation expectations",
+    ],
+    "docs/reference/lorebook-methodology.md": [
+        "## What a lorebook is in this repo",
+        "## Core rule",
+        "## Recommended workflow",
+        "## Good lorebook entry shape",
+        "## Validation questions",
     ],
     "docs/research/game-development/genre/genre-design-pattern-catalog.md": [
         "### Auto-battler",

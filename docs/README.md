@@ -32,6 +32,7 @@ That belongs in `studio/docs/active/`.
 - `reference/engine-examples.md`
 - `reference/workflow-recipes.md`
 - `reference/task-prompt-examples.md`
+- `reference/lorebook-methodology.md`
 - `reference/code-review.md`
 - `reference/eval-strategy.md`
 - `reference/genre-presets.md`
@@ -101,6 +102,17 @@ If the task is about inventory, character state, enemy architecture, or save/com
 - `research/game-development/systems/save-progression-and-runtime-data-architecture.md`
 
 Those notes exist so the repo does not reduce system-heavy work to "just add another script." They define ownership, persistence, authored-data boundaries, encounter roles, and the main scaling risks.
+
+## Narrative Research Highlights
+
+If the task is about story canon, lorebook structure, or narrative state, start here:
+
+- `reference/lorebook-methodology.md`
+- `research/game-development/narrative/README.md`
+- `research/game-development/narrative/lorebook-world-state-and-canon-architecture.md`
+- `research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md`
+
+Those notes exist so story facts, unlocks, and dialogue references stay separate instead of drifting into one large script layer.
 
 ## Genre Research Highlights
 

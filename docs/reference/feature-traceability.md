@@ -20,6 +20,8 @@ Start from:
 - `docs/examples/qa-matrix-golden-example.md`
 - `studio/docs/templates/genre-starter.md`
 - `docs/research/game-development/genre/genre-advanced-development-framework.md`
+- `studio/docs/templates/lorebook-brief.md`
+- `docs/reference/lorebook-methodology.md`
 
 ## Why this matters
 
@@ -42,6 +44,12 @@ For genre support work, traceability should also show:
 - which genre family the change strengthens
 - whether the change affects first-slice guidance or mature support guidance
 - whether a preset, playbook, example matrix, or advanced framework changed
+
+For lorebook support work, traceability should also show:
+
+- which canon scope changed
+- whether the lorebook affected gameplay unlocks or only authored prose
+- which systems own the lorebook data, unlock logic, and save/load persistence
 
 ## Bad traceability
 
