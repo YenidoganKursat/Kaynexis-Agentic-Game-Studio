@@ -23,7 +23,23 @@ def gather_paths(explicit_paths: list[str], paths_file: Path | None) -> list[str
     return changed_paths_from_git()
 
 
-def build_guard_payload(paths: list[str]) -> dict[str, object]:
+def build_guard_payload(
+    paths: list[str],
+    *,
+    allow_dependabot_pr: bool = False,
+    pr_author: str = "",
+) -> dict[str, object]:
+    if allow_dependabot_pr and pr_author == "dependabot[bot]":
+        return {
+            "paths": paths,
+            "recommendations": [],
+            "missing_docs": [],
+            "passed": True,
+            "skipped": True,
+            "skip_reason": "dependabot pull request",
+            "pr_author": pr_author,
+        }
+
     recommendations = resolve_recommendations(paths)
     changed = {path.replace("\\", "/") for path in paths}
     missing_docs: list[dict[str, object]] = []
@@ -51,17 +67,21 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Fail when code or content changes should have refreshed docs but did not.")
     parser.add_argument("paths", nargs="*", help="Explicit changed paths. If omitted, uses git status.")
     parser.add_argument("--paths-file", type=Path, help="Read changed paths from a newline-separated file.")
+    parser.add_argument("--allow-dependabot-pr", action="store_true", help="Skip doc sync enforcement for Dependabot pull requests.")
+    parser.add_argument("--pr-author", default="", help="Pull request author login used with --allow-dependabot-pr.")
     parser.add_argument("--json", action="store_true", help="Emit JSON.")
     args = parser.parse_args()
 
     paths = gather_paths(args.paths, args.paths_file)
-    payload = build_guard_payload(paths)
+    payload = build_guard_payload(paths, allow_dependabot_pr=args.allow_dependabot_pr, pr_author=args.pr_author)
 
     if args.json:
         print(json.dumps(payload, indent=2))
     else:
         if not paths:
             print("No changed paths found.")
+        elif payload.get("skipped"):
+            print(f"Doc sync guard skipped for {payload['skip_reason']} ({payload['pr_author']}).")
         elif payload["passed"]:
             print("Doc sync guard passed.")
         else:

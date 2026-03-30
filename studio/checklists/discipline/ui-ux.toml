@@ -9,3 +9,27 @@ severity = "required"
 applies_when = "HUD, menu, tutorial, or settings work"
 validation = "List the key state changes and the player action each state expects"
 owner = "ux"
+
+[[item]]
+id = "ui-stack-choice"
+title = "UI stack choice stays deliberate"
+severity = "required"
+applies_when = "Any HUD, menu, or template-selection task"
+validation = "State which stack owns the flow and why: Control, UI Toolkit, uGUI, or UMG/CommonUI"
+owner = "ux"
+
+[[item]]
+id = "ui-template-source"
+title = "UI template source is named"
+severity = "required"
+applies_when = "Any UI layout, menu, or HUD task"
+validation = "Name the starter source, sample, or marketplace template before implementation"
+owner = "ux"
+
+[[item]]
+id = "ui-projection-boundary"
+title = "UI projection stays separate from gameplay truth"
+severity = "required"
+applies_when = "HUD, menu, pause, inventory, or upgrade UI work"
+validation = "State what data is projected and which system keeps canonical ownership"
+owner = "ux"

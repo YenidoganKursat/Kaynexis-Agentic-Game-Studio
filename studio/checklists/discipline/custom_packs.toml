@@ -1,0 +1,51 @@
+id = "custom_packs"
+title = "Custom Packs"
+layer = "discipline"
+
+[[item]]
+id = "custom-pack-intake"
+title = "Pack type and request source are explicit"
+severity = "required"
+applies_when = "Any custom pack, custom feature bundle, or pack registry task"
+validation = "Name the request source, pack type, and owner before implementation."
+owner = "producer"
+
+[[item]]
+id = "custom-pack-model"
+title = "Fixed rules, override rules, and hook points are explicit"
+severity = "required"
+applies_when = "Any custom pack or custom feature bundle"
+validation = "List the fixed rules, override rules, hook points, and override points."
+owner = "technical_director"
+
+[[item]]
+id = "custom-pack-fallback"
+title = "Fallback behavior is explicit"
+severity = "required"
+applies_when = "Any pack that can be enabled or disabled"
+validation = "Name the fallback path when the pack is absent or disabled."
+owner = "technical_director"
+
+[[item]]
+id = "custom-pack-registry"
+title = "Registry entry is durable"
+severity = "required"
+applies_when = "Any custom pack or feature registry change"
+validation = "Record the pack id, pack type, owner, and dependency list in the durable docs."
+owner = "docs_researcher"
+
+[[item]]
+id = "custom-pack-validation"
+title = "One narrow proof path exists"
+severity = "required"
+applies_when = "Any custom pack or registry change"
+validation = "Run one smoke, test, or review path that proves the pack works."
+owner = "qa_lead"
+
+[[item]]
+id = "custom-pack-doc-sync"
+title = "Guide, example, research, checklist, and eval stay in sync"
+severity = "required"
+applies_when = "Any custom pack routing or documentation change"
+validation = "Update the guide, example, research note, checklist, eval plan, and active decision note together."
+owner = "maintainer"

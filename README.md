@@ -9,104 +9,56 @@ A Codex-first multi-engine studio operating system for turning fuzzy game ideas 
 Supported engine families: `Godot 4`, `Unity 6`, `Unreal 5`
 Root runtime reference today: `Godot 4`
 
-## Reference packs available now
+Fastest front door: `make start` or `python3 scripts/start_game_studio.py`.
 
-The repo already ships with durable reference packs for all supported engine families and for cross-engine game architecture work.
+## Studio map
 
-| Reference area | What it answers | Start here |
+If you only read one overview page, use `docs/reference/studio-map.md`. It is the compact, professional front door for the repo and it points to the right lane without repeating the whole tree.
+
+## Core packs
+
+| Pack | Purpose | Start here |
 | --- | --- | --- |
-| engine architecture | how a feature should fit the chosen engine and repo layout | `docs/research/game-development/engines/README.md` |
-| engine object model | which runtime class, data object, editor surface, or authored asset should own the work | `docs/research/game-development/engines/*-class-editor-object-map.md` |
-| engine mechanic mapping | which 2D and 3D classes, nodes, components, actors, or assets to use for common mechanics | `docs/research/game-development/engines/*-2d-3d-class-and-mechanic-guide.md` |
-| engine performance patterns | navigation, damage, pooling, pathfinding, and scale decisions | `docs/research/game-development/engines/*-2d-3d-navigation-damage-performance.md` |
-| engine examples | concrete Godot, Unity, and Unreal task examples and small slice patterns | `docs/reference/engine-examples.md` |
-| academic foundations | MDA, GameFlow, SDT, game feel, usability, accessibility, AI/pathfinding, and difficulty adaptation | `docs/research/game-development/foundations/README.md` |
-| game systems architecture | combat, save/progression, loop/state ownership, AI/entity scale | `docs/research/game-development/systems/README.md` |
-| genre design patterns | loop shape, risk profile, and example games by genre | `docs/research/game-development/genre/README.md` |
-| production and release | content pipeline and release validation policy | `docs/research/game-development/production/` |
-| operator workflow | onboarding, recipes, command usage, and maintainer setup | `docs/README.md` |
-| execution glue | handoff contracts, feature traceability, doc-sync reminders, and golden examples | `docs/reference/handoff-contracts.md` |
+| operating model | controller, role matrix, hierarchy, validation, review trails | `docs/reference/agent-system.md`, `docs/reference/mastermind-guide.md`, `docs/reference/agent-portfolio.md`, `docs/reference/agent-hierarchy.md` |
+| work packets | execution packets, prompt history, transcripts, proof paths | `docs/reference/agent-execution.md`, `docs/reference/prompt-journal.md`, `docs/reference/agent-transcript.md`, `docs/reference/agent-validation-matrix.md` |
+| engine and systems | engine choice, object ownership, engine atlas, system atlas | `docs/reference/engine-map.md`, `docs/reference/engine-atlas.md`, `docs/reference/system-atlas.md`, `docs/reference/engine-fit.md`, `docs/reference/engine-eval.md` |
+| gameplay and genre | genre presets, genre plans, examples, theory, architecture | `docs/reference/genre-presets.md`, `docs/reference/genre-plan.md`, `docs/research/game-development/genre/genre-guide.md`, `docs/research/game-development/genre/genre-maturity.md`, `docs/reference/theory-guide.md`, `docs/reference/architecture-guide.md` |
+| production and release | versioning, CI/CD, platform fit, Steam, sector, marketing, hardening | `docs/reference/ci-cd.md`, `docs/reference/version-guide.md`, `docs/reference/platform-guide.md`, `docs/reference/release-hardening-guide.md`, `docs/reference/steam-intel.md`, `docs/reference/sector-intel.md`, `docs/reference/marketing-guide.md`, `docs/reference/marketing-intel.md` |
+| scale and customization | custom packs, custom architecture, extensions, libraries, assets, benchmarks, quality, perf, GPU | `docs/reference/custom-packs.md`, `docs/reference/custom-architecture.md`, `docs/reference/extensions-guide.md`, `docs/reference/library-guide.md`, `docs/reference/asset-guide.md`, `docs/reference/benchmark-guide.md`, `docs/reference/quality-guide.md`, `docs/reference/perf-guide.md`, `docs/reference/gpu-guide.md` |
 
-## Engine families in one view
+## Engine families
 
-This repo is designed around three first-class engine families at the studio-system level.
+| Engine | What it means here | Start here |
+| --- | --- | --- |
+| Godot 4 | reference slice and smoke/export helpers | `docs/research/game-development/engines/README.md`, `docs/reference/godot-atlas.md` |
+| Unity 6 | starter-kit-first support with editor/runtime separation | `docs/research/game-development/engines/README.md`, `docs/reference/unity-atlas.md` |
+| Unreal 5 | starter-kit-first support with gameplay framework and packaging | `docs/research/game-development/engines/README.md`, `docs/reference/unreal-atlas.md` |
 
-| Engine family | Repo-level support | Starter-kit surface | Research surface | Adapter / validation surface |
-| --- | --- | --- | --- | --- |
-| `godot-4` | root-facing reference slice, active-doc baseline, export presets | scene/script runtime, smoke/export helpers | architecture, object model, class/mechanic, navigation/damage/performance | `scripts/godot_smoke.py`, `scripts/godot_export.py`, Godot checklist items |
-| `unity-6` | starter-kit-first support with editor/runtime/test separation | runtime scripts, editor entrypoint, asmdef layout, prefab and ScriptableObject folders, edit-mode tests | architecture, object model, class/mechanic, navigation/damage/performance | `scripts/unity_adapter.py`, starter-kit smoke, Unity checklist items |
-| `unreal-5` | starter-kit-first support with gameplay framework and packaging structure | gameplay classes, health component, config defaults, Blueprint/content guidance | architecture, object model, class/mechanic, navigation/damage/performance | `scripts/unreal_adapter.py`, starter-kit smoke, Unreal checklist items |
+## What this repo is
 
-If you choose Unity or Unreal, the repo is not asking you to "translate a Godot template." It already includes engine-specific starter-kit, research, checklist, and CI contract surfaces for those engines.
+- a studio operating system for Codex-centered game development
+- a planning and execution layer that survives across sessions
+- a multi-engine starter-kit and validation platform
+- a checklist and research system for gameplay, tools, pipeline, and production work
+- a genre-aware support layer that can steer the major game families without collapsing everything into one default combat recipe
 
-## Genre packs now included
+## What this repo is not
 
-The genre layer is broader than the original combat-heavy presets. The repo now carries first-slice, contrast-set, and failure-mode guidance for:
+- not a finished commercial game
+- not a full replacement for real engine editors
+- not a fake "supports every engine" README with no adapter contract behind it
+- not a one-off prompt pack that only works if someone remembers the thread history
+- not a Godot-only template pretending to be multi-engine
 
-- `action-roguelite`
-- `deckbuilder-roguelike`
-- `co-op-survival`
-- `auto-battler`
-- `cozy-sim`
-- `extraction-lite`
-- `grand-strategy`
-- `survivorlike`
-- `narrative-adventure`
-- `platformer`
-- `puzzle`
-- `stealth`
-- `colony-sim`
-- `factory-automation`
-- `city-builder`
-- `life-sim`
-- `hero-shooter`
-- `metroidvania`
-- `soulslike`
-- `tactical-rpg`
+## Genre and support families
 
-If the game is still fuzzy, start with [genre presets](docs/reference/genre-presets.md), then read the deeper contrast-set notes in [genre research](docs/research/game-development/genre/README.md).
-If the genre is chosen but you need to know how to build it, read [genre development playbook](docs/research/game-development/genre/genre-development-playbook.md) next.
+The repo includes dedicated notes for `auto-battler`, `grand-strategy`, `stealth`, `city-builder`, `life-sim`, `hero-shooter`, `soulslike`, `co-op-survival`, `cozy-sim`, `extraction-lite`, `narrative-adventure`, `platformer`, `puzzle`, `tactical-rpg`, `sandbox-survival`, `tower-defense`, `4X`, `rhythm-action`, `management-sim`, and `immersive-sim`.
 
-## Why this repo exists
+## Execution glue
 
-Game projects usually decay in the same ways:
-
-- key decisions live in chat instead of the repo
-- engine setup is half-documented and half-tribal knowledge
-- feature briefs, risks, and validation paths drift apart
-- CI only checks files, not the actual working contract
-- research gets done once, then disappears
-
-This repo exists to stop that drift.
-
-It gives you:
-
-- one source of truth in `studio.toml`
-- one front-door CLI in `python3 scripts/codex_studio.py`
-- one routing system for tasks, agents, docs, research, and checklists
-- one starter-kit contract for `godot-4`, `unity-6`, and `unreal-5`
-- one validation surface for docs, kits, evals, workflows, Docker, and active project state
-
-## Multi-engine support, explicitly
-
-This repo is not Godot-only.
-
-- Godot 4: root reference slice in `src/`, smoke/export helpers, active project baseline, and engine-specific mechanic guidance
-- Unity 6: starter kit with runtime scripts, editor build entrypoint, ScriptableObject surface, prefab/script folders, edit-mode tests, and engine-specific mechanic guidance
-- Unreal 5: starter kit with gameplay framework classes, health component, data asset surface, config defaults, Blueprint/content guidance, packaging adapter flow, and engine-specific mechanic guidance
-
-The shared system layer treats all three as first-class engine families for routing, checklists, research, and CI contract smoke.
-
-## Execution glue now included
-
-The repo now includes the connective tissue that usually gets lost between planning and shipping:
-
-- handoff contracts in `studio/docs/templates/handoff-contract.md`
-- feature traceability in `studio/docs/templates/feature-traceability.md`
-- golden examples in `docs/examples/`
-- doc refresh suggestions via `python3 scripts/doc_sync_audit.py --json`
-- a small pacing helper via `python3 scripts/balance_simulator.py --json`
-- production research for platform readiness and hotfix/rollback decisions
+- handoff contracts, traceability, prompt journals, transcripts, and execution packets keep planning and shipping tied together
+- the examples index groups those packs so the same naming and routing contract stays visible
+- doc-sync, validation, and eval plans keep the repo truthful when the structure shifts
 
 ## What this repo is
 
@@ -128,7 +80,7 @@ The repo now includes the connective tissue that usually gets lost between plann
 
 These genre families now have dedicated preset, contrast-set, and architecture notes:
 
-- `auto-battler` for draft economy, small-board placement, and round resolution
+- `auto-battler` for drafting economy, small-board placement, and round resolution
 - `grand-strategy` for realm planning, diplomacy, and campaign-scale persistence
 - `stealth` for patrol readability, suspicion states, and objective routing
 - `city-builder` for zoning, transport bottlenecks, and simulation legibility
@@ -153,13 +105,16 @@ Each family points at a different first-risk profile, so the repo can stop offer
 
 Use this table when you do not want to think about the internal architecture first.
 
+If you want the shortest setup path, run `make start` or `python3 scripts/start_game_studio.py`, then open `docs/setup/quick-access.md` for the fastest access bundle.
+
 | If you want to... | Run this | Why |
 | --- | --- | --- |
-| set up or reset the project baseline | `python3 scripts/codex_studio.py init` | seeds config, active docs, engine profile, and starter-kit assumptions |
+| set up or reset the project baseline | `make start` | shortest front door for the guided setup flow |
 | decide what to work on next | `python3 scripts/codex_studio.py next "your task"` | routes the task to the right skills, agents, docs, and research |
 | see what must be true before calling the task done | `python3 scripts/codex_studio.py checklist --task "your task"` | merges base, engine, discipline, milestone, and custom checklist layers |
 | create a durable research note before architecture work | `python3 scripts/codex_studio.py research --category systems --title "your note"` | keeps reasoning in the repo instead of chat history |
 | inspect engine support or kit contracts | `python3 scripts/codex_studio.py engine --list --json` | shows which engine families the system recognizes |
+| compare Codex models or ChatGPT plan tiers | `python3 scripts/codex_studio.py next "Choose the right Codex model and ChatGPT plan tier"` | routes model-fit questions to the model guide and OpenAI/Codex research |
 | run a full repo health pass | `python3 scripts/codex_studio.py doctor` | checks repo, docs, kits, adapters, CI, and configured engine state |
 | validate docs, tests, evals, and workflows together | `make ci-local` | runs the local CI-equivalent stack |
 
@@ -172,7 +127,54 @@ Use this table when you do not want to think about the internal architecture fir
 | a systems designer shaping combat, save, or progression | `docs/research/game-development/systems/README.md` | scaffold research first, then route the design task |
 | a tools or pipeline owner | `docs/research/game-development/production/` | run `doctor`, `validate_workflows.py`, and `make ci-local` |
 | a new contributor or collaborator | `docs/setup/first-hour-walkthrough.md` | read active docs, then run `doctor` and `engine --list` |
-| a maintainer preparing GitHub or release flows | `docs/setup/github-maintainer-setup.md` and `docs/reference/ci-cd-architecture.md` | run the local CI and review the artifact report |
+| a person setting up engine binaries or editor paths | `docs/setup/engine-installation.md` | install or point the repo at the right local engine path |
+| a person bootstrapping the agent stack | `docs/setup/agent-setup.md` | install Codex CLI, verify agent metadata, and keep single-specialist mode visible |
+| a maintainer preparing GitHub or release flows | `docs/setup/github-setup.md` and `docs/reference/ci-cd.md` | run the local CI and review the artifact report |
+
+## Example starter bundles
+
+If you want to move fast without losing the repo's validation discipline, use one of these bundles as your starting point.
+
+### First combat room bundle
+
+Use this when the next task is a playable combat slice.
+
+1. Read `docs/research/game-development/engines/*-class-editor-object-map.md`
+2. Read `docs/research/game-development/systems/combat.md`
+3. Route the task with `python3 scripts/codex_studio.py next "Build the first combat room"`
+4. Render the checklist with `python3 scripts/codex_studio.py checklist --task "Build the first combat room"`
+5. Write or update `studio/docs/active/combat-feature.md`
+6. Validate with the narrowest relevant smoke or test command before expanding scope
+
+### Inventory and UI bundle
+
+Use this when the next task changes loadout, items, menus, or screen flow.
+
+1. Read `docs/research/game-development/systems/inventory.md`
+2. Read `docs/research/game-development/systems/ui.md`
+3. Route the task with `python3 scripts/codex_studio.py next "Design the inventory and HUD flow"`
+4. Check the engine-specific checklist for input, UI layering, and save boundaries
+5. Validate that the new UI projects real runtime state instead of inventing its own truth
+
+### Narrative world graph bundle
+
+Use this when the task changes lorebook, canon, relationships, or history state.
+
+1. Read `docs/reference/lorebook-methodology.md`
+2. Read `docs/reference/world-graph-methodology.md`
+3. Read the matching narrative architecture note in `docs/research/game-development/narrative/`
+4. Route the task with `python3 scripts/codex_studio.py next "Extend the world graph for a new faction"`
+5. Keep authored prose, unlock logic, and persistence ownership separate
+
+### Unity or Unreal starter bundle
+
+Use this when the project is not Godot-first.
+
+1. Read `docs/reference/engine-selection-guide.md`
+2. Read the matching engine class/mechanic guide
+3. Use `python3 scripts/codex_studio.py init --engine unity-6` or `--engine unreal-5`
+4. Open the matching starter-kit README under `studio/starter-kits/`
+5. Validate the contract smoke before claiming the engine path is healthy
 
 ## Start from the right reference
 
@@ -185,31 +187,34 @@ If your next task sounds like one of these, start with the matching reference pa
 | runtime vs data vs editor ownership | `docs/research/game-development/engines/*-class-editor-object-map.md` |
 | visuals, animation, sprites, particles, and UI presentation ownership | `docs/research/game-development/engines/*-visuals-animation-playbook.md` |
 | concrete engine examples and cross-engine comparison | `docs/reference/engine-examples.md` |
-| AI architecture, A*, behavior trees, GOAP, or hierarchical planning tradeoffs | `docs/research/game-development/foundations/ai-pathfinding-and-decision-foundations.md` |
-| flow, motivation, engagement, player psychology, or why a loop should work | `docs/research/game-development/foundations/design-frameworks-mda-gameflow-and-sdt.md` |
-| game feel, readability, usability, accessibility, or feedback quality | `docs/research/game-development/foundations/game-feel-usability-and-accessibility-foundations.md` |
-| difficulty tuning, adaptation, pacing, or DDA | `docs/research/game-development/foundations/difficulty-balance-and-adaptation-foundations.md` |
-| pathfinding, pooling, damage/contact, high-entity-count gameplay | `docs/research/game-development/engines/*-2d-3d-navigation-damage-performance.md` and `docs/research/game-development/systems/ai-navigation-and-entity-scale-architecture.md` |
-| inventory, equipment, loot, quick bars, or loadouts | `docs/research/game-development/systems/inventory-equipment-and-item-architecture.md` and `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md` |
-| crafting, recipes, gathering loops, stations, or production resource flow | `docs/research/game-development/systems/crafting-recipes-and-resource-flow-architecture.md` and `docs/research/game-development/systems/inventory-equipment-and-item-architecture.md` |
-| player avatar, locomotion, ability ownership, or character state | `docs/research/game-development/systems/character-controller-ability-and-state-architecture.md` |
-| enemy roles, patrols, aggro, perception, encounter behavior, or boss design | `docs/research/game-development/systems/enemy-roster-behavior-and-encounter-architecture.md` and `docs/research/game-development/systems/ai-navigation-and-entity-scale-architecture.md` |
-| dialogue, branching conversations, quest stages, or narrative consequence state | `docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md` and `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md` |
-| companions, recruitable allies, follower AI, squads, or party-slot rules | `docs/research/game-development/systems/party-companion-and-squad-architecture.md` and `docs/research/game-development/systems/enemy-roster-behavior-and-encounter-architecture.md` |
-| input, keyboard/gamepad parity, remapping, pause flow, or camera behavior | `docs/research/game-development/systems/input-controls-camera-and-remapping-architecture.md` |
-| HUDs, menus, settings, onboarding, or upgrade screens | `docs/research/game-development/systems/ui-hud-menu-and-screen-flow-architecture.md` |
-| abilities, perks, skill trees, cooldowns, upgrades, or build variety | `docs/research/game-development/systems/abilities-skill-trees-upgrades-and-build-architecture.md` |
-| prompts, pickups, chests, levers, or interactable world objects | `docs/research/game-development/systems/interactions-pickups-and-world-object-architecture.md` |
-| combat readability, damage flow, status effects, tuning boundaries | `docs/research/game-development/systems/combat-damage-and-effects-architecture.md` |
-| state machines, update order, run loop structure, pausing, phase ownership | `docs/research/game-development/systems/gameplay-loop-state-and-update-architecture.md` |
-| save/load, checkpoints, migrations, meta progression, runtime vs persistent state | `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md` |
-| scoping a genre, comparing inspirations, spotting common failure modes | `docs/research/game-development/genre/genre-design-pattern-catalog.md` and `docs/research/game-development/genre/genre-example-matrix.md` |
+| deeper class-family ownership lookup | `docs/reference/engine-atlas.md` |
+| engine-specific class deep dives | `docs/reference/godot-atlas.md`, `docs/reference/unity-atlas.md`, `docs/reference/unreal-atlas.md` |
+| fast system ownership lookup | `docs/reference/system-atlas.md` |
+| AI architecture, A*, behavior trees, GOAP, or hierarchical planning tradeoffs | `docs/research/game-development/foundations/ai.md` |
+| flow, motivation, engagement, player psychology, or why a loop should work | `docs/research/game-development/foundations/frameworks.md` |
+| game feel, readability, usability, accessibility, or feedback quality | `docs/research/game-development/foundations/ux.md` |
+| difficulty tuning, adaptation, pacing, or DDA | `docs/research/game-development/foundations/balance.md` |
+| pathfinding, pooling, damage/contact, high-entity-count gameplay | `docs/research/game-development/engines/*-2d-3d-navigation-damage-performance.md` and `docs/research/game-development/systems/navigation.md` |
+| inventory, equipment, loot, quick bars, or loadouts | `docs/research/game-development/systems/inventory.md` and `docs/research/game-development/systems/save.md` |
+| crafting, recipes, gathering loops, stations, or production resource flow | `docs/research/game-development/systems/crafting.md` and `docs/research/game-development/systems/inventory.md` |
+| player avatar, locomotion, ability ownership, or character state | `docs/research/game-development/systems/character.md` |
+| enemy roles, patrols, aggro, perception, encounter behavior, or boss design | `docs/research/game-development/systems/enemy.md` and `docs/research/game-development/systems/navigation.md` |
+| dialogue, branching conversations, quest stages, or narrative consequence state | `docs/research/game-development/systems/dialogue.md` and `docs/research/game-development/systems/save.md` |
+| companions, recruitable allies, follower AI, squads, or party-slot rules | `docs/research/game-development/systems/party.md` and `docs/research/game-development/systems/enemy.md` |
+| input, keyboard/gamepad parity, remapping, pause flow, or camera behavior | `docs/research/game-development/systems/input.md` |
+| HUDs, menus, settings, onboarding, or upgrade screens | `docs/research/game-development/systems/ui.md` |
+| abilities, perks, skill trees, cooldowns, upgrades, or build variety | `docs/research/game-development/systems/skills.md` |
+| prompts, pickups, chests, levers, or interactable world objects | `docs/research/game-development/systems/interactions.md` |
+| combat readability, damage flow, status effects, tuning boundaries | `docs/research/game-development/systems/combat.md` |
+| state machines, update order, run loop structure, pausing, phase ownership | `docs/research/game-development/systems/loop.md` |
+| save/load, checkpoints, migrations, meta progression, runtime vs persistent state | `docs/research/game-development/systems/save.md` |
+| scoping a genre, comparing inspirations, spotting common failure modes | `docs/research/game-development/genre/genre-patterns.md` and `docs/research/game-development/genre/genre-examples.md` |
 | choosing a new genre family | `docs/reference/genre-presets.md` then the matching `docs/research/game-development/genre/*-architecture.md` note |
-| turning that genre into a concrete first slice | `docs/research/game-development/genre/genre-development-playbook.md` |
+| turning that genre into a concrete first slice | `docs/research/game-development/genre/genre-guide.md` |
 | needing a concrete example slice for Godot, Unity, or Unreal | `docs/reference/engine-examples.md` |
-| content pipeline, release confidence, CI/CD expectations | `docs/research/game-development/production/content-pipeline.md`, `docs/research/game-development/production/release-validation.md`, and `docs/reference/ci-cd-architecture.md` |
-| platform deltas across PC, web, mobile, and console | `docs/research/game-development/production/platform-readiness-pc-web-mobile-console.md` |
-| live incident, hotfix, and rollback decisions | `docs/research/game-development/production/incident-hotfix-and-rollback.md` |
+| content pipeline, release confidence, CI/CD expectations | `docs/research/game-development/production/content-pipeline.md`, `docs/research/game-development/production/release-validation.md`, and `docs/reference/ci-cd.md` |
+| platform deltas across PC, web, mobile, and console | `docs/research/game-development/production/platform.md` |
+| live incident, hotfix, and rollback decisions | `docs/research/game-development/production/incident.md` |
 | handoff quality, traceability, and doc refresh discipline | `docs/reference/handoff-contracts.md`, `docs/reference/feature-traceability.md`, and `docs/reference/doc-sync-audit.md` |
 | daily operator flow, handoff, or task phrasing | `docs/reference/workflow-recipes.md` and `docs/reference/task-prompt-examples.md` |
 
@@ -326,18 +331,18 @@ After choosing an engine, immediately read the engine pack:
 
 ```bash
 sed -n '1,80p' docs/research/game-development/engines/README.md
-sed -n '1,120p' docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md
-sed -n '1,120p' docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md
-sed -n '1,120p' docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md
+sed -n '1,120p' docs/research/game-development/engines/godot-classes.md
+sed -n '1,120p' docs/research/game-development/engines/unity-classes.md
+sed -n '1,120p' docs/research/game-development/engines/unreal-classes.md
 ```
 
 If the task is more architectural than engine-specific, open the systems pack too:
 
 ```bash
-sed -n '1,120p' docs/research/game-development/systems/gameplay-loop-state-and-update-architecture.md
-sed -n '1,120p' docs/research/game-development/systems/combat-damage-and-effects-architecture.md
-sed -n '1,120p' docs/research/game-development/systems/ai-navigation-and-entity-scale-architecture.md
-sed -n '1,120p' docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md
+sed -n '1,120p' docs/research/game-development/systems/loop.md
+sed -n '1,120p' docs/research/game-development/systems/combat.md
+sed -n '1,120p' docs/research/game-development/systems/navigation.md
+sed -n '1,120p' docs/research/game-development/systems/save.md
 ```
 
 ## What a normal session looks like
@@ -382,6 +387,8 @@ Weak examples:
 
 ## Real command examples
 
+These examples are deliberately concrete so you can copy the sequence, swap the task text, and keep the validation order intact.
+
 ### The minimum useful loop
 
 ```bash
@@ -413,10 +420,10 @@ Example output excerpt:
     "version_family": "6000.x"
   },
   "research_refs": [
-    "docs/research/game-development/engines/unity-6-class-editor-object-map.md",
-    "docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md",
-    "docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md",
-    "docs/research/game-development/systems/ai-navigation-and-entity-scale-architecture.md"
+    "docs/research/game-development/engines/unity-map.md",
+    "docs/research/game-development/engines/unity-classes.md",
+    "docs/research/game-development/engines/unity-performance.md",
+    "docs/research/game-development/systems/navigation.md"
   ]
 }
 ```
@@ -489,6 +496,8 @@ Example output excerpt:
 ```
 
 ## Example sessions by engine
+
+Each session below shows the shortest practical path from idea to validation for that engine family.
 
 ### Godot gameplay slice
 
@@ -573,6 +582,8 @@ python3 scripts/codex_studio.py checklist \
 
 ## Common workflows
 
+Use these when you want a repeatable operator loop instead of a one-off task.
+
 ### 1. Solo Godot prototype
 
 ```bash
@@ -626,7 +637,7 @@ This repo is designed so a normal task leaves a visible trail.
 | mechanic or gameplay slice | engine runtime files, one feature brief, one test plan or QA surface, relevant active docs |
 | architecture change | one ADR or research note, one active doc update, relevant checklist-driven validation files |
 | save/progression change | system docs, save plan docs, migration or persistence notes, tests |
-| CI/CD or tooling change | `scripts/`, `.github/workflows/`, `Makefile`, `docs/reference/ci-cd-architecture.md`, and eval/test surfaces |
+| CI/CD or tooling change | `scripts/`, `.github/workflows/`, `Makefile`, `docs/reference/ci-cd.md`, and eval/test surfaces |
 | research-driven decision | one research note under `docs/research/game-development/`, then route/checklist output for the actual implementation task |
 
 If a task changes code but leaves no durable doc, checklist, or validation trail, it is usually under-documented.
@@ -642,9 +653,9 @@ Each engine family now has a four-layer research pack:
 
 Examples:
 
-- `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
-- `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
-- `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
+- `docs/research/game-development/engines/godot-classes.md`
+- `docs/research/game-development/engines/unity-classes.md`
+- `docs/research/game-development/engines/unreal-classes.md`
 
 Those guides are where the repo spells out the most-used classes, object ownership, mechanic patterns, writing style expectations, and common mistakes for each engine family.
 
@@ -718,37 +729,37 @@ Recommended reference sweep:
 
 ### Engine packs
 
-- `docs/research/game-development/engines/godot-4-architecture.md`
-- `docs/research/game-development/engines/godot-4-class-editor-object-map.md`
-- `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
-- `docs/research/game-development/engines/godot-4-2d-3d-navigation-damage-performance.md`
-- `docs/research/game-development/engines/unity-6-architecture.md`
-- `docs/research/game-development/engines/unity-6-class-editor-object-map.md`
-- `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
-- `docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md`
-- `docs/research/game-development/engines/unreal-5-architecture.md`
-- `docs/research/game-development/engines/unreal-5-class-editor-object-map.md`
-- `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
-- `docs/research/game-development/engines/unreal-5-2d-3d-navigation-damage-performance.md`
+- `docs/research/game-development/engines/godot.md`
+- `docs/research/game-development/engines/godot-map.md`
+- `docs/research/game-development/engines/godot-classes.md`
+- `docs/research/game-development/engines/godot-performance.md`
+- `docs/research/game-development/engines/unity.md`
+- `docs/research/game-development/engines/unity-map.md`
+- `docs/research/game-development/engines/unity-classes.md`
+- `docs/research/game-development/engines/unity-performance.md`
+- `docs/research/game-development/engines/unreal.md`
+- `docs/research/game-development/engines/unreal-map.md`
+- `docs/research/game-development/engines/unreal-classes.md`
+- `docs/research/game-development/engines/unreal-performance.md`
 
 ### Systems packs
 
-- `docs/research/game-development/systems/gameplay-loop-state-and-update-architecture.md`
-- `docs/research/game-development/systems/combat-damage-and-effects-architecture.md`
-- `docs/research/game-development/systems/ai-navigation-and-entity-scale-architecture.md`
-- `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md`
-- `docs/research/game-development/systems/inventory-equipment-and-item-architecture.md`
-- `docs/research/game-development/systems/character-controller-ability-and-state-architecture.md`
-- `docs/research/game-development/systems/enemy-roster-behavior-and-encounter-architecture.md`
-- `docs/research/game-development/systems/input-controls-camera-and-remapping-architecture.md`
-- `docs/research/game-development/systems/ui-hud-menu-and-screen-flow-architecture.md`
-- `docs/research/game-development/systems/abilities-skill-trees-upgrades-and-build-architecture.md`
-- `docs/research/game-development/systems/interactions-pickups-and-world-object-architecture.md`
+- `docs/research/game-development/systems/loop.md`
+- `docs/research/game-development/systems/combat.md`
+- `docs/research/game-development/systems/navigation.md`
+- `docs/research/game-development/systems/save.md`
+- `docs/research/game-development/systems/inventory.md`
+- `docs/research/game-development/systems/character.md`
+- `docs/research/game-development/systems/enemy.md`
+- `docs/research/game-development/systems/input.md`
+- `docs/research/game-development/systems/ui.md`
+- `docs/research/game-development/systems/skills.md`
+- `docs/research/game-development/systems/interactions.md`
 
 ### Genre and production packs
 
-- `docs/research/game-development/genre/genre-design-pattern-catalog.md`
-- `docs/research/game-development/genre/genre-example-matrix.md`
+- `docs/research/game-development/genre/genre-patterns.md`
+- `docs/research/game-development/genre/genre-examples.md`
 - `docs/research/game-development/production/content-pipeline.md`
 - `docs/research/game-development/production/release-validation.md`
 
@@ -767,6 +778,7 @@ This repo ships with a broad CI/CD layer and local equivalents.
 | `make ci-workflows` | validate workflow definitions themselves | JSON workflow report |
 | `make starter-kit-smoke` | contract smoke across engines | per-engine smoke output |
 | `make ci-report` | generate CI artifact summaries | `build/ci/local/ci-report.json` and `.md` |
+| `.github/workflows/validate.yml` | main-branch smoke and validate report | validate artifact bundle |
 | `.github/workflows/repo-validate.yml` | PR validation matrix | workflow artifacts |
 | `.github/workflows/starter-kit-contracts.yml` | starter-kit contract smoke | engine artifact bundles |
 | `.github/workflows/release-readiness.yml` | manual release-readiness bundle | build metadata artifact |
@@ -782,7 +794,7 @@ python3 scripts/ci_artifact_report.py --output-dir build/ci/manual-check --label
 make docker-verify
 ```
 
-See `docs/reference/ci-cd-architecture.md` for the full workflow map.
+See `docs/reference/ci-cd.md` for the full workflow map.
 
 ## Docker helper environment
 
@@ -836,7 +848,7 @@ Suggested topics:
 - `game-architecture`
 - `research-driven-development`
 
-Apply these later from the GitHub UI or with `gh repo edit`. See `docs/setup/github-maintainer-setup.md`.
+Apply these later from the GitHub UI or with `gh repo edit`. See `docs/setup/github-setup.md`.
 
 ## First 15 minutes
 
@@ -850,7 +862,24 @@ Apply these later from the GitHub UI or with `gh repo edit`. See `docs/setup/git
 8. Run `python3 scripts/run_local_evals.py`
 9. Run `python3 scripts/codex_studio.py doctor`
 
+If the project is a team handoff rather than a fresh bootstrap, also read `docs/reference/feature-traceability.md` and `docs/reference/handoff-contracts.md` before implementation starts.
+
+## What to update when something changes
+
+Use this mapping to keep the repo honest when you touch a major system.
+
+| If you change... | Update these docs first |
+| --- | --- |
+| engine choice or engine support | `studio.toml`, `docs/reference/engine-selection-guide.md`, `studio/docs/active/engine-profile.md` |
+| genre choice or genre guidance | `docs/reference/genre-presets.md`, `docs/research/game-development/genre/genre-guide.md`, `studio/docs/active/genre-starter.md` |
+| combat, save, inventory, UI, or character systems | the matching note in `docs/research/game-development/systems/` and the active feature brief |
+| lorebook, canon, or world graph structure | `docs/reference/lorebook-methodology.md`, `docs/reference/world-graph-methodology.md`, and the narrative research note |
+| build, release, or CI behavior | `docs/reference/ci-cd.md`, `docs/setup/github-setup.md`, and the active build pipeline doc |
+| user-facing onboarding | `docs/setup/getting-started.md`, `docs/setup/first-hour-walkthrough.md`, and this README |
+
 ## FAQ
+
+The answers below reflect the repo's current multi-engine contract and the active Godot baseline.
 
 ### Is the Godot sample the main product?
 
@@ -889,40 +918,40 @@ Yes, but the repo defaults to English-first onboarding and CLI output so the sys
 - `docs/research/game-development/engines/README.md`
 - `docs/research/game-development/systems/README.md`
 - `docs/research/game-development/genre/README.md`
-- `docs/research/game-development/engines/godot-4-architecture.md`
-- `docs/research/game-development/engines/unity-6-architecture.md`
-- `docs/research/game-development/engines/unreal-5-architecture.md`
-- `docs/research/game-development/engines/godot-4-class-editor-object-map.md`
-- `docs/research/game-development/engines/unity-6-class-editor-object-map.md`
-- `docs/research/game-development/engines/unreal-5-class-editor-object-map.md`
-- `docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md`
-- `docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md`
-- `docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md`
-- `docs/research/game-development/engines/godot-4-2d-3d-navigation-damage-performance.md`
-- `docs/research/game-development/engines/unity-6-2d-3d-navigation-damage-performance.md`
-- `docs/research/game-development/engines/unreal-5-2d-3d-navigation-damage-performance.md`
-- `docs/research/game-development/systems/gameplay-loop-state-and-update-architecture.md`
-- `docs/research/game-development/systems/combat-damage-and-effects-architecture.md`
-- `docs/research/game-development/systems/ai-navigation-and-entity-scale-architecture.md`
-- `docs/research/game-development/systems/save-progression-and-runtime-data-architecture.md`
-- `docs/research/game-development/systems/inventory-equipment-and-item-architecture.md`
-- `docs/research/game-development/systems/character-controller-ability-and-state-architecture.md`
-- `docs/research/game-development/systems/enemy-roster-behavior-and-encounter-architecture.md`
-- `docs/research/game-development/systems/input-controls-camera-and-remapping-architecture.md`
-- `docs/research/game-development/systems/ui-hud-menu-and-screen-flow-architecture.md`
-- `docs/research/game-development/systems/abilities-skill-trees-upgrades-and-build-architecture.md`
-- `docs/research/game-development/systems/interactions-pickups-and-world-object-architecture.md`
-- `docs/research/game-development/genre/genre-design-pattern-catalog.md`
-- `docs/research/game-development/genre/genre-example-matrix.md`
+- `docs/research/game-development/engines/godot.md`
+- `docs/research/game-development/engines/unity.md`
+- `docs/research/game-development/engines/unreal.md`
+- `docs/research/game-development/engines/godot-map.md`
+- `docs/research/game-development/engines/unity-map.md`
+- `docs/research/game-development/engines/unreal-map.md`
+- `docs/research/game-development/engines/godot-classes.md`
+- `docs/research/game-development/engines/unity-classes.md`
+- `docs/research/game-development/engines/unreal-classes.md`
+- `docs/research/game-development/engines/godot-performance.md`
+- `docs/research/game-development/engines/unity-performance.md`
+- `docs/research/game-development/engines/unreal-performance.md`
+- `docs/research/game-development/systems/loop.md`
+- `docs/research/game-development/systems/combat.md`
+- `docs/research/game-development/systems/navigation.md`
+- `docs/research/game-development/systems/save.md`
+- `docs/research/game-development/systems/inventory.md`
+- `docs/research/game-development/systems/character.md`
+- `docs/research/game-development/systems/enemy.md`
+- `docs/research/game-development/systems/input.md`
+- `docs/research/game-development/systems/ui.md`
+- `docs/research/game-development/systems/skills.md`
+- `docs/research/game-development/systems/interactions.md`
+- `docs/research/game-development/genre/genre-patterns.md`
+- `docs/research/game-development/genre/genre-examples.md`
 - `docs/research/game-development/production/content-pipeline.md`
 - `docs/research/game-development/production/release-validation.md`
 - `docs/research/game-development/policy.md`
 - `docs/reference/workflow-recipes.md`
 - `docs/reference/task-prompt-examples.md`
 - `docs/reference/command-cheatsheet.md`
-- `docs/reference/ci-cd-architecture.md`
-- `docs/reference/engine-agent-guidelines.md`
+- `docs/reference/ci-cd.md`
+- `docs/reference/agent-guide.md`
 - `docs/setup/getting-started.md`
-- `docs/setup/github-maintainer-setup.md`
-- `codex-game-studio-v3-roadmap.md`
+- `docs/setup/github-setup.md`
+- `roadmap.md`
 - `CHANGELOG.md`

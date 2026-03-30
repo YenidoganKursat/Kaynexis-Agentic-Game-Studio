@@ -1,5 +1,6 @@
 name = "lead_programmer"
 description = "Coordinates implementation strategy, integration order, and code review quality bar."
+public_title = "Sophie Wilson"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"

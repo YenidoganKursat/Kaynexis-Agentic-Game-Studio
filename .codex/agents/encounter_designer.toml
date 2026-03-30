@@ -1,5 +1,6 @@
 name = "encounter_designer"
 description = "Designs enemy and event compositions that teach, test, and vary player skill."
+public_title = "Isaac Newton"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"

@@ -1,5 +1,7 @@
 # Support
 
+This file is the quick pointer for repo and studio-system support. It is intentionally short so people can find the right path without hunting through chat history.
+
 ## Where to start
 
 - Usage questions: read `README.md` and `docs/setup/getting-started.md`
@@ -8,6 +10,8 @@
 - Review and eval policy: read `docs/reference/code-review.md` and `docs/reference/eval-strategy.md`
 
 ## Filing work
+
+Use the GitHub issue forms when the work needs to survive beyond the current session and should be triaged with a durable label, owner, or milestone.
 
 Use the GitHub issue forms for:
 

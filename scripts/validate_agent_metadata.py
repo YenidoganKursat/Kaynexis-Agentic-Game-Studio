@@ -14,6 +14,7 @@ CHECKLISTS_DIR = REPO_ROOT / "studio" / "checklists"
 REQUIRED_KEYS = {
     "name",
     "description",
+    "public_title",
     "model",
     "sandbox_mode",
     "nickname_candidates",
@@ -61,12 +62,27 @@ def validate_agent(path: Path) -> list[str]:
     if len(instructions) < 80:
         errors.append(f"{path.name}: developer_instructions look too small to be useful")
 
+    public_title = str(data.get("public_title", "")).strip()
+    if not public_title:
+        errors.append(f"{path.name}: public_title must be a non-empty string")
+
     return errors
 
 
 def collect_errors() -> list[str]:
     errors: list[str] = []
+    seen_titles: dict[str, Path] = {}
     for path in sorted(AGENTS_DIR.glob("*.toml")):
+        data = tomllib.loads(path.read_text(encoding="utf-8"))
+        title = str(data.get("public_title", "")).strip()
+        if title:
+            previous = seen_titles.get(title)
+            if previous is None:
+                seen_titles[title] = path
+            else:
+                errors.append(
+                    f"{path.name}: public_title '{title}' duplicates '{previous.name}'"
+                )
         errors.extend(validate_agent(path))
     return errors
 

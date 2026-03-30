@@ -1,0 +1,67 @@
+id = "engine_eval"
+title = "Engine Eval"
+layer = "discipline"
+
+[[item]]
+id = "engine-source-hierarchy"
+title = "Official engine sources come first"
+severity = "required"
+applies_when = "Any engine comparison, selection, or readiness task"
+validation = "Name the official engine docs or package pages before summarizing the scorecard"
+owner = "technical_director"
+
+[[item]]
+id = "engine-family-split"
+title = "Engine families stay separate"
+severity = "required"
+applies_when = "Any task comparing more than one engine family"
+validation = "Name each engine family separately instead of collapsing them into one target"
+owner = "producer"
+
+[[item]]
+id = "engine-build-contract"
+title = "Build contract is explicit"
+severity = "required"
+applies_when = "Any engine eval task that touches build or export"
+validation = "State the build command, artifact path, and the smallest proof that the build is real"
+owner = "build_release_engineer"
+
+[[item]]
+id = "engine-test-contract"
+title = "Test contract is explicit"
+severity = "required"
+applies_when = "Any engine eval task that touches automated tests or smoke tests"
+validation = "State the test runner or smoke path, the output path, and the expected latency signal"
+owner = "qa_lead"
+
+[[item]]
+id = "engine-performance-baseline"
+title = "Performance baseline is captured"
+severity = "required"
+applies_when = "Any engine eval task that touches frame, memory, startup, or scale"
+validation = "Record one baseline number or reproducible observation before comparing engines"
+owner = "performance_analyst"
+
+[[item]]
+id = "engine-toolchain-readiness"
+title = "Toolchain readiness is named"
+severity = "required"
+applies_when = "Any engine eval task that depends on local or CI toolchain setup"
+validation = "State the local binary, package, or service assumption that must hold before the engine can be validated"
+owner = "engine_programmer"
+
+[[item]]
+id = "engine-scorecard-artifact"
+title = "Scorecard artifact is produced"
+severity = "required"
+applies_when = "Any engine comparison or decision task"
+validation = "Return one scorecard or matrix plus one repo implication"
+owner = "technical_director"
+
+[[item]]
+id = "engine-doc-sync"
+title = "Engine docs stay synchronized"
+severity = "required"
+applies_when = "Any engine eval, comparison, or readiness change"
+validation = "Update the guide, example, research note, active scorecard, checklist, and eval plan together"
+owner = "maintainer"

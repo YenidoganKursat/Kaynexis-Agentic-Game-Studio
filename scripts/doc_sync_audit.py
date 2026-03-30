@@ -22,8 +22,8 @@ DOC_RULES = [
         "prefixes": ("scripts/", ".github/workflows/", "Makefile", "Dockerfile", "docker-compose.yml"),
         "docs": [
             "studio/docs/active/build-pipeline.md",
-            "docs/reference/ci-cd-architecture.md",
-            "docs/setup/github-maintainer-setup.md",
+            "docs/reference/ci-cd.md",
+            "docs/setup/github-setup.md",
         ],
         "reason": "tooling or CI surface changed",
     },
@@ -48,7 +48,7 @@ DOC_RULES = [
     {
         "prefixes": ("studio/checklists/", ".codex/agents/", ".agents/skills/"),
         "docs": [
-            "docs/reference/engine-agent-guidelines.md",
+            "docs/reference/agent-guide.md",
             "docs/reference/workflow-recipes.md",
             "docs/reference/task-prompt-examples.md",
         ],

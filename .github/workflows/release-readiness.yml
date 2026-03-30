@@ -51,11 +51,14 @@ jobs:
           python3 scripts/starter_kit_contract_smoke.py --engine unity-6 --output-dir build/ci/release/starter-kit
           python3 scripts/starter_kit_contract_smoke.py --engine unreal-5 --output-dir build/ci/release/starter-kit
 
+      - name: Run version guard
+        run: python3 scripts/version_guard.py --output-dir build/ci/version
+
       - name: Generate release readiness report
         run: python3 scripts/ci_artifact_report.py --label "${{ inputs.release_label }}" --output-dir build/ci/release
 
       - name: Run CI quality gate
-        run: python3 scripts/ci_quality_gate.py --report build/ci/release/ci-report.json --min-score 80 --minimum-readiness validation-ready
+        run: python3 scripts/ci_quality_gate.py --report build/ci/release/ci-report.json --min-score 90 --minimum-readiness release-ready --forbid-external-dependencies
 
       - name: Upload release readiness bundle
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

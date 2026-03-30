@@ -1,0 +1,43 @@
+id = "agent_validation"
+title = "Agent Validation Matrices"
+layer = "discipline"
+
+[[item]]
+id = "agent-validation-scope"
+title = "The matrix names the operating mode"
+severity = "required"
+applies_when = "Any task that needs a validation matrix for agent behavior"
+validation = "Say whether the work stays single-specialist, uses a paired specialist, or fans out into a panel"
+owner = "producer"
+
+[[item]]
+id = "agent-validation-rows"
+title = "Each lane has one narrow proof row"
+severity = "required"
+applies_when = "Any agent validation or routing task"
+validation = "List the exact row for each lane and the command or artifact that proves it"
+owner = "qa_lead"
+
+[[item]]
+id = "agent-validation-history"
+title = "Prompt history and transcript stay separate"
+severity = "required"
+applies_when = "Any task that should be reopened later"
+validation = "Name which entries live in prompt journal, agent journal, and transcript"
+owner = "docs_researcher"
+
+[[item]]
+id = "agent-validation-models"
+title = "Lane model overrides stay explicit"
+severity = "recommended"
+applies_when = "Any task that fans out into specialists"
+validation = "State the default model and any explicit `--agent-model` overrides"
+owner = "technical_director"
+
+[[item]]
+id = "agent-validation-doc-sync"
+title = "Docs and evals stay in sync"
+severity = "required"
+applies_when = "Any routing, checklist, or agent-management change"
+validation = "Update the guide, example, research note, checklist, and eval plan together"
+owner = "maintainer"

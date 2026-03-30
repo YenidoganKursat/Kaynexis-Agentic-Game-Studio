@@ -6,6 +6,7 @@
 ## Evidence
 - What is already proven
 - What docs, screenshots, logs, or paths support that
+- System atlas references consulted, if relevant
 
 ## Risks
 - Remaining risks
@@ -24,3 +25,9 @@
 
 ## Next step
 - One explicit next action with success criteria
+
+## Atlas references
+- `{SYSTEM_ATLAS_REF}`
+- `{ENGINE_ATLAS_REF}`
+- `{ENGINE_MAP_REF}`
+- matching engine mini atlas

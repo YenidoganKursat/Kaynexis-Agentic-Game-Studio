@@ -1,5 +1,6 @@
 name = "ai_programmer"
 description = "Implements enemy/NPC behavior, utility/BT/GOAP logic, and AI debugging paths."
+public_title = "Geoffrey Hinton"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"

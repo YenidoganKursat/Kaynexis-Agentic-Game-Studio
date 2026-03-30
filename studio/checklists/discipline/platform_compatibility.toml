@@ -1,0 +1,75 @@
+id = "platform_compatibility"
+title = "Platform Compatibility"
+layer = "discipline"
+
+[[item]]
+id = "platform-source-hierarchy"
+title = "Official platform sources come first"
+severity = "required"
+applies_when = "Any platform compatibility, readiness, or porting task"
+validation = "Name the official platform docs or policy pages before summarizing the plan"
+owner = "porting_engineer"
+
+[[item]]
+id = "platform-family-split"
+title = "Platform families are separated explicitly"
+severity = "required"
+applies_when = "Any platform compatibility task spanning more than one family"
+validation = "Name each platform family separately instead of collapsing them into one target"
+owner = "producer"
+
+[[item]]
+id = "platform-support-tier"
+title = "Support tiers are named per family"
+severity = "required"
+applies_when = "Any platform compatibility or cross-platform task"
+validation = "State whether each family is core, supported, demo, research, or deferred before naming release order"
+owner = "producer"
+
+[[item]]
+id = "platform-input-model"
+title = "Input and focus model are named"
+severity = "required"
+applies_when = "Any platform compatibility task that touches input, UI, or controls"
+validation = "State the keyboard, controller, touch, remote, or focus model for each family"
+owner = "ux_designer"
+
+[[item]]
+id = "platform-performance-envelope"
+title = "Performance envelopes are set per family"
+severity = "required"
+applies_when = "Any platform compatibility task that touches load, frame pacing, or memory"
+validation = "State the target budget or ceiling for each family before tuning"
+owner = "performance_analyst"
+
+[[item]]
+id = "platform-policy-watch"
+title = "Store, review, or certification constraints are named"
+severity = "recommended"
+applies_when = "Any platform compatibility task that touches release or submission"
+validation = "Name the platform-holder, store, or submission rule that constrains the decision"
+owner = "release_manager"
+
+[[item]]
+id = "platform-release-sequence"
+title = "Release sequencing is explicit"
+severity = "required"
+applies_when = "Any platform compatibility or cross-platform task that touches release order"
+validation = "Name the family order and the first validation gate before implementation"
+owner = "build_release_engineer"
+
+[[item]]
+id = "platform-visual-pack"
+title = "The visual output pack is named"
+severity = "required"
+applies_when = "Any platform compatibility task that will be shown to a user"
+validation = "Name the chart pack or dashboard schema before recommending a decision"
+owner = "art_director"
+
+[[item]]
+id = "platform-doc-sync"
+title = "Platform docs stay synchronized"
+severity = "required"
+applies_when = "Any platform compatibility, routing, or readiness change"
+validation = "Update the guide, example, research note, checklist, and eval plan together"
+owner = "maintainer"

@@ -1,0 +1,43 @@
+id = "gameplay_programmer"
+title = "Gameplay Programmer"
+layer = "discipline"
+
+[[item]]
+id = "gameplay-owner"
+title = "Runtime ownership is explicit"
+severity = "required"
+applies_when = "Any gameplay slice or mechanic task"
+validation = "State the runtime owner, the data owner, and the boundary before coding"
+owner = "gameplay_programmer"
+
+[[item]]
+id = "gameplay-slice"
+title = "The smallest playable slice is named"
+severity = "required"
+applies_when = "Any gameplay implementation task"
+validation = "Describe the smallest player-facing slice that proves the mechanic"
+owner = "gameplay_programmer"
+
+[[item]]
+id = "gameplay-state"
+title = "State and interaction boundaries are clear"
+severity = "required"
+applies_when = "Any mechanic, combat, or interaction task"
+validation = "Document what the mechanic owns, what it reads, and what it does not own"
+owner = "technical_director"
+
+[[item]]
+id = "gameplay-validation"
+title = "A narrow validation path exists"
+severity = "required"
+applies_when = "Any gameplay implementation task"
+validation = "Name one smoke, test, or manual loop that proves the slice works"
+owner = "qa_lead"
+
+[[item]]
+id = "gameplay-doc-sync"
+title = "Gameplay docs stay synchronized"
+severity = "recommended"
+applies_when = "Any gameplay implementation task"
+validation = "Update the gameplay note, feature brief, or active doc in the same change"
+owner = "maintainer"

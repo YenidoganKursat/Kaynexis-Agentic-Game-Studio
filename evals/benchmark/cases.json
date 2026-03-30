@@ -1,0 +1,120 @@
+[
+  {
+    "task": "Build a benchmark suite that measures route accuracy, checklist quality, and docs sync for this studio",
+    "expected_route": "benchmark / measurement",
+    "expected_docs": [
+      "docs/reference/benchmark-guide.md",
+      "docs/examples/benchmark-example.md"
+    ],
+    "expected_research_refs": [
+      "docs/reference/benchmark-guide.md",
+      "docs/examples/benchmark-example.md",
+      "docs/research/game-development/foundations/benchmarks.md",
+      "docs/reference/eval-strategy.md"
+    ],
+    "expected_disciplines": [
+      "benchmark",
+      "quality",
+      "performance",
+      "research"
+    ],
+    "expected_checklist_ids": [
+      "benchmark-family",
+      "benchmark-baseline",
+      "benchmark-threshold",
+      "benchmark-coverage",
+      "benchmark-artifact",
+      "benchmark-doc-sync",
+      "quality-owner",
+      "quality-process",
+      "perf-first-lever"
+    ]
+  },
+  {
+    "task": "Compare SWE-bench and OpenAI Evals for code-edit regression coverage before choosing a harness",
+    "expected_route": "benchmark / measurement",
+    "expected_docs": [
+      "docs/reference/benchmark-guide.md",
+      "docs/examples/benchmark-example.md"
+    ],
+    "expected_research_refs": [
+      "docs/reference/benchmark-guide.md",
+      "docs/examples/benchmark-example.md",
+      "docs/research/game-development/foundations/benchmarks.md",
+      "docs/reference/eval-strategy.md"
+    ],
+    "expected_disciplines": [
+      "benchmark",
+      "quality",
+      "performance",
+      "research"
+    ],
+    "expected_checklist_ids": [
+      "benchmark-family",
+      "benchmark-baseline",
+      "benchmark-threshold",
+      "benchmark-artifact",
+      "benchmark-doc-sync"
+    ]
+  },
+  {
+    "task": "Compare AgentBench, GAIA, OSWorld, and WebArena for broad agent coverage before picking a benchmark family",
+    "expected_route": "benchmark / measurement",
+    "expected_docs": [
+      "docs/reference/benchmark-guide.md",
+      "docs/examples/benchmark-example.md"
+    ],
+    "expected_research_refs": [
+      "docs/reference/benchmark-guide.md",
+      "docs/examples/benchmark-example.md",
+      "docs/research/game-development/foundations/benchmarks.md",
+      "docs/reference/eval-strategy.md"
+    ],
+    "expected_disciplines": [
+      "benchmark",
+      "quality",
+      "performance",
+      "research"
+    ],
+    "expected_checklist_ids": [
+      "benchmark-family",
+      "benchmark-baseline",
+      "benchmark-threshold",
+      "benchmark-coverage",
+      "benchmark-artifact",
+      "benchmark-doc-sync"
+    ]
+  },
+  {
+    "task": "Design a benchmark pass for a Unity 6 inventory HUD and name the metric, baseline, and threshold",
+    "expected_route": "benchmark / measurement",
+    "expected_docs": [
+      "docs/reference/benchmark-guide.md",
+      "docs/examples/benchmark-example.md",
+      "docs/reference/perf-guide.md"
+    ],
+    "expected_research_refs": [
+      "docs/reference/benchmark-guide.md",
+      "docs/examples/benchmark-example.md",
+      "docs/research/game-development/foundations/benchmarks.md",
+      "docs/research/game-development/engines/unity-performance.md",
+      "docs/reference/perf-guide.md"
+    ],
+    "expected_disciplines": [
+      "benchmark",
+      "quality",
+      "performance",
+      "research"
+    ],
+    "expected_checklist_ids": [
+      "benchmark-family",
+      "benchmark-baseline",
+      "benchmark-threshold",
+      "benchmark-artifact",
+      "benchmark-doc-sync",
+      "quality-owner",
+      "quality-process",
+      "perf-first-lever"
+    ]
+  }
+]

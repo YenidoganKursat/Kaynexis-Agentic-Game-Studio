@@ -1,0 +1,43 @@
+id = "game_designer"
+title = "Game Designer"
+layer = "discipline"
+
+[[item]]
+id = "design-outcome"
+title = "Player outcome is the starting point"
+severity = "required"
+applies_when = "Any design, genre, or gameplay-shaping task"
+validation = "State the player outcome in one sentence before describing the system"
+owner = "game_designer"
+
+[[item]]
+id = "design-loop"
+title = "The loop is named and bounded"
+severity = "required"
+applies_when = "Any design or planning task"
+validation = "Describe the primary loop and the smallest loop boundary that proves it"
+owner = "game_designer"
+
+[[item]]
+id = "design-pacing"
+title = "Pacing and tension are explicit"
+severity = "required"
+applies_when = "Any genre, progression, or encounter design task"
+validation = "State the pacing shape, the tension source, and the release point"
+owner = "game_designer"
+
+[[item]]
+id = "design-validation"
+title = "The design has a playable proof path"
+severity = "required"
+applies_when = "Any design task that should become implementation"
+validation = "Name the smallest testable slice or prototype beat"
+owner = "qa_lead"
+
+[[item]]
+id = "design-doc-sync"
+title = "Design notes stay durable"
+severity = "recommended"
+applies_when = "Any gameplay or genre design task"
+validation = "Update the brief, genre plan, or active design note together"
+owner = "maintainer"

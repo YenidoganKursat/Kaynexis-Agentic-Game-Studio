@@ -1,0 +1,43 @@
+id = "technical_director"
+title = "Technical Director"
+layer = "discipline"
+
+[[item]]
+id = "tech-boundary"
+title = "Runtime, data, and editor boundaries are explicit"
+severity = "required"
+applies_when = "Any architecture, engine, or cross-layer decision"
+validation = "State the runtime owner, data owner, editor owner, and what each does not own"
+owner = "technical_director"
+
+[[item]]
+id = "tech-feasibility"
+title = "Feasibility and first blocker are named"
+severity = "required"
+applies_when = "Any design or implementation task with technical risk"
+validation = "Name the hardest blocker before implementation starts"
+owner = "technical_director"
+
+[[item]]
+id = "tech-tradeoff"
+title = "Tradeoffs stay visible"
+severity = "required"
+applies_when = "Any architecture or system-shaping task"
+validation = "Record the main alternatives, the chosen path, and why it wins"
+owner = "technical_director"
+
+[[item]]
+id = "tech-validation"
+title = "A narrow validation path is chosen"
+severity = "required"
+applies_when = "Any implementation or refactor task"
+validation = "Name one smoke, test, or manual loop that proves the technical choice"
+owner = "qa_lead"
+
+[[item]]
+id = "tech-doc-sync"
+title = "Durable architecture docs stay in sync"
+severity = "required"
+applies_when = "Any architectural or routing change"
+validation = "Update the matching guide, example, or active doc in the same change"
+owner = "maintainer"

@@ -18,3 +18,8 @@
 ## Severity & owner
 - Severity
 - Suspected owner / subsystem
+
+## Atlas references
+- Primary system atlas: `{SYSTEM_ATLAS_REF}`
+- Core class atlas: `{ENGINE_ATLAS_REF}`
+- Fast owner map: `{ENGINE_MAP_REF}`

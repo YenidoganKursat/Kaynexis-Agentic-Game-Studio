@@ -1,0 +1,51 @@
+id = "benchmark"
+title = "Benchmark"
+layer = "discipline"
+
+[[item]]
+id = "benchmark-family"
+title = "Benchmark family is named"
+severity = "required"
+applies_when = "Any benchmark, measurement, or comparison task"
+validation = "State the ready-made family or the repo-local suite before comparing results"
+owner = "technical-director"
+
+[[item]]
+id = "benchmark-baseline"
+title = "Baseline is captured before comparison"
+severity = "required"
+applies_when = "Any benchmark or measurement task"
+validation = "Record the starting score, pass rate, or observed failure mode"
+owner = "qa"
+
+[[item]]
+id = "benchmark-threshold"
+title = "Metric and threshold are explicit"
+severity = "required"
+applies_when = "Any benchmark or measurement task"
+validation = "Name the metric, the target, and the pass/fail bar before comparing"
+owner = "technical-director"
+
+[[item]]
+id = "benchmark-coverage"
+title = "Coverage includes representative and regression cases"
+severity = "recommended"
+applies_when = "Any benchmark suite"
+validation = "List the core path, one regression case, and one edge case"
+owner = "qa"
+
+[[item]]
+id = "benchmark-artifact"
+title = "Evidence artifact is written"
+severity = "required"
+applies_when = "Any benchmark or measurement task"
+validation = "Store the report path, command used, and result summary"
+owner = "maintainer"
+
+[[item]]
+id = "benchmark-doc-sync"
+title = "Benchmark docs stay in sync"
+severity = "required"
+applies_when = "Any benchmark, routing, or measurement change"
+validation = "Update the benchmark guide, example, and eval plan in the same change"
+owner = "maintainer"

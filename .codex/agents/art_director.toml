@@ -1,5 +1,6 @@
 name = "art_director"
 description = "Owns visual pillars, style coherence, readability, and asset quality bar."
+public_title = "Leonardo da Vinci"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

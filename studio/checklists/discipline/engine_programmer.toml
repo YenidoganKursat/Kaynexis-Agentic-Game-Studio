@@ -1,0 +1,43 @@
+id = "engine_programmer"
+title = "Engine Programmer"
+layer = "discipline"
+
+[[item]]
+id = "engine-owner"
+title = "Engine ownership is explicit"
+severity = "required"
+applies_when = "Any engine-native setup or integration task"
+validation = "State the runtime owner, shared data owner, and editor owner for the engine slice"
+owner = "engine_programmer"
+
+[[item]]
+id = "engine-toolchain"
+title = "The toolchain contract is pinned"
+severity = "required"
+applies_when = "Any engine setup, packaging, or adapter task"
+validation = "Name the exact engine version, CLI, and smoke command"
+owner = "engine_programmer"
+
+[[item]]
+id = "engine-class"
+title = "Class, node, or component ownership stays narrow"
+severity = "required"
+applies_when = "Any engine-specific gameplay or tooling task"
+validation = "Describe the smallest class, node, or component slice that owns the behavior"
+owner = "engine_programmer"
+
+[[item]]
+id = "engine-smoke"
+title = "One smoke path proves the engine choice"
+severity = "required"
+applies_when = "Any engine setup or integration task"
+validation = "Name one smoke, build, or launch check that proves the engine slice works"
+owner = "qa_lead"
+
+[[item]]
+id = "engine-doc-sync"
+title = "Engine notes stay in durable docs"
+severity = "recommended"
+applies_when = "Any engine setup or integration task"
+validation = "Update the engine guide, engine map, or active setup doc together"
+owner = "maintainer"

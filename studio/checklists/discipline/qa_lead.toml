@@ -1,0 +1,43 @@
+id = "qa_lead"
+title = "QA Lead"
+layer = "discipline"
+
+[[item]]
+id = "qa-criteria"
+title = "Acceptance criteria are concrete"
+severity = "required"
+applies_when = "Any feature, bugfix, or release gate task"
+validation = "Write the expected pass/fail behavior in plain language"
+owner = "qa_lead"
+
+[[item]]
+id = "qa-matrix"
+title = "The test matrix stays narrow but meaningful"
+severity = "required"
+applies_when = "Any validation or review task"
+validation = "Name the minimum set of checks that proves the change"
+owner = "qa_lead"
+
+[[item]]
+id = "qa-go-no-go"
+title = "Go/no-go gate is explicit"
+severity = "required"
+applies_when = "Any milestone, demo, or release readiness task"
+validation = "State what would block shipping and who can clear it"
+owner = "release_manager"
+
+[[item]]
+id = "qa-evidence"
+title = "Evidence is attached to the decision"
+severity = "required"
+applies_when = "Any non-trivial validation or review task"
+validation = "Attach the command output, transcript, screenshot, or manual note that proves the decision"
+owner = "qa_lead"
+
+[[item]]
+id = "qa-doc-sync"
+title = "Test notes and review notes stay durable"
+severity = "recommended"
+applies_when = "Any QA, review, or regression pass"
+validation = "Update the active test plan, QA note, or postmortem when the judgment changes"
+owner = "maintainer"

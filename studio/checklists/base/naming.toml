@@ -1,0 +1,19 @@
+id = "naming"
+title = "Naming"
+layer = "base"
+
+[[item]]
+id = "short-canonical-names"
+title = "Short canonical names stay short"
+severity = "required"
+applies_when = "Any new doc, example, checklist, preset, or rename"
+validation = "Prefer 1-2 word canonical names when practical; avoid legacy labels like golden example or architecture-heavy filenames; keep README, repo tour, and doc-sync surfaces updated together"
+owner = "maintainer"
+
+[[item]]
+id = "rename-sync"
+title = "Renames update every public reference"
+severity = "required"
+applies_when = "Any file rename or doc simplification"
+validation = "Refresh links in README, docs/README, repo-tour, examples indexes, and validation surfaces in the same change"
+owner = "maintainer"

@@ -1,0 +1,35 @@
+id = "journal"
+title = "Prompt Journal"
+layer = "discipline"
+
+[[item]]
+id = "journal-prompt-history"
+title = "Prompt history is captured in append-only form"
+severity = "required"
+applies_when = "Any non-trivial routed task or reviewable prompt"
+validation = "Record the user prompt, timestamp, route, and short outcome in the active prompt journal"
+owner = "maintainer"
+
+[[item]]
+id = "journal-agent-step"
+title = "Agent step notes capture expectation, found, improvement, and evaluation"
+severity = "required"
+applies_when = "Any multi-step task or non-trivial validation loop"
+validation = "Write a timestamped agent journal entry with the expected result, what was found, the improvement made, and a short evaluation"
+owner = "technical-director"
+
+[[item]]
+id = "journal-review-path"
+title = "The review path is obvious to the user"
+severity = "required"
+applies_when = "Any prompt-history or agent-journal update"
+validation = "Link the active journal to the guide, example, and relevant validation artifacts"
+owner = "qa"
+
+[[item]]
+id = "journal-doc-sync"
+title = "Journal docs stay in sync with the logging behavior"
+severity = "required"
+applies_when = "Any prompt-journal routing or script change"
+validation = "Update the guide, example, active journal, and eval plan in the same change"
+owner = "maintainer"

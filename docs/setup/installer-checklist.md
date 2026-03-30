@@ -6,11 +6,13 @@ Use this checklist when you are the person standing up the repo for a team or ne
 
 - Confirm Python `3.11+` is available.
 - Confirm the intended engine, platform, and genre presets.
+- Review `docs/setup/engine-installation.md` and `docs/setup/agent-setup.md`.
 - Run `python3 scripts/codex_studio.py init --project-name "Your Game" --engine ... --platform ... --genre ... --yes`
 - Review `studio/docs/active/game-brief.md`
 - Review `studio/docs/active/genre-starter.md`
 - Review `studio/docs/active/engine-profile.md`
 - Review `studio/docs/active/platform-targets.md`
+- Review `docs/reference/platform-guide.md`
 - Read `docs/reference/code-review.md`
 - Read `docs/reference/eval-strategy.md`
 - Install git hooks if the repo is already initialized.
@@ -30,12 +32,16 @@ Use this checklist when you are the person standing up the repo for a team or ne
 ## Before Inviting Collaborators
 
 - Make sure `README.md` matches the real way the team should start.
+- Make sure `docs/setup/quick-access.md` reflects the real front door and shortest setup path.
 - Make sure `docs/setup/getting-started.md` reflects the real bootstrap command.
+- Make sure `docs/setup/engine-installation.md` reflects the real install path and smoke versus editor-backed boundary.
+- Make sure `docs/setup/agent-setup.md` reflects the real agent bootstrap path and single-specialist default.
 - Make sure `docs/reference/command-cheatsheet.md` matches the commands you expect people to use.
 - Make sure `docs/reference/genre-presets.md` matches the genre choices you want new users to see.
+- Make sure `docs/reference/platform-guide.md` matches the actual supported families and readiness assumptions.
 - Make sure review and eval expectations are still accurate for your team.
 - Make sure `.github/CODEOWNERS` and community health files reflect the real maintainer identity.
-- Confirm there are no unresolved placeholders in `studio/docs/active/`.
+- Confirm there are no unresolved template markers or stale project-specific values in `studio/docs/active/`.
 - Confirm there are no committed `__pycache__` or `.pyc` files.
 - Confirm the first meaningful feature or milestone is visible in `current-sprint.md`.
 
@@ -52,6 +58,8 @@ Use this checklist when you are the person standing up the repo for a team or ne
 You have done enough installer work when:
 
 - the team can clone the repo and run one setup command
+- the team can find a short engine installation path
+- the team can find a short agent bootstrap path
 - the active docs explain what the game is and what is being built next
 - the routing/scaffolding commands work
 - validation passes

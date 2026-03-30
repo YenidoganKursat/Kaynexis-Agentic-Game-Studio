@@ -70,7 +70,7 @@ HOOKS_CONFIG_PATH = REPO_ROOT / ".codex" / "hooks.json"
 ENV_EXAMPLE_PATH = REPO_ROOT / ".env.example"
 SECRETS_DOC_PATH = REPO_ROOT / "docs" / "setup" / "secrets-and-env.md"
 CODEX_COMPAT_DOC_PATH = REPO_ROOT / "docs" / "reference" / "codex-compatibility.md"
-CI_CD_ARCHITECTURE_DOC_PATH = REPO_ROOT / "docs" / "reference" / "ci-cd-architecture.md"
+CI_CD_ARCHITECTURE_DOC_PATH = REPO_ROOT / "docs" / "reference" / "ci-cd.md"
 BASELINE_SCRIPT_PATH = REPO_ROOT / "scripts" / "seed_project_baseline.py"
 GODOT_SMOKE_SCRIPT_PATH = REPO_ROOT / "scripts" / "godot_smoke.py"
 GODOT_EXPORT_SCRIPT_PATH = REPO_ROOT / "scripts" / "godot_export.py"
@@ -223,13 +223,24 @@ def main() -> int:
     checks.append(
         make_check(
             "github-automation",
-            "pass" if WORKFLOWS_DIR.exists() and (WORKFLOWS_DIR / "repo-validate.yml").exists() and (WORKFLOWS_DIR / "docker-smoke.yml").exists() else "warn",
-            "GitHub workflows are present."
-            if WORKFLOWS_DIR.exists() and (WORKFLOWS_DIR / "repo-validate.yml").exists() and (WORKFLOWS_DIR / "docker-smoke.yml").exists()
-            else "GitHub automation workflows are missing.",
+            "pass"
+            if WORKFLOWS_DIR.exists()
+            and (WORKFLOWS_DIR / "validate.yml").exists()
+            and (WORKFLOWS_DIR / "repo-validate.yml").exists()
+            and (WORKFLOWS_DIR / "docker-smoke.yml").exists()
+            else "warn",
+            "GitHub workflows are present: validate.yml, repo-validate.yml, docker-smoke.yml."
+            if WORKFLOWS_DIR.exists()
+            and (WORKFLOWS_DIR / "validate.yml").exists()
+            and (WORKFLOWS_DIR / "repo-validate.yml").exists()
+            and (WORKFLOWS_DIR / "docker-smoke.yml").exists()
+            else "GitHub automation workflows are missing: validate.yml, repo-validate.yml, docker-smoke.yml.",
             next_step=None
-            if WORKFLOWS_DIR.exists() and (WORKFLOWS_DIR / "repo-validate.yml").exists() and (WORKFLOWS_DIR / "docker-smoke.yml").exists()
-            else "Restore .github/workflows/repo-validate.yml and .github/workflows/docker-smoke.yml.",
+            if WORKFLOWS_DIR.exists()
+            and (WORKFLOWS_DIR / "validate.yml").exists()
+            and (WORKFLOWS_DIR / "repo-validate.yml").exists()
+            and (WORKFLOWS_DIR / "docker-smoke.yml").exists()
+            else "Restore .github/workflows/validate.yml, .github/workflows/repo-validate.yml, and .github/workflows/docker-smoke.yml.",
         )
     )
     checks.append(
@@ -259,7 +270,7 @@ def main() -> int:
             else "CI/CD reporting surface is incomplete.",
             next_step=None
             if CI_ARTIFACT_REPORT_PATH.exists() and STARTER_KIT_SMOKE_PATH.exists() and CI_CD_ARCHITECTURE_DOC_PATH.exists()
-            else "Restore scripts/ci_artifact_report.py, scripts/starter_kit_contract_smoke.py, and docs/reference/ci-cd-architecture.md.",
+            else "Restore scripts/ci_artifact_report.py, scripts/starter_kit_contract_smoke.py, and docs/reference/ci-cd.md.",
         )
     )
     checks.append(
@@ -430,7 +441,10 @@ def main() -> int:
         unreal_uat = find_unreal_uat()
         unreal_editor = find_unreal_editor()
         if unreal_uat:
-            checks.append(make_check("unreal-cli", "pass", f"Unreal UAT found at {unreal_uat}."))
+            detail = f"Unreal UAT found at {unreal_uat}."
+            if "tools/engine-stubs" in unreal_uat.replace("\\", "/"):
+                detail = f"Unreal UAT repo-local contract stub found at {unreal_uat}."
+            checks.append(make_check("unreal-cli", "pass", detail))
         elif unreal_editor:
             checks.append(
                 make_check(

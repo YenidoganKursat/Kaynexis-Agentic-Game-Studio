@@ -1,0 +1,51 @@
+id = "advanced_performance"
+title = "Advanced Performance"
+layer = "discipline"
+
+[[item]]
+id = "advanced-perf-owner"
+title = "Advanced perf names the owning algorithm family"
+severity = "required"
+applies_when = "Any culling, partitioning, batching, instancing, or job system change"
+validation = "State the algorithm family before implementation"
+owner = "technical-director"
+
+[[item]]
+id = "advanced-perf-baseline"
+title = "Advanced perf starts from a measured baseline"
+severity = "required"
+applies_when = "Any algorithmic or scale optimization"
+validation = "Record one baseline number or reproducible observation"
+owner = "performance"
+
+[[item]]
+id = "advanced-perf-representation"
+title = "Representation choice is explicit before micro-optimization"
+severity = "required"
+applies_when = "Crowds, projectiles, world simulation, or visibility work"
+validation = "Document whether the feature stays on gameplay objects or moves to servers, jobs, DOTS, Mass, or data-oriented execution"
+owner = "technical-director"
+
+[[item]]
+id = "advanced-perf-lever"
+title = "First algorithmic lever and fallback are explicit"
+severity = "required"
+applies_when = "Any advanced performance pass"
+validation = "Name the first lever and the fallback lever before tuning"
+owner = "performance"
+
+[[item]]
+id = "advanced-perf-validation"
+title = "Advanced perf has one proof path"
+severity = "required"
+applies_when = "Any algorithmic optimization change"
+validation = "Name the profiler, capture method, or test that proves the choice beat alternatives"
+owner = "qa"
+
+[[item]]
+id = "advanced-perf-doc-sync"
+title = "Advanced perf docs stay in sync"
+severity = "required"
+applies_when = "Any algorithmic optimization change"
+validation = "Update the reference guide, example, and active note together"
+owner = "maintainer"

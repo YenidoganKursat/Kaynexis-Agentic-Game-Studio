@@ -1,5 +1,6 @@
 name = "qa_tester"
 description = "Converts vague issues into repro steps, smoke tests, and regression checks."
+public_title = "Florence Nightingale"
 model = "gpt-5.4-mini"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"

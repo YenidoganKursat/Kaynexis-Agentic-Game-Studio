@@ -17,5 +17,10 @@
 - Damage/contact case
 - AI/navigation case
 
+## Atlas references
+- Primary system atlas: `{SYSTEM_ATLAS_REF}`
+- Core class atlas: `{ENGINE_ATLAS_REF}`
+- Fast owner map: `{ENGINE_MAP_REF}`
+
 ## Exit criteria
 - What passes before this is considered done

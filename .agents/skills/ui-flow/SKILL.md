@@ -22,8 +22,8 @@ Design or implement one UI flow with screen states, transitions, copy needs, and
 ## Primary docs / outputs
 - `studio/docs/templates/feature-brief.md`
 - `studio/docs/templates/accessibility-pass.md`
-- `docs/research/game-development/systems/ui-hud-menu-and-screen-flow-architecture.md`
-- `docs/research/game-development/systems/input-controls-camera-and-remapping-architecture.md`
+- `docs/research/game-development/systems/ui.md`
+- `docs/research/game-development/systems/input.md`
 
 ## Workflow
 1. Inspect the current repo/docs state first and cite concrete evidence.

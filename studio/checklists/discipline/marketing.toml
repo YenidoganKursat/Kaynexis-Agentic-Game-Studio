@@ -1,0 +1,67 @@
+id = "marketing"
+title = "Marketing"
+layer = "discipline"
+
+[[item]]
+id = "marketing-source-hierarchy"
+title = "Official platform and store sources come first"
+severity = "required"
+applies_when = "Any marketing strategy or campaign planning task"
+validation = "Name the official platform or store docs that constrain the plan before recommending channels"
+owner = "producer"
+
+[[item]]
+id = "marketing-objective"
+title = "One objective drives the plan"
+severity = "required"
+applies_when = "Any marketing strategy or campaign planning task"
+validation = "State whether the objective is awareness, wishlists, demo installs, launch conversion, retention, creator reach, or community growth"
+owner = "producer"
+
+[[item]]
+id = "marketing-audience-and-promise"
+title = "Audience and promise are explicit"
+severity = "required"
+applies_when = "Any marketing strategy or campaign planning task"
+validation = "Name the primary audience and the promise the campaign wants them to remember"
+owner = "creative_director"
+
+[[item]]
+id = "marketing-channel-fit"
+title = "Channel choice follows fit, not habit"
+severity = "required"
+applies_when = "Any marketing strategy or campaign planning task"
+validation = "Explain why the selected channel is the best match for the audience, asset strength, and timing"
+owner = "community_manager"
+
+[[item]]
+id = "marketing-asset-readiness"
+title = "Assets match the chosen channel"
+severity = "required"
+applies_when = "Any marketing strategy or campaign planning task"
+validation = "List the required assets and note any missing proof points before the beat starts"
+owner = "art_director"
+
+[[item]]
+id = "marketing-metrics-and-baseline"
+title = "The measurement path is baselined"
+severity = "required"
+applies_when = "Any marketing strategy or campaign planning task"
+validation = "Name the baseline, the primary metric, the supporting metrics, and the observation window"
+owner = "analytics_engineer"
+
+[[item]]
+id = "marketing-policy-watch"
+title = "Store, platform, and accessibility constraints are named"
+severity = "recommended"
+applies_when = "Any marketing strategy or campaign planning task that touches launch, store, or metadata"
+validation = "Name the store policy, metadata rule, or accessibility tag that constrains the decision"
+owner = "release_manager"
+
+[[item]]
+id = "marketing-doc-sync"
+title = "Marketing docs stay synchronized"
+severity = "required"
+applies_when = "Any marketing strategy, routing, or measurement change"
+validation = "Update the guide, example, research note, checklist, and eval plan together"
+owner = "maintainer"

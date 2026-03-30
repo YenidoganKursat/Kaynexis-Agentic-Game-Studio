@@ -18,6 +18,8 @@ Use this guide when reviewing code, docs, config, or workflow changes in this re
 
 ## Risk checklist
 
+Use this checklist to keep review comments focused on real risk rather than style-only noise.
+
 ### Runtime and project risk
 
 - crashes, hangs, data loss, or save corruption
@@ -35,6 +37,7 @@ Use this guide when reviewing code, docs, config, or workflow changes in this re
 
 ## Validation expectations
 
+- For quality or optimization-criteria work, pair this guide with `docs/reference/quality-guide.md` and `docs/reference/quality-process.md` so the review bar, process loop, optimization bar, and first lever stay explicit.
 - Small doc-only change: link checks, grep checks, script validation, and a clear before/after explanation
 - Script or config change: command output from the touched script plus `python3 scripts/doctor.py` or `make validate`
 - Agent or instruction change: at minimum an eval plan or an explicit rationale for why behavior is unchanged

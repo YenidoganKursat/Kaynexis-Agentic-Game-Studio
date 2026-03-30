@@ -1,0 +1,13 @@
+# Example extension pack manifest
+# Copy this shape when you need a project-specific optional pack.
+
+id = "inventory_extension_pack"
+name = "Inventory Extension Pack"
+enabled = false
+owner = "technical_director"
+scope = "Project-specific inventory filters, UI helpers, and debug overlays"
+depends_on = ["custom-architecture"]
+hook_points = ["inventory_ui", "loot_filters", "debug_overlay"]
+override_points = ["sort_order", "visible_groups", "tooltip_copy"]
+fallback = "core inventory flow"
+validation = "Run the extensions checklist and one narrow smoke path."

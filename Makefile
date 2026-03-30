@@ -43,6 +43,7 @@ ci-local: ## Run the local CI-equivalent checks
 	$(PYTHON) scripts/validate_repo_layout.py
 	$(PYTHON) scripts/validate_docs.py
 	$(PYTHON) scripts/validate_assets.py
+	$(PYTHON) scripts/version_guard.py --output-dir build/ci/version
 	$(PYTHON) scripts/ci_artifact_report.py --output-dir build/ci/local
 	$(PYTHON) scripts/doc_sync_guard.py --json
 	$(PYTHON) scripts/ci_quality_gate.py --report build/ci/local/ci-report.json --min-score 80 --minimum-readiness validation-ready
@@ -51,6 +52,7 @@ validate: ## Run layout, docs, and asset validation
 	$(PYTHON) scripts/validate_workflows.py
 	$(PYTHON) scripts/validate_engine_kits.py
 	$(PYTHON) scripts/godot_smoke.py --static-only
+	$(PYTHON) scripts/version_guard.py --json
 	$(PYTHON) scripts/validate_repo_layout.py
 	$(PYTHON) scripts/validate_docs.py
 	$(PYTHON) scripts/validate_assets.py
@@ -101,10 +103,12 @@ ci-doc-sync: ## Fail if changed code likely needs docs updates
 	$(PYTHON) scripts/doc_sync_guard.py --json
 
 ci-quality: ## Generate and enforce the local CI quality gate
+	$(PYTHON) scripts/version_guard.py --output-dir build/ci/version
 	$(PYTHON) scripts/ci_artifact_report.py --output-dir build/ci/latest
 	$(PYTHON) scripts/ci_quality_gate.py --report build/ci/latest/ci-report.json --min-score 80 --minimum-readiness validation-ready
 
 ci-report: ## Generate CI health artifacts into build/ci/latest
+	$(PYTHON) scripts/version_guard.py --output-dir build/ci/version
 	$(PYTHON) scripts/ci_artifact_report.py --output-dir build/ci/latest
 
 starter-kit-smoke: ## Run starter-kit contract smoke for all supported engines
@@ -121,11 +125,11 @@ unity-build-command: ## Print the Unity build command for the starter-kit scaffo
 unreal-package-command: ## Print the Unreal package command for the starter-kit scaffold
 	$(PYTHON) scripts/unreal_adapter.py package --project-path studio/starter-kits/unreal-5/scaffold --uat-path $(UNREAL_STUB) --dry-run --json
 
-feature: ## Scaffold a feature brief, ADR, and test plan
-	$(PYTHON) scripts/scaffold_feature.py "$(FEATURE)" --with-adr --with-test-plan
+feature: ## Scaffold a feature brief, ADR, test plan, and eval plan
+	$(PYTHON) scripts/scaffold_feature.py "$(FEATURE)" --with-adr --with-test-plan --with-eval-plan
 
-bug: ## Scaffold bug triage docs
-	$(PYTHON) scripts/scaffold_bugfix.py "$(BUG)"
+bug: ## Scaffold bug triage docs plus optional validation artifacts
+	$(PYTHON) scripts/scaffold_bugfix.py "$(BUG)" --with-test-plan --with-eval-plan
 
 qa: ## Generate a lightweight QA matrix
 	$(PYTHON) scripts/generate_qa_matrix.py "$(QA_TITLE)"
@@ -135,6 +139,12 @@ eval: ## Scaffold an eval plan for behavior or instruction changes
 
 evals: ## Run the local eval corpus
 	$(PYTHON) scripts/run_local_evals.py
+
+bench: ## Run the repo-local benchmark corpus
+	$(PYTHON) scripts/run_bench.py
+
+version: ## Validate version metadata and changelog sync
+	$(PYTHON) scripts/version_guard.py --json
 
 hooks-enable: ## Enable optional Codex hooks in .codex/config.toml
 	$(PYTHON) scripts/toggle_codex_hooks.py --enable

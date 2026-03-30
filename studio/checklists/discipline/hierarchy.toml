@@ -1,0 +1,44 @@
+id = "hierarchy"
+title = "Agent Hierarchy"
+layer = "discipline"
+
+[[item]]
+id = "hierarchy-single-specialist"
+title = "Single specialist mode remains available"
+severity = "required"
+applies_when = "Any agent hierarchy or orchestration task"
+validation = "State when one specialist is enough and keep that option visible in the final plan"
+owner = "producer"
+
+[[item]]
+id = "hierarchy-title-picked"
+title = "Each lane has a title and repo role"
+severity = "required"
+applies_when = "Any task that needs a command tree or reporting lines"
+validation = "Name the public title, repo role, and parent tier for every lane"
+owner = "technical_director"
+
+[[item]]
+id = "hierarchy-command-tree"
+title = "Command tree is explicit"
+severity = "required"
+applies_when = "Any hierarchy or multi-agent panel task"
+validation = "Show the controller, director, lead, specialist, and validator tiers"
+owner = "technical_director"
+
+[[item]]
+id = "hierarchy-async-packet"
+title = "Async status packets are standardized"
+severity = "required"
+applies_when = "Any hierarchy or orchestration task"
+validation = "Record owner, reports_to, scope, blockers, evidence, next_action, and status"
+owner = "qa_lead"
+
+[[item]]
+id = "hierarchy-doc-sync"
+title = "Durable docs reflect the hierarchy"
+severity = "required"
+applies_when = "Any routing or agent-management change"
+validation = "Update the hierarchy guide, example, and decision log together"
+owner = "maintainer"
+

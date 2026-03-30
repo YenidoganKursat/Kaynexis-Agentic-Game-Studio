@@ -1,5 +1,6 @@
 name = "technical_director"
 description = "Owns architecture, boundaries, feasibility, and technical risk across the repo."
+public_title = "Alan Turing"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

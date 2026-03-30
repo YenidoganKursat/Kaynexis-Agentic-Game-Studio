@@ -1,0 +1,43 @@
+id = "narrative_director"
+title = "Narrative Director"
+layer = "discipline"
+
+[[item]]
+id = "narrative-beat"
+title = "The story beat is named"
+severity = "required"
+applies_when = "Any lorebook, dialogue, or branching story task"
+validation = "State the beat, the player intent, and the narrative purpose"
+owner = "narrative_director"
+
+[[item]]
+id = "narrative-branch"
+title = "Branching or fallback rules are explicit"
+severity = "required"
+applies_when = "Any branching narrative or quest task"
+validation = "Document the branch choice, the fallback, and the fail state"
+owner = "narrative_director"
+
+[[item]]
+id = "narrative-graph"
+title = "Lorebook or world graph ownership is clear"
+severity = "required"
+applies_when = "Any world-state, lorebook, or quest-flow task"
+validation = "State whether the work uses lorebook, world graph, or a hybrid and what each owns"
+owner = "narrative_director"
+
+[[item]]
+id = "narrative-validation"
+title = "A short playable proof exists"
+severity = "required"
+applies_when = "Any narrative implementation task"
+validation = "Name one scene, branch, or dialogue loop that proves the narrative contract"
+owner = "qa_lead"
+
+[[item]]
+id = "narrative-doc-sync"
+title = "Narrative docs stay durable"
+severity = "recommended"
+applies_when = "Any narrative task"
+validation = "Update the lorebook or world-graph active note with the same change"
+owner = "maintainer"

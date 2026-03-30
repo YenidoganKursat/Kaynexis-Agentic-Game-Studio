@@ -1,0 +1,59 @@
+id = "steam_intel"
+title = "Steam Intel"
+layer = "discipline"
+
+[[item]]
+id = "steam-source-hierarchy"
+title = "Official Steam sources come first"
+severity = "required"
+applies_when = "Any Steam store, forum, wishlist, or hardware intelligence task"
+validation = "Name the Steamworks or Steam Community source before summarizing current Steam signals"
+owner = "producer"
+
+[[item]]
+id = "steam-current-window"
+title = "Current window is explicit"
+severity = "required"
+applies_when = "Any Steam intelligence task"
+validation = "State the date or survey window that the signal came from"
+owner = "producer"
+
+[[item]]
+id = "steam-signal-split"
+title = "Store, forum, hardware, and market signals stay separate"
+severity = "required"
+applies_when = "Any Steam intelligence task"
+validation = "Report the traffic or wishlist metric, the forum theme, the hardware baseline, and the market implication separately"
+owner = "technical_director"
+
+[[item]]
+id = "steam-visual-pack"
+title = "The visual output pack is named"
+severity = "required"
+applies_when = "Any Steam intelligence task that will be shown to a user"
+validation = "Name the chart pack or dashboard schema before recommending a decision"
+owner = "art_director"
+
+[[item]]
+id = "steam-forum-themes"
+title = "Forum signals are treated as themes, not facts"
+severity = "required"
+applies_when = "Any Steam community or forum signal task"
+validation = "Summarize recurring themes, frequency, and severity separately from the hard metrics"
+owner = "community_manager"
+
+[[item]]
+id = "steam-permissions"
+title = "Steamworks permissions or access assumptions are explicit"
+severity = "recommended"
+applies_when = "Any Steamworks traffic, wishlist, or analytics task"
+validation = "Note whether the needed analytics view or partner access is available before promising a report"
+owner = "producer"
+
+[[item]]
+id = "steam-doc-sync"
+title = "Steam docs stay synchronized"
+severity = "required"
+applies_when = "Any Steam intelligence, routing, or measurement change"
+validation = "Update the guide, example, research note, checklist, and eval plan together"
+owner = "maintainer"

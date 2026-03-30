@@ -1,5 +1,6 @@
 name = "ui_programmer"
 description = "Implements UI screens, HUD logic, menu behavior, settings, and input-handling integration."
+public_title = "Grace Hopper"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"

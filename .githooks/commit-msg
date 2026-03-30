@@ -13,3 +13,18 @@ if [[ ! "$FIRST_LINE" =~ ^(feat|fix|docs|chore|refactor|test|build|perf|design|r
   echo "Example: feat(combat): add parry timing window"
   exit 1
 fi
+
+if [[ "$FIRST_LINE" =~ ^(release|version)(\(.+\))?:\  ]] || [[ "$FIRST_LINE" =~ ^[a-z]+\([^)]*(version|release)[^)]*\):\  ]]; then
+  BODY="$(tail -n +2 "$MSG_FILE" | tr -d '\r' | sed '/^[[:space:]]*$/d')"
+  if ! grep -Eq '^(What changed:|Changes:|- )' <<<"$BODY"; then
+    echo "Versioning and release commits should include a short body that says what changed."
+    echo "Example:"
+    echo "  feat(versioning): record release-note summary for 2.1.0-dev"
+    echo ""
+    echo "  What changed:"
+    echo "  - updated VERSION to 2.1.0-dev"
+    echo "  - synced CHANGELOG.md with the new state"
+    echo "  - kept the tag policy aligned"
+    exit 1
+  fi
+fi

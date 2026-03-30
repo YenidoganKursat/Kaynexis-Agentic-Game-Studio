@@ -44,9 +44,19 @@ Fix:
 - update `studio/docs/active/engine-profile.md`
 - add the real engine-native repo files when they exist
 
-## Active docs still contain placeholders
+## Active docs still need project-specific values
 
-Run setup again with the right metadata or edit the docs directly:
+If the active docs still read like a template, it usually means the bootstrap metadata was wrong or the repo has not yet been tailored to the actual game.
+
+Check these first:
+
+- `studio/docs/active/game-brief.md`
+- `studio/docs/active/engine-profile.md`
+- `studio/docs/active/current-sprint.md`
+- `studio/docs/active/platform-targets.md`
+- `docs/reference/platform-guide.md`
+
+Then run setup again with the right metadata or edit the docs directly:
 
 ```bash
 python3 scripts/codex_studio.py init \
@@ -63,6 +73,18 @@ If you only want to inspect the issue:
 python3 scripts/studio_status.py
 python3 scripts/doctor.py
 ```
+
+## I need the engine install or agent setup path, not the full bootstrap flow
+
+If the task is about a new local engine install, use:
+
+- `docs/setup/engine-installation.md`
+
+If the task is about Codex CLI or the agent operating model, use:
+
+- `docs/setup/agent-setup.md`
+
+These are the shortest durable setup guides for the new install/bootstrap surface.
 
 ## Docker commands fail
 

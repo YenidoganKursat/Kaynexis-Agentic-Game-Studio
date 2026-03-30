@@ -1,0 +1,43 @@
+id = "agents"
+title = "Agent Portfolio"
+layer = "discipline"
+
+[[item]]
+id = "agent-mode-picked"
+title = "Operating mode is chosen explicitly"
+severity = "required"
+applies_when = "Any agent-system, routing, or orchestration task"
+validation = "State whether the task should stay single-agent, use a paired specialist, or use a multi-agent panel"
+owner = "producer"
+
+[[item]]
+id = "agent-role-owned"
+title = "Each specialist lane has one owner"
+severity = "required"
+applies_when = "Any task that splits across specialist workers"
+validation = "Name the agent, the lane it owns, and what it does not own"
+owner = "technical-director"
+
+[[item]]
+id = "agent-handoffs"
+title = "Handoffs are explicit and narrow"
+severity = "required"
+applies_when = "Any orchestration task"
+validation = "Name each worker handoff, its scope, and the expected output"
+owner = "technical-director"
+
+[[item]]
+id = "agent-validation"
+title = "The proof path stays small"
+severity = "required"
+applies_when = "Any agent portfolio or master mind change"
+validation = "Name one command, doc, or manual loop that proves the role map"
+owner = "qa"
+
+[[item]]
+id = "agent-doc-sync"
+title = "Durable docs reflect the role matrix"
+severity = "required"
+applies_when = "Any routing or agent-management change"
+validation = "Update the portfolio guide, the mastermind guide, and the examples together"
+owner = "maintainer"

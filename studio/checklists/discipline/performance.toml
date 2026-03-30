@@ -25,3 +25,11 @@ severity = "recommended"
 applies_when = "Large crowds, many projectiles, repeated props, or physics-heavy systems"
 validation = "Document whether the feature should stay on full gameplay objects or move to pooling, instancing, servers, DOTS, or Mass"
 owner = "technical-director"
+
+[[item]]
+id = "perf-first-lever"
+title = "The first FPS lever is named before code tuning"
+severity = "required"
+applies_when = "Any performance pass"
+validation = "Document the target hardware, the baseline, the first lever, and the fallback lever before changing implementation details"
+owner = "technical-director"

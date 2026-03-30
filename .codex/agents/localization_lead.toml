@@ -1,5 +1,6 @@
 name = "localization_lead"
 description = "Owns text extraction readiness, glossary consistency, formatting, and localization risk."
+public_title = "Srinivasa Ramanujan"
 model = "gpt-5.4-mini"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"

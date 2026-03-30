@@ -1,0 +1,59 @@
+id = "console"
+title = "Console"
+layer = "discipline"
+
+[[item]]
+id = "console-source-hierarchy"
+title = "Official console-holder sources come first"
+severity = "required"
+applies_when = "Any PS5-like or console porting/submission task"
+validation = "Name the platform-holder docs or partner portal pages before summarizing"
+owner = "porting_engineer"
+
+[[item]]
+id = "console-family-split"
+title = "PS5-like, Xbox-like, and Switch-like families are separate"
+severity = "required"
+applies_when = "Any console or multi-platform console task"
+validation = "Name each console family and do not collapse them into 'console'"
+owner = "producer"
+
+[[item]]
+id = "console-input-model"
+title = "Controller-first input and UI focus are named"
+severity = "required"
+applies_when = "Any console task that touches input, UI, or controls"
+validation = "State the controller, focus, or UI navigation model for each family"
+owner = "ux_designer"
+
+[[item]]
+id = "console-suspend-save"
+title = "Suspend/resume, save, and entitlement behavior are named"
+severity = "required"
+applies_when = "Any console porting or submission task"
+validation = "Record the suspend, save, and entitlement assumptions"
+owner = "certification_manager"
+
+[[item]]
+id = "console-cert-risk"
+title = "At least one submission or cert risk is surfaced"
+severity = "required"
+applies_when = "Submission or console prep"
+validation = "Record a cert-risk assumption in the active docs"
+owner = "certification_manager"
+
+[[item]]
+id = "console-release-sequence"
+title = "Console release order is explicit"
+severity = "recommended"
+applies_when = "Any console or cross-platform release plan"
+validation = "Name whether console is core, supported, demo, or research before sequencing"
+owner = "release_manager"
+
+[[item]]
+id = "console-doc-sync"
+title = "Console docs stay synchronized"
+severity = "required"
+applies_when = "Any console, porting, or readiness change"
+validation = "Update the guide, example, research note, checklist, and eval plan together"
+owner = "maintainer"

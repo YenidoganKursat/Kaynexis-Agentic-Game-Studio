@@ -1,0 +1,43 @@
+id = "presentation"
+title = "Presentation"
+layer = "discipline"
+
+[[item]]
+id = "presentation-owner"
+title = "Playback, timing, and gameplay ownership are explicit"
+severity = "required"
+applies_when = "Any audio, animation, or presentation-layer change"
+validation = "State the playback owner, the timing owner, and the gameplay owner"
+owner = "technical-director"
+
+[[item]]
+id = "presentation-tier"
+title = "The presentation tier is named before implementation"
+severity = "required"
+applies_when = "Any audio, animation, or presentation-layer change"
+validation = "Name whether the slice is simple playback, state-driven presentation, timed coordination, or advanced presentation"
+owner = "technical-director"
+
+[[item]]
+id = "presentation-sync"
+title = "Timing sync stays separate from gameplay truth"
+severity = "required"
+applies_when = "Any audio, animation, or telegraph change"
+validation = "Document how cues, motion, and gameplay windows stay aligned without hiding the rule in the presentation layer"
+owner = "qa"
+
+[[item]]
+id = "presentation-evidence"
+title = "Presentation decisions carry concrete evidence"
+severity = "required"
+applies_when = "Any non-trivial audio or animation pass"
+validation = "Attach the command output, capture, or manual note that proves the cue or animation behaves as expected"
+owner = "qa"
+
+[[item]]
+id = "presentation-doc-sync"
+title = "Presentation docs stay in sync with durable behavior"
+severity = "required"
+applies_when = "Any routing, guide, example, or playbook change"
+validation = "Update the matching guide, example, engine note, or active doc in the same change"
+owner = "maintainer"

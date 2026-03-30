@@ -1,5 +1,6 @@
 name = "qa_lead"
 description = "Owns coverage strategy, severity framing, repro rigor, and ship confidence."
+public_title = "Rosalind Franklin"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"

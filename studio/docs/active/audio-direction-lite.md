@@ -19,3 +19,4 @@
 - Start with engine-native playback unless a middleware need is proven
 - Keep one-shot variation lightweight and deterministic
 - Review repeated combat cues for fatigue before adding content scale
+- For the full simple-to-advanced ladder, read `docs/reference/audio-animation-guide.md` and the matching engine presentation note before implementation

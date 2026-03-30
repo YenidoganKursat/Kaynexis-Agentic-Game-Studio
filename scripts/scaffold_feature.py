@@ -27,6 +27,10 @@ def main() -> int:
         "TEST_SCOPE": args.feature_name,
         "DECISION_NAME": args.feature_name,
         "EVAL_NAME": args.feature_name,
+        "SYSTEM_ATLAS_REF": "docs/reference/system-atlas.md",
+        "ENGINE_ATLAS_REF": "docs/reference/engine-atlas.md",
+        "ENGINE_MAP_REF": "docs/reference/engine-map.md",
+        "ENGINE_MINI_ATLAS_NOTE": "Godot / Unity / Unreal",
     }
 
     targets = []

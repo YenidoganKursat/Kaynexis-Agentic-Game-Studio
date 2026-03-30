@@ -1,5 +1,15 @@
 [
   {
+    "task": "Build a benchmark suite that measures route accuracy, checklist quality, and docs sync for this studio",
+    "expected_route": "benchmark / measurement",
+    "expected_skills": ["qa-matrix", "perf-pass", "feature-brief"],
+    "expected_docs": [
+      "docs/reference/benchmark-guide.md",
+      "docs/examples/benchmark-example.md",
+      "docs/reference/eval-strategy.md"
+    ]
+  },
+  {
     "task": "Investigate save corruption after crash",
     "expected_route": "save / persistence",
     "expected_skills": ["save-system", "qa-matrix"],
@@ -16,6 +26,16 @@
     "expected_route": "release / storefront / marketing",
     "expected_skills": ["storefront-launch", "marketing-beat-brief"],
     "expected_docs": ["studio/docs/templates/storefront-checklist.md"]
+  },
+  {
+    "task": "Write commit notes for a version bump and keep VERSION, CHANGELOG.md, and release tags aligned",
+    "expected_route": "versioning / release metadata",
+    "expected_docs": [
+      "docs/reference/version-guide.md",
+      "docs/examples/version-example.md",
+      "docs/research/game-development/production/versioning.md",
+      "CHANGELOG.md"
+    ]
   },
   {
     "task": "Prototype co-op lobby matchmaking and sync flow",
@@ -36,6 +56,65 @@
     "expected_docs": ["studio/docs/active/engine-profile.md"]
   },
   {
+    "task": "Compare Unity 6 and Unreal 5 in an engine evaluation scorecard for build, test, performance, and toolchain readiness",
+    "expected_route": "engine / evaluation / scorecard",
+    "expected_skills": ["engine-setup", "build-pipeline", "qa-matrix", "perf-pass"],
+    "expected_docs": [
+      "docs/reference/engine-eval.md",
+      "docs/examples/engine-eval-example.md",
+      "docs/research/game-development/foundations/engine-eval.md",
+      "docs/reference/engine-selection-guide.md",
+      "docs/reference/engine-map.md",
+      "docs/reference/engine-examples.md",
+      "docs/reference/benchmark-guide.md",
+      "docs/reference/perf-guide.md",
+      "docs/reference/quality-guide.md",
+      "docs/reference/ci-cd.md",
+      "studio/docs/active/engine-eval.md",
+      "studio/docs/active/eval-engine-eval.md"
+    ]
+  },
+  {
+    "task": "Design a custom architecture and rule pack for project-specific inventory overrides",
+    "expected_route": "custom / architecture / rules",
+    "expected_skills": ["feature-brief", "architecture-decision", "qa-matrix"],
+    "expected_docs": [
+      "docs/reference/custom-architecture.md",
+      "docs/examples/custom-architecture-example.md",
+      "docs/research/game-development/foundations/custom-architecture.md",
+      "docs/reference/architecture-guide.md"
+    ]
+  },
+  {
+    "task": "Design a custom extension pack for inventory hooks and UI panels",
+    "expected_route": "extensions / plugin packs",
+    "expected_skills": ["feature-brief", "architecture-decision", "tools-pipeline", "qa-matrix"],
+    "expected_docs": [
+      "docs/reference/extensions-guide.md",
+      "docs/examples/extensions-example.md",
+      "docs/research/game-development/foundations/extensions.md",
+      "docs/reference/custom-architecture.md",
+      "docs/reference/library-guide.md"
+    ]
+  },
+  {
+    "task": "Which engine fits a beginner solo developer building a small 2D game in Godot 4?",
+    "expected_route": "engine / developer fit / recommendation",
+    "expected_skills": ["engine-setup", "feature-brief", "qa-matrix"],
+    "expected_docs": [
+      "docs/reference/engine-fit.md",
+      "docs/examples/engine-fit-example.md",
+      "docs/research/game-development/foundations/engine-fit.md",
+      "docs/reference/engine-selection-guide.md",
+      "docs/reference/engine-map.md",
+      "docs/reference/engine-examples.md",
+      "docs/reference/engine-eval.md",
+      "studio/checklists/discipline/engine_fit.toml",
+      "studio/docs/active/engine-fit.md",
+      "studio/docs/active/eval-engine-fit.md"
+    ]
+  },
+  {
     "task": "Implement Unity combat room",
     "expected_route": "combat / gameplay",
     "expected_skills": ["combat-loop", "mechanic-design"],
@@ -46,5 +125,96 @@
     "expected_route": "handoff / traceability / doc sync",
     "expected_skills": ["feature-brief", "qa-matrix"],
     "expected_docs": ["studio/docs/templates/handoff-contract.md"]
+  },
+  {
+    "task": "Run a performance pass on a survivorlike and cap active enemies before changing combat logic",
+    "expected_route": "performance",
+    "expected_skills": ["perf-pass"],
+    "expected_docs": [
+      "docs/reference/perf-guide.md",
+      "docs/reference/genre-perf-guide.md",
+      "docs/examples/perf-example.md",
+      "docs/examples/genre-perf-example.md"
+    ]
+  },
+  {
+    "task": "Run a performance pass on a city-builder and chunk simulation before adding more AI detail",
+    "expected_route": "performance",
+    "expected_skills": ["perf-pass"],
+    "expected_docs": [
+      "docs/reference/perf-guide.md",
+      "docs/reference/genre-perf-guide.md",
+      "docs/examples/perf-example.md",
+      "docs/examples/genre-perf-example.md"
+    ]
+  },
+  {
+    "task": "Research advanced optimization algorithms for a Unity 6 city-builder and compare Burst jobs with occlusion culling",
+    "expected_route": "advanced performance / algorithms",
+    "expected_skills": ["perf-pass", "qa-matrix", "feature-brief"],
+    "expected_docs": [
+      "docs/reference/advanced-perf-guide.md",
+      "docs/examples/advanced-perf-example.md",
+      "docs/reference/perf-guide.md",
+      "docs/reference/genre-perf-guide.md"
+    ]
+  },
+  {
+    "task": "Research the GPU communication path for a Godot 4 survivorlike and decide whether MultiMesh or RenderingDevice is the first lever",
+    "expected_route": "gpu / rendering / communication",
+    "expected_skills": ["perf-pass", "qa-matrix", "feature-brief"],
+    "expected_docs": [
+      "docs/reference/gpu-guide.md",
+      "docs/examples/gpu-example.md",
+      "docs/reference/perf-guide.md",
+      "docs/examples/perf-example.md",
+      "docs/reference/advanced-perf-guide.md",
+      "docs/examples/advanced-perf-example.md"
+    ]
+  },
+  {
+    "task": "Review code quality and optimization criteria for a Unity 6 inventory HUD before refactoring",
+    "expected_route": "quality / optimization",
+    "expected_skills": ["feature-brief", "qa-matrix", "perf-pass"],
+    "expected_docs": [
+      "docs/reference/quality-guide.md",
+      "docs/examples/quality-example.md",
+      "docs/reference/code-review.md",
+      "docs/reference/perf-guide.md",
+      "docs/examples/perf-example.md",
+      "docs/reference/advanced-perf-guide.md",
+      "docs/examples/advanced-perf-example.md"
+    ]
+  },
+  {
+    "task": "Build a theory stack for a tactical RPG tutorial and name the MDA, flow, and motivation lenses",
+    "expected_route": "theory / design lenses",
+    "expected_skills": ["feature-brief", "mechanic-design", "qa-matrix"],
+    "expected_docs": [
+      "docs/reference/theory-guide.md",
+      "docs/examples/theory-example.md",
+      "docs/research/game-development/foundations/theory.md",
+      "docs/research/game-development/foundations/frameworks.md",
+      "docs/research/game-development/foundations/ux.md",
+      "docs/research/game-development/foundations/balance.md"
+    ]
+  },
+  {
+    "task": "Choose the smallest official library set for a Unity 6 inventory HUD and controller remap flow",
+    "expected_route": "libraries / dependencies",
+    "expected_skills": ["engine-setup", "feature-brief"],
+    "expected_docs": [
+      "docs/reference/library-guide.md",
+      "docs/examples/library-example.md"
+    ]
+  },
+  {
+    "task": "Decide asset ownership and import boundaries for a Unity 6 inventory HUD",
+    "expected_route": "assets / content pipeline",
+    "expected_skills": ["content-pipeline", "tools-pipeline", "feature-brief"],
+    "expected_docs": [
+      "docs/reference/asset-guide.md",
+      "docs/examples/asset-example.md"
+    ]
   }
 ]

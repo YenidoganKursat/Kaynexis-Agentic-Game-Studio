@@ -19,3 +19,7 @@
 - Technical direction owns structure and import assumptions
 - Design/content owners update the linked active docs when behavior or data contracts change
 - Large content waves should ship with checklist coverage and at least one review note about risk
+
+## Asset choices
+- Read `docs/reference/asset-guide.md` before choosing between a reusable scene/object, a shared data asset, a sprite atlas, Addressables, or a streamable package.
+- Name the source asset, the runtime owner, and the import or load boundary in the first draft.

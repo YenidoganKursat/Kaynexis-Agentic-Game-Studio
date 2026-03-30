@@ -98,11 +98,24 @@ def main() -> int:
         remote_result = subprocess.run(["git", "remote"], cwd=REPO_ROOT, check=False, capture_output=True, text=True)
         if not [line.strip() for line in remote_result.stdout.splitlines() if line.strip()]:
             findings.append({"severity": "medium", "finding": "No git remote is configured, so GitHub workflows and governance are only theoretical.", "next": "Create a remote and push the repository before treating CI or ruleset guidance as active."})
-    build_pipeline_path = ACTIVE_DIR / "build-pipeline.md"
-    if build_pipeline_path.exists():
-        text = build_pipeline_path.read_text(encoding="utf-8")
-        if "real editor/export jobs only count as complete once engine binaries are present on the runner" in text:
-            findings.append({"severity": "medium", "finding": "Real engine-native release validation is still deferred behind external tool installation.", "next": "Wire Unity, Unreal, or Godot binaries into local or CI runners before claiming shipping-grade build coverage."})
+    engine_native_ready = bool(find_godot_binary()) and bool(unity_cli) and unity_channel == "stable" and bool(unreal_uat or unreal_editor)
+    if not engine_native_ready:
+        missing_toolchains: list[str] = []
+        if not find_godot_binary():
+            missing_toolchains.append("Godot")
+        if not unity_cli:
+            missing_toolchains.append("Unity")
+        elif unity_channel in {"alpha", "beta"}:
+            missing_toolchains.append("Unity(stable)")
+        if not (unreal_uat or unreal_editor):
+            missing_toolchains.append("Unreal")
+        findings.append(
+            {
+                "severity": "medium",
+                "finding": "Real engine-native release validation is still deferred behind external tool installation.",
+                "next": f"Wire the remaining toolchains into local or CI runners before claiming shipping-grade build coverage: {', '.join(missing_toolchains) if missing_toolchains else 'review engine setup state'}.",
+            }
+        )
 
     summary = repo_summary()
     payload = {

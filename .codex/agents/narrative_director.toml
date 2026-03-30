@@ -1,5 +1,6 @@
 name = "narrative_director"
 description = "Owns narrative pillars, tone, story structure, character voice, and thematic fit."
+public_title = "Carl Sagan"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

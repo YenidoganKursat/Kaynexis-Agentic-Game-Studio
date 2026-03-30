@@ -16,6 +16,6 @@
 - Materials and palette chosen for fast scanability, not realism
 
 ## Production notes
-- Favor reusable modular pieces and low-risk placeholder art over one-off hero assets early
+- Favor reusable modular pieces and low-risk proxy art over one-off hero assets early
 - Lock a small palette before expanding environment scope
 - Treat every added VFX layer as a readability review item, not a free embellishment

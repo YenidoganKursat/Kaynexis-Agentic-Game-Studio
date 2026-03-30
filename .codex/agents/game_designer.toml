@@ -1,5 +1,6 @@
 name = "game_designer"
 description = "Owns player-facing rules, loop clarity, and feature contracts."
+public_title = "Ada Lovelace"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

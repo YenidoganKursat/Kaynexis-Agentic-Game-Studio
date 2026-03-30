@@ -1,0 +1,51 @@
+id = "marketing_intel"
+title = "Marketing Intel"
+layer = "discipline"
+
+[[item]]
+id = "marketing-intel-source-hierarchy"
+title = "Official source families come first"
+severity = "required"
+applies_when = "Any marketing status, analytics, dashboard, or chart-pack task"
+validation = "Name the analytics or platform source family before recommending a chart"
+owner = "analytics_engineer"
+
+[[item]]
+id = "marketing-intel-window"
+title = "The current window is explicit"
+severity = "required"
+applies_when = "Any marketing status, analytics, dashboard, or chart-pack task"
+validation = "State the date window, region, or platform family that the metrics cover"
+owner = "producer"
+
+[[item]]
+id = "marketing-intel-baseline"
+title = "Baseline and current movement are separated"
+severity = "required"
+applies_when = "Any marketing status, analytics, dashboard, or chart-pack task"
+validation = "Name the baseline, the current value, and the direction of movement"
+owner = "analytics_engineer"
+
+[[item]]
+id = "marketing-intel-chart-pack"
+title = "The chart pack matches the decision"
+severity = "required"
+applies_when = "Any marketing status, analytics, dashboard, or chart-pack task"
+validation = "Choose one summary card plus the smallest useful set of charts or tables"
+owner = "community_manager"
+
+[[item]]
+id = "marketing-intel-implication"
+title = "One repo implication follows the chart"
+severity = "required"
+applies_when = "Any marketing status, analytics, dashboard, or chart-pack task"
+validation = "State one concrete implication for the next beat, message, or channel choice"
+owner = "producer"
+
+[[item]]
+id = "marketing-intel-doc-sync"
+title = "Marketing intel docs stay synchronized"
+severity = "required"
+applies_when = "Any marketing intel change"
+validation = "Update the guide, example, research note, template, checklist, and eval plan together"
+owner = "maintainer"

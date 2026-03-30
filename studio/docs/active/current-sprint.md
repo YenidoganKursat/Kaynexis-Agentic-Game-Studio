@@ -17,8 +17,7 @@
 - Full progression or release polish
 
 ## Top blockers
-- Unity editor coverage is available locally, but the detected install is not yet the final release-grade baseline; Unreal tooling is still external | Owner: technical_director | Mitigation: keep adapter contracts green, prefer a stable Unity editor for shipping validation, and wire real Unreal CLI/UAT paths before claiming full editor integration
-- Runtime export confidence still depends on a local Godot binary or a runner with Godot installed | Owner: lead_programmer | Mitigation: keep static smoke green and add runtime smoke where `GODOT_BIN` is available
+- Runner-backed engine-native smoke is still missing for Godot, Unity, and Unreal, so CI parity still depends on runner-side engine binaries even though local toolchain health is green | Owner: technical_director | Mitigation: keep local adapter/contracts green, then add real engine binaries to the runner before claiming release-grade parity
 - Hosted GitHub ruleset is active on `main`, but it currently enforces only the always-on `repo-validate` matrix | Owner: producer | Mitigation: keep the ruleset audited and add more required checks only when their workflows are not path-filtered
 
 ## Definition of done

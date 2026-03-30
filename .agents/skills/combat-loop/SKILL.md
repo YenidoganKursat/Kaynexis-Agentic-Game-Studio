@@ -23,9 +23,9 @@ Design or tune a combat loop including enemy roles, feedback, pacing, damage mod
 - `studio/docs/templates/enemy-archetype.md`
 - `studio/docs/templates/boss-fight-brief.md`
 - `studio/docs/templates/perf-pass.md`
-- `docs/research/game-development/systems/enemy-roster-behavior-and-encounter-architecture.md`
-- `docs/research/game-development/systems/abilities-skill-trees-upgrades-and-build-architecture.md`
-- `docs/research/game-development/systems/character-controller-ability-and-state-architecture.md`
+- `docs/research/game-development/systems/enemy.md`
+- `docs/research/game-development/systems/skills.md`
+- `docs/research/game-development/systems/character.md`
 
 ## Workflow
 1. Inspect the current repo/docs state first and cite concrete evidence.

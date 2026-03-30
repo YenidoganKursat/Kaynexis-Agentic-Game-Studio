@@ -1,0 +1,67 @@
+id = "release_hardening"
+title = "Release Hardening"
+layer = "discipline"
+
+[[item]]
+id = "hardening-owner"
+title = "Hardening owner and trust owners are named"
+severity = "required"
+applies_when = "Any release-hardening or protected build task"
+validation = "Name the build owner, trust owner, and rollback owner"
+owner = "release_manager"
+
+[[item]]
+id = "hardening-build-integrity"
+title = "Build integrity is deterministic"
+severity = "required"
+applies_when = "Any packaging, signing, or protected build task"
+validation = "State the exact build command, output name, and artifact path"
+owner = "build_release_engineer"
+
+[[item]]
+id = "hardening-code-protection"
+title = "Code protection choice is explicit"
+severity = "required"
+applies_when = "Any code protection, stripping, encryption, or obfuscation task"
+validation = "State the chosen protection layer and why it is enough"
+owner = "security_engineer"
+
+[[item]]
+id = "hardening-symbol-policy"
+title = "Symbol and crash artifact policy is explicit"
+severity = "required"
+applies_when = "Any protected release or shipping build task"
+validation = "Name what symbols are kept, where they live, and who can access them"
+owner = "build_release_engineer"
+
+[[item]]
+id = "hardening-trust-boundary"
+title = "Multiplayer trust boundary is explicit"
+severity = "required"
+applies_when = "Any co-op, online, authority, or dedicated-server task"
+validation = "State what the client can predict and what the server validates"
+owner = "network_programmer"
+
+[[item]]
+id = "hardening-server-split"
+title = "Dedicated server or server-authoritative split is named"
+severity = "required"
+applies_when = "Any multiplayer shipping task"
+validation = "Say whether the build ships with a separate server target or an explicit trust fallback"
+owner = "network_programmer"
+
+[[item]]
+id = "hardening-smoke"
+title = "One hardening smoke proves the bundle"
+severity = "required"
+applies_when = "Any release-hardening or protected build task"
+validation = "Name one packaging, launch, or desync smoke that proves the hardening path still works"
+owner = "qa_lead"
+
+[[item]]
+id = "hardening-doc-sync"
+title = "Hardening notes stay in durable docs"
+severity = "recommended"
+applies_when = "Any release-hardening task"
+validation = "Keep the guide, example, research note, checklist, and eval plan in sync"
+owner = "maintainer"

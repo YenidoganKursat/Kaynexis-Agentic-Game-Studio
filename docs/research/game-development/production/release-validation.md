@@ -21,3 +21,4 @@
 - Keep `make validate` and GitHub Actions aligned.
 - Add starter-kit validation to local CI.
 - Extend route/checklist output to include validation steps and engine actions.
+- Keep the versioning contract in sync with `docs/research/game-development/production/versioning.md`, `CHANGELOG.md`, and `VERSION` before calling a release bundle complete.

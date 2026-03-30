@@ -1,0 +1,43 @@
+id = "sector"
+title = "Sector Intel"
+layer = "discipline"
+
+[[item]]
+id = "sector-source-hierarchy"
+title = "Official sources come first"
+severity = "required"
+applies_when = "Any task about current game-industry, market, platform, or policy signals"
+validation = "Name at least one official report or policy page before summarizing current sector signals"
+owner = "producer"
+
+[[item]]
+id = "sector-currentness"
+title = "Current window is explicit"
+severity = "required"
+applies_when = "Any sector or market intelligence task"
+validation = "State the date or report window that the signal came from"
+owner = "producer"
+
+[[item]]
+id = "sector-signal-shape"
+title = "Signal and implication are separate"
+severity = "required"
+applies_when = "Any sector or market intelligence task"
+validation = "Report the fact, the implication for the repo, and the confidence separately"
+owner = "technical-director"
+
+[[item]]
+id = "sector-policy-watch"
+title = "Policy and platform constraints are named"
+severity = "recommended"
+applies_when = "Any sector intelligence task that touches launch, store, or platform planning"
+validation = "Name the platform or policy source that constrains the decision"
+owner = "release_manager"
+
+[[item]]
+id = "sector-doc-sync"
+title = "Sector docs stay synchronized"
+severity = "required"
+applies_when = "Any sector intelligence, routing, or current-signals change"
+validation = "Update the guide, example, research note, checklist, and eval plan together"
+owner = "maintainer"

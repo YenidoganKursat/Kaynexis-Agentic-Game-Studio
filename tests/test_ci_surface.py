@@ -15,11 +15,37 @@ from validate_workflows import validate_workflows
 def test_validate_workflows_surface() -> None:
     failures, summaries = validate_workflows()
     assert failures == []
+    assert "validate.yml" in summaries
     assert "repo-validate.yml" in summaries
     assert "doc-sync.yml" in summaries
     assert "starter-kit-contracts.yml" in summaries
     assert "release-readiness.yml" in summaries
     assert "nightly-audit.yml" in summaries
+    validate_runs = "\n".join(summaries["validate.yml"]["runs"])
+    assert "scripts/version_guard.py" in validate_runs
+    assert "scripts/ci_quality_gate.py" in validate_runs
+    doc_sync_runs = "\n".join(summaries["doc-sync.yml"]["runs"])
+    assert "scripts/resolve_changed_paths.py" in doc_sync_runs
+    repo_validate_runs = "\n".join(summaries["repo-validate.yml"]["runs"])
+    assert "scripts/resolve_changed_paths.py" in repo_validate_runs
+    release_runs = "\n".join(summaries["release-readiness.yml"]["runs"])
+    assert "release-ready" in release_runs
+    assert "forbid-external-dependencies" in release_runs
+
+
+def test_doctor_includes_validate_workflow_surface() -> None:
+    result = subprocess.run(
+        [sys.executable, str(REPO_ROOT / "scripts" / "doctor.py"), "--json"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+    payload = json.loads(result.stdout)
+    github_automation = next(check for check in payload["checks"] if check["name"] == "github-automation")
+    assert github_automation["status"] == "pass"
+    assert "validate.yml" in github_automation["detail"]
 
 
 def test_ci_artifact_report_generates_files() -> None:
@@ -70,7 +96,7 @@ def test_doc_sync_audit_is_surface_checked() -> None:
     assert result.returncode == 0, result.stderr or result.stdout
     payload = json.loads(result.stdout)
     recommended = {item["doc"] for item in payload["recommendations"]}
-    assert "docs/reference/ci-cd-architecture.md" in recommended
+    assert "docs/reference/ci-cd.md" in recommended
     assert "docs/reference/genre-presets.md" in recommended
 
 
@@ -117,3 +143,57 @@ def test_doc_sync_guard_and_quality_gate_surface() -> None:
     assert quality.returncode == 0, quality.stderr or quality.stdout
     quality_payload = json.loads(quality.stdout)
     assert quality_payload["passed"] is True
+
+
+def test_doc_sync_guard_skips_dependabot_pr_when_explicitly_allowed(tmp_path: Path) -> None:
+    paths_file = tmp_path / "changed-paths.txt"
+    paths_file.write_text(".github/workflows/repo-validate.yml\n", encoding="utf-8")
+
+    guard = subprocess.run(
+        [
+            sys.executable,
+            str(REPO_ROOT / "scripts" / "doc_sync_guard.py"),
+            "--paths-file",
+            str(paths_file),
+            "--allow-dependabot-pr",
+            "--pr-author",
+            "dependabot[bot]",
+            "--json",
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert guard.returncode == 0, guard.stdout or guard.stderr
+    guard_payload = json.loads(guard.stdout)
+    assert guard_payload["passed"] is True
+    assert guard_payload["skipped"] is True
+    assert guard_payload["skip_reason"] == "dependabot pull request"
+    assert guard_payload["missing_docs"] == []
+
+
+def test_resolve_changed_paths_falls_back_when_base_sha_is_missing(tmp_path: Path) -> None:
+    changed_paths = tmp_path / "changed-paths.txt"
+    bogus_sha = "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(REPO_ROOT / "scripts" / "resolve_changed_paths.py"),
+            "--base-sha",
+            bogus_sha,
+            "--paths-file",
+            str(changed_paths),
+            "--json",
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+    payload = json.loads(result.stdout)
+    assert payload["requested_base_sha"] == bogus_sha
+    assert payload["resolved_base_sha"] != bogus_sha
+    assert payload["paths"] == changed_paths.read_text(encoding="utf-8").splitlines()

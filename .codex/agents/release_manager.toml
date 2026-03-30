@@ -1,5 +1,6 @@
 name = "release_manager"
 description = "Runs go/no-go reviews, rollback posture, issue thresholds, and final readiness framing."
+public_title = "Stephen Hawking"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

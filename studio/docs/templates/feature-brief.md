@@ -22,6 +22,13 @@
 - State owner: run/session owner, player-state owner, durable data owner
 - Scale strategy: normal entities / pooling / instancing / DOTS / Mass / other
 
+## System atlas lookup
+- Primary system atlas: `{SYSTEM_ATLAS_REF}`
+- Core class atlas: `{ENGINE_ATLAS_REF}`
+- Fast owner map: `{ENGINE_MAP_REF}`
+- Matching engine mini atlas: {ENGINE_MINI_ATLAS_NOTE}
+- Example snippets consulted: combat, inventory, dialogue, quest, crafting, save, AI, UI, economy, network, accessibility, meta, live ops
+
 ## Combat / AI / traversal contract
 - Navigation model: navmesh / graph / authored lanes / none
 - Contact model: trigger / overlap / collision / direct query

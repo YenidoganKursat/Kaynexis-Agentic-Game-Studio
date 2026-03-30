@@ -1,0 +1,67 @@
+id = "speedpack"
+title = "Agent Speed Pack"
+layer = "discipline"
+
+[[item]]
+id = "speedpack-owner"
+title = "Keep the owner explicit"
+severity = "required"
+applies_when = "Any task that should start from the fastest safe path"
+validation = "Name the single specialist or controller that owns the first pass"
+owner = "producer"
+
+[[item]]
+id = "speedpack-route"
+title = "Keep the route narrow"
+severity = "required"
+applies_when = "Any task that should start from the fastest safe path"
+validation = "Name the narrow lane and the shortest proof path before implementation"
+owner = "technical_director"
+
+[[item]]
+id = "speedpack-bundle"
+title = "Keep the bundle small"
+severity = "required"
+applies_when = "Any task that should start from the fastest safe path"
+validation = "List only the docs that are needed to start, and name what stays out for now"
+owner = "docs_researcher"
+
+[[item]]
+id = "speedpack-proof"
+title = "Name one proof path"
+severity = "required"
+applies_when = "Any task that should start from the fastest safe path"
+validation = "Name one command, artifact, or observation that proves the first pass"
+owner = "qa_lead"
+
+[[item]]
+id = "speedpack-summary"
+title = "Keep the summary short"
+severity = "required"
+applies_when = "Any task that should start from the fastest safe path"
+validation = "Write a short user-facing summary that fits in one pass"
+owner = "producer"
+
+[[item]]
+id = "speedpack-history"
+title = "Add history only when it helps later"
+severity = "recommended"
+applies_when = "Any task that should be reopened later"
+validation = "State whether prompt history, transcript, or execution packet is actually needed"
+owner = "docs_researcher"
+
+[[item]]
+id = "speedpack-fanout"
+title = "Fan out only when the proof rows demand it"
+severity = "recommended"
+applies_when = "Any fast-path task that cannot stay single-specialist"
+validation = "Explain why a pair or panel is safer than one owner"
+owner = "producer"
+
+[[item]]
+id = "speedpack-doc-sync"
+title = "Keep docs and evals in sync"
+severity = "required"
+applies_when = "Any routing, checklist, or agent-management change"
+validation = "Update the guide, example, research note, checklist, and eval plan together"
+owner = "maintainer"

@@ -1,0 +1,51 @@
+id = "theory"
+title = "Theory And Design Lenses"
+layer = "discipline"
+
+[[item]]
+id = "theory-outcome"
+title = "Player outcome and dominant tension are explicit"
+severity = "required"
+applies_when = "Any theory, design-lens, or game-feel task"
+validation = "Name the player outcome and dominant tension before choosing lenses."
+owner = "game_designer"
+
+[[item]]
+id = "theory-lens-stack"
+title = "Lens stack is named before analysis"
+severity = "required"
+applies_when = "Any theory, design-lens, or game-feel task"
+validation = "State the chosen lenses and what each one is answering."
+owner = "technical_director"
+
+[[item]]
+id = "theory-evidence"
+title = "Theory claims cite evidence"
+severity = "required"
+applies_when = "Any theory, design, or analysis task"
+validation = "Reference the source note, framework, or observation that supports the claim."
+owner = "docs_researcher"
+
+[[item]]
+id = "theory-boundary"
+title = "Theory stays separate from implementation"
+severity = "required"
+applies_when = "Any theory or design-lens task"
+validation = "Explain what the theory predicts and what is still an implementation question."
+owner = "technical_director"
+
+[[item]]
+id = "theory-validation"
+title = "One narrow proof path exists"
+severity = "required"
+applies_when = "Any theory or design-lens task"
+validation = "Name the smallest slice, review, or playtest that can falsify the theory."
+owner = "qa_lead"
+
+[[item]]
+id = "theory-doc-sync"
+title = "Guide, example, research, checklist, and eval stay aligned"
+severity = "required"
+applies_when = "Any theory or design-lens task"
+validation = "Update the guide, example, research note, checklist, and eval plan together."
+owner = "maintainer"

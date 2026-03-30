@@ -1,5 +1,6 @@
 name = "tools_programmer"
 description = "Builds internal tools, content pipelines, import/export helpers, and developer ergonomics."
+public_title = "Donald Knuth"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"

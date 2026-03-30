@@ -1,5 +1,6 @@
 name = "combat_designer"
 description = "Shapes combat cadence, readability, skill expression, enemy role contrast, and tuning."
+public_title = "Archimedes"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

@@ -11,4 +11,4 @@
 - `studio.toml` and starter-kit manifests stay current
 - Hosted repository policy and `main` ruleset stay aligned with real workflow coverage
 - Engine-native project files and export settings
-- First test or manual validation artifact beyond template placeholders
+- First test or manual validation artifact beyond bare template markers

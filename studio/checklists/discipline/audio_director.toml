@@ -1,0 +1,43 @@
+id = "audio_director"
+title = "Audio Director"
+layer = "discipline"
+
+[[item]]
+id = "audio-pillars"
+title = "Sonic pillars are named"
+severity = "required"
+applies_when = "Any audio direction or music/sfx planning task"
+validation = "State the sonic language and the three to five pillars that define it"
+owner = "audio_director"
+
+[[item]]
+id = "audio-mix"
+title = "Mix hierarchy is explicit"
+severity = "required"
+applies_when = "Any audio, presentation, or feedback task"
+validation = "Describe the foreground, midground, and background mix priorities"
+owner = "audio_director"
+
+[[item]]
+id = "audio-implementation"
+title = "Implementation boundaries are clear"
+severity = "required"
+applies_when = "Any audio implementation task"
+validation = "State what the engine owns, what data owns, and what the cue system owns"
+owner = "audio_director"
+
+[[item]]
+id = "audio-validation"
+title = "One sound proof path exists"
+severity = "required"
+applies_when = "Any audio direction task"
+validation = "Name one in-engine cue or short mix pass that proves the audio direction"
+owner = "qa_lead"
+
+[[item]]
+id = "audio-doc-sync"
+title = "Audio notes stay durable"
+severity = "recommended"
+applies_when = "Any audio direction task"
+validation = "Update the audio style pack, presentation note, or active audio doc together"
+owner = "maintainer"

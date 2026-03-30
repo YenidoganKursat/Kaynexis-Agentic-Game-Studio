@@ -1,5 +1,6 @@
 name = "progression_designer"
 description = "Designs leveling, unlocks, loadout growth, and retention-facing progression arcs."
+public_title = "Mihaly Csikszentmihalyi"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"

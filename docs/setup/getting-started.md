@@ -6,6 +6,8 @@ This is a multi-engine repo. You can start with `godot-4`, `unity-6`, or `unreal
 
 You are not expected to default to Godot unless you actually want Godot. Unity and Unreal are fully represented in the repo's planning, routing, research, checklist, and CI contract surfaces.
 
+If you want the shortest possible route, read `docs/setup/quick-access.md` first. It condenses the setup and access path to the smallest practical front door.
+
 ## Prerequisites
 
 Required:
@@ -19,12 +21,23 @@ Recommended:
 - Codex CLI: `npm i -g @openai/codex`
 - Docker if you want the optional container workflow
 
+If you are standing up the engine or the agent stack on a new machine, read these before or immediately after the first bootstrap:
+
+- `docs/setup/engine-installation.md`
+- `docs/setup/agent-setup.md`
+
 ## Quick Setup
 
 Simplest path:
 
 ```bash
-python3 scripts/codex_studio.py init
+make start
+```
+
+If you prefer the direct script front door instead of Make:
+
+```bash
+python3 scripts/start_game_studio.py
 ```
 
 Direct setup from the repo root:
@@ -95,6 +108,8 @@ Read these in order:
 14. `docs/reference/code-review.md`
 15. `docs/reference/eval-strategy.md`
 16. `docs/reference/command-cheatsheet.md`
+17. `docs/setup/engine-installation.md`
+18. `docs/setup/agent-setup.md`
 
 Then run:
 
@@ -104,6 +119,8 @@ python3 scripts/codex_studio.py checklist --task "describe your next task"
 python3 scripts/run_local_evals.py
 python3 scripts/validate_engine_kits.py
 python3 scripts/codex_studio.py engine --list --json
+python3 scripts/doctor.py
+python3 scripts/validate_agent_metadata.py --json
 ```
 
 If you want a quick engine-specific contract check immediately:
@@ -117,9 +134,9 @@ python3 scripts/starter_kit_contract_smoke.py --engine unreal-5 --json
 If you want the engine-specific mechanic and class guidance immediately:
 
 ```bash
-sed -n '1,120p' docs/research/game-development/engines/godot-4-2d-3d-class-and-mechanic-guide.md
-sed -n '1,120p' docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md
-sed -n '1,120p' docs/research/game-development/engines/unreal-5-2d-3d-class-and-mechanic-guide.md
+sed -n '1,120p' docs/research/game-development/engines/godot-classes.md
+sed -n '1,120p' docs/research/game-development/engines/unity-classes.md
+sed -n '1,120p' docs/research/game-development/engines/unreal-classes.md
 ```
 
 For engine-specific starter-kit expectations, also read:
@@ -145,10 +162,10 @@ python3 scripts/codex_studio.py research --category systems --title "Core Moveme
 7. Create a feature brief:
 
 ```bash
-python3 scripts/scaffold_feature.py "Core Movement" --with-adr --with-test-plan
+python3 scripts/scaffold_feature.py "Core Movement" --with-adr --with-test-plan --with-eval-plan
 ```
 
-By default this also produces handoff and traceability docs so the feature can move cleanly from brief to implementation to validation.
+By default this also produces handoff and traceability docs, and the validation docs become part of the same review bundle when you add `--with-test-plan` and `--with-eval-plan`.
 
 8. Generate a QA matrix before calling the slice done:
 
@@ -157,7 +174,7 @@ python3 scripts/generate_qa_matrix.py "Core Movement"
 ```
 
 If `genre-starter.md` suggests a tighter first slice for your chosen genre, prefer that over a broader generic first task.
-Once that first slice is stable, use `docs/research/game-development/genre/genre-advanced-development-framework.md` to mature the genre into a stronger production model.
+Once that first slice is stable, use `docs/research/game-development/genre/genre-maturity.md` to mature the genre into a stronger production model.
 
 ## Engine-specific first checks
 

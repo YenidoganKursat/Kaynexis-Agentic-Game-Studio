@@ -11,6 +11,8 @@ The goal is simple:
 - resolve the checklist for that same task
 - run one validation path before you start building
 
+If you want the shortest possible entry point, read `docs/setup/quick-access.md` first and then come back here when you want the fuller first-hour loop.
+
 ## Before you start
 
 Minimum tools:
@@ -23,6 +25,11 @@ Helpful extras:
 - Docker
 - Codex CLI
 - one local engine install if you want engine-backed validation instead of contract smoke
+
+If you are still installing the engine or the agent stack, open these first:
+
+- `docs/setup/engine-installation.md`
+- `docs/setup/agent-setup.md`
 
 ## Step 1: Choose the engine family
 
@@ -80,7 +87,7 @@ Read these before you do any real feature work:
 3. `studio/docs/active/engine-profile.md`
 4. `studio/docs/active/current-sprint.md`
 5. `studio/docs/active/risk-register.md`
-6. `docs/research/game-development/genre/genre-advanced-development-framework.md` if the first slice is already clear and you want to think about scaling the genre support surface.
+6. `docs/research/game-development/genre/genre-maturity.md` if the first slice is already clear and you want to think about scaling the genre support surface.
 
 What you are checking for:
 
@@ -165,10 +172,10 @@ This keeps the task grounded in one proof path before the work grows.
 Use a short brief before a non-trivial slice:
 
 ```bash
-python3 scripts/scaffold_feature.py "Tutorial Enemy Attack" --with-adr --with-test-plan
+python3 scripts/scaffold_feature.py "Tutorial Enemy Attack" --with-adr --with-test-plan --with-eval-plan
 ```
 
-That scaffold also creates default handoff and traceability docs, which is useful even for solo work because it keeps the next step explicit.
+That scaffold also creates default handoff and traceability docs, and the optional validation docs keep the next step explicit when you want a tighter review bundle.
 
 Do this especially when:
 
@@ -185,6 +192,12 @@ Run:
 python3 scripts/codex_studio.py doctor
 python3 scripts/run_local_evals.py
 python3 scripts/validate_engine_kits.py
+```
+
+If your first hour was mostly install/bootstrap work, also run:
+
+```bash
+python3 scripts/validate_agent_metadata.py --json
 ```
 
 If you want the broader local CI equivalent:

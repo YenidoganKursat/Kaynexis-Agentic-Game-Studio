@@ -1,5 +1,9 @@
 name: Validate
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
   pull_request:
@@ -13,20 +17,39 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
         with:
-          python-version: "3.12"
+          python-version: "3.13"
 
-      - name: Install test dependency
-        run: python3 -m pip install pytest
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
 
-      - name: Run static smoke
-        run: python3 scripts/godot_smoke.py --static-only
+      - name: Run core validation
+        run: make validate
 
-      - name: Run automated tests
+      - name: Run targeted Godot smoke tests
         run: python3 -m pytest -q tests/test_godot_surface.py
+
+      - name: Run version guard
+        run: python3 scripts/version_guard.py --output-dir build/ci/version
+
+      - name: Generate validate report
+        run: python3 scripts/ci_artifact_report.py --label validate --output-dir build/ci/validate
+
+      - name: Run CI quality gate
+        run: python3 scripts/ci_quality_gate.py --report build/ci/validate/ci-report.json --min-score 80 --minimum-readiness validation-ready
+
+      - name: Upload validate report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: validate-report
+          path: build/ci/validate
+          if-no-files-found: error
