@@ -76,6 +76,7 @@ jobs:
 
       - name: Resolve changed paths
         run: |
+          mkdir -p build/ci/repo-validate/${{ matrix.python-version }}
           python3 scripts/resolve_changed_paths.py \
             --base-sha "${{ github.event.pull_request.base.sha || github.event.before }}" \
             --paths-file build/ci/repo-validate/${{ matrix.python-version }}/changed-paths.txt \

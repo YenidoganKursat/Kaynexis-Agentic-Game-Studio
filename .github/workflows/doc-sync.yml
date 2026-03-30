@@ -48,6 +48,7 @@ jobs:
 
       - name: Resolve changed paths
         run: |
+          mkdir -p build/ci/doc-sync
           python3 scripts/resolve_changed_paths.py \
             --base-sha "${{ github.event.pull_request.base.sha || github.event.before }}" \
             --paths-file build/ci/doc-sync/changed-paths.txt \
