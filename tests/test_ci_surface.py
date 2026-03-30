@@ -172,7 +172,6 @@ def test_doc_sync_guard_skips_dependabot_pr_when_explicitly_allowed(tmp_path: Pa
     assert guard_payload["skip_reason"] == "dependabot pull request"
     assert guard_payload["missing_docs"] == []
 
-
 def test_resolve_changed_paths_falls_back_when_base_sha_is_missing(tmp_path: Path) -> None:
     changed_paths = tmp_path / "changed-paths.txt"
     bogus_sha = "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
