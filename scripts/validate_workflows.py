@@ -66,11 +66,13 @@ REQUIRED_RUN_SNIPPETS: dict[str, list[str]] = {
         "scripts/ci_artifact_report.py",
     ],
     "repo-validate.yml": [
+        "scripts/resolve_changed_paths.py",
         "scripts/doc_sync_guard.py",
         "scripts/ci_quality_gate.py",
         "dependabot[bot]",
     ],
     "doc-sync.yml": [
+        "scripts/resolve_changed_paths.py",
         "scripts/doc_sync_guard.py",
         "dependabot[bot]",
     ],

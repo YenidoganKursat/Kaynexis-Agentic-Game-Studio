@@ -76,12 +76,10 @@ jobs:
 
       - name: Resolve changed paths
         run: |
-          mkdir -p build/ci/repo-validate/${{ matrix.python-version }}
-          BASE_SHA="${{ github.event.pull_request.base.sha || github.event.before }}"
-          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
-            BASE_SHA="$(git rev-list --max-parents=0 HEAD | tail -n 1)"
-          fi
-          git diff --name-only "$BASE_SHA" HEAD > build/ci/repo-validate/${{ matrix.python-version }}/changed-paths.txt
+          python3 scripts/resolve_changed_paths.py \
+            --base-sha "${{ github.event.pull_request.base.sha || github.event.before }}" \
+            --paths-file build/ci/repo-validate/${{ matrix.python-version }}/changed-paths.txt \
+            --json > build/ci/repo-validate/${{ matrix.python-version }}/resolve-changed-paths.json
 
       - name: Run doc sync guard
         env:

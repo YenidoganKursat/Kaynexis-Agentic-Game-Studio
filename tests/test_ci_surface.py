@@ -24,6 +24,10 @@ def test_validate_workflows_surface() -> None:
     validate_runs = "\n".join(summaries["validate.yml"]["runs"])
     assert "scripts/version_guard.py" in validate_runs
     assert "scripts/ci_quality_gate.py" in validate_runs
+    doc_sync_runs = "\n".join(summaries["doc-sync.yml"]["runs"])
+    assert "scripts/resolve_changed_paths.py" in doc_sync_runs
+    repo_validate_runs = "\n".join(summaries["repo-validate.yml"]["runs"])
+    assert "scripts/resolve_changed_paths.py" in repo_validate_runs
     release_runs = "\n".join(summaries["release-readiness.yml"]["runs"])
     assert "release-ready" in release_runs
     assert "forbid-external-dependencies" in release_runs
@@ -167,3 +171,29 @@ def test_doc_sync_guard_skips_dependabot_pr_when_explicitly_allowed(tmp_path: Pa
     assert guard_payload["skipped"] is True
     assert guard_payload["skip_reason"] == "dependabot pull request"
     assert guard_payload["missing_docs"] == []
+
+
+def test_resolve_changed_paths_falls_back_when_base_sha_is_missing(tmp_path: Path) -> None:
+    changed_paths = tmp_path / "changed-paths.txt"
+    bogus_sha = "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(REPO_ROOT / "scripts" / "resolve_changed_paths.py"),
+            "--base-sha",
+            bogus_sha,
+            "--paths-file",
+            str(changed_paths),
+            "--json",
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+    payload = json.loads(result.stdout)
+    assert payload["requested_base_sha"] == bogus_sha
+    assert payload["resolved_base_sha"] != bogus_sha
+    assert payload["paths"] == changed_paths.read_text(encoding="utf-8").splitlines()

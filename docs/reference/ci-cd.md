@@ -10,6 +10,7 @@
 - `studio/docs/active/eval-ci-cd.md`: active eval plan for validate workflow hardening and artifact coverage
 - `repo-validate.yml`: Python matrix for repo validation, evals, tests, routing smoke, adapter smoke, and artifact reports
 - `doc-sync.yml`: changed-path doc sync guard for code, scripts, presets, and doc surfaces
+- `doc-sync.yml` and `repo-validate.yml` now resolve changed paths through `scripts/resolve_changed_paths.py`, so push events keep working even if a base SHA was rewritten or temporarily unavailable in the checkout
 - `docker-smoke.yml`: helper container build and smoke import, plus uploaded report
 - `starter-kit-contracts.yml`: engine-by-engine contract smoke for Godot, Unity, and Unreal starter kits
 - `release-readiness.yml`: manual readiness bundle for a named release check that now requires release-ready quality and no remaining external dependencies
