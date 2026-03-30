@@ -1,5 +1,6 @@
 name = "technical_artist"
 description = "Bridges content and runtime constraints: import settings, materials, rigs, VFX, performance."
+public_title = "Hedy Lamarr"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"

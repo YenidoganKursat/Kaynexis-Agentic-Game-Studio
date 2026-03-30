@@ -4,7 +4,17 @@ This page shows concrete examples for Godot 4, Unity 6, and Unreal 5.
 
 Use it when you want to move from "which engine?" to "what does this look like in practice?"
 
+If you only need the fastest possible owner/stack answer, start with `docs/reference/engine-map.md` first and then come back here for examples.
+If the real decision is which engine fits a specific developer profile or team shape, read `docs/reference/engine-fit.md` and `docs/examples/engine-fit-example.md` first, then use this page to translate that fit into a concrete slice.
+If the real decision is whether one engine family has a better build, test, performance, or toolchain scorecard, read `docs/reference/engine-eval.md` and `docs/examples/engine-eval-example.md` first, then use this page to translate that decision into a concrete slice.
+If you need the class-family breakdown behind those examples, read `docs/reference/engine-atlas.md` next, then the matching engine mini atlas.
+If the task is about source art, imported assets, shared tuning, or load boundaries, read `docs/reference/asset-guide.md` and `docs/examples/asset-example.md` before implementation.
+If the task is about HUDs, menus, settings, onboarding, or template selection, read `docs/reference/ui-guide.md` and `docs/examples/ui-example.md` before implementation.
+If the task is about audio playback, animation timing, or presentation sync, read `docs/reference/audio-animation-guide.md` and `docs/examples/audio-animation-example.md` before implementation.
+
 ## Example slices by engine
+
+The examples below are intentionally small. They show the ownership pattern and validation path, not the final content scale.
 
 ### Godot 4
 
@@ -107,6 +117,8 @@ What to watch:
 
 ## Same mechanic, three engine examples
 
+Use this section when the same feature must make sense in Godot, Unity, and Unreal without collapsing into a one-engine assumption.
+
 ### A short dodge mechanic
 
 - Godot 4: `CharacterBody2D` or `CharacterBody3D` owns movement, with animation and invulnerability frames separated into dedicated logic.
@@ -124,6 +136,76 @@ What to watch:
 - Godot 4: data objects for item definitions, runtime inventory container in script, and save conversion that avoids direct scene coupling.
 - Unity 6: `ScriptableObject` item definitions, runtime inventory state in a plain C# model or service, and explicit save migration boundaries.
 - Unreal 5: data asset definitions, runtime inventory on gameplay classes or components, and save-game serialization with clear ownership.
+
+## UI and template examples
+
+Use this section when the question is about HUDs, menus, settings, onboarding, or template choice rather than only styling.
+
+### A controller-first pause menu
+
+- Godot 4: `Control` owns the flow, `CanvasLayer` owns the overlay, and `Theme` owns the shared style. Start from the Godot UI tutorials or an Asset Library UI pack when you need a ready-made template.
+- Unity 6: UI Toolkit owns the reusable layout, `UIDocument` binds the runtime screen, and UI Builder or package samples provide the starting template. Use uGUI only if the screen is intentionally simple or legacy-bound.
+- Unreal 5: `UMG` / Widget Blueprints own the visible screen, CommonUI owns controller-first activation, and a widget blueprint template or sample project is the closest ready-made starter.
+
+### A settings screen
+
+- Godot 4: a `Control` scene with explicit focus order and pause behavior.
+- Unity 6: UI Toolkit if the screen is reusable or data-heavy, uGUI if the screen is a small runtime overlay.
+- Unreal 5: UMG + CommonUI when the screen must respect controller focus and input routing.
+
+Good prompts:
+
+```bash
+python3 scripts/codex_studio.py next "Design a controller-first pause menu in Godot using Control, CanvasLayer, and a Theme source"
+python3 scripts/codex_studio.py next "Use Unity UI Toolkit and UI Builder to build an inventory screen with UXML templates and USS styles"
+python3 scripts/codex_studio.py next "Choose UMG, CommonUI, and Enhanced Input for an Unreal settings menu and name the widget template source"
+```
+
+## Audio and animation examples
+
+Use this section when sound cues and visible motion must stay aligned without making presentation the gameplay owner.
+
+### A short boss windup
+
+- Godot 4: `AudioStreamPlayer` plays the cue while `AnimationPlayer` or `AnimationTree` handles the visible windup and reaction.
+- Unity 6: `AudioSource` plays the cue while `Animator` owns the animation state and `AudioMixer` handles the mix split if needed.
+- Unreal 5: `Audio Components` or `MetaSounds` play the cue while `Animation Blueprints` own the visible windup and `Quartz` or Sequencer only enters when sync needs proof.
+
+### A UI confirm and close
+
+- Godot 4: `AudioStreamPlayer` handles the confirm sound while `Control` and `AnimationPlayer` own the menu motion.
+- Unity 6: `AudioSource` handles the confirm sound while `Animator` and the UI flow own the visible transition.
+- Unreal 5: `Audio Components` handle the confirm cue while UMG and `Animation Blueprints` own the visible state change.
+
+## GPU and render scale examples
+
+Use this section when the question is not just "can the game render this?" but "where should repeated visuals, buffer data, and GPU work live?"
+
+### Godot 4
+
+- `RenderingServer` for render-side ownership when the scene tree is the wrong scale boundary.
+- `RenderingDevice` for compute or buffer-driven work when a real GPU contract is required.
+- `MultiMesh` / `MultiMeshInstance3D` for repeated visuals before inventing a per-node swarm.
+
+### Unity 6
+
+- `GraphicsBuffer` for structured render data that should stay buffer-shaped.
+- `ComputeShader` for uniform, parallel GPU work.
+- Instanced indirect drawing for dense repeated visuals before a DOTS rewrite.
+
+### Unreal 5
+
+- Instanced Static Meshes for repeated geometry before increasing Actor count.
+- Nanite when the problem is virtualized detail and geometry scale.
+- HLOD when the problem is world-scale visibility reduction.
+
+Good prompts:
+
+```bash
+python3 scripts/codex_studio.py next "Research the GPU communication path for a Godot 4 survivorlike and decide whether MultiMesh or RenderingDevice is the first lever"
+python3 scripts/codex_studio.py next "Compare Unity GraphicsBuffer, ComputeShader, and indirect instancing for a dense projectile field before changing gameplay code"
+python3 scripts/codex_studio.py next "Choose between Unreal Instanced Static Meshes, Nanite, and HLOD for repeated world objects before scaling Actor count"
+```
 
 ## Example validation paths
 
@@ -166,5 +248,14 @@ Use this page when:
 - `docs/research/game-development/engines/README.md`
 - `docs/research/game-development/engines/*-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/*-systems-playbook.md`
+- `docs/reference/gpu-guide.md`
+- `docs/examples/gpu-example.md`
+- `docs/reference/ui-guide.md`
+- `docs/examples/ui-example.md`
 - `docs/reference/task-prompt-examples.md`
+- `docs/reference/asset-guide.md`
+- `docs/reference/engine-fit.md`
+- `docs/examples/engine-fit-example.md`
+- `docs/reference/engine-eval.md`
+- `docs/examples/engine-eval-example.md`
 - `docs/reference/workflow-recipes.md`

@@ -1,5 +1,6 @@
 name = "physics_programmer"
 description = "Owns collision, simulation stability, movement feel, and deterministic concerns."
+public_title = "James Clerk Maxwell"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"

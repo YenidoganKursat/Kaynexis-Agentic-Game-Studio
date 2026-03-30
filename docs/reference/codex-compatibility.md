@@ -24,6 +24,18 @@ It is also intentionally multi-engine. The repo-level contract covers `godot-4`,
 - Docker is optional, not mandatory
 - engine parity is defined at starter-kit and adapter level, not by pretending all three engines share the same runtime files
 
+## OpenAI / Codex alignment
+
+- When the work touches OpenAI, Codex, or agent-platform design, start with `docs/research/openai-codex-infra-findings.md` and `docs/reference/agent-system.md`.
+- When model choice or plan-tier fit is part of the question, also start with `docs/research/openai-codex-models.md` and `docs/reference/codex-model-guide.md`.
+- If you need the repo-local model control contract, pair that with `docs/examples/codex-model-guide-example.md`, `studio/checklists/discipline/openai_models.toml`, and `studio/docs/active/eval-openai-models.md`.
+- Keep the controller summary short and the specialist lanes narrow, even if the internal workflow uses traces, handoffs, or a multi-agent panel.
+- Treat prompt-shape changes, routing changes, and tool-access changes as eval-worthy and document the proof path in `studio/docs/active/`.
+- Keep internet access, tool approvals, and safety assumptions explicit for any workflow that reaches outside the repo.
+- Prefer the official OpenAI docs first when the question is about OpenAI products, Codex, or agent workflow surfaces.
+- Prefer the current model catalog and the codex model guide when the question is about model choice, reasoning level, or plan fit.
+- Use `studio/checklists/discipline/openai_codex.toml` and `studio/docs/active/eval-openai-codex.md` when you need the repo-local control contract for this workflow.
+
 ## What to customize first
 
 1. `.github/CODEOWNERS`
@@ -52,4 +64,4 @@ python3 scripts/toggle_codex_hooks.py --status
 - `docs/reference/code-review.md`
 - `docs/reference/eval-strategy.md`
 - `docs/setup/optional-codex-hooks.md`
-- `docs/setup/github-maintainer-setup.md`
+- `docs/setup/github-setup.md`

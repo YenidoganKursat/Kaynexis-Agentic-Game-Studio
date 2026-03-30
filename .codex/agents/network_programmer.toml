@@ -1,5 +1,6 @@
 name = "network_programmer"
 description = "Owns replication, authority, latency handling, sync correctness, and session flow."
+public_title = "Vint Cerf"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"

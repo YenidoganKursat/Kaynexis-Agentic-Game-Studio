@@ -55,7 +55,7 @@ Use this when a game needs a durable world-knowledge layer for canon, story fact
 - Can the game load a save and still resolve lore unlocks correctly?
 
 ## Related docs
-- `docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md`
+- `docs/research/game-development/narrative/lorebook.md`
 - `docs/reference/world-graph-methodology.md`
 - `docs/reference/feature-traceability.md`
 - `docs/reference/handoff-contracts.md`

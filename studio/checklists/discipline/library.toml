@@ -1,0 +1,43 @@
+id = "library"
+title = "Library Selection"
+layer = "discipline"
+
+[[item]]
+id = "library-owner"
+title = "Library choice names the smallest owner"
+severity = "required"
+applies_when = "Any library, package, plugin, or SDK choice"
+validation = "State the built-in option, the official package or plugin, and the fallback if none is needed"
+owner = "technical-director"
+
+[[item]]
+id = "library-version-pin"
+title = "Library version and compatibility are explicit"
+severity = "required"
+applies_when = "Any external dependency is introduced or upgraded"
+validation = "Record the chosen version, the compatible engine/runtime family, and the upgrade path"
+owner = "engine-programmer"
+
+[[item]]
+id = "library-boundary"
+title = "Library boundary stays narrow"
+severity = "required"
+applies_when = "Any input, UI, save, navigation, networking, or VFX dependency decision"
+validation = "Document what the library owns and what the project keeps in-house"
+owner = "technical-director"
+
+[[item]]
+id = "library-validation"
+title = "Library choice has a narrow validation loop"
+severity = "required"
+applies_when = "Any dependency decision"
+validation = "Name one smoke, integration check, or manual loop that proves the stack is enough"
+owner = "qa"
+
+[[item]]
+id = "library-doc-sync"
+title = "Library docs stay in sync"
+severity = "required"
+applies_when = "Any dependency decision or package change"
+validation = "Update the reference guide, the example, and the active note together"
+owner = "maintainer"

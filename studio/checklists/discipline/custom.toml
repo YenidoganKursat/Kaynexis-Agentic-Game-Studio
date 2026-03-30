@@ -1,0 +1,43 @@
+id = "custom"
+title = "Custom Architecture And Rule Packs"
+layer = "discipline"
+
+[[item]]
+id = "custom-intake"
+title = "Custom request contract is explicit"
+severity = "required"
+applies_when = "Any custom architecture, custom rule, or custom request lane"
+validation = "Name the request source, the fixed rules, and the allowed overrides before implementation."
+owner = "producer"
+
+[[item]]
+id = "custom-owner"
+title = "Canonical owner and fallback are named"
+severity = "required"
+applies_when = "Any project-specific rule pack or override contract"
+validation = "Name who owns the canonical architecture, who can author overrides, and what happens when the custom lane does not apply."
+owner = "technical-director"
+
+[[item]]
+id = "custom-rulepack"
+title = "Rule precedence and escape hatches are explicit"
+severity = "required"
+applies_when = "Any custom architecture or house-rule pack"
+validation = "Write the precedence order from canonical to override, and name the escape hatch or fallback rule."
+owner = "technical-director"
+
+[[item]]
+id = "custom-validation"
+title = "One narrow proof path exists"
+severity = "required"
+applies_when = "Any custom architecture or request contract change"
+validation = "Run one smoke, test, or review pass that proves the custom contract works."
+owner = "qa_lead"
+
+[[item]]
+id = "custom-doc-sync"
+title = "Guide, example, research, and active note stay in sync"
+severity = "required"
+applies_when = "Any custom architecture or custom request behavior change"
+validation = "Update the guide, example, research note, checklist, and eval plan together."
+owner = "maintainer"

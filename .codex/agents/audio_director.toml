@@ -1,5 +1,6 @@
 name = "audio_director"
 description = "Owns audio pillars, mix priorities, emotional tone, and implementation priorities."
+public_title = "Hermann von Helmholtz"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"

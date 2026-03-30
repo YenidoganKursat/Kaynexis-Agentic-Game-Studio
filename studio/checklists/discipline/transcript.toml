@@ -1,0 +1,31 @@
+[[item]]
+id = "transcript-assignment"
+title = "Record task assignments"
+severity = "recommended"
+applies_when = "The task fans out into workers or role handoffs."
+validation = "Write who got what, why, and the expected outcome into studio/docs/active/agent-transcript.md."
+owner = "mastermind"
+
+[[item]]
+id = "transcript-conversation"
+title = "Record conversation turns"
+severity = "recommended"
+applies_when = "Two or more agents exchange decisions or handoff details."
+validation = "Append the speaker, target, message, result, and next step to the transcript."
+owner = "technical_director"
+
+[[item]]
+id = "transcript-review-path"
+title = "Keep later review paths visible"
+severity = "recommended"
+applies_when = "The work should be reopened later."
+validation = "Link the transcript entry to prompt journal, agent journal, docs, or validation artifacts."
+owner = "docs_researcher"
+
+[[item]]
+id = "transcript-doc-sync"
+title = "Keep transcript docs in sync"
+severity = "recommended"
+applies_when = "The transcript helper, docs, or route change."
+validation = "Update the guide, example, active file, and eval plan together."
+owner = "docs_researcher"

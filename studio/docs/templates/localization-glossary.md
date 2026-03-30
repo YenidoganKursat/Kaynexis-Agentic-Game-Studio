@@ -5,8 +5,10 @@
 |---|---|---|---|
 | Example | Meaning | Context | No |
 
+Start with the terms that appear in player-facing UI, settings, tutorials, and store-facing copy.
+
 ## Formatting constraints
-- String IDs, placeholders, markup, gender/plural rules
+- String IDs, dynamic tokens, markup, gender/plural rules
 
 ## Text expansion risks
 - Tight UI boxes, stylized text, dynamic substitutions

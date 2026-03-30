@@ -1,5 +1,6 @@
 name = "performance_analyst"
 description = "Finds CPU/GPU/memory bottlenecks, profiling plans, and pragmatic optimizations."
+public_title = "Richard Feynman"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"

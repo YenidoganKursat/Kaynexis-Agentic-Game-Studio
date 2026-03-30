@@ -1,0 +1,67 @@
+id = "engine_fit"
+title = "Engine Fit"
+layer = "discipline"
+
+[[item]]
+id = "engine-profile-named"
+title = "Developer profile is named"
+severity = "required"
+applies_when = "Any engine fit or engine recommendation task"
+validation = "Name the developer profile and team shape before recommending an engine"
+owner = "producer"
+
+[[item]]
+id = "engine-language-fit"
+title = "Language comfort is explicit"
+severity = "required"
+applies_when = "Any engine fit task that depends on scripting or language comfort"
+validation = "State whether the recommendation depends on GDScript, C#, Blueprint, or C++ comfort"
+owner = "technical_director"
+
+[[item]]
+id = "engine-collaboration-fit"
+title = "Collaboration model is explicit"
+severity = "required"
+applies_when = "Any engine fit task that depends on team collaboration or role split"
+validation = "State whether the team is solo, designer-first, tools-first, or engine-programmer heavy"
+owner = "producer"
+
+[[item]]
+id = "engine-platform-fit"
+title = "Platform appetite is explicit"
+severity = "required"
+applies_when = "Any engine fit task that depends on platform spread or release target"
+validation = "Name the platform appetite that helps the recommendation"
+owner = "technical_director"
+
+[[item]]
+id = "engine-tooling-fit"
+title = "Tooling appetite is explicit"
+severity = "required"
+applies_when = "Any engine fit task that depends on editor tooling, automation, or package discipline"
+validation = "State whether the team wants scene-driven simplicity, package tooling, or gameplay-framework weight"
+owner = "engine_programmer"
+
+[[item]]
+id = "engine-proof-path"
+title = "First proof path is named"
+severity = "required"
+applies_when = "Any engine fit recommendation task"
+validation = "Name the smallest slice or smoke path that would test the recommendation"
+owner = "technical_director"
+
+[[item]]
+id = "engine-tradeoff-matrix"
+title = "Tradeoffs are separated"
+severity = "required"
+applies_when = "Any engine fit comparison task"
+validation = "Return the main advantage and main downside for each recommended engine"
+owner = "producer"
+
+[[item]]
+id = "engine-doc-sync"
+title = "Fit docs stay synchronized"
+severity = "required"
+applies_when = "Any engine fit or engine recommendation change"
+validation = "Update the guide, example, research note, active scorecard, checklist, and eval plan together"
+owner = "maintainer"

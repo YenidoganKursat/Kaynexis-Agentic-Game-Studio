@@ -1,0 +1,43 @@
+id = "art_director"
+title = "Art Director"
+layer = "discipline"
+
+[[item]]
+id = "art-pillars"
+title = "Style pillars are named"
+severity = "required"
+applies_when = "Any visual direction or asset-planning task"
+validation = "State the three to five visual pillars that define the look"
+owner = "art_director"
+
+[[item]]
+id = "art-readability"
+title = "Readability wins over decoration"
+severity = "required"
+applies_when = "Any art, UI, or presentation task"
+validation = "Explain how the composition keeps gameplay readable at a glance"
+owner = "art_director"
+
+[[item]]
+id = "art-pipeline"
+title = "Asset pipeline constraints are explicit"
+severity = "required"
+applies_when = "Any art direction or asset production task"
+validation = "State the asset priority, export format, and integration boundary"
+owner = "content-pipeline"
+
+[[item]]
+id = "art-validation"
+title = "A visual proof path exists"
+severity = "required"
+applies_when = "Any art direction task"
+validation = "Name one mockup, sheet, or in-engine scene that proves the direction"
+owner = "qa_lead"
+
+[[item]]
+id = "art-doc-sync"
+title = "Style notes stay durable"
+severity = "recommended"
+applies_when = "Any visual direction task"
+validation = "Update the style pack, asset guide, or active art note together"
+owner = "maintainer"

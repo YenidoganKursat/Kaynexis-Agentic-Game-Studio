@@ -56,7 +56,14 @@ jobs:
           git diff --name-only "$BASE_SHA" HEAD > build/ci/doc-sync/changed-paths.txt
 
       - name: Run doc sync guard
-        run: python3 scripts/doc_sync_guard.py --paths-file build/ci/doc-sync/changed-paths.txt --json > build/ci/doc-sync/doc-sync.json
+        env:
+          PR_AUTHOR: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login || '' }}
+        run: |
+          if [ "$PR_AUTHOR" = "dependabot[bot]" ]; then
+            python3 scripts/doc_sync_guard.py --paths-file build/ci/doc-sync/changed-paths.txt --allow-dependabot-pr --pr-author "$PR_AUTHOR" --json > build/ci/doc-sync/doc-sync.json
+          else
+            python3 scripts/doc_sync_guard.py --paths-file build/ci/doc-sync/changed-paths.txt --json > build/ci/doc-sync/doc-sync.json
+          fi
 
       - name: Upload doc sync report
         if: always()

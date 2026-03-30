@@ -64,9 +64,9 @@ Use this when a game needs a durable relationship and history layer for characte
 
 ## Related docs
 - `docs/reference/lorebook-methodology.md`
-- `docs/research/game-development/narrative/world-graph-relationship-history-architecture.md`
-- `docs/research/game-development/narrative/lorebook-world-state-and-canon-architecture.md`
-- `docs/examples/world-graph-brief-golden-example.md`
+- `docs/research/game-development/narrative/world-graph.md`
+- `docs/research/game-development/narrative/lorebook.md`
+- `docs/examples/world-graph-example.md`
 - `studio/docs/templates/world-graph-brief.md`
-- `docs/research/game-development/systems/dialogue-conversation-and-quest-state-architecture.md`
-- `docs/research/game-development/systems/party-companion-and-squad-architecture.md`
+- `docs/research/game-development/systems/dialogue.md`
+- `docs/research/game-development/systems/party.md`

@@ -1,0 +1,67 @@
+id = "agent_execution"
+title = "Agent Execution Packets"
+layer = "discipline"
+
+[[item]]
+id = "execution-owner"
+title = "Name the packet owner"
+severity = "required"
+applies_when = "Any task that needs a reusable execution packet before work starts"
+validation = "State which role or controller owns the packet"
+owner = "producer"
+
+[[item]]
+id = "execution-mode"
+title = "Name the operating mode"
+severity = "required"
+applies_when = "Any task that needs a reusable execution packet before work starts"
+validation = "State whether the work stays single-specialist, uses a paired specialist, or fans out into a panel"
+owner = "producer"
+
+[[item]]
+id = "execution-goal"
+title = "State the goal and expected outputs"
+severity = "required"
+applies_when = "Any task that needs a reusable execution packet before work starts"
+validation = "Write the goal, expected outputs, and the smallest visible success condition"
+owner = "technical_director"
+
+[[item]]
+id = "execution-rules"
+title = "Keep custom rules explicit"
+severity = "required"
+applies_when = "Any task with project-specific overrides or house rules"
+validation = "List the custom rules or overrides that must stay visible during the work"
+owner = "docs_researcher"
+
+[[item]]
+id = "execution-proof"
+title = "Name the proof path"
+severity = "required"
+applies_when = "Any task that needs a reusable execution packet before work starts"
+validation = "Name the command, artifact, or measurement that proves the packet was followed"
+owner = "qa_lead"
+
+[[item]]
+id = "execution-stop"
+title = "State stop conditions"
+severity = "required"
+applies_when = "Any task that needs a reusable execution packet before work starts"
+validation = "Write the conditions that should stop the lane or trigger a handoff"
+owner = "qa_lead"
+
+[[item]]
+id = "execution-review"
+title = "Keep the review trail visible"
+severity = "required"
+applies_when = "Any task that should be easy to reopen later"
+validation = "Name where the prompt history, transcript, and packet will live"
+owner = "docs_researcher"
+
+[[item]]
+id = "execution-doc-sync"
+title = "Keep docs and evals in sync"
+severity = "required"
+applies_when = "Any routing, checklist, or agent-management change"
+validation = "Update the guide, example, research note, checklist, eval plan, template, and active log together"
+owner = "maintainer"

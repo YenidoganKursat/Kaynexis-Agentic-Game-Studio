@@ -17,3 +17,11 @@ severity = "recommended"
 applies_when = "Packaging, release, or demo prep"
 validation = "Check artifact path examples in docs and workflows"
 owner = "producer"
+
+[[item]]
+id = "ci-short-names"
+title = "CI names stay short and canonical"
+severity = "required"
+applies_when = "Any workflow, job, artifact, or report naming change"
+validation = "Keep workflow names, job labels, artifact labels, and report filenames aligned with studio/checklists/base/naming.toml and docs/reference/ci-cd.md"
+owner = "build-release"

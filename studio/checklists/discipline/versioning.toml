@@ -1,0 +1,51 @@
+id = "versioning"
+title = "Versioning"
+layer = "discipline"
+
+[[item]]
+id = "version-source"
+title = "VERSION is the source of truth"
+severity = "required"
+applies_when = "Any version, tag, or release metadata change"
+validation = "Keep VERSION, CHANGELOG.md, and release tags aligned"
+owner = "release_manager"
+
+[[item]]
+id = "version-changelog"
+title = "Changelog matches version state"
+severity = "required"
+applies_when = "Any prerelease or release cut"
+validation = "Keep Unreleased visible during prerelease work and add the matching release heading before tagging"
+owner = "producer"
+
+[[item]]
+id = "version-tag"
+title = "Tag policy is canonical"
+severity = "recommended"
+applies_when = "Any release or demo cut"
+validation = "Use short vX.Y.Z tags and record the chosen tag in release notes"
+owner = "build_release_engineer"
+
+[[item]]
+id = "version-artifact"
+title = "Artifacts surface the version"
+severity = "required"
+applies_when = "Any CI report or release bundle change"
+validation = "Expose the current version in build provenance, CI reports, or release notes"
+owner = "build_release_engineer"
+
+[[item]]
+id = "version-doc-sync"
+title = "Version docs stay synchronized"
+severity = "recommended"
+applies_when = "Any versioning or release metadata change"
+validation = "Keep docs/reference/version-guide.md, docs/examples/version-example.md, and docs/research/game-development/production/versioning.md in sync with the release checklist"
+owner = "technical_director"
+
+[[item]]
+id = "version-commit"
+title = "Commit notes describe the version change"
+severity = "required"
+applies_when = "Any versioning or release metadata change"
+validation = "Use a commit subject and body that name the version change, changelog update, and tag or release-note impact"
+owner = "release_manager"

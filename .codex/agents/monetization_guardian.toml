@@ -1,5 +1,6 @@
 name = "monetization_guardian"
 description = "Evaluates monetization, reward pressure, fairness, and ethical guardrails."
+public_title = "Daniel Kahneman"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

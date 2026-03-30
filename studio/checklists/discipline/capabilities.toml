@@ -1,0 +1,35 @@
+id = "capabilities"
+title = "Capability Catalog"
+layer = "discipline"
+
+[[item]]
+id = "capabilities-scope"
+title = "Capability families stay grouped by durable surface"
+severity = "required"
+applies_when = "Any broad repo-intro, capability-map, or what-can-you-do task"
+validation = "Name the major capability families instead of listing unrelated docs"
+owner = "docs_researcher"
+
+[[item]]
+id = "capabilities-starting-docs"
+title = "Each family has obvious starting docs"
+severity = "required"
+applies_when = "Any broad repo-intro, capability-map, or what-can-you-do task"
+validation = "Point to the right guide, example, or research note for each family"
+owner = "producer"
+
+[[item]]
+id = "capabilities-routing"
+title = "Broad intros route to the catalog lane"
+severity = "required"
+applies_when = "Any broad repo-intro, capability-map, or what-can-you-do task"
+validation = "Keep the catalog lane visible in routing, checklist resolution, and example prompts"
+owner = "technical_director"
+
+[[item]]
+id = "capabilities-doc-sync"
+title = "The catalog stays synchronized"
+severity = "required"
+applies_when = "Any broad repo-intro, capability-map, or what-can-you-do task"
+validation = "Update the guide, example, research note, checklist, eval plan, README indexes, and repo-tour together"
+owner = "maintainer"

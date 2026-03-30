@@ -13,7 +13,12 @@ def main() -> int:
     args = parser.parse_args()
 
     slug = args.slug or slugify(args.title)
-    replacements = {"EVAL_NAME": args.title}
+    replacements = {
+        "EVAL_NAME": args.title,
+        "SYSTEM_ATLAS_REF": "docs/reference/system-atlas.md",
+        "ENGINE_ATLAS_REF": "docs/reference/engine-atlas.md",
+        "ENGINE_MAP_REF": "docs/reference/engine-map.md",
+    }
 
     target = ACTIVE_DIR / f"eval-plan-{slug}.md"
     write_text(target, load_template("eval-plan.md", replacements))

@@ -1,5 +1,6 @@
 name = "certification_manager"
 description = "Tracks console/platform compliance, TRC/XR-style risks, submission readiness, and evidence."
+public_title = "Niels Bohr"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

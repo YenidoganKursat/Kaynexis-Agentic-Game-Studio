@@ -6,7 +6,9 @@ Use `.env.example` only when you want optional integrations or helper scripts th
 
 The same file also holds optional local engine tool paths. That means the repo can stay multi-engine even when different contributors only have one engine installed locally.
 
-## Included placeholders
+## Optional environment values
+
+Only add these when the matching integration, engine, or helper flow is actually in use.
 
 - `OPENAI_API_KEY`
   Needed only for OpenAI API-powered helper scripts or external tooling.
@@ -30,6 +32,8 @@ The same file also holds optional local engine tool paths. That means the repo c
 - Keep example files non-secret and minimal
 - Keep long-lived tool paths in `studio.toml` when they are repo defaults and use `.env` only for local overrides
 - Do not assume every machine has every engine installed; only the paths you need for the current contributor or runner should be set
+
+If you are not using a given engine on a machine, leave that engine's path unset and rely on the repo stubs and static checks.
 
 ## Recommended flow
 

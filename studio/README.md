@@ -17,7 +17,8 @@ Static repo and onboarding docs live under `docs/`. Anything that represents the
 
 1. Run `python3 scripts/codex_studio.py init --project-name "Your Game" --engine godot-4 --platform pc-premium --genre action-roguelite --yes`
 2. Review `docs/active/game-brief.md`, `docs/active/genre-starter.md`, and `docs/active/engine-profile.md`
-3. Use skills to create feature, QA, release, and postmortem documents as the project evolves
+3. If the machine still needs an engine install or an agent bootstrap, open `docs/setup/engine-installation.md` and `docs/setup/agent-setup.md`
+4. Use skills to create feature, QA, release, and postmortem documents as the project evolves
 
 ## High-value files
 

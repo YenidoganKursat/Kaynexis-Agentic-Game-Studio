@@ -1,0 +1,43 @@
+id = "extensions"
+title = "Custom Extension Packs"
+layer = "discipline"
+
+[[item]]
+id = "extension-intake"
+title = "Extension scope is explicit"
+severity = "required"
+applies_when = "Any custom extension, plugin pack, or add-on lane"
+validation = "Name the request source, the pack owner, and whether the pack is opt-in or always-on before implementation."
+owner = "producer"
+
+[[item]]
+id = "extension-manifest"
+title = "Manifest fields are explicit"
+severity = "required"
+applies_when = "Any extension pack or plugin-like add-on"
+validation = "Name the manifest id, dependencies, hook points, override points, and fallback path."
+owner = "technical_director"
+
+[[item]]
+id = "extension-boundary"
+title = "Hook boundary is explicit"
+severity = "required"
+applies_when = "Any extension pack that touches runtime, editor, UI, or data surfaces"
+validation = "Document which layer owns the hook and which layer remains canonical."
+owner = "technical_director"
+
+[[item]]
+id = "extension-validation"
+title = "One narrow proof path exists"
+severity = "required"
+applies_when = "Any extension pack or plugin-like add-on change"
+validation = "Run one smoke, test, or manual loop that proves the pack attaches and detaches cleanly."
+owner = "qa_lead"
+
+[[item]]
+id = "extension-doc-sync"
+title = "Guide, example, research, and active note stay in sync"
+severity = "required"
+applies_when = "Any extension pack routing or documentation change"
+validation = "Update the guide, example, research note, checklist, and eval plan together."
+owner = "maintainer"

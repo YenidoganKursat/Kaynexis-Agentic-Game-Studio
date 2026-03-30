@@ -1,0 +1,67 @@
+id = "genre"
+title = "Genre"
+layer = "discipline"
+
+[[item]]
+id = "genre-loop"
+title = "Dominant genre loop is named"
+severity = "required"
+applies_when = "Genre preset, genre research, or genre scoping work"
+validation = "State the dominant tension and the loop that repeats it"
+owner = "game-designer"
+
+[[item]]
+id = "genre-plan-schema"
+title = "Genre plan schema is explicit"
+severity = "required"
+applies_when = "Genre planning, genre support, or first-slice planning"
+validation = "Name the player outcome, dominant tension, contrast set, loop ladder, state owner, accessibility envelope, and validation ladder"
+owner = "game-designer"
+
+[[item]]
+id = "genre-pattern-fit"
+title = "Software pattern family is chosen before implementation"
+severity = "required"
+applies_when = "Genre support, genre architecture, or first-slice planning"
+validation = "Name the software pattern family that owns the genre promise"
+owner = "technical-director"
+
+[[item]]
+id = "genre-plan-fit"
+title = "Genre plan adapts to the family"
+severity = "required"
+applies_when = "Genre planning or genre support work"
+validation = "Name the first slice proof, the first system that breaks, and the first thing not to overbuild"
+owner = "technical-director"
+
+[[item]]
+id = "genre-contrast-set"
+title = "Example contrast set is explicit"
+severity = "required"
+applies_when = "Genre research or preset selection"
+validation = "Name one or two example games that prove the pattern is real"
+owner = "producer"
+
+[[item]]
+id = "genre-state-boundary"
+title = "Genre state ownership is explicit"
+severity = "required"
+applies_when = "Any genre support, architecture, or first slice work"
+validation = "Name which system owns truth, which system projects it, and which system only reads it"
+owner = "technical-director"
+
+[[item]]
+id = "genre-validation"
+title = "First genre slice and failure mode are defined"
+severity = "required"
+applies_when = "Any genre support or genre architecture task"
+validation = "State the first slice, the first system that breaks if the genre is shallow, and the validation path"
+owner = "qa"
+
+[[item]]
+id = "genre-doc-sync"
+title = "Genre docs stay synchronized"
+severity = "required"
+applies_when = "Any genre research, preset, or routing change"
+validation = "Update the genre plan, guide, pattern catalog, example matrix, maturity guide, and preset entry together"
+owner = "maintainer"

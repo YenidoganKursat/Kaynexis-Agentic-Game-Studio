@@ -25,9 +25,14 @@
 
 {GENRE_DESIGN_FOCUS}
 
+## Planning schema
+
+- Use `docs/reference/genre-plan.md` and `docs/examples/genre-plan-example.md` to turn this preset into a buildable plan before the first feature brief.
+- Keep the player outcome, dominant tension, contrast set, loop ladder, state owner, accessibility envelope, performance envelope, and validation ladder explicit.
+
 ## Advanced genre guidance
 
-- Deeper theory and maturity path: `{GENRE_ADVANCED_GUIDE}`
+- Deeper theory and maturity path: `{GENRE_MATURITY}`
 - Use this once the first slice is stable and you want to scale the genre into a production-ready support model.
 
 ## Recommended first skills
@@ -38,5 +43,5 @@
 
 - `python3 scripts/codex_studio.py next "{GENRE_ROUTE_EXAMPLE}"`
 - `python3 scripts/codex_studio.py checklist --task "{GENRE_ROUTE_EXAMPLE}"`
-- `python3 scripts/scaffold_feature.py "{GENRE_FIRST_FEATURE}" --with-adr --with-test-plan`
+- `python3 scripts/scaffold_feature.py "{GENRE_FIRST_FEATURE}" --with-adr --with-test-plan --with-eval-plan`
 - `python3 scripts/generate_qa_matrix.py "{GENRE_FIRST_FEATURE}"`

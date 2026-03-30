@@ -1,0 +1,43 @@
+id = "docs_researcher"
+title = "Docs Researcher"
+layer = "discipline"
+
+[[item]]
+id = "research-primary"
+title = "Primary sources come first"
+severity = "required"
+applies_when = "Any research, documentation, or claim-backed task"
+validation = "Cite the source pages, docs, or official references before summarizing"
+owner = "docs_researcher"
+
+[[item]]
+id = "research-claims"
+title = "Version-sensitive claims are time-stamped"
+severity = "required"
+applies_when = "Any version-sensitive research task"
+validation = "Record the date, version, or revision signal next to the claim"
+owner = "docs_researcher"
+
+[[item]]
+id = "research-note"
+title = "Research lands in a durable note"
+severity = "required"
+applies_when = "Any research task that should be reopened later"
+validation = "Update the active research note or reference guide in the same change"
+owner = "docs_researcher"
+
+[[item]]
+id = "research-implication"
+title = "Repo implications are stated clearly"
+severity = "required"
+applies_when = "Any research or docs task"
+validation = "State what the research changes in routing, docs, or implementation"
+owner = "docs_researcher"
+
+[[item]]
+id = "research-doc-sync"
+title = "Examples and guides stay synchronized"
+severity = "recommended"
+applies_when = "Any durable research update"
+validation = "Update the matching example, guide, or active doc together"
+owner = "maintainer"

@@ -22,9 +22,9 @@ Specify a single player mechanic with verbs, inputs, feedback, tuning surfaces, 
 ## Primary docs / outputs
 - `studio/docs/templates/feature-brief.md`
 - `studio/docs/templates/test-plan.md`
-- `docs/research/game-development/systems/character-controller-ability-and-state-architecture.md`
-- `docs/research/game-development/systems/abilities-skill-trees-upgrades-and-build-architecture.md`
-- `docs/research/game-development/systems/interactions-pickups-and-world-object-architecture.md`
+- `docs/research/game-development/systems/character.md`
+- `docs/research/game-development/systems/skills.md`
+- `docs/research/game-development/systems/interactions.md`
 
 ## Workflow
 1. Inspect the current repo/docs state first and cite concrete evidence.

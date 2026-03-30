@@ -14,6 +14,11 @@ from _studio_common import REPO_ROOT
 WORKFLOWS_DIR = REPO_ROOT / ".github" / "workflows"
 
 REQUIRED_WORKFLOWS: dict[str, dict[str, Any]] = {
+    "validate.yml": {
+        "jobs": {"validate"},
+        "triggers": {"workflow_dispatch", "pull_request", "push"},
+        "needs_upload_artifact": True,
+    },
     "repo-validate.yml": {
         "jobs": {"repo-validate", "ci-artifacts"},
         "triggers": {"workflow_dispatch", "pull_request", "push"},
@@ -53,15 +58,27 @@ PINNED_ACTIONS = {
 }
 
 REQUIRED_RUN_SNIPPETS: dict[str, list[str]] = {
+    "validate.yml": [
+        "make validate",
+        "tests/test_godot_surface.py",
+        "scripts/version_guard.py",
+        "scripts/ci_quality_gate.py",
+        "scripts/ci_artifact_report.py",
+    ],
     "repo-validate.yml": [
         "scripts/doc_sync_guard.py",
         "scripts/ci_quality_gate.py",
+        "dependabot[bot]",
     ],
     "doc-sync.yml": [
         "scripts/doc_sync_guard.py",
+        "dependabot[bot]",
     ],
     "release-readiness.yml": [
+        "scripts/version_guard.py",
         "scripts/ci_quality_gate.py",
+        "release-ready",
+        "forbid-external-dependencies",
     ],
     "nightly-audit.yml": [
         "scripts/ci_quality_gate.py",

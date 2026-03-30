@@ -1,0 +1,43 @@
+id = "build_release_engineer"
+title = "Build Release Engineer"
+layer = "discipline"
+
+[[item]]
+id = "build-deterministic"
+title = "Build and export commands are deterministic"
+severity = "required"
+applies_when = "Any pipeline or artifact change"
+validation = "Write the exact command line used for the artifact"
+owner = "build_release_engineer"
+
+[[item]]
+id = "build-env"
+title = "Environment assumptions are pinned"
+severity = "required"
+applies_when = "Any build, packaging, or CI task"
+validation = "Name the engine version, tool path, and any required env var"
+owner = "build_release_engineer"
+
+[[item]]
+id = "build-artifacts"
+title = "Artifact paths are stable"
+severity = "required"
+applies_when = "Any packaging or release task"
+validation = "Document the build output location and expected filename pattern"
+owner = "build_release_engineer"
+
+[[item]]
+id = "build-smoke"
+title = "One smoke path proves the build"
+severity = "required"
+applies_when = "Any packaging or pipeline task"
+validation = "Name one smoke, install, or launch check that proves the artifact works"
+owner = "qa_lead"
+
+[[item]]
+id = "build-doc-sync"
+title = "Build and release docs stay in sync"
+severity = "recommended"
+applies_when = "Any build or pipeline change"
+validation = "Update the build pipeline note, CI notes, or release checklist together"
+owner = "maintainer"

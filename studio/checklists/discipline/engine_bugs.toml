@@ -1,0 +1,44 @@
+id = "engine_bugs"
+title = "Engine Bugs"
+layer = "discipline"
+
+[[item]]
+id = "engine-bugs-family"
+title = "Bug family is named before a fix is proposed"
+severity = "required"
+applies_when = "Any engine bug, crash, or troubleshooting request"
+validation = "Classify the symptom into ownership, lifecycle, serialization, packaging, or networking before patching"
+owner = "qa_lead"
+
+[[item]]
+id = "engine-bugs-first-check"
+title = "First check surface is explicit"
+severity = "required"
+applies_when = "Any engine bug, crash, or troubleshooting request"
+validation = "Name the first log, debugger, console, or profiler surface to inspect"
+owner = "technical_director"
+
+[[item]]
+id = "engine-bugs-boundary"
+title = "Runtime, editor, and packaged-build behavior are separated"
+severity = "required"
+applies_when = "Any engine bug, crash, or troubleshooting request"
+validation = "Say whether the failure is editor-only, runtime-only, or packaging-specific"
+owner = "engine_programmer"
+
+[[item]]
+id = "engine-bugs-proof-path"
+title = "One repro path or failing proof is recorded"
+severity = "required"
+applies_when = "Any bug report or troubleshooting note"
+validation = "Capture one deterministic repro or one failure surface that should pass after the fix"
+owner = "qa"
+
+[[item]]
+id = "engine-bugs-doc-sync"
+title = "The bug atlas stays synchronized"
+severity = "required"
+applies_when = "Any engine bug family routing change"
+validation = "Update the guide, example, research note, checklist, eval plan, and indexes together"
+owner = "maintainer"
+

@@ -1,0 +1,51 @@
+id = "architecture"
+title = "Architecture"
+layer = "discipline"
+
+[[item]]
+id = "architecture-owner"
+title = "Canonical state owner is explicit"
+severity = "required"
+applies_when = "Any state, authority, projection, or event architecture change"
+validation = "Name the single canonical owner before implementation and sketch the boundary if the flow is still fuzzy"
+owner = "technical-director"
+
+[[item]]
+id = "architecture-boundary"
+title = "Boundary between state, event, and projection is explicit"
+severity = "required"
+applies_when = "Any system-level design change"
+validation = "Document which layer owns truth, which layer reacts, and which layer only projects; reference the architecture guide diagram when the shape is broad"
+owner = "lead_programmer"
+
+[[item]]
+id = "architecture-state"
+title = "State graph or state machine is written down when phases matter"
+severity = "required"
+applies_when = "Any boss, encounter, mission, or flow-phase change"
+validation = "Describe the legal transitions before implementation"
+owner = "game-designer"
+
+[[item]]
+id = "architecture-events"
+title = "Event flow is named when multiple systems react to one source"
+severity = "recommended"
+applies_when = "Any decoupled notification path"
+validation = "Name the event source, the listeners, and the failure case"
+owner = "technical-director"
+
+[[item]]
+id = "architecture-validation"
+title = "Architecture has one narrow proof path"
+severity = "required"
+applies_when = "Any architecture decision or refactor"
+validation = "Name one test, smoke, or manual loop that proves the boundary works"
+owner = "qa"
+
+[[item]]
+id = "architecture-doc-sync"
+title = "Architecture docs stay in sync"
+severity = "required"
+applies_when = "Any architecture decision or routing change"
+validation = "Update the guide, example, diagram-aware notes, and active note in the same change"
+owner = "maintainer"

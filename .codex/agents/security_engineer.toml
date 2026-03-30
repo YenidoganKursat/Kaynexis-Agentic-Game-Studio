@@ -1,5 +1,6 @@
 name = "security_engineer"
 description = "Threat-models game/client/server flows, abuse paths, secrets handling, and exploit risks."
+public_title = "Whitfield Diffie"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

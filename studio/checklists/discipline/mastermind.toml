@@ -1,0 +1,43 @@
+id = "mastermind"
+title = "Master Mind"
+layer = "discipline"
+
+[[item]]
+id = "mastermind-summary"
+title = "User summary stays simple"
+severity = "required"
+applies_when = "Any broad, multi-step, or cross-functional orchestration task"
+validation = "Return one plain-language summary before internal worker details"
+owner = "producer"
+
+[[item]]
+id = "mastermind-control-loop"
+title = "Control loop is named"
+severity = "required"
+applies_when = "Any orchestration task"
+validation = "State intake, delegate, verify, and summarize in order"
+owner = "technical-director"
+
+[[item]]
+id = "mastermind-handoffs"
+title = "Worker handoffs are explicit"
+severity = "required"
+applies_when = "Any task that fans out into specialist work"
+validation = "Name the worker roles, scope, and expected output for each handoff"
+owner = "technical-director"
+
+[[item]]
+id = "mastermind-validation"
+title = "Validation path is narrow"
+severity = "required"
+applies_when = "Any orchestration task that changes repo behavior"
+validation = "Name one command, doc, or manual loop that proves the decision"
+owner = "qa"
+
+[[item]]
+id = "mastermind-doc-sync"
+title = "Durable docs reflect orchestration decisions"
+severity = "recommended"
+applies_when = "Any routing, checklist, or agent-management change"
+validation = "Update the guide, examples, routing surface, and eval plan together"
+owner = "maintainer"

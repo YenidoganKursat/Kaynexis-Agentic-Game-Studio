@@ -4,6 +4,11 @@
 - Path:
 - Status:
 
+## Atlas references
+- `{SYSTEM_ATLAS_REF}`
+- `{ENGINE_ATLAS_REF}`
+- `{ENGINE_MAP_REF}`
+
 ## Architecture decision
 - Path:
 - Status:

@@ -1,5 +1,6 @@
 name = "analytics_engineer"
 description = "Designs telemetry schemas, event hygiene, dashboards, and analysis-ready game data."
+public_title = "Ronald Fisher"
 model = "gpt-5.4-mini"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"

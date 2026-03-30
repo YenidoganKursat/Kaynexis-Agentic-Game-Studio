@@ -1,5 +1,6 @@
 name = "producer"
 description = "Turns goals into next actions, sequencing, and dependency-aware sprint plans."
+public_title = "Marie Curie"
 model = "gpt-5.4-mini"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"

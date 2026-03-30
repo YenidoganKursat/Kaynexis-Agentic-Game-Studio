@@ -15,6 +15,16 @@ That does not mean the runtime files are identical. It means the repo gives all 
 - CI contract smoke
 - user-facing setup and routing support
 
+If your real concern is FPS, frame time, memory, or scale, pair the engine choice with `docs/reference/perf-guide.md` and `docs/reference/genre-perf-guide.md` before you commit to a representation path.
+If the real concern is algorithmic scale - spatial partitioning, culling, batching, instancing, job systems, or state compression - also add `docs/reference/advanced-perf-guide.md` and `docs/examples/advanced-perf-example.md` before you commit to a representation path.
+If the real concern is GPU ownership, render communication, buffer shape, or repeated-visual scale, also add `docs/reference/gpu-guide.md` and `docs/examples/gpu-example.md` before you commit to a render path.
+If the real concern is how the engines compare on build, tests, performance, and toolchain readiness, also add `docs/reference/engine-eval.md` and `docs/examples/engine-eval-example.md` before you commit to an engine choice.
+If the real concern is which engine fits a specific developer profile or team shape, also add `docs/reference/engine-fit.md` and `docs/examples/engine-fit-example.md` before you commit to an engine choice.
+If the real concern is how to install the engine cleanly on a new machine, also add `docs/setup/engine-installation.md` before you commit to an install path.
+
+If your real concern is which library, package, plugin, or SDK should own the case, pair the engine choice with `docs/reference/library-guide.md` and `docs/examples/library-example.md` before you commit to a dependency path.
+If your real concern is code quality, maintainability, refactor safety, or optimization criteria, pair the engine choice with `docs/reference/quality-guide.md` and `docs/examples/quality-example.md` before you commit to a refactor path.
+
 ## Pick Godot 4 when
 
 - you want the fastest path from idea to playable reference slice
@@ -35,6 +45,7 @@ What this repo gives you for Godot:
 - static smoke and export helper scripts
 - Godot-specific research and checklist coverage
 - a class/mechanic guide that maps common 2D and 3D work onto `CharacterBody`, `Area`, `RigidBody`, `Camera`, `AnimationTree`, `PackedScene`, and `Resource`
+- a GPU guide that maps CPU-GPU ownership, buffers, instancing, compute, and readback decisions onto the supported engines
 - concrete example slices and cross-engine comparisons in `docs/reference/engine-examples.md`
 
 Commands:
@@ -159,6 +170,8 @@ Right now:
 
 You only need the engine you actually plan to use locally.
 
+If you are still choosing the install path, start with `docs/setup/engine-installation.md` and then set the local path variables below.
+
 Optional local paths:
 
 - `GODOT_BIN`
@@ -181,3 +194,6 @@ Do this deliberately:
 Do not silently switch engines only in docs or only in runtime files.
 
 If you need concrete examples before you decide, read `docs/reference/engine-examples.md` and compare the same mechanic in each engine family.
+If you need a build / test / performance scorecard before you decide, read `docs/reference/engine-eval.md` and `docs/examples/engine-eval-example.md` alongside the engine selection guide.
+If you need a developer-fit matrix before you decide, read `docs/reference/engine-fit.md` and `docs/examples/engine-fit-example.md` alongside the engine selection guide.
+If you need concrete optimization examples before you decide, read `docs/reference/advanced-perf-guide.md` and `docs/examples/advanced-perf-example.md` alongside the engine performance notes.

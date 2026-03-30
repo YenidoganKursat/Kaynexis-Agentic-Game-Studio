@@ -65,7 +65,7 @@ def run_genre_guidance_eval() -> list[str]:
             failures.append(
                 f"genre guidance first feature mismatch for '{case['genre']}': expected {case['expected_first_feature']}, got {payload.get('GENRE_FIRST_FEATURE')}"
             )
-        if not str(payload.get("GENRE_ADVANCED_GUIDE", "")).endswith("genre-advanced-development-framework.md"):
+        if not str(payload.get("GENRE_MATURITY", "")).endswith("genre-maturity.md"):
             failures.append(f"genre guidance missing advanced framework guide for '{case['genre']}'")
         skills_block = str(payload.get("GENRE_SKILLS", ""))
         for skill in case.get("required_skills", []):
@@ -149,11 +149,104 @@ def run_workflow_surface_eval() -> list[str]:
 
 def run_checklist_eval() -> list[str]:
     failures: list[str] = []
-    items = resolve_checklists(engine_slug="godot-4", disciplines=["gameplay"], milestone="prototype", agent_name="gameplay_programmer")
-    item_ids = {item["id"] for item in items}
+    gameplay_items = resolve_checklists(engine_slug="godot-4", disciplines=["gameplay"], milestone="prototype", agent_name="gameplay_programmer")
+    gameplay_ids = {item["id"] for item in gameplay_items}
     for required in ("repo-health-doctor", "gameplay-readability", "prototype-proves-core-loop"):
-        if required not in item_ids:
+        if required not in gameplay_ids:
             failures.append(f"resolved checklist bundle is missing '{required}'")
+
+    engine_eval_items = resolve_checklists(engine_slug="unity-6", disciplines=["engine_eval"], milestone="prototype", agent_name="technical_director")
+    engine_eval_ids = {item["id"] for item in engine_eval_items}
+    for required in (
+        "engine-source-hierarchy",
+        "engine-family-split",
+        "engine-build-contract",
+        "engine-test-contract",
+        "engine-performance-baseline",
+        "engine-toolchain-readiness",
+        "engine-scorecard-artifact",
+        "engine-doc-sync",
+    ):
+        if required not in engine_eval_ids:
+            failures.append(f"resolved engine eval bundle is missing '{required}'")
+    for required in ("ci-short-names", "benchmark-family", "quality-owner", "quality-process", "perf-first-lever", "research-primary-sources"):
+        if required not in engine_eval_ids:
+            failures.append(f"resolved engine eval support bundle is missing '{required}'")
+
+    engine_fit_items = resolve_checklists(engine_slug="unity-6", disciplines=["engine_fit"], milestone="prototype", agent_name="technical_director")
+    engine_fit_ids = {item["id"] for item in engine_fit_items}
+    for required in (
+        "engine-profile-named",
+        "engine-language-fit",
+        "engine-collaboration-fit",
+        "engine-platform-fit",
+        "engine-tooling-fit",
+        "engine-proof-path",
+        "engine-tradeoff-matrix",
+        "engine-doc-sync",
+    ):
+        if required not in engine_fit_ids:
+            failures.append(f"resolved engine fit bundle is missing '{required}'")
+    for required in ("research-primary-sources", "research-repo-impact"):
+        if required not in engine_fit_ids:
+            failures.append(f"resolved engine fit support bundle is missing '{required}'")
+
+    custom_items = resolve_checklists(engine_slug="unity-6", disciplines=["custom"], milestone="prototype", agent_name="technical_director")
+    custom_ids = {item["id"] for item in custom_items}
+    for required in ("custom-intake", "custom-owner", "custom-rulepack", "custom-validation", "custom-doc-sync"):
+        if required not in custom_ids:
+            failures.append(f"resolved custom checklist bundle is missing '{required}'")
+    if not any(item["source"].endswith("studio/checklists/discipline/custom.toml") for item in custom_items):
+        failures.append("resolved custom checklist bundle missing source 'studio/checklists/discipline/custom.toml'")
+
+    extension_items = resolve_checklists(engine_slug="unity-6", disciplines=["extensions"], milestone="prototype", agent_name="technical_director")
+    extension_ids = {item["id"] for item in extension_items}
+    for required in ("extension-intake", "extension-manifest", "extension-boundary", "extension-validation", "extension-doc-sync"):
+        if required not in extension_ids:
+            failures.append(f"resolved extensions checklist bundle is missing '{required}'")
+    if not any(item["source"].endswith("studio/checklists/discipline/extensions.toml") for item in extension_items):
+        failures.append("resolved extensions checklist bundle missing source 'studio/checklists/discipline/extensions.toml'")
+
+    theory_items = resolve_checklists(engine_slug="unity-6", disciplines=["theory"], milestone="prototype", agent_name="game_designer")
+    theory_ids = {item["id"] for item in theory_items}
+    for required in ("theory-outcome", "theory-lens-stack", "theory-evidence", "theory-boundary", "theory-validation", "theory-doc-sync"):
+        if required not in theory_ids:
+            failures.append(f"resolved theory checklist bundle is missing '{required}'")
+    if not any(item["source"].endswith("studio/checklists/discipline/theory.toml") for item in theory_items):
+        failures.append("resolved theory checklist bundle missing source 'studio/checklists/discipline/theory.toml'")
+
+    role_cases = [
+        ("producer", {"producer-summary", "producer-scope", "producer-handoffs", "producer-risk"}, "studio/checklists/discipline/producer.toml"),
+        ("technical_director", {"tech-boundary", "tech-feasibility", "tech-tradeoff", "tech-validation"}, "studio/checklists/discipline/technical_director.toml"),
+        ("qa_lead", {"qa-criteria", "qa-matrix", "qa-go-no-go", "qa-evidence"}, "studio/checklists/discipline/qa_lead.toml"),
+        ("release_manager", {"release-freeze", "release-artifacts", "release-rollback", "release-note"}, "studio/checklists/discipline/release_manager.toml"),
+        ("build_release_engineer", {"build-deterministic", "build-env", "build-artifacts", "build-smoke"}, "studio/checklists/discipline/build_release_engineer.toml"),
+        ("docs_researcher", {"research-primary", "research-claims", "research-note", "research-implication"}, "studio/checklists/discipline/docs_researcher.toml"),
+        ("performance_analyst", {"perf-baseline", "perf-budget", "perf-first-lever", "perf-fallback"}, "studio/checklists/discipline/performance_analyst.toml"),
+        ("engine_programmer", {"engine-owner", "engine-toolchain", "engine-class", "engine-smoke"}, "studio/checklists/discipline/engine_programmer.toml"),
+        ("gameplay_programmer", {"gameplay-owner", "gameplay-slice", "gameplay-state", "gameplay-validation"}, "studio/checklists/discipline/gameplay_programmer.toml"),
+        ("game_designer", {"design-outcome", "design-loop", "design-pacing", "design-validation"}, "studio/checklists/discipline/game_designer.toml"),
+        ("ui_programmer", {"ui-screen-flow", "ui-projection", "ui-accessibility", "ui-validation"}, "studio/checklists/discipline/ui_programmer.toml"),
+        ("narrative_director", {"narrative-beat", "narrative-branch", "narrative-graph", "narrative-validation"}, "studio/checklists/discipline/narrative_director.toml"),
+        ("art_director", {"art-pillars", "art-readability", "art-pipeline", "art-validation"}, "studio/checklists/discipline/art_director.toml"),
+        ("audio_director", {"audio-pillars", "audio-mix", "audio-implementation", "audio-validation"}, "studio/checklists/discipline/audio_director.toml"),
+    ]
+    for role, required_ids, source_suffix in role_cases:
+        items = resolve_checklists(engine_slug="unity-6", disciplines=[role], milestone="prototype", agent_name=role)
+        item_ids = {item["id"] for item in items}
+        for required in required_ids:
+            if required not in item_ids:
+                failures.append(f"resolved {role} checklist bundle is missing '{required}'")
+        if not any(item["source"].endswith(source_suffix) for item in items):
+            failures.append(f"resolved {role} checklist bundle missing source '{source_suffix}'")
+
+    versioning_items = resolve_checklists(engine_slug="unity-6", disciplines=["versioning"], milestone="release", agent_name="release_manager")
+    versioning_ids = {item["id"] for item in versioning_items}
+    for required in ("version-source", "version-changelog", "version-tag", "version-artifact", "version-doc-sync", "version-commit"):
+        if required not in versioning_ids:
+            failures.append(f"resolved versioning checklist bundle is missing '{required}'")
+    if not any(item["source"].endswith("studio/checklists/discipline/versioning.toml") for item in versioning_items):
+        failures.append("resolved versioning checklist bundle missing source 'studio/checklists/discipline/versioning.toml'")
     return failures
 
 
@@ -225,6 +318,7 @@ def run_route_task_engine_eval() -> list[str]:
         ("Plan the next Unity starter kit task", "engine / tooling / packaging", "unity-6"),
         ("Plan the next UE5 packaging task", "engine / tooling / packaging", "unreal-5"),
         ("Implement Unity combat room", "combat / gameplay", "unity-6"),
+        ("Compare Unity 6 and Unreal 5 in an engine evaluation scorecard for build, test, performance, and toolchain readiness", "engine / evaluation / scorecard", "unity-6"),
     ]
     script = REPO_ROOT / "scripts" / "route_task.py"
     for task, expected_route, expected_engine in cases:
@@ -237,6 +331,38 @@ def run_route_task_engine_eval() -> list[str]:
             failures.append(f"route_task route mismatch for '{task}': expected {expected_route}, got {payload.get('route')}")
         if payload.get("engine_kit", {}).get("id") != expected_engine:
             failures.append(f"route_task engine mismatch for '{task}': expected {expected_engine}, got {payload.get('engine_kit', {}).get('id')}")
+    return failures
+
+
+def run_route_task_engine_fit() -> list[str]:
+    failures: list[str] = []
+    cases = [
+        ("Which engine fits a beginner solo developer building a small 2D game in Godot 4?", "engine / developer fit / recommendation", "godot-4"),
+        ("Which engine fits a C# tools-heavy team building a simulation in Unity 6?", "engine / developer fit / recommendation", "unity-6"),
+        ("Which engine fits a designer-first Blueprint-heavy team in Unreal 5?", "engine / developer fit / recommendation", "unreal-5"),
+    ]
+    script = REPO_ROOT / "scripts" / "route_task.py"
+    for task, expected_route, expected_engine in cases:
+        result = subprocess.run([sys.executable, str(script), task, "--json"], cwd=REPO_ROOT, check=False, capture_output=True, text=True)
+        if result.returncode != 0:
+            failures.append(f"route_task failed for '{task}'")
+            continue
+        payload = json.loads(result.stdout)
+        if payload.get("route") != expected_route:
+            failures.append(f"route_task route mismatch for '{task}': expected {expected_route}, got {payload.get('route')}")
+        if payload.get("engine_kit", {}).get("id") != expected_engine:
+            failures.append(f"route_task engine mismatch for '{task}': expected {expected_engine}, got {payload.get('engine_kit', {}).get('id')}")
+        docs = set(payload.get("docs", []))
+        for required in (
+            "docs/reference/engine-fit.md",
+            "docs/examples/engine-fit-example.md",
+            "docs/research/game-development/foundations/engine-fit.md",
+            "studio/checklists/discipline/engine_fit.toml",
+            "studio/docs/active/engine-fit.md",
+            "studio/docs/active/eval-engine-fit.md",
+        ):
+            if required not in docs:
+                failures.append(f"route_task missing doc '{required}' for '{task}'")
     return failures
 
 
@@ -273,6 +399,33 @@ def run_ci_report_eval() -> list[str]:
     return failures
 
 
+def run_version_eval() -> list[str]:
+    failures: list[str] = []
+    script = REPO_ROOT / "scripts" / "version_guard.py"
+    result = subprocess.run(
+        [sys.executable, str(script), "--output-dir", str(REPO_ROOT / "build" / "ci" / "version"), "--json"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        failures.append(f"version_guard failed during eval: {result.stderr.strip() or result.stdout.strip()}")
+        return failures
+    payload = json.loads(result.stdout)
+    if payload.get("status") not in {"version-ready", "release-ready"}:
+        failures.append(f"version guard returned unexpected status: {payload.get('status')}")
+    if not payload.get("version"):
+        failures.append("version guard did not report a version")
+    if payload.get("failures"):
+        failures.extend(payload["failures"])
+    for key in ("json", "markdown"):
+        path = Path(payload[key])
+        if not path.exists():
+            failures.append(f"version eval missing artifact: {path}")
+    return failures
+
+
 def run_doc_sync_eval() -> list[str]:
     failures: list[str] = []
     script = REPO_ROOT / "scripts" / "doc_sync_audit.py"
@@ -288,10 +441,50 @@ def run_doc_sync_eval() -> list[str]:
         return failures
     payload = json.loads(result.stdout)
     docs = {item["doc"] for item in payload.get("recommendations", [])}
-    expected = {"docs/reference/ci-cd-architecture.md", "docs/reference/genre-presets.md"}
+    expected = {"docs/reference/ci-cd.md", "docs/reference/genre-presets.md"}
     missing = expected - docs
     if missing:
         failures.append(f"doc sync audit missing expected docs: {', '.join(sorted(missing))}")
+    return failures
+
+
+def run_benchmark_eval() -> list[str]:
+    failures: list[str] = []
+    script = REPO_ROOT / "scripts" / "run_bench.py"
+    output_dir = REPO_ROOT / "build" / "bench" / "eval"
+    result = subprocess.run(
+        [sys.executable, str(script), "--output-dir", str(output_dir), "--json"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    try:
+        payload = json.loads(result.stdout or "{}")
+    except json.JSONDecodeError:
+        failures.append(f"run_bench failed during eval: {result.stderr.strip() or result.stdout.strip()}")
+        return failures
+
+    summary = payload.get("summary", {}) if isinstance(payload, dict) else {}
+    if result.returncode != 0 or int(summary.get("failure_count", 0) or 0) > 0:
+        for case in payload.get("cases", []) if isinstance(payload, dict) else []:
+            task = case.get("task", "unknown task")
+            for failure in case.get("failures", []):
+                failures.append(f"benchmark case '{task}': {failure}")
+        if not failures:
+            failures.append(f"benchmark surface reported failures: {summary}")
+        return failures
+
+    if summary.get("readiness") != "benchmark-ready":
+        failures.append(f"benchmark readiness is not benchmark-ready: {summary.get('readiness')}")
+    if int(summary.get("score", 0) or 0) < 90:
+        failures.append(f"benchmark score below threshold: {summary.get('score')}")
+
+    artifacts = payload.get("artifacts", {}) if isinstance(payload, dict) else {}
+    for key in ("json", "markdown"):
+        path = Path(artifacts.get(key, ""))
+        if not path.exists():
+            failures.append(f"benchmark eval missing artifact: {path}")
     return failures
 
 
@@ -343,10 +536,13 @@ def main() -> int:
         "engine_adapters": run_engine_adapter_eval(),
         "agent_metadata": run_agent_metadata_eval(),
         "route_task_engines": run_route_task_engine_eval(),
+        "route_task_engine_fit": run_route_task_engine_fit(),
         "checklists": run_checklist_eval(),
         "research_surface": run_research_surface_eval(),
+        "versioning": run_version_eval(),
         "ci_report": run_ci_report_eval(),
         "doc_sync": run_doc_sync_eval(),
+        "benchmark": run_benchmark_eval(),
         "godot_surface": run_godot_surface_eval(),
     }
     total_failures = sum(len(items) for items in failures.values())

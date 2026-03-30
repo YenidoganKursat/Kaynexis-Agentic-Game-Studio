@@ -1,0 +1,43 @@
+id = "release_manager"
+title = "Release Manager"
+layer = "discipline"
+
+[[item]]
+id = "release-freeze"
+title = "Freeze window and blockers are explicit"
+severity = "required"
+applies_when = "Any release, demo, or launch planning task"
+validation = "List the freeze window, the ship blockers, and the unblock owners"
+owner = "release_manager"
+
+[[item]]
+id = "release-artifacts"
+title = "Release artifacts are named and bounded"
+severity = "required"
+applies_when = "Any shipping or milestone task"
+validation = "State the expected build artifact, destination, and distribution path"
+owner = "build_release_engineer"
+
+[[item]]
+id = "release-rollback"
+title = "Rollback or abort path is known"
+severity = "required"
+applies_when = "Any release-readiness or launch task"
+validation = "Name the abort condition and the fallback path before ship"
+owner = "release_manager"
+
+[[item]]
+id = "release-note"
+title = "Release notes or build notes are updated"
+severity = "required"
+applies_when = "Any release or demo prep task"
+validation = "Update the release note, build note, or active release doc in the same change"
+owner = "release_manager"
+
+[[item]]
+id = "release-doc-sync"
+title = "Release decisions stay in durable docs"
+severity = "recommended"
+applies_when = "Any release management task"
+validation = "Keep the active release doc, versioning note, and handoff aligned"
+owner = "maintainer"

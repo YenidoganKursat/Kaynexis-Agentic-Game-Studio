@@ -16,6 +16,7 @@
 - Content-pipeline docs should say where authored assets begin and where runtime-ready assets live.
 - Starter kits should reserve deterministic roots for content even before the first real asset lands.
 - Checklist items should focus on authoring path and naming determinism.
+- When a task needs the actual asset alternative, pair this note with `docs/reference/asset-guide.md` and `docs/examples/asset-example.md`.
 
 ## Decision impact
 - Keep `studio/docs/active/content-pipeline.md` in the default doc set.

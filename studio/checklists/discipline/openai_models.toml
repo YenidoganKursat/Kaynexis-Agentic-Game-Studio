@@ -1,0 +1,51 @@
+id = "openai_models"
+title = "OpenAI / Codex Models"
+layer = "discipline"
+
+[[item]]
+id = "openai-model-choice-explicit"
+title = "Model choice is explicit"
+severity = "required"
+applies_when = "Any OpenAI/Codex task that asks which model or plan tier should be used"
+validation = "Name the model or plan tier before recommending a workflow"
+owner = "technical_director"
+
+[[item]]
+id = "openai-smallest-model-first"
+title = "Smallest model that fits comes first"
+severity = "required"
+applies_when = "Any OpenAI/Codex task that compares model families"
+validation = "Prefer gpt-5.4-mini or gpt-5.4-nano when they safely fit the task"
+owner = "producer"
+
+[[item]]
+id = "openai-hard-problems-pay-for-pro"
+title = "Hard problems can justify pro"
+severity = "required"
+applies_when = "Any OpenAI/Codex task that needs the hardest correctness pass"
+validation = "Explain why gpt-5.4-pro is worth the added latency and cost"
+owner = "qa_lead"
+
+[[item]]
+id = "openai-plan-vs-api"
+title = "Plan tier and API usage are separated"
+severity = "required"
+applies_when = "Any OpenAI/Codex task that mentions ChatGPT plans or API usage"
+validation = "State whether the guidance is for the ChatGPT/Codex app or the API surface"
+owner = "technical_director"
+
+[[item]]
+id = "openai-compatibility-only"
+title = "Legacy models stay compatibility-only"
+severity = "required"
+applies_when = "Any OpenAI/Codex task that mentions older Codex or GPT-5.x model names"
+validation = "Treat older Codex-branded names as compatibility surfaces unless the prompt explicitly needs them"
+owner = "maintainer"
+
+[[item]]
+id = "openai-model-doc-sync"
+title = "Model docs stay synchronized"
+severity = "required"
+applies_when = "Any OpenAI/Codex model guidance update"
+validation = "Update the research note, guide, example, checklist, and eval plan together"
+owner = "maintainer"

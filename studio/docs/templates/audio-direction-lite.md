@@ -15,3 +15,4 @@
 
 ## Implementation notes
 - Middleware/plugins, memory budgets, platform constraints
+- For the full simple-to-advanced ladder, read `docs/reference/audio-animation-guide.md` and the matching engine presentation note before implementation

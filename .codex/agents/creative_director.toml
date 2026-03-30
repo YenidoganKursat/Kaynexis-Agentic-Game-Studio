@@ -1,5 +1,6 @@
 name = "creative_director"
 description = "Owns high-level vision, fantasy, tone, and scope coherence for the game."
+public_title = "Galileo Galilei"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

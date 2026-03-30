@@ -12,9 +12,18 @@ That guided setup shows the same options in a simple menu and then creates `stud
 
 For deeper design references, also read:
 
-- `docs/research/game-development/genre/genre-development-playbook.md`
-- `docs/research/game-development/genre/genre-design-pattern-catalog.md`
-- `docs/research/game-development/genre/genre-example-matrix.md`
+- `docs/reference/genre-plan.md`
+- `docs/examples/genre-plan-example.md`
+- `docs/research/game-development/genre/genre-plan.md`
+- `docs/research/game-development/genre/genre-guide.md`
+- `docs/research/game-development/genre/genre-maturity.md`
+- `docs/research/game-development/genre/genre-patterns.md`
+- `docs/research/game-development/genre/genre-examples.md`
+- `docs/examples/genre-gallery-example.md` when you need more than one contrast set
+- `docs/reference/genre-perf-guide.md`
+- `docs/examples/genre-perf-example.md`
+
+The canonical long-form genre note now lives at `genre-maturity.md`; the older verbose framework filename has been retired, so keep new docs and route text on the short name.
 
 ## Quick chooser
 
@@ -64,8 +73,10 @@ For deeper design references, also read:
 - If you care most about stamina mastery and telegraph readability, start with `soulslike`.
 - If you care most about tactical clarity and build planning, start with `tactical-rpg`.
 
-If you know the genre but want to know how to build it, use `docs/research/game-development/genre/genre-development-playbook.md` next.
+If you know the genre but want to know how to build it, use `docs/reference/genre-plan.md` first, then `docs/research/game-development/genre/genre-guide.md`.
+If you already know the genre and need the software pattern that should own the loop, read `docs/research/game-development/genre/genre-patterns.md` before implementation.
+If the chosen genre is also a scale or FPS risk, read `docs/reference/genre-perf-guide.md` before implementation so the first optimization lever stays genre-aware.
 
-If the first slice is already clear and you want to mature the genre into a stronger production model, use `docs/research/game-development/genre/genre-advanced-development-framework.md` after the playbook.
+If the first slice is already clear and you want to mature the genre into a stronger production model, use `docs/research/game-development/genre/genre-maturity.md` after the playbook.
 
-A good rhythm is: choose the genre preset -> read the example matrix -> read the development playbook -> read the advanced framework -> write the feature brief -> then route the first slice.
+A good rhythm is: choose the genre preset -> read the example matrix -> read the genre plan schema -> read the development playbook -> read the advanced framework -> write the feature brief -> then route the first slice.

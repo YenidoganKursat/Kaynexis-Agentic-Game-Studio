@@ -1,5 +1,6 @@
 name = "build_release_engineer"
 description = "Owns CI, packaging, versioning, deployment cadence, and release reproducibility."
+public_title = "Claude Shannon"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"

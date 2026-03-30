@@ -268,14 +268,31 @@ def seed_platform_targets(project_name: str, platform_name: str) -> str:
 | Platform | Priority | Input | Perf target | Special constraints |
 |---|---|---|---|---|
 | {platform_name} | Primary | Keyboard/mouse + controller | 60 FPS target | Settings scalability and sane defaults |
+| Windows PC | Primary / Secondary | Keyboard/mouse + controller | 60 FPS target | Installer, drivers, windowing, and scalable settings |
+| macOS | Secondary | Keyboard/mouse + controller | 60 FPS target | App Sandbox, signing, Apple Silicon, and controller parity |
+| Linux / Steam Deck | Secondary | Controller + keyboard/mouse | 60 FPS target with stable frame pacing | Steamworks, Proton / SteamOS, Deck verification, and compatibility notes |
+| Web Demo | Secondary | Keyboard/mouse + controller | 60 FPS target with shorter sessions | Asset size, startup latency, browser-safe persistence, and focus loss |
+| Android / iOS | Deferred research | Touch + controller if supported | 30-60 FPS depending on class | Battery, thermal load, UI scale, session compression, and store review |
+| webOS / TV | Deferred research | Remote + controller | 30-60 FPS depending on class | 10-foot UI, focus navigation, safe areas, and TV store rules |
 
 ## Store / submission notes
 - PC storefront readiness should include screenshots, controller support notes, and a demo-friendly build path
+- Steam should explicitly call out Steamworks / Steam Deck assumptions and controller coverage
+- Web demo should be treated as a discovery funnel, not as parity with the full PC target
+- Mobile and TV work should not start until touch, focus, safe-area, and store-policy assumptions are explicit
 
 ## Input & UX implications
 - Keyboard/mouse must feel native
 - Controller parity should exist before external playtests
 - Accessibility should cover subtitle readability, remappable controls where practical, and clear feedback
+- Web should degrade gracefully if persistence is browser-backed only
+- Mobile should only move forward once touch affordances and pause/resume handling are designed on purpose
+- TV should assume 10-foot readability and remotes or controllers as the primary input surface
+
+## Platform compatibility guide
+- Read `docs/reference/platform-guide.md` before changing targets, store assumptions, or porting scope
+- Use `docs/examples/platform-example.md` for dashboard and matrix examples
+- Keep `docs/research/game-development/production/platform-compatibility.md` nearby for source-backed platform notes
 """
 
 

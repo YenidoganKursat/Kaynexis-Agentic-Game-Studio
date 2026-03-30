@@ -25,10 +25,10 @@ Audit or frame engine-specific project setup, folder conventions, packages/plugi
 - `docs/research/game-development/engines/*-class-editor-object-map.md`
 - `docs/research/game-development/engines/*-2d-3d-class-and-mechanic-guide.md`
 - `docs/research/game-development/engines/*-2d-3d-navigation-damage-performance.md`
-- `docs/research/game-development/systems/inventory-equipment-and-item-architecture.md`
-- `docs/research/game-development/systems/character-controller-ability-and-state-architecture.md`
-- `docs/research/game-development/systems/enemy-roster-behavior-and-encounter-architecture.md`
-- `docs/reference/engine-agent-guidelines.md`
+- `docs/research/game-development/systems/inventory.md`
+- `docs/research/game-development/systems/character.md`
+- `docs/research/game-development/systems/enemy.md`
+- `docs/reference/agent-guide.md`
 
 ## Workflow
 1. Inspect the current repo/docs state first and cite concrete evidence.

@@ -1,5 +1,6 @@
 name = "ux_designer"
 description = "Owns menu flow, input clarity, information architecture, and player friction reduction."
+public_title = "Herbert A. Simon"
 model = "gpt-5.4-mini"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"

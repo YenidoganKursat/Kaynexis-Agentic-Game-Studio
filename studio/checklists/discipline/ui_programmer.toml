@@ -1,0 +1,43 @@
+id = "ui_programmer"
+title = "UI Programmer"
+layer = "discipline"
+
+[[item]]
+id = "ui-screen-flow"
+title = "Screen states and flow are explicit"
+severity = "required"
+applies_when = "Any UI, menu, HUD, or settings task"
+validation = "Name the visible states, transitions, and the smallest flow that proves it"
+owner = "ui_programmer"
+
+[[item]]
+id = "ui-projection"
+title = "Projection boundaries stay clear"
+severity = "required"
+applies_when = "Any HUD, menu, or overlay task"
+validation = "Document what the UI reads from runtime state and what it only projects"
+owner = "ui_programmer"
+
+[[item]]
+id = "ui-accessibility"
+title = "Readability and accessibility are checked"
+severity = "required"
+applies_when = "Any UI task"
+validation = "State the control readability, text clarity, and accessibility guardrails"
+owner = "qa_lead"
+
+[[item]]
+id = "ui-validation"
+title = "One UI smoke proves the flow"
+severity = "required"
+applies_when = "Any UI or HUD change"
+validation = "Name one screen-flow or manual check that proves the UI path"
+owner = "qa_lead"
+
+[[item]]
+id = "ui-doc-sync"
+title = "UI docs and examples stay synchronized"
+severity = "recommended"
+applies_when = "Any UI, menu, or HUD task"
+validation = "Update the UI guide, example, or active doc with the same change"
+owner = "maintainer"

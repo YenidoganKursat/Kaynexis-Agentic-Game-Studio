@@ -1,0 +1,52 @@
+id = "gpu"
+title = "GPU"
+layer = "discipline"
+
+[[item]]
+id = "gpu-owner"
+title = "GPU work names the CPU and GPU owners"
+severity = "required"
+applies_when = "Any GPU, rendering, shader, compute, or CPU-GPU communication task"
+validation = "State which side owns gameplay truth, which side owns render or compute work, and which side owns the data contract"
+owner = "technical-director"
+
+[[item]]
+id = "gpu-baseline"
+title = "GPU work starts from a measured baseline"
+severity = "required"
+applies_when = "Any GPU or render optimization task"
+validation = "Record one CPU/GPU frame measurement, capture, or profiler observation before tuning"
+owner = "performance"
+
+[[item]]
+id = "gpu-communication"
+title = "CPU-GPU communication path is explicit"
+severity = "required"
+applies_when = "Any GPU task that uploads data, reads back data, or streams per-instance state"
+validation = "Name the upload path, buffer shape, update cadence, and readback policy"
+owner = "technical-director"
+
+[[item]]
+id = "gpu-representation"
+title = "Representation choice is reviewed before tuning"
+severity = "required"
+applies_when = "Repeated visuals, compute, culling, instancing, or shader-heavy work"
+validation = "Document whether the feature should stay as normal gameplay objects, move to instancing, use buffers, or use a compute-driven path"
+owner = "technical-director"
+
+[[item]]
+id = "gpu-validation"
+title = "One proof path proves the GPU choice"
+severity = "required"
+applies_when = "Any GPU optimization or render representation change"
+validation = "Name the profiler, capture, or timing path that proves the chosen GPU path beat the alternatives"
+owner = "qa"
+
+[[item]]
+id = "gpu-doc-sync"
+title = "GPU docs stay in sync"
+severity = "required"
+applies_when = "Any GPU optimization or render representation change"
+validation = "Update the GPU guide, example, and research notes together"
+owner = "maintainer"
+

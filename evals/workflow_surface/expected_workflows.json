@@ -1,7 +1,21 @@
 {
-  "repo-validate.yml": ["repo-validate", "ci-artifacts"],
-  "docker-smoke.yml": ["docker-smoke"],
-  "starter-kit-contracts.yml": ["starter-kit-contracts"],
-  "release-readiness.yml": ["release-readiness"],
-  "nightly-audit.yml": ["nightly-audit"]
+  "validate.yml": [
+    "validate"
+  ],
+  "repo-validate.yml": [
+    "repo-validate",
+    "ci-artifacts"
+  ],
+  "docker-smoke.yml": [
+    "docker-smoke"
+  ],
+  "starter-kit-contracts.yml": [
+    "starter-kit-contracts"
+  ],
+  "release-readiness.yml": [
+    "release-readiness"
+  ],
+  "nightly-audit.yml": [
+    "nightly-audit"
+  ]
 }

@@ -1,0 +1,51 @@
+id = "openai_codex"
+title = "OpenAI / Codex"
+layer = "discipline"
+
+[[item]]
+id = "openai-controller-policy"
+title = "Controller policy stays separate from the task prompt"
+severity = "required"
+applies_when = "Any OpenAI/Codex or agent-platform task"
+validation = "Keep stable controller rules in repo docs and put task-specific details in the routed prompt or workflow note"
+owner = "technical_director"
+
+[[item]]
+id = "openai-prompt-version"
+title = "Prompt versions are explicit"
+severity = "required"
+applies_when = "Any OpenAI/Codex or agent-platform task"
+validation = "Record the prompt version or prompt object before behavior changes land"
+owner = "producer"
+
+[[item]]
+id = "openai-tool-access"
+title = "Tool access and internet assumptions are explicit"
+severity = "required"
+applies_when = "Any OpenAI/Codex or agent-platform task that touches tools or web access"
+validation = "Name the allowed tools, approvals, and internet assumptions before delegation"
+owner = "technical_director"
+
+[[item]]
+id = "openai-eval-path"
+title = "Eval path is named"
+severity = "required"
+applies_when = "Any OpenAI/Codex or agent-platform routing or behavior change"
+validation = "Name the eval plan, review path, or trace grading path before calling the change done"
+owner = "qa_lead"
+
+[[item]]
+id = "openai-single-specialist"
+title = "Single specialist mode remains visible"
+severity = "required"
+applies_when = "Any OpenAI/Codex or agent-platform task"
+validation = "Keep the one-agent path visible even if the internal workflow fans out"
+owner = "producer"
+
+[[item]]
+id = "openai-doc-sync"
+title = "Durable docs and examples stay synchronized"
+severity = "required"
+applies_when = "Any OpenAI/Codex or agent-platform routing change"
+validation = "Update the research note, compatibility guide, workflow recipe, and example together"
+owner = "maintainer"

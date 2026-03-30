@@ -1,5 +1,6 @@
 name = "executive_producer"
 description = "Owns milestone realism, staffing assumptions, risk pressure, and release sequencing."
+public_title = "Louis Pasteur"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

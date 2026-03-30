@@ -2,6 +2,13 @@
 
 ## One-Time Setup
 
+Quick access:
+
+```bash
+make start
+python3 scripts/start_game_studio.py
+```
+
 Guided setup:
 
 ```bash
@@ -70,6 +77,22 @@ Run the local eval corpus:
 
 ```bash
 python3 scripts/run_local_evals.py
+```
+
+Run the repo-local benchmark corpus:
+
+```bash
+python3 scripts/run_bench.py
+python3 scripts/run_bench.py --json
+make bench
+```
+
+Validate version metadata:
+
+```bash
+python3 scripts/version_guard.py --json
+make version
+cat VERSION
 ```
 
 Validate engine starter kits:
@@ -192,6 +215,13 @@ Find the likely workflow for a task:
 python3 scripts/codex_studio.py next "Add aim assist tuning for controller combat"
 ```
 
+Build an agent validation matrix:
+
+```bash
+python3 scripts/codex_studio.py next "Build validation matrices for a multi-agent UI and QA pass while keeping single specialist mode visible"
+python3 scripts/codex_studio.py checklist --task "Build validation matrices for a multi-agent UI and QA pass while keeping single specialist mode visible"
+```
+
 Resolve the merged checklist bundle:
 
 ```bash
@@ -209,7 +239,7 @@ Inspect the engine research pack:
 ```bash
 ls docs/research/game-development/engines
 sed -n '1,80p' docs/research/game-development/engines/README.md
-sed -n '1,120p' docs/research/game-development/engines/unity-6-2d-3d-class-and-mechanic-guide.md
+sed -n '1,120p' docs/research/game-development/engines/unity-classes.md
 ```
 
 Scan for top gaps:
@@ -223,16 +253,64 @@ python3 scripts/project_radar.py --warn-only
 Feature brief + ADR + test plan:
 
 ```bash
-python3 scripts/scaffold_feature.py "Core Combat" --with-adr --with-test-plan
+python3 scripts/scaffold_feature.py "Core Combat" --with-adr --with-test-plan --with-eval-plan
 ```
 
-This now creates the feature brief plus default `handoff-*.md` and `traceability-*.md` docs unless you explicitly pass `--no-handoff` or `--no-traceability`.
+This now creates the feature brief plus default `handoff-*.md`, `traceability-*.md`, and optional validation docs unless you explicitly pass `--no-handoff` or `--no-traceability`.
 
 Bug triage docs:
 
 ```bash
-python3 scripts/scaffold_bugfix.py "Save Corruption After Alt-F4"
+python3 scripts/scaffold_bugfix.py "Save Corruption After Alt-F4" --with-test-plan --with-eval-plan
 ```
+
+This creates the bug report and crash triage docs, plus validation docs when you want the bug package to move as a single review bundle.
+
+Prompt history and agent journal
+
+Use this when you need prompt history and agent journal records in one append-only file.
+
+```bash
+python3 scripts/codex_studio.py journal prompt \
+  --prompt "Add a prompt history log and an agent journal so the user can review later." \
+  --route "prompt history / agent journal" \
+  --summary "Created append-only journal sections and a journal command." \
+  --doc docs/reference/prompt-journal.md \
+  --json
+
+python3 scripts/codex_studio.py journal agent \
+  --step "Draft the journal template and journal command" \
+  --expected "One active file with two append-only sections" \
+  --found "The repo had no durable history trail yet" \
+  --improved "Added a shared prompt journal file and append helper" \
+  --evaluation "The record is now easy to reopen later without reading the whole chat" \
+  --doc docs/reference/prompt-journal.md \
+  --validation "python3 scripts/journal.py prompt --dry-run --json" \
+  --json
+```
+
+Agent transcript
+
+Use this when agent assignments or back-and-forth conversation turns should stay reviewable later.
+
+```bash
+python3 scripts/codex_studio.py journal transcript \
+  --kind assignment \
+  --task "Profile the inventory HUD and report the first bottleneck" \
+  --speaker "Kaynexis" \
+  --target "technical_director, qa_lead" \
+  --message "Capture one baseline, one likely bottleneck, and one first lever before any refactor." \
+  --json
+
+python3 scripts/codex_studio.py journal transcript \
+  --kind conversation \
+  --speaker "technical_director" \
+  --target "qa_lead" \
+  --message "Use a shared baseline before changing pooling or layout code." \
+  --json
+```
+
+Use this when you want a later-review trail that records both the user prompt and the agent's step notes in one append-only file.
 
 QA matrix:
 
@@ -278,8 +356,8 @@ Common targets:
 - `make route TASK="..."`
 - `make checklist TASK="..."`
 - `make research EVAL_TITLE="..."`
-- `make feature FEATURE="..."`
-- `make bug BUG="..."`
+- `make feature FEATURE="..."` now emits the feature brief, handoff, traceability, test plan, and eval plan bundle
+- `make bug BUG="..."` now emits the bug report, crash triage, test plan, and eval plan bundle
 - `make qa QA_TITLE="..."`
 - `make eval EVAL_TITLE="..."`
 - `make hooks-enable`

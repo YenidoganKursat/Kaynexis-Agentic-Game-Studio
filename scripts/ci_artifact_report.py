@@ -33,12 +33,45 @@ def git_output(*args: str) -> str | None:
     return value or None
 
 
+def load_json_file(path: Path) -> dict[str, object] | None:
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+
+
+def load_benchmark_report() -> dict[str, object] | None:
+    for path in (
+        REPO_ROOT / "build" / "bench" / "eval" / "bench-report.json",
+        REPO_ROOT / "build" / "bench" / "latest" / "bench-report.json",
+    ):
+        report = load_json_file(path)
+        if report is not None:
+            return report
+    return None
+
+
+def load_version_report() -> dict[str, object] | None:
+    for path in (
+        REPO_ROOT / "build" / "ci" / "version" / "version-report.json",
+        REPO_ROOT / "build" / "ci" / "latest" / "version-report.json",
+    ):
+        report = load_json_file(path)
+        if report is not None:
+            return report
+    return None
+
+
 def build_report(label: str | None = None) -> dict[str, object]:
     config = load_studio_config()
     project = config.get("project", {}) if isinstance(config.get("project"), dict) else {}
     doc_errors, doc_warnings = collect_doc_findings()
     workflow_failures, workflow_summaries = validate_workflows()
     starter_kit_failures = {engine: validate_kit(engine) for engine in available_starter_kits()}
+    benchmark_report = load_benchmark_report()
+    version_report = load_version_report()
 
     remotes = git_output("remote")
     external_dependencies = [
@@ -57,7 +90,9 @@ def build_report(label: str | None = None) -> dict[str, object]:
     workflow_penalty = len(workflow_failures) * 12
     kit_penalty = sum(len(items) for items in starter_kit_failures.values()) * 8
     dependency_penalty = len(external_dependencies) * 4
-    quality_score = max(0, min(100, 100 - doc_penalty - workflow_penalty - kit_penalty - dependency_penalty))
+    # External dependencies are reported separately and gate release readiness,
+    # but they should not collapse the repo-quality score for validation use.
+    quality_score = max(0, min(100, 100 - doc_penalty - workflow_penalty - kit_penalty))
     readiness = "release-ready" if quality_score >= 90 and not external_dependencies else "validation-ready" if quality_score >= 75 else "needs-attention"
     report = {
         "generated_at_utc": datetime.now(UTC).replace(microsecond=0).isoformat(),
@@ -99,6 +134,27 @@ def build_report(label: str | None = None) -> dict[str, object]:
             },
         },
         "workflow_summary": workflow_summaries,
+        "benchmark": {
+            "report": benchmark_report,
+            "summary": {
+                "case_count": benchmark_report.get("summary", {}).get("case_count", 0) if benchmark_report else 0,
+                "failure_count": benchmark_report.get("summary", {}).get("failure_count", 0) if benchmark_report else 0,
+                "score": benchmark_report.get("summary", {}).get("score", 0) if benchmark_report else 0,
+                "readiness": benchmark_report.get("summary", {}).get("readiness", "unknown") if benchmark_report else "unknown",
+            },
+            "artifacts": benchmark_report.get("artifacts", {}) if benchmark_report else {},
+        },
+        "versioning": {
+            "report": version_report,
+            "summary": {
+                "version": version_report.get("version", "") if version_report else "",
+                "tag": version_report.get("tag", "") if version_report else "",
+                "status": version_report.get("status", "unknown") if version_report else "unknown",
+                "is_prerelease": version_report.get("is_prerelease", False) if version_report else False,
+                "failure_count": len(version_report.get("failures", [])) if version_report else 0,
+            },
+            "artifacts": version_report.get("artifacts", {}) if version_report else {},
+        },
         "external_dependencies": external_dependencies,
     }
     return report
@@ -129,6 +185,49 @@ def render_markdown(report: dict[str, object]) -> str:
         f"- Workflow failures: {len(quality['workflow_failures'])}",
         f"- Starter-kit failures: {sum(len(items) for items in quality['starter_kit_failures'].values())}",
         f"- Penalties: {quality['penalties']}",
+        "",
+        "## Benchmark summary",
+    ]
+    benchmark = report.get("benchmark", {})
+    benchmark_summary = benchmark.get("summary", {}) if isinstance(benchmark, dict) else {}
+    benchmark_artifacts = benchmark.get("artifacts", {}) if isinstance(benchmark, dict) else {}
+    if benchmark_summary and benchmark_summary.get("case_count"):
+        lines += [
+            f"- Case count: {benchmark_summary.get('case_count')}",
+            f"- Failure count: {benchmark_summary.get('failure_count')}",
+            f"- Score: {benchmark_summary.get('score')} / 100",
+            f"- Readiness: {benchmark_summary.get('readiness')}",
+        ]
+        if benchmark_artifacts:
+            lines += [
+                f"- JSON: {benchmark_artifacts.get('json')}",
+                f"- Markdown: {benchmark_artifacts.get('markdown')}",
+            ]
+    else:
+        lines.append("- None")
+    lines += [
+        "",
+        "## Version summary",
+    ]
+    version = report.get("versioning", {})
+    version_summary = version.get("summary", {}) if isinstance(version, dict) else {}
+    version_artifacts = version.get("artifacts", {}) if isinstance(version, dict) else {}
+    if version_summary and version_summary.get("version"):
+        lines += [
+            f"- Version: {version_summary.get('version')}",
+            f"- Tag: {version_summary.get('tag')}",
+            f"- Status: {version_summary.get('status')}",
+            f"- Prerelease: {version_summary.get('is_prerelease')}",
+            f"- Failure count: {version_summary.get('failure_count')}",
+        ]
+        if version_artifacts:
+            lines += [
+                f"- JSON: {version_artifacts.get('json')}",
+                f"- Markdown: {version_artifacts.get('markdown')}",
+            ]
+    else:
+        lines.append("- None")
+    lines += [
         "",
         "## External dependencies",
     ]

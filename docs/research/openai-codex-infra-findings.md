@@ -1,45 +1,83 @@
 # OpenAI Codex Infrastructure Findings
 
-Last reviewed: `2026-03-27`
+Last reviewed: `2026-03-29`
 
-This note captures the official Codex guidance that most directly shaped this repository's infrastructure. It is intentionally short; the linked source pages remain the source of truth.
+This note captures the OpenAI docs that most directly shaped this repository's agent operating model, prompt routing, and eval discipline. It is intentionally short; the linked source pages remain the source of truth.
 
 ## Source pages
 
-- Config basics: [developers.openai.com/codex/config-basic](https://developers.openai.com/codex/config-basic)
-- Subagents: [developers.openai.com/codex/subagents](https://developers.openai.com/codex/subagents)
-- Best practices: [developers.openai.com/codex/learn/best-practices](https://developers.openai.com/codex/learn/best-practices)
-- Working with evals: [developers.openai.com/api/docs/guides/evals](https://developers.openai.com/api/docs/guides/evals)
+- Codex cloud: https://developers.openai.com/codex/cloud
+- Codex internet access: https://developers.openai.com/codex/cloud/internet-access
+- Codex code generation: https://platform.openai.com/docs/guides/code-generation
+- Shell tool with the Agents SDK: https://platform.openai.com/docs/guides/tools-shell
+- Background mode: https://platform.openai.com/docs/guides/background
+- Prompt / text generation guidance: https://platform.openai.com/docs/guides/text-generation/parameter-details
+- Evaluation best practices: https://platform.openai.com/docs/guides/evaluation-best-practices
+- Safety best practices: https://platform.openai.com/docs/guides/safety-best-practices/constrain-user-input-and-limit-output-tokens.pls
+- Messages reference: https://platform.openai.com/docs/api-reference/messages/object
+- OpenAI Platform overview: https://platform.openai.com/docs/overview
 
 ## Findings adopted in this repo
 
-### 1. Shared behavior belongs in project config
+### 1. Keep durable policy separate from task-specific prompt text
 
-Official Codex docs place repo-scoped defaults in `.codex/config.toml`. This repo uses that file for shared model, sandbox, approval, web search, and subagent limits.
+OpenAI's prompting guidance treats the stable instruction layer and the task payload as separate concerns. In practice, that means durable controller policy belongs in stable repo docs and role metadata, while task-specific details, examples, and constraints belong in the routed prompt or workflow note.
 
-### 2. Recursive delegation should stay conservative
+This repo mirrors that separation by keeping long-lived agent policy in `AGENTS.md`, `docs/reference/`, `.codex/agents/`, and `studio/docs/active/`, instead of stuffing everything into a single ephemeral request.
 
-The subagents docs say `agents.max_depth` defaults to `1` and recommend keeping that default unless recursive delegation is explicitly needed. This repo adopts that policy and treats deeper nesting as an exception that should be documented.
+### 2. Version prompts and rerun evals when behavior changes
 
-### 3. Narrow custom agents are safer than broad super-agents
+OpenAI's eval guidance emphasizes designing the eval before declaring the change done. The platform docs also frame prompt design as something you iterate, version, and measure instead of treating it as one static blob.
 
-The subagents docs emphasize focused roles such as `explorer`, `reviewer`, and `docs_researcher`, with each role keeping a clear tool surface and responsibility boundary. This repo follows that pattern by favoring specialized agents over general-purpose role blobs.
+This repo therefore treats routing changes, agent-behavior changes, and prompt-shape changes as eval-worthy changes. If a prompt or controller rule changes, the matching eval plan should change with it.
 
-### 4. Review policy should be explicit and durable
+### 3. Prefer explicit workflows, traces, and handoffs for multi-step work
 
-OpenAI's Codex guidance repeatedly centers review on correctness, security, regressions, and missing tests. This repo interprets that as a reason to keep a dedicated review checklist in `docs/reference/code-review.md` instead of overloading the root instruction file.
+Codex cloud, the shell tool, and the broader OpenAI platform now all point toward workflow-style agent operation rather than opaque "one giant prompt" thinking. The useful mental model is a controller plus explicit tools, handoffs, and traceable steps.
 
-### 5. Instruction changes deserve an eval surface
+This repo mirrors that with:
 
-The official docs expose a dedicated evaluation surface, which is a strong signal that prompt and workflow changes should be measured, not just reasoned about. This repo therefore treats shared instruction, agent, and routing changes as eval-worthy changes.
+- a simple user summary
+- a named controller decision
+- a narrow role matrix
+- a command tree when needed
+- an append-only prompt journal
+- a short validation path
 
-### 6. Cached web search is the safer default for local work
+### 4. Keep tool access and internet access constrained
 
-Config basics states that cached web search is the default and reduces exposure to prompt injection from arbitrary live content, while still requiring normal skepticism toward results. This repo keeps `web_search = "cached"` unless a task explicitly needs live freshness.
+OpenAI's Codex cloud docs say agent internet access is blocked by default and can be enabled per environment when needed. They also call out prompt injection, secret exfiltration, and malicious dependencies as real risks.
+
+This repo keeps the sandbox conservative, keeps web search cached unless freshness is required, and makes tool or internet assumptions explicit when a task crosses external boundaries.
+
+### 5. Use agent-style workflows only when the task benefits from them
+
+OpenAI's docs surface multiple workflow surfaces, including Codex cloud, the shell tool, and higher-level agent workflow tooling. The lesson for this repo is not "always fan out"; it is "use the smallest workflow that keeps ownership visible."
+
+This repo keeps single specialist mode visible by default and only fans out when the task actually needs a controller, a panel, or explicit reporting lines.
+
+### 6. Separate controller summary from internal worker detail
+
+OpenAI's docs make it clear that traces, evals, and tooling can be rich internally, but the user does not need every internal step. The controller should still surface a short, readable answer.
+
+This repo therefore keeps `Kaynexis` or the single specialist as the public-facing story while hiding specialist chatter in the journal, checklist, or active docs.
+
+### 7. Model selection is a separate decision from routing policy
+
+OpenAI's platform docs now document model and workflow surfaces for coding and agentic tasks. That is useful context, but it is still a separate decision from how we route or split work.
+
+This repo keeps its model defaults stable unless a deliberate model-selection review says otherwise. Routing, journaling, evals, and tool safety are allowed to evolve independently of the baseline model choice.
+
+### 8. Model choice should be reopened through a dedicated guide
+
+When the question is specifically about which model or plan tier to use, this repo does not want the agent to improvise from memory. It should reopen the model ladder, the plan fit, and the API-vs-ChatGPT split from `docs/research/openai-codex-models.md` and `docs/reference/codex-model-guide.md` before recommending a lane.
 
 ## Resulting repo guardrails
 
-- review risky changes with `docs/reference/code-review.md`
-- create `eval-plan-*.md` files for meaningful instruction or workflow changes
-- keep root instructions concise and move detailed policy into dedicated docs
-- keep subagent depth conservative unless a documented workflow needs more
+- Use `docs/research/openai-codex-infra-findings.md` first for OpenAI/Codex questions.
+- Use `docs/research/openai-codex-models.md` and `docs/reference/codex-model-guide.md` first for model-choice or plan-tier questions.
+- Prefer `docs/reference/agent-system.md` for the repo operating model.
+- Keep prompt history, agent journaling, eval plans, and review trails aligned whenever routing or agent behavior changes.
+- Keep tool approvals, internet access, and safety assumptions explicit when any workflow touches external systems.
+- Use `studio/checklists/discipline/openai_codex.toml` and `studio/docs/active/eval-openai-codex.md` as the durable control surface for this lane.
+- Create or update `eval-plan-*.md` files when instruction, routing, or agent behavior changes.

@@ -1,0 +1,43 @@
+id = "producer"
+title = "Producer"
+layer = "discipline"
+
+[[item]]
+id = "producer-summary"
+title = "User summary stays simple"
+severity = "required"
+applies_when = "Any broad planning or orchestration task"
+validation = "Return one plain-language summary before any worker packet"
+owner = "producer"
+
+[[item]]
+id = "producer-scope"
+title = "Scope and sequence are explicit"
+severity = "required"
+applies_when = "Any planning, roadmap, or milestone task"
+validation = "State the player outcome, the sequence, and one-line scope before delegation"
+owner = "producer"
+
+[[item]]
+id = "producer-handoffs"
+title = "Handoffs are named and ordered"
+severity = "required"
+applies_when = "Any task that fans out into specialist work"
+validation = "Name each lane, what it owns, and the expected output"
+owner = "producer"
+
+[[item]]
+id = "producer-risk"
+title = "Risks and dependencies are visible"
+severity = "required"
+applies_when = "Any multi-step or cross-functional task"
+validation = "List the top dependency, the top risk, and the first fallback"
+owner = "producer"
+
+[[item]]
+id = "producer-doc-sync"
+title = "Planning decisions land in durable docs"
+severity = "recommended"
+applies_when = "Any planning or orchestration task"
+validation = "Update the active sprint, decision log, or role packet when the plan changes"
+owner = "maintainer"

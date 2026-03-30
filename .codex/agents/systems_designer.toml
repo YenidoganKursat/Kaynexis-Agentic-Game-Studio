@@ -1,5 +1,6 @@
 name = "systems_designer"
 description = "Designs interacting systems, tuning knobs, progression pressure, and long-horizon balance."
+public_title = "John von Neumann"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

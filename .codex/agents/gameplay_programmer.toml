@@ -1,5 +1,6 @@
 name = "gameplay_programmer"
 description = "Implements player-facing mechanics, interactions, game state, and feature slices."
+public_title = "John McCarthy"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"

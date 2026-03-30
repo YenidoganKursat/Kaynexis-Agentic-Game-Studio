@@ -15,6 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE_DIR = REPO_ROOT / "studio" / "docs" / "templates"
 ACTIVE_DIR = REPO_ROOT / "studio" / "docs" / "active"
 PRESET_DIR = REPO_ROOT / "studio" / "presets"
+VERSION_PATH = REPO_ROOT / "VERSION"
 PLACEHOLDER_FILENAMES = {".gitkeep", "AGENTS.md"}
 PROJECT_SCOPED_ACTIVE_DOCS = {
     "art-direction-lite.md",
@@ -25,6 +26,7 @@ PROJECT_SCOPED_ACTIVE_DOCS = {
     "decision-log.md",
     "engine-profile.md",
     "game-brief.md",
+    "prompt-journal.md",
     "localization-glossary.md",
     "milestones.md",
     "monetization-guardrails.md",
@@ -49,7 +51,7 @@ PLACEHOLDER_DEFAULTS = {
     "GENRE_ROUTE_EXAMPLE": "Describe the first genre-specific task",
     "GENRE_REFERENCE_GAMES": "- Add one or two contrast-set references.",
     "GENRE_DESIGN_FOCUS": "- Document the dominant loop and first failure risk.",
-    "GENRE_ADVANCED_GUIDE": "docs/research/game-development/genre/genre-advanced-development-framework.md",
+    "GENRE_MATURITY": "docs/research/game-development/genre/genre-maturity.md",
     "TODAY": _dt.date.today().isoformat(),
     "FEATURE_NAME": "Example Feature",
     "DECISION_NAME": "Example Decision",
@@ -300,6 +302,20 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(text.rstrip() + "\n", encoding="utf-8")
 
 
+def append_markdown_before_marker(path: Path, marker: str, block: str, seed_text: str | None = None) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not path.exists():
+        if seed_text is None:
+            raise FileNotFoundError(f"Journal file not found: {path}")
+        write_text(path, seed_text)
+    text = path.read_text(encoding="utf-8")
+    marker_line = f"<!-- {marker} -->"
+    if marker_line not in text:
+        raise ValueError(f"Marker not found in {path}: {marker_line}")
+    updated = text.replace(marker_line, f"{block.rstrip()}\n\n{marker_line}", 1)
+    write_text(path, updated)
+
+
 def copy_template_to_active(name: str, replacements: dict[str, str] | None = None, overwrite: bool = False) -> Path:
     dest = ACTIVE_DIR / name
     if dest.exists() and not overwrite:
@@ -387,7 +403,7 @@ def build_genre_replacements(genre: str | None) -> dict[str, str]:
             "GENRE_ROUTE_EXAMPLE": f"Plan the first {genre_name.lower()} slice",
             "GENRE_REFERENCE_GAMES": "- Add one or two contrast-set references.",
             "GENRE_DESIGN_FOCUS": "- Document the dominant loop and first failure risk.",
-            "GENRE_ADVANCED_GUIDE": "docs/research/game-development/genre/genre-advanced-development-framework.md",
+            "GENRE_MATURITY": "docs/research/game-development/genre/genre-maturity.md",
         }
 
     metadata = parse_preset_metadata(path)
@@ -408,7 +424,7 @@ def build_genre_replacements(genre: str | None) -> dict[str, str]:
         "GENRE_ROUTE_EXAMPLE": guidance.get("GENRE_ROUTE_EXAMPLE", f"Plan the first {genre_name.lower()} slice"),
         "GENRE_REFERENCE_GAMES": reference_guidance.get("GENRE_REFERENCE_GAMES", "- Add one or two contrast-set references."),
         "GENRE_DESIGN_FOCUS": reference_guidance.get("GENRE_DESIGN_FOCUS", "- Document the dominant loop and first failure risk."),
-        "GENRE_ADVANCED_GUIDE": "docs/research/game-development/genre/genre-advanced-development-framework.md",
+        "GENRE_MATURITY": "docs/research/game-development/genre/genre-maturity.md",
     }
 
 
@@ -533,6 +549,15 @@ def detect_engine(root: Path | None = None) -> str:
     return str(report["resolved_engine"])
 
 
+def read_project_version(root: Path | None = None) -> str | None:
+    root = root or REPO_ROOT
+    path = root / "VERSION"
+    if not path.exists():
+        return None
+    value = path.read_text(encoding="utf-8").strip()
+    return value or None
+
+
 def find_godot_binary() -> str | None:
     env_candidate = os.environ.get("GODOT_BIN")
     candidates = [env_candidate] if env_candidate else []
@@ -586,10 +611,18 @@ def find_unity_cli() -> str | None:
     if configured:
         return configured
 
-    path_candidates: list[Path] = []
     applications_unity = Path("/Applications/Unity")
     if applications_unity.exists():
-        path_candidates.extend(sorted(applications_unity.glob("Hub/Editor/*/Unity.app/Contents/MacOS/Unity"), reverse=True))
+        stable_candidates: list[Path] = []
+        prerelease_candidates: list[Path] = []
+        for candidate in sorted(applications_unity.glob("Hub/Editor/*/Unity.app/Contents/MacOS/Unity")):
+            if unity_editor_channel(str(candidate)) == "stable":
+                stable_candidates.append(candidate)
+            else:
+                prerelease_candidates.append(candidate)
+        path_candidates = [*sorted(stable_candidates, reverse=True), *sorted(prerelease_candidates, reverse=True)]
+    else:
+        path_candidates = []
     path_candidates.extend(
         [
             Path("/Applications/Unity/Hub/Editor/Unity.app/Contents/MacOS/Unity"),
@@ -648,7 +681,13 @@ def find_unreal_uat() -> str | None:
         candidates: list[Path] = []
         for pattern in ("UE_*/Engine/Build/BatchFiles/RunUAT.sh", "UE_*/Engine/Build/BatchFiles/RunUAT.command", "UE_*/Engine/Build/BatchFiles/RunUAT.bat"):
             candidates.extend(sorted(shared_epic.glob(pattern), reverse=True))
-        return _first_existing_path(candidates)
+        resolved = _first_existing_path(candidates)
+        if resolved:
+            return resolved
+
+    repo_stub = REPO_ROOT / "tools" / "engine-stubs" / "unreal" / "RunUAT.sh"
+    if repo_stub.exists():
+        return str(repo_stub.resolve())
     return None
 
 
@@ -703,6 +742,7 @@ def repo_summary() -> dict[str, object]:
         "engine_source": engine_report["source"],
         "configured_engine": engine_report["configured_slug"] or "",
         "engine_clue": engine_report["clue_engine"],
+        "version": read_project_version() or "",
         "has_src": (REPO_ROOT / "src").exists(),
         "has_tests": (REPO_ROOT / "tests").exists(),
         "has_assets": (REPO_ROOT / "assets").exists(),

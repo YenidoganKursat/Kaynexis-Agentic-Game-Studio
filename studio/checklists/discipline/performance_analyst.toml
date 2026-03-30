@@ -1,0 +1,43 @@
+id = "performance_analyst"
+title = "Performance Analyst"
+layer = "discipline"
+
+[[item]]
+id = "perf-baseline"
+title = "A measured baseline exists"
+severity = "required"
+applies_when = "Any FPS, load time, memory, thermal, or battery pass"
+validation = "Record one baseline number or reproducible observation before tuning"
+owner = "performance_analyst"
+
+[[item]]
+id = "perf-budget"
+title = "The target budget is explicit"
+severity = "required"
+applies_when = "Any scale-sensitive optimization task"
+validation = "Document the expected ceiling or improvement target before tuning"
+owner = "performance_analyst"
+
+[[item]]
+id = "perf-first-lever"
+title = "The first optimization lever is named"
+severity = "required"
+applies_when = "Any optimization pass"
+validation = "State the first lever, the fallback lever, and why the first path should win"
+owner = "technical_director"
+
+[[item]]
+id = "perf-fallback"
+title = "The fallback path is known"
+severity = "required"
+applies_when = "Any optimization pass"
+validation = "Name the second-best path if the first lever does not move the metric enough"
+owner = "performance_analyst"
+
+[[item]]
+id = "perf-doc-sync"
+title = "Optimization notes land in durable docs"
+severity = "recommended"
+applies_when = "Any performance investigation or tuning pass"
+validation = "Update the perf note, benchmark note, or active doc with the measurement path"
+owner = "maintainer"

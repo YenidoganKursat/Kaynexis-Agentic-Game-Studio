@@ -1,0 +1,35 @@
+id = "assets"
+title = "Assets"
+layer = "discipline"
+
+[[item]]
+id = "assets-owner"
+title = "Asset ownership is explicit"
+severity = "required"
+applies_when = "Any asset, import, or packaging decision"
+validation = "Name the runtime owner, the authored-data owner, and the editor owner"
+owner = "technical-artist"
+
+[[item]]
+id = "assets-alternative"
+title = "The chosen asset alternative is stated"
+severity = "required"
+applies_when = "Choosing between scenes, prefabs, resources, data assets, atlases, or bundles"
+validation = "Say why the selected asset path is better than the closest alternative"
+owner = "technical-artist"
+
+[[item]]
+id = "assets-import-boundary"
+title = "Import and load boundaries are explicit"
+severity = "required"
+applies_when = "Any new import or loading surface"
+validation = "State where source files end and runtime-ready assets begin"
+owner = "tools-programmer"
+
+[[item]]
+id = "assets-validation"
+title = "Asset changes have a validation path"
+severity = "recommended"
+applies_when = "Any content or asset pipeline change"
+validation = "Describe the first smoke test, inspection, or manual validation step"
+owner = "producer"

@@ -1,5 +1,6 @@
 name = "tutorial_designer"
 description = "Designs onboarding, information pacing, input teaching, and first-session comprehension."
+public_title = "Jean Piaget"
 model = "gpt-5.4-mini"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"

@@ -1,0 +1,83 @@
+id = "quality"
+title = "Quality"
+layer = "discipline"
+
+[[item]]
+id = "quality-owner"
+title = "Runtime, data, and editor ownership are explicit"
+severity = "required"
+applies_when = "Any non-trivial gameplay, UI, tool, or workflow change"
+validation = "State the runtime owner, shared data owner, editor owner, and validation loop"
+owner = "technical-director"
+
+[[item]]
+id = "quality-boundaries"
+title = "Runtime, data, UI, and editor boundaries stay separate"
+severity = "required"
+applies_when = "Any gameplay, UI, or tool change"
+validation = "Document what each layer owns and what it does not own"
+owner = "technical-director"
+
+[[item]]
+id = "quality-tests"
+title = "Every quality pass has a narrow validation path"
+severity = "required"
+applies_when = "Any refactor or maintainability pass"
+validation = "Name one automated test, smoke, or manual loop that proves the change"
+owner = "qa"
+
+[[item]]
+id = "quality-process"
+title = "Quality passes follow a named control loop"
+severity = "required"
+applies_when = "Any quality-control, review, or optimization-criteria pass"
+validation = "State the scope, owners, proof path, evidence artifact, and go/no-go gate before implementation"
+owner = "qa"
+
+[[item]]
+id = "quality-doc-sync"
+title = "Durable docs stay in sync with durable behavior"
+severity = "required"
+applies_when = "Any behavior, routing, or architecture change"
+validation = "Update the matching active doc, reference guide, or example in the same change"
+owner = "maintainer"
+
+[[item]]
+id = "quality-naming"
+title = "Names stay short and canonical"
+severity = "recommended"
+applies_when = "Any new doc, example, checklist, or rename"
+validation = "Prefer 1-2 word canonical names when practical and update public links together"
+owner = "maintainer"
+
+[[item]]
+id = "quality-opt-baseline"
+title = "Optimization work starts from a measured baseline"
+severity = "required"
+applies_when = "Any optimization or scale-sensitive change"
+validation = "Record one baseline number or reproducible observation before tuning"
+owner = "performance"
+
+[[item]]
+id = "quality-opt-target"
+title = "The expected improvement or budget is explicit"
+severity = "required"
+applies_when = "Any optimization or scale-sensitive change"
+validation = "Document the target budget, improvement, or ceiling before tuning"
+owner = "technical-director"
+
+[[item]]
+id = "quality-opt-first-lever"
+title = "The first optimization lever is named before tuning"
+severity = "required"
+applies_when = "Any optimization or scale-sensitive change"
+validation = "State the first lever, fallback lever, and why the chosen path should beat alternatives"
+owner = "technical-director"
+
+[[item]]
+id = "quality-evidence"
+title = "Quality decisions carry concrete evidence"
+severity = "required"
+applies_when = "Any non-trivial quality pass or review"
+validation = "Attach the command output, transcript, screenshot, or manual note that proves the decision"
+owner = "qa"

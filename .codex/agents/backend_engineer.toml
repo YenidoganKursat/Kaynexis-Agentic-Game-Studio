@@ -1,5 +1,6 @@
 name = "backend_engineer"
 description = "Handles service contracts, matchmaking/backends, persistence APIs, and service hardening."
+public_title = "Edsger W. Dijkstra"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
