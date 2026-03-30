@@ -117,6 +117,7 @@ gh repo edit OWNER/REPO \
 - if you simplify or rename doc or checklist surfaces, keep `studio/checklists/base/naming.toml`, `docs/reference/repo-tour.md`, and the validation docs updated together so the short canonical names rule stays visible
 - if you change the validate workflow, keep `docs/reference/ci-cd.md`, `studio/docs/active/build-pipeline.md`, and `studio/docs/active/eval-ci-cd.md` updated together so the main-branch gate stays truthful
 - if you prefer a lighter main-branch gate, keep `docs/reference/ci-cd.md` and `studio/docs/active/build-pipeline.md` aligned with the actual `validate.yml` command set so the docs do not overstate the runner contract
+- if you change the doc-sync or repo-validate push diff logic, keep `scripts/resolve_changed_paths.py`, `docs/reference/ci-cd.md`, `studio/docs/active/build-pipeline.md`, and `studio/docs/active/eval-ci-cd.md` updated together so rewritten base SHAs do not create false failures
 - keep the canonical short refs in sync too: `docs/reference/ci-cd.md`, `studio/docs/active/build-pipeline.md`, and `studio/docs/active/genre-starter.md` should use the short names that `scripts/studio_core.py` now surfaces.
 - if you extend the doc validation surface, keep `docs/reference/engine-atlas.md`, the engine class research notes, and the maintainer-facing CI docs synchronized so the validator and the docs say the same thing about the covered engine families.
 

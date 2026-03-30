@@ -18,6 +18,7 @@
 - Repo validation now includes a doc-sync guard and a minimum CI quality gate, so code or workflow changes must be accompanied by the docs they affect
 - The validate workflow now runs the core repo validation path plus a targeted Godot smoke, version guard, validate artifact report, and CI quality gate, so main-branch gates should keep that workflow pinned and synchronized with the validator surface
 - The matching eval plan lives at `studio/docs/active/eval-ci-cd.md`, so workflow hardening should keep that active note synchronized with the workflow file and the CI/CD doc
+- The doc-sync and repo-validate workflows now resolve changed paths through `scripts/resolve_changed_paths.py`, so push-event validation should keep that helper, the workflow files, and the maintainer CI docs synchronized whenever a base SHA might be missing from the checkout
 - The example surface in `docs/reference/engine-examples.md` is part of that doc-sync scope, so engine example updates should be validated like other engine support docs
 - The genre development playbook at `docs/research/game-development/genre/genre-guide.md` is part of the same sync scope, so build-facing genre changes should update the playbook, the preset catalog, and the active starter together
 - When adding or revising genre presets, keep the matching architecture note, example matrix row, and starter doc updated together so the support surface stays truthful for teams choosing city-builder, life-sim, hero-shooter, or soulslike paths
