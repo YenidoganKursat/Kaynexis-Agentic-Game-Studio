@@ -96,7 +96,7 @@ jobs:
         run: python3 scripts/ci_quality_gate.py --report build/ci/repo-validate/${{ matrix.python-version }}/ci-report.json --min-score 80 --minimum-readiness validation-ready
 
       - name: Upload CI artifact report
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: repo-validate-${{ matrix.python-version }}
           path: build/ci/repo-validate/${{ matrix.python-version }}
@@ -124,7 +124,7 @@ jobs:
         run: python3 scripts/ci_artifact_report.py --label consolidated --output-dir build/ci/consolidated
 
       - name: Upload consolidated CI artifact report
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ci-artifacts-consolidated
           path: build/ci/consolidated

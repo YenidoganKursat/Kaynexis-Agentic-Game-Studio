@@ -49,7 +49,7 @@ jobs:
         run: python3 scripts/ci_quality_gate.py --report build/ci/nightly/ci-report.json --min-score 80 --minimum-readiness validation-ready
 
       - name: Upload nightly audit bundle
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: nightly-audit
           path: build/ci/nightly

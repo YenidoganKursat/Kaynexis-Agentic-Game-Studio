@@ -47,7 +47,7 @@ jobs:
           printf "docker-ok\n" > build/ci/docker-smoke/result.txt
 
       - name: Upload docker smoke report
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: docker-smoke-report
           path: build/ci/docker-smoke
